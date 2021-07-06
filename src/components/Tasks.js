@@ -7,8 +7,10 @@ class Tasks extends React.Component {
       tasks,
       mainInputFocus,
       handleEditBack,
+      checkedItems,
       handleRemoveFocus,
       handleRemoveItem,
+      handleToggleCheck,
     } = this.props;
 
     return (
@@ -19,10 +21,12 @@ class Tasks extends React.Component {
               key={ id }
               id={ id }
               text={ text }
+              checkedItems={ checkedItems }
               mainInputFocus={ mainInputFocus }
               handleEditBack={ handleEditBack }
               handleRemoveFocus={ handleRemoveFocus }
               handleRemoveItem={ handleRemoveItem }
+              handleToggleCheck={ handleToggleCheck }
             />
           )
         }

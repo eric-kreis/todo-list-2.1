@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class EditInputSection extends Component {
+class EditSection extends Component {
   constructor() {
     super();
 
@@ -38,23 +38,25 @@ class EditInputSection extends Component {
               handleEditing(e);
             } }
             onBlur={ () => {
+              handleRemoveFocus();
               handleToggle();
               handleEditBack(taskText, inputID);
             } }
           />
           <label>Escreva aqui para editar sua tarefa</label>
+          <button
+            onClick={ () => {
+              handleRemoveFocus();
+              handleToggle();
+              handleEditBack(taskText, inputID);
+            } }
+          >
+            Voltar
+          </button>
         </div>
-        <button
-          onClick={ () => {
-            handleToggle();
-            handleEditBack(taskText, inputID);
-          } }
-        >
-          Voltar
-        </button>
       </section>
     );
   }
 }
 
-export default EditInputSection;
+export default EditSection;

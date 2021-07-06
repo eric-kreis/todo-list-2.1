@@ -1,6 +1,7 @@
 import React from 'react';
 
-import EditInputSection from './EditInputSection';
+import TaskSection from './TaskSection';
+import EditSection from './EditSection';
 
 class TaskContainer extends React.Component {
   constructor(props) {
@@ -36,9 +37,11 @@ class TaskContainer extends React.Component {
       id,
       text,
       mainInputFocus,
+      checkedItems,
       handleEditBack,
       handleRemoveFocus,
       handleRemoveItem,
+      handleToggleCheck,
     } = this.props;
 
     return (
@@ -46,7 +49,12 @@ class TaskContainer extends React.Component {
         { !edit
           ? (
             <section>
-              <span>{ text }</span>
+              <TaskSection
+                id={ id }
+                text={ text }
+                checkedItems={ checkedItems }
+                handleToggleCheck={ handleToggleCheck }
+              />
               <button
                 onClick={ () => {
                   handleRemoveFocus();
@@ -66,7 +74,7 @@ class TaskContainer extends React.Component {
             </section>
           )
           : (
-            <EditInputSection
+            <EditSection
               id={ id }
               edit={ edit }
               taskText={ taskText }
