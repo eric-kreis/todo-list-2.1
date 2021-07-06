@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class TaskSection extends Component {
   constructor() {
@@ -33,5 +34,11 @@ class TaskSection extends Component {
     );
   }
 }
+
+TaskSection.propTypes = {
+  id: PropTypes.number.isRequired,
+  text: PropTypes.string.isRequired,
+  handleToggleCheck: PropTypes.func.isRequired,
+};
 
 export default TaskSection;

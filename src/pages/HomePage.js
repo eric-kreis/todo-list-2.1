@@ -1,23 +1,28 @@
 import React from 'react';
-import FormContainer from './FormContainer';
-import Tasks from './Tasks';
+
+import FormContainer from '../components/FormContainer';
+import Tasks from '../components/taskComponents/Tasks';
 
 const savedTasks = JSON.parse(localStorage.getItem('tasks'));
 const savedChecks = JSON.parse(localStorage.getItem('checkedItems'));
 
 const initialState = {
+  show: 'all',
+  formInputClass: 'form-control',
   taskText: '',
   tasks: !savedTasks ? [] : savedTasks,
   mainInputFocus: true,
-  checkedItems: !savedChecks ? []: savedChecks,
+  checkedItems: !savedChecks ? [] : savedChecks,
 };
 
-class MainSection extends React.Component {
+class HomePage extends React.Component {
   constructor() {
     super();
+
     this.handleChange = this.handleChange.bind(this);
     this.handleAddTask = this.handleAddTask.bind(this);
     this.handleClear = this.handleClear.bind(this);
+    this.handleChangeView = this.handleChangeView.bind(this);
     this.handleEditBack = this.handleEditBack.bind(this);
     this.handleRemoveItem = this.handleRemoveItem.bind(this);
     this.handleToggleCheck = this.handleToggleCheck.bind(this);
@@ -27,23 +32,24 @@ class MainSection extends React.Component {
     this.state = initialState;
   }
 
-  componentDidMount() {
-    const { tasks } = this.state;
-    const validTasks = tasks.filter(({ text }) => text.trim());
-    this.setState({ tasks: validTasks });
-    localStorage.setItem('tasks', JSON.stringify(validTasks));
-  }
-
   handleChange({ target }) {
     const { value, name } = target;
-    this.setState({ [name]: value })
+    this.setState({ [name]: value });
+    
+    if (value.trim()) {
+      this.setState({ formInputClass: 'form-control' });
+    } else {
+      this.setState({ formInputClass: 'form-control is-invalid' });
+    }
   }
 
   handleAddTask() {
     const { taskText, tasks } = this.state;
     if (!taskText.trim()) {
-      alert('Escreva algo');
-      this.setState({ taskText: '' });
+      this.setState({
+        formInputClass: 'form-control is-invalid',
+        taskText: '',
+      });
     } else {
       const addingTask = [
         ...tasks,
@@ -70,14 +76,20 @@ class MainSection extends React.Component {
     localStorage.setItem('checkedItems', JSON.stringify([]));
   }
 
+  handleChangeView(status = 'all') {
+    this.setState({ show: status });
+  }
+
   handleEditBack(newText, inputID) {
-    const { tasks } = this.state;
-    const tasksCopy = tasks.map(({ id, text }) => {
-      if (id === inputID) return { id, text: newText };
-      return { id, text };
-    })
-    this.setState({ tasks: tasksCopy }, () =>
-      localStorage.setItem('tasks', JSON.stringify(tasksCopy)));
+    if (newText.trim()) {
+      const { tasks } = this.state;
+      const tasksCopy = tasks.map(({ id, text }) => {
+        if (id === inputID) return { id, text: newText };
+        return { id, text };
+      })
+      this.setState({ tasks: tasksCopy }, () =>
+        localStorage.setItem('tasks', JSON.stringify(tasksCopy)));
+    }
   }
 
   handleRemoveItem(taskID) {
@@ -106,7 +118,6 @@ class MainSection extends React.Component {
       this.setState({ checkedItems: removingItem }, () =>
         localStorage.setItem('checkedItems', JSON.stringify(removingItem)));
     }
-
     this.handleRemoveFocus();
   }
 
@@ -120,11 +131,13 @@ class MainSection extends React.Component {
 
   render() {
     const {
+      show,
       tasks,
       taskText,
       checkedItems,
+      formInputClass,
       mainInputFocus,
-    } = this.state
+    } = this.state;
 
     return (
       <main>
@@ -132,12 +145,15 @@ class MainSection extends React.Component {
           handleAddTask={ this.handleAddTask }
           handleChange={ this.handleChange }
           handleClear={ this.handleClear }
+          handleChangeView={ this.handleChangeView }
           handleFocus={ this.handleFocus }
           handleRemoveFocus={ this.handleRemoveFocus }
           mainInputFocus={ mainInputFocus }
+          formInputClass={ formInputClass }
           taskText={ taskText }
         />
         <Tasks
+          show={ show }
           tasks={ tasks }
           mainInputFocus={ mainInputFocus }
           checkedItems={ checkedItems }
@@ -151,4 +167,4 @@ class MainSection extends React.Component {
   }
 }
 
-export default MainSection;
+export default HomePage;

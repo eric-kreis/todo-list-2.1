@@ -1,22 +1,34 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TaskContainer from './TaskContainer';
 
 class Tasks extends React.Component {
   render() {
     const {
+      show,
       tasks,
+      checkedItems,
       mainInputFocus,
       handleEditBack,
-      checkedItems,
       handleRemoveFocus,
       handleRemoveItem,
       handleToggleCheck,
     } = this.props;
 
+    let filtredTasks = tasks;
+
+    if (show === 'completed') {
+      filtredTasks = tasks.filter(({ id }) => checkedItems.includes(id));
+    }
+
+    if (show === 'toDo') {
+      filtredTasks = tasks.filter(({ id }) => !checkedItems.includes(id));
+    }
+
     return (
       <ul>
         {
-          tasks.map(({ id, text }) =>
+          filtredTasks.map(({ id, text }) =>
             <TaskContainer
               key={ id }
               id={ id }
@@ -34,5 +46,15 @@ class Tasks extends React.Component {
     );
   }
 }
+
+Tasks.propTypes = {
+  tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
+  checkedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
+  mainInputFocus: PropTypes.bool.isRequired,
+  handleEditBack: PropTypes.func.isRequired,
+  handleRemoveFocus: PropTypes.func.isRequired,
+  handleRemoveItem: PropTypes.func.isRequired,
+  handleToggleCheck: PropTypes.func.isRequired,
+};
 
 export default Tasks;

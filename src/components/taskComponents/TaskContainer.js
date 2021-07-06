@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import TaskSection from './TaskSection';
 import EditSection from './EditSection';
@@ -6,7 +7,7 @@ import EditSection from './EditSection';
 class TaskContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.handleToggle = this.handleToggle.bind(this);
+    this.handleToggleEdit = this.handleToggleEdit.bind(this);
     this.handleEditing = this.handleEditing.bind(this);
 
     const { text } = props;
@@ -16,7 +17,7 @@ class TaskContainer extends React.Component {
     }
   }
 
-  handleToggle() {
+  handleToggleEdit() {
     const { taskText } = this.state;
     if (taskText !== '') {
       this.setState((prevState) => ({
@@ -58,7 +59,7 @@ class TaskContainer extends React.Component {
               <button
                 onClick={ () => {
                   handleRemoveFocus();
-                  this.handleToggle();
+                  this.handleToggleEdit();
                 } }
               >
                 Editar
@@ -79,7 +80,7 @@ class TaskContainer extends React.Component {
               edit={ edit }
               taskText={ taskText }
               mainInputFocus={ mainInputFocus }
-              handleToggle={ this.handleToggle }
+              handleToggleEdit={ this.handleToggleEdit }
               handleEditing={ this.handleEditing }
               handleRemoveFocus={ handleRemoveFocus }
               handleEditBack={ handleEditBack }
@@ -90,5 +91,16 @@ class TaskContainer extends React.Component {
     );
   }
 }
+
+TaskContainer.propTypes = {
+  id: PropTypes.number.isRequired,
+  text: PropTypes.string.isRequired,
+  mainInputFocus: PropTypes.bool.isRequired,
+  checkedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
+  handleEditBack: PropTypes.func.isRequired,
+  handleRemoveItem: PropTypes.func.isRequired,
+  handleRemoveFocus: PropTypes.func.isRequired,
+  handleToggleCheck: PropTypes.func.isRequired,
+};
 
 export default TaskContainer;

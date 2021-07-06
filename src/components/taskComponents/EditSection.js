@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class EditSection extends Component {
   constructor() {
@@ -18,7 +19,7 @@ class EditSection extends Component {
     const {
       id: inputID,
       taskText,
-      handleToggle,
+      handleToggleEdit,
       handleEditing,
       handleRemoveFocus,
       handleEditBack,
@@ -37,9 +38,15 @@ class EditSection extends Component {
               handleRemoveFocus();
               handleEditing(e);
             } }
+            onKeyUp={ (e) => {
+              if (e.key === 'Enter') {
+                handleToggleEdit();
+                handleEditBack(taskText, inputID);
+              }
+            } }
             onBlur={ () => {
               handleRemoveFocus();
-              handleToggle();
+              handleToggleEdit();
               handleEditBack(taskText, inputID);
             } }
           />
@@ -47,7 +54,7 @@ class EditSection extends Component {
           <button
             onClick={ () => {
               handleRemoveFocus();
-              handleToggle();
+              handleToggleEdit();
               handleEditBack(taskText, inputID);
             } }
           >
@@ -58,5 +65,14 @@ class EditSection extends Component {
     );
   }
 }
+
+EditSection.propTypes = {
+  id: PropTypes.number.isRequired,
+  taskText: PropTypes.string.isRequired,
+  handleToggleEdit: PropTypes.func.isRequired,
+  handleEditing: PropTypes.func.isRequired,
+  handleRemoveFocus: PropTypes.func.isRequired,
+  handleEditBack: PropTypes.func.isRequired,
+};
 
 export default EditSection;

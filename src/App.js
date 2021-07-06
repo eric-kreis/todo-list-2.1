@@ -1,11 +1,18 @@
-import HomePage from './components/HomePage'
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
-    <div>
-      <h1>Lista de Tarefas</h1>
-      <HomePage />
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route
+          exact
+          path="/"
+        >
+          <HomePage />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 

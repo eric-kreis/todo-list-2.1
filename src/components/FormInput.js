@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class Input extends Component {
+import '../styles/bootstrap.min.css'
+
+class FormInput extends Component {
   constructor() {
     super();
 
     this.input = React.createRef();
-  }
-
-  componentDidMount() {
-    this.input.current.focus();
   }
 
   componentDidUpdate() {
@@ -21,20 +19,26 @@ class Input extends Component {
 
   render() {
     const {
-      id,
       type,
       name,
       value,
-      children,
-      handleChange,
       handleFocus,
+      handleChange,
+      formInputClass,
     } = this.props;
 
+    let labelText = 'Escreva sua tarefa aqui';
+
+    if (formInputClass !== 'form-control') {
+      labelText = 'Este campo não pode estar vazio';
+    }
+
     return (
-      <section>
+      <section className="form-floating mb3">
         <input
+          className={ formInputClass }
           ref={ this.input }
-          id={ id }
+          id="form-input"
           type={ type }
           name={ name }
           value={ value }
@@ -43,22 +47,22 @@ class Input extends Component {
           placeholder="placeholder"
           autoComplete="off"
         />
-        <label htmlFor={ id }>{ children }</label>
+        <label htmlFor="form-input">{ labelText }</label>
       </section>
     );  
   }
 }
 
-Input.defaultProps = {
+FormInput.defaultProps = {
   type: 'text',
 };
 
-Input.propTypes = {
-  id: PropTypes.string.isRequired,
+FormInput.propTypes = {
   type: PropTypes.string,
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
+  handleFocus: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
 };
 
-export default Input;
+export default FormInput;
