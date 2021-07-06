@@ -48,7 +48,6 @@ class EditInputSection extends Component {
           onClick={ () => {
             handleToggle();
             handleEditBack(taskText, inputID);
-            handleRemoveFocus();
           } }
         >
           Voltar

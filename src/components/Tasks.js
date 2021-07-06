@@ -8,6 +8,7 @@ class Tasks extends React.Component {
       mainInputFocus,
       handleEditBack,
       handleRemoveFocus,
+      handleRemoveItem,
     } = this.props;
 
     return (
@@ -21,6 +22,7 @@ class Tasks extends React.Component {
               mainInputFocus={ mainInputFocus }
               handleEditBack={ handleEditBack }
               handleRemoveFocus={ handleRemoveFocus }
+              handleRemoveItem={ handleRemoveItem }
             />
           )
         }

@@ -38,6 +38,7 @@ class TaskContainer extends React.Component {
       mainInputFocus,
       handleEditBack,
       handleRemoveFocus,
+      handleRemoveItem,
     } = this.props;
 
     return (
@@ -48,14 +49,17 @@ class TaskContainer extends React.Component {
               <span>{ text }</span>
               <button
                 onClick={ () => {
-                  this.handleToggle();
                   handleRemoveFocus();
+                  this.handleToggle();
                 } }
               >
                 Editar
               </button>
               <button
-                
+                onClick={ () => {
+                  handleRemoveFocus();
+                  handleRemoveItem(id);
+                } }
               >
                 Remover
               </button>

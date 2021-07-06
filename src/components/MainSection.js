@@ -17,6 +17,7 @@ class MainSection extends React.Component {
     this.handleAddTask = this.handleAddTask.bind(this);
     this.handleClear = this.handleClear.bind(this);
     this.handleEditBack = this.handleEditBack.bind(this);
+    this.handleRemoveItem = this.handleRemoveItem.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleRemoveFocus = this.handleRemoveFocus.bind(this);
 
@@ -64,9 +65,15 @@ class MainSection extends React.Component {
       }
       return { id, text };
     })
-    this.setState({
-      tasks: tasksCopy,
-    }, () => localStorage.setItem('tasks', JSON.stringify(tasksCopy)));
+    this.setState({ tasks: tasksCopy }, () =>
+      localStorage.setItem('tasks', JSON.stringify(tasksCopy)));
+  }
+
+  handleRemoveItem(taskID) {
+    const { tasks } = this.state;
+    const tasksWithoutItem = tasks.filter(({ id }) => taskID !== id);
+    this.setState({ tasks: tasksWithoutItem }, () =>
+      localStorage.setItem('tasks', JSON.stringify(tasksWithoutItem)));
   }
 
   handleFocus() {
@@ -100,6 +107,7 @@ class MainSection extends React.Component {
           mainInputFocus={ mainInputFocus }
           handleEditBack={ this.handleEditBack }
           handleRemoveFocus={ this.handleRemoveFocus }
+          handleRemoveItem={ this.handleRemoveItem }
         />
       </main>
     );
