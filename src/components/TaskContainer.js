@@ -1,9 +1,10 @@
 import React from 'react';
 
+import EditInputSection from './EditInputSection';
+
 class TaskContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.editInput = React.createRef();
     this.handleToggle = this.handleToggle.bind(this);
     this.handleEditing = this.handleEditing.bind(this);
 
@@ -11,13 +12,6 @@ class TaskContainer extends React.Component {
     this.state = {
       edit: false,
       taskText: text,
-    }
-  }
-
-  componentDidUpdate() {
-    const { edit } = this.state;
-    if (edit) {
-      this.editInput.current.focus();
     }
   }
 
@@ -39,41 +33,45 @@ class TaskContainer extends React.Component {
     const { edit, taskText } = this.state
 
     const {
-      id: inputID,
+      id,
       text,
+      mainInputFocus,
       handleEditBack,
+      handleRemoveFocus,
     } = this.props;
 
     return (
       <li>
         { !edit
           ? (
-            <div>
+            <section>
               <span>{ text }</span>
               <button
-                onClick={ this.handleToggle }
+                onClick={ () => {
+                  this.handleToggle();
+                  handleRemoveFocus();
+                } }
               >
                 Editar
               </button>
-              <button>Remover</button>
-            </div>
+              <button
+                
+              >
+                Remover
+              </button>
+            </section>
           )
           : (
-            <div>
-              <input
-                ref={ this.editInput }
-                type="text"
-                name="taskText"
-                value={ taskText }
-                onChange={ this.handleEditing }
-              />
-              <label>Escreva aqui para editar sua tarefa</label>
-              <button
-                onClick={ () => { this.handleToggle(); handleEditBack(taskText, inputID) } }
-              >
-                Voltar
-              </button>
-            </div>
+            <EditInputSection
+              id={ id }
+              edit={ edit }
+              taskText={ taskText }
+              mainInputFocus={ mainInputFocus }
+              handleToggle={ this.handleToggle }
+              handleEditing={ this.handleEditing }
+              handleRemoveFocus={ handleRemoveFocus }
+              handleEditBack={ handleEditBack }
+            />
           )
         }
       </li>

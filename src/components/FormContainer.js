@@ -1,26 +1,31 @@
 import React from 'react';
-import Input from './FormInput';
+import FormInput from './FormInput';
 
 class FormContainer extends React.Component {
   render() {
     const {
       taskText,
+      mainInputFocus,
       handleAddTask,
       handleChange,
       handleClear,
+      handleFocus,
+      handleRemoveFocus,
     } = this.props;
 
     return (
       <form onSubmit={ (e) => e.preventDefault() }>
-        <Input
+        <FormInput
           name="taskText"
           value={ taskText }
           handleChange={ handleChange }
+          mainInputFocus={ mainInputFocus }
+          handleFocus={ handleFocus }
         >
           Digite sua tarefa aqui
-        </Input>
-        <button onClick={ handleAddTask }>Add task</button>
-        <button onClick={ handleClear }>Clear</button>
+        </FormInput>
+        <button onClick={ () => { handleAddTask(); handleFocus(); } }>Add task</button>
+        <button onClick={ () => { handleClear(); handleRemoveFocus(); } }>Clear</button>
       </form>
     )
   }

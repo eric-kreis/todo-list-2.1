@@ -5,7 +5,9 @@ class Tasks extends React.Component {
   render() {
     const {
       tasks,
+      mainInputFocus,
       handleEditBack,
+      handleRemoveFocus,
     } = this.props;
 
     return (
@@ -16,8 +18,9 @@ class Tasks extends React.Component {
               key={ id }
               id={ id }
               text={ text }
-              tasks={ tasks }
+              mainInputFocus={ mainInputFocus }
               handleEditBack={ handleEditBack }
+              handleRemoveFocus={ handleRemoveFocus }
             />
           )
         }

@@ -7,6 +7,7 @@ const savedTasks = JSON.parse(localStorage.getItem('tasks'));
 const initialState = {
   taskText: '',
   tasks: !savedTasks ? [] : savedTasks,
+  mainInputFocus: true,
 };
 
 class MainSection extends React.Component {
@@ -16,6 +17,8 @@ class MainSection extends React.Component {
     this.handleAddTask = this.handleAddTask.bind(this);
     this.handleClear = this.handleClear.bind(this);
     this.handleEditBack = this.handleEditBack.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleRemoveFocus = this.handleRemoveFocus.bind(this);
 
     this.state = initialState;
   }
@@ -66,10 +69,19 @@ class MainSection extends React.Component {
     }, () => localStorage.setItem('tasks', JSON.stringify(tasksCopy)));
   }
 
+  handleFocus() {
+    this.setState({ mainInputFocus: true });
+  }
+
+  handleRemoveFocus() {
+    this.setState({ mainInputFocus: false });
+  }
+
   render() {
     const {
       taskText,
       tasks,
+      mainInputFocus,
     } = this.state
 
     return (
@@ -78,11 +90,16 @@ class MainSection extends React.Component {
           handleAddTask={ this.handleAddTask }
           handleChange={ this.handleChange }
           handleClear={ this.handleClear }
+          handleFocus={ this.handleFocus }
+          handleRemoveFocus={ this.handleRemoveFocus }
+          mainInputFocus={ mainInputFocus }
           taskText={ taskText }
         />
         <Tasks
           tasks={ tasks }
+          mainInputFocus={ mainInputFocus }
           handleEditBack={ this.handleEditBack }
+          handleRemoveFocus={ this.handleRemoveFocus }
         />
       </main>
     );

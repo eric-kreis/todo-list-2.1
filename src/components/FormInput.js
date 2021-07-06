@@ -1,24 +1,44 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class Input extends React.Component {
+class Input extends Component {
+  constructor() {
+    super();
+
+    this.input = React.createRef();
+  }
+
+  componentDidMount() {
+    this.input.current.focus();
+  }
+
+  componentDidUpdate() {
+    const { mainInputFocus } = this.props;
+    if (mainInputFocus) {
+      this.input.current.focus();
+    }
+  }
+
   render() {
     const {
       id,
       type,
       name,
       value,
-      handleChange,
       children,
+      handleChange,
+      handleFocus,
     } = this.props;
 
     return (
       <section>
         <input
+          ref={ this.input }
           id={ id }
           type={ type }
           name={ name }
           value={ value }
+          onFocus={ handleFocus }
           onChange={ handleChange }
           placeholder="placeholder"
           autoComplete="off"
