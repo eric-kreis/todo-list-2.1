@@ -22,6 +22,7 @@ class FormInput extends Component {
       handleFocus,
       handleRemoveFocus,
       handleChange,
+      formInputToggle,
       formInputClass,
     } = this.props;
 
@@ -32,7 +33,7 @@ class FormInput extends Component {
     }
 
     return (
-      <section className="form-floating mb3">
+      <span className="form-floating mb3">
         <input
           className={ formInputClass }
           ref={ this.input }
@@ -42,12 +43,12 @@ class FormInput extends Component {
           value={ value }
           onFocus={ handleFocus }
           onBlur={ handleRemoveFocus }
-          onChange={ handleChange }
+          onChange={ (e) => { handleChange(e); formInputToggle(e); } }
           placeholder="placeholder"
           autoComplete="off"
         />
         <label htmlFor="form-input">{ labelText }</label>
-      </section>
+      </span>
     );  
   }
 }

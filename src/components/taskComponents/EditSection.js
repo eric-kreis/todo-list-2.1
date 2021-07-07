@@ -9,8 +9,8 @@ class EditSection extends Component {
   }
 
   componentDidMount() {
-    const { edit, mainInputFocus } = this.props;
-    if (edit && !mainInputFocus) {
+    const { edit } = this.props;
+    if (edit) {
       this.editInput.current.focus();
     }
   }
@@ -18,37 +18,38 @@ class EditSection extends Component {
   render() {
     const {
       id: inputID,
-      taskText,
+      editText,
       handleToggleEdit,
       handleEditing,
       handleEditBack,
     } = this.props;
 
     return (
-      <section className="">
+      <section className="form-floating mb-3">
         <input
           ref={ this.editInput }
+          className="form-control"
           type="text"
-          name="taskText"
-          value={ taskText }
+          name="editText"
+          value={ editText }
           placeholder="placeholder"
           onChange={ handleEditing }
           onKeyUp={ (e) => {
             if (e.key === 'Enter') {
               handleToggleEdit();
-              handleEditBack(taskText, inputID);
+              handleEditBack(editText, inputID);
             }
           } }
           onBlur={ () => {
             handleToggleEdit();
-            handleEditBack(taskText, inputID);
+            handleEditBack(editText, inputID);
           } }
         />
         <label>Escreva aqui para editar sua tarefa</label>
         <button
           onClick={ () => {
             handleToggleEdit();
-            handleEditBack(taskText, inputID);
+            handleEditBack(editText, inputID);
           } }
         >
           Voltar
@@ -60,7 +61,7 @@ class EditSection extends Component {
 
 EditSection.propTypes = {
   id: PropTypes.number.isRequired,
-  taskText: PropTypes.string.isRequired,
+  editText: PropTypes.string.isRequired,
   handleToggleEdit: PropTypes.func.isRequired,
   handleEditing: PropTypes.func.isRequired,
   handleEditBack: PropTypes.func.isRequired,

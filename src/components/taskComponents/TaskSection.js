@@ -17,8 +17,8 @@ class TaskSection extends Component {
   render() {
     const {
       id,
-      text,
       handleToggleCheck,
+      children,
     } = this.props;
 
     return (
@@ -29,7 +29,7 @@ class TaskSection extends Component {
           value={ id }
           onChange={ handleToggleCheck }
         />
-        <span>{ text }</span>
+        <span>{ children }</span>
       </label>
     );
   }
@@ -37,7 +37,7 @@ class TaskSection extends Component {
 
 TaskSection.propTypes = {
   id: PropTypes.number.isRequired,
-  text: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   handleToggleCheck: PropTypes.func.isRequired,
 };
 

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import TaskSection from './TaskSection';
 import EditSection from './EditSection';
+import { TaskItem, TaskBody } from '../../styles/styledComponents';
 
 class TaskContainer extends React.Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class TaskContainer extends React.Component {
     const { text } = props;
     this.state = {
       edit: false,
-      taskText: text,
+      editText: text,
     }
   }
 
@@ -29,12 +30,11 @@ class TaskContainer extends React.Component {
   }
 
   render() {
-    const { edit, taskText } = this.state
+    const { edit, editText } = this.state
 
     const {
       id,
       text,
-      mainInputFocus,
       checkedItems,
       handleEditBack,
       handleRemoveItem,
@@ -43,46 +43,49 @@ class TaskContainer extends React.Component {
     } = this.props;
 
     return (
-      <li>
+      <TaskItem>
         { !edit
           ? (
-            <section>
+            <TaskBody>
               <TaskSection
                 id={ id }
-                text={ text }
                 checkedItems={ checkedItems }
                 handleToggleCheck={ handleToggleCheck }
-              />
-              <button
-                onClick={ () => {
-                  handleRemoveFocus();
-                  this.handleToggleEdit();
-                } }
               >
-                Editar
-              </button>
-              <button
-                onClick={ () => {
-                  handleRemoveItem(id);
-                } }
-              >
-                Remover
-              </button>
-            </section>
+                { text }
+              </TaskSection>
+              <div>
+                <button
+                  onClick={ () => {
+                    handleRemoveFocus();
+                    this.handleToggleEdit();
+                  } }
+                >
+                  Editar
+                </button>
+                <button
+                  onClick={ () => {
+                    handleRemoveFocus();
+                    handleRemoveItem(id);
+                  } }
+                >
+                  Remover
+                </button>
+              </div>
+            </TaskBody>
           )
           : (
             <EditSection
               id={ id }
               edit={ edit }
-              taskText={ taskText }
-              mainInputFocus={ mainInputFocus }
+              editText={ editText }
               handleToggleEdit={ this.handleToggleEdit }
               handleEditing={ this.handleEditing }
               handleEditBack={ handleEditBack }
             />
           )
         }
-      </li>
+      </TaskItem>
     );
   }
 }
@@ -90,7 +93,6 @@ class TaskContainer extends React.Component {
 TaskContainer.propTypes = {
   id: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
-  mainInputFocus: PropTypes.bool.isRequired,
   checkedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
   handleEditBack: PropTypes.func.isRequired,
   handleRemoveItem: PropTypes.func.isRequired,

@@ -2,6 +2,7 @@ import React from 'react';
 
 import FormContainer from '../components/FormContainer';
 import Tasks from '../components/taskComponents/Tasks';
+import { HomeBody, HomeMain } from '../styles/styledComponents';
 
 const savedTasks = JSON.parse(localStorage.getItem('tasks'));
 const savedChecks = JSON.parse(localStorage.getItem('checkedItems'));
@@ -11,7 +12,7 @@ const initialState = {
   formInputClass: 'form-control',
   taskText: '',
   tasks: !savedTasks ? [] : savedTasks,
-  mainInputFocus: true,
+  mainInputFocus: false,
   checkedItems: !savedChecks ? [] : savedChecks,
 };
 
@@ -20,14 +21,18 @@ class HomePage extends React.Component {
     super();
 
     this.handleChange = this.handleChange.bind(this);
+    this.formInputToggle = this.formInputToggle.bind(this);
     this.handleAddTask = this.handleAddTask.bind(this);
     this.handleClear = this.handleClear.bind(this);
-    this.handleChangeView = this.handleChangeView.bind(this);
     this.handleEditBack = this.handleEditBack.bind(this);
     this.handleRemoveItem = this.handleRemoveItem.bind(this);
     this.handleToggleCheck = this.handleToggleCheck.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleRemoveFocus = this.handleRemoveFocus.bind(this);
+
+    this.clearToDo = this.clearToDo.bind(this);
+    this.clearCompleted = this.clearCompleted.bind(this);
+    this.clearAll = this.clearAll.bind(this);
 
     this.state = initialState;
   }
@@ -35,7 +40,10 @@ class HomePage extends React.Component {
   handleChange({ target }) {
     const { value, name } = target;
     this.setState({ [name]: value });
-    
+  }
+
+  formInputToggle({ target }) {
+    const { value } = target;
     if (value.trim()) {
       this.setState({ formInputClass: 'form-control' });
     } else {
@@ -67,6 +75,32 @@ class HomePage extends React.Component {
   }
 
   handleClear() {
+    const { show } = this.state;
+    if (show === 'toDo') {
+      this.clearToDo();
+    } else if (show === 'completed') {
+      this.clearCompleted();
+    } else {
+      this.clearAll();
+    }
+  }
+  
+  clearToDo() {
+    const { tasks, checkedItems } = this.state;
+    const onlyCompleted = tasks.filter(({ id }) => checkedItems.includes(id));
+    this.setState({ tasks: onlyCompleted, taskText: '' });
+    localStorage.setItem('tasks', JSON.stringify(onlyCompleted));
+  }
+
+  clearCompleted() {
+    const { tasks, checkedItems } = this.state;
+    const onlyToDo = tasks.filter(({ id }) => !checkedItems.includes(id));
+    this.setState({ tasks: onlyToDo, taskText: '' });
+    localStorage.setItem('tasks', JSON.stringify(onlyToDo));
+    localStorage.setItem('checkedItems', JSON.stringify([]));
+  }
+
+  clearAll() {
     this.setState({
       tasks: [],
       taskText: '',
@@ -74,10 +108,6 @@ class HomePage extends React.Component {
     });
     localStorage.setItem('tasks', JSON.stringify([]));
     localStorage.setItem('checkedItems', JSON.stringify([]));
-  }
-
-  handleChangeView(status = 'all') {
-    this.setState({ show: status });
   }
 
   handleEditBack(newText, inputID) {
@@ -143,29 +173,30 @@ class HomePage extends React.Component {
     } = this.state;
 
     return (
-      <main>
-        <FormContainer
-          handleAddTask={ this.handleAddTask }
-          handleChange={ this.handleChange }
-          handleClear={ this.handleClear }
-          handleChangeView={ this.handleChangeView }
-          handleFocus={ this.handleFocus }
-          handleRemoveFocus={ this.handleRemoveFocus }
-          mainInputFocus={ mainInputFocus }
-          formInputClass={ formInputClass }
-          taskText={ taskText }
-        />
-        <Tasks
-          show={ show }
-          tasks={ tasks }
-          mainInputFocus={ mainInputFocus }
-          checkedItems={ checkedItems }
-          handleEditBack={ this.handleEditBack }
-          handleRemoveItem={ this.handleRemoveItem }
-          handleRemoveFocus={ this.handleRemoveFocus }
-          handleToggleCheck={ this.handleToggleCheck }
-        />
-      </main>
+      <HomeBody>
+        <HomeMain>
+          <FormContainer
+            handleAddTask={ this.handleAddTask }
+            handleChange={ this.handleChange }
+            handleClear={ this.handleClear }
+            formInputToggle={ this.formInputToggle }
+            handleFocus={ this.handleFocus }
+            handleRemoveFocus={ this.handleRemoveFocus }
+            mainInputFocus={ mainInputFocus }
+            formInputClass={ formInputClass }
+            taskText={ taskText }
+          />
+          <Tasks
+            show={ show }
+            tasks={ tasks }
+            checkedItems={ checkedItems }
+            handleEditBack={ this.handleEditBack }
+            handleRemoveItem={ this.handleRemoveItem }
+            handleRemoveFocus={ this.handleRemoveFocus }
+            handleToggleCheck={ this.handleToggleCheck }
+          />
+        </HomeMain>
+      </HomeBody>
     );
   }
 }

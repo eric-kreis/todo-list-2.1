@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import { TaskList } from '../../styles/styledComponents';
 import TaskContainer from './TaskContainer';
 
 class Tasks extends React.Component {
@@ -8,7 +10,6 @@ class Tasks extends React.Component {
       show,
       tasks,
       checkedItems,
-      mainInputFocus,
       handleEditBack,
       handleRemoveItem,
       handleToggleCheck,
@@ -26,7 +27,7 @@ class Tasks extends React.Component {
     }
 
     return (
-      <ul>
+      <TaskList>
         {
           filtredTasks.map(({ id, text }) =>
             <TaskContainer
@@ -34,7 +35,6 @@ class Tasks extends React.Component {
               id={ id }
               text={ text }
               checkedItems={ checkedItems }
-              mainInputFocus={ mainInputFocus }
               handleEditBack={ handleEditBack }
               handleRemoveFocus={ handleRemoveFocus }
               handleRemoveItem={ handleRemoveItem }
@@ -42,7 +42,7 @@ class Tasks extends React.Component {
             />
           )
         }
-      </ul>
+      </TaskList>
     );
   }
 }
@@ -50,7 +50,6 @@ class Tasks extends React.Component {
 Tasks.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
   checkedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
-  mainInputFocus: PropTypes.bool.isRequired,
   handleEditBack: PropTypes.func.isRequired,
   handleRemoveItem: PropTypes.func.isRequired,
   handleToggleCheck: PropTypes.func.isRequired,

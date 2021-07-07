@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import FormInput from './FormInput';
-import PropTypes from 'prop-types';
+import { MainForm, InputSectionForm } from '../styles/styledComponents'
 
 class FormContainer extends Component {
   render() {
@@ -9,7 +10,7 @@ class FormContainer extends Component {
       taskText,
       formInputClass,
       mainInputFocus,
-      handleChangeView,
+      formInputToggle,
       handleAddTask,
       handleChange,
       handleClear,
@@ -18,17 +19,18 @@ class FormContainer extends Component {
     } = this.props;
 
     return (
-      <form onSubmit={ (e) => e.preventDefault() }>
-        <FormInput
-          name="taskText"
-          value={ taskText }
-          formInputClass={ formInputClass }
-          mainInputFocus={ mainInputFocus }
-          handleChange={ handleChange }
-          handleFocus={ handleFocus }
-          handleRemoveFocus={ handleRemoveFocus }
-        />
-        <div>
+      <MainForm onSubmit={ (e) => e.preventDefault() }>
+        <InputSectionForm>
+          <FormInput
+            name="taskText"
+            value={ taskText }
+            formInputClass={ formInputClass }
+            mainInputFocus={ mainInputFocus }
+            handleChange={ handleChange }
+            formInputToggle={ formInputToggle }
+            handleFocus={ handleFocus }
+            handleRemoveFocus={ handleRemoveFocus }
+          />
           <button
             onClick={ () => {
               handleAddTask();
@@ -44,28 +46,32 @@ class FormContainer extends Component {
           >
             Remover Tarefas
           </button>
-        </div>
+        </InputSectionForm>
+
         <div>
-          <button onClick={ handleChangeView }
+          <button
+            name="show"
+            value="all"
+            onClick={ handleChange }
           >
             Todas
           </button>
           <button
-            onClick={ () => {
-              handleChangeView('toDo');
-            } }
+            name="show"
+            value="toDo"
+            onClick={ handleChange }
           >
             Pendentes
           </button>
           <button
-            onClick={ () => {
-              handleChangeView('completed');
-            } }
+            name="show"
+            value="completed"
+            onClick={ handleChange }
           >
             Concluídas
           </button>
         </div>
-      </form>
+      </MainForm>
     )
   }
 }
