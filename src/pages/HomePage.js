@@ -126,7 +126,10 @@ class HomePage extends React.Component {
   }
 
   handleRemoveFocus() {
-    this.setState({ mainInputFocus: false });
+    this.setState({
+      mainInputFocus: false,
+      formInputClass: 'form-control',
+    });
   }
 
   render() {
@@ -158,8 +161,8 @@ class HomePage extends React.Component {
           mainInputFocus={ mainInputFocus }
           checkedItems={ checkedItems }
           handleEditBack={ this.handleEditBack }
-          handleRemoveFocus={ this.handleRemoveFocus }
           handleRemoveItem={ this.handleRemoveItem }
+          handleRemoveFocus={ this.handleRemoveFocus }
           handleToggleCheck={ this.handleToggleCheck }
         />
       </main>

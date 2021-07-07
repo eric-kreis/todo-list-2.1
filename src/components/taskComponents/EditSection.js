@@ -21,46 +21,38 @@ class EditSection extends Component {
       taskText,
       handleToggleEdit,
       handleEditing,
-      handleRemoveFocus,
       handleEditBack,
     } = this.props;
 
     return (
-      <section>
-        <div>
-          <input
-            ref={ this.editInput }
-            type="text"
-            name="taskText"
-            value={ taskText }
-            placeholder="placeholder"
-            onChange={ (e) => {
-              handleRemoveFocus();
-              handleEditing(e);
-            } }
-            onKeyUp={ (e) => {
-              if (e.key === 'Enter') {
-                handleToggleEdit();
-                handleEditBack(taskText, inputID);
-              }
-            } }
-            onBlur={ () => {
-              handleRemoveFocus();
+      <section className="">
+        <input
+          ref={ this.editInput }
+          type="text"
+          name="taskText"
+          value={ taskText }
+          placeholder="placeholder"
+          onChange={ handleEditing }
+          onKeyUp={ (e) => {
+            if (e.key === 'Enter') {
               handleToggleEdit();
               handleEditBack(taskText, inputID);
-            } }
-          />
-          <label>Escreva aqui para editar sua tarefa</label>
-          <button
-            onClick={ () => {
-              handleRemoveFocus();
-              handleToggleEdit();
-              handleEditBack(taskText, inputID);
-            } }
-          >
-            Voltar
-          </button>
-        </div>
+            }
+          } }
+          onBlur={ () => {
+            handleToggleEdit();
+            handleEditBack(taskText, inputID);
+          } }
+        />
+        <label>Escreva aqui para editar sua tarefa</label>
+        <button
+          onClick={ () => {
+            handleToggleEdit();
+            handleEditBack(taskText, inputID);
+          } }
+        >
+          Voltar
+        </button>
       </section>
     );
   }
@@ -71,7 +63,6 @@ EditSection.propTypes = {
   taskText: PropTypes.string.isRequired,
   handleToggleEdit: PropTypes.func.isRequired,
   handleEditing: PropTypes.func.isRequired,
-  handleRemoveFocus: PropTypes.func.isRequired,
   handleEditBack: PropTypes.func.isRequired,
 };
 

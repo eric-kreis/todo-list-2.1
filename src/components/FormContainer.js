@@ -26,6 +26,7 @@ class FormContainer extends Component {
           mainInputFocus={ mainInputFocus }
           handleChange={ handleChange }
           handleFocus={ handleFocus }
+          handleRemoveFocus={ handleRemoveFocus }
         />
         <div>
           <button
@@ -39,25 +40,19 @@ class FormContainer extends Component {
           <button
             onClick={ () => {
               handleClear();
-              handleRemoveFocus();
             } }
           >
             Remover Tarefas
           </button>
         </div>
         <div>
-          <button
-            onClick={ () => {
-              handleChangeView();
-              handleRemoveFocus();
-            } }
+          <button onClick={ handleChangeView }
           >
             Todas
           </button>
           <button
             onClick={ () => {
               handleChangeView('toDo');
-              handleRemoveFocus();
             } }
           >
             Pendentes
@@ -65,7 +60,6 @@ class FormContainer extends Component {
           <button
             onClick={ () => {
               handleChangeView('completed');
-              handleRemoveFocus();
             } }
           >
             Concluídas

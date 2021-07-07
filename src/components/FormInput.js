@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-import '../styles/bootstrap.min.css'
-
 class FormInput extends Component {
   constructor() {
     super();
@@ -23,6 +20,7 @@ class FormInput extends Component {
       name,
       value,
       handleFocus,
+      handleRemoveFocus,
       handleChange,
       formInputClass,
     } = this.props;
@@ -43,6 +41,7 @@ class FormInput extends Component {
           name={ name }
           value={ value }
           onFocus={ handleFocus }
+          onBlur={ handleRemoveFocus }
           onChange={ handleChange }
           placeholder="placeholder"
           autoComplete="off"

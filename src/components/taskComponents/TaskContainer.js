@@ -18,12 +18,9 @@ class TaskContainer extends React.Component {
   }
 
   handleToggleEdit() {
-    const { taskText } = this.state;
-    if (taskText !== '') {
-      this.setState((prevState) => ({
-        edit: !prevState.edit,
-      }));
-    }
+    this.setState((prevState) => ({
+      edit: !prevState.edit,
+    }));
   }
 
   handleEditing({ target }) {
@@ -40,9 +37,9 @@ class TaskContainer extends React.Component {
       mainInputFocus,
       checkedItems,
       handleEditBack,
-      handleRemoveFocus,
       handleRemoveItem,
       handleToggleCheck,
+      handleRemoveFocus,
     } = this.props;
 
     return (
@@ -66,7 +63,6 @@ class TaskContainer extends React.Component {
               </button>
               <button
                 onClick={ () => {
-                  handleRemoveFocus();
                   handleRemoveItem(id);
                 } }
               >
@@ -82,7 +78,6 @@ class TaskContainer extends React.Component {
               mainInputFocus={ mainInputFocus }
               handleToggleEdit={ this.handleToggleEdit }
               handleEditing={ this.handleEditing }
-              handleRemoveFocus={ handleRemoveFocus }
               handleEditBack={ handleEditBack }
             />
           )

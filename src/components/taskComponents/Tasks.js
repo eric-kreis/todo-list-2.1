@@ -10,9 +10,9 @@ class Tasks extends React.Component {
       checkedItems,
       mainInputFocus,
       handleEditBack,
-      handleRemoveFocus,
       handleRemoveItem,
       handleToggleCheck,
+      handleRemoveFocus,
     } = this.props;
 
     let filtredTasks = tasks;
@@ -52,7 +52,6 @@ Tasks.propTypes = {
   checkedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
   mainInputFocus: PropTypes.bool.isRequired,
   handleEditBack: PropTypes.func.isRequired,
-  handleRemoveFocus: PropTypes.func.isRequired,
   handleRemoveItem: PropTypes.func.isRequired,
   handleToggleCheck: PropTypes.func.isRequired,
 };
