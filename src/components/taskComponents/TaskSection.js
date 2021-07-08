@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { TaskLabel } from '../../styles/styledComponents'
+
 class TaskSection extends Component {
   constructor() {
     super();
@@ -22,7 +24,7 @@ class TaskSection extends Component {
     } = this.props;
 
     return (
-      <label>
+      <TaskLabel>
         <input
           ref={ this.check }
           type="checkbox"
@@ -30,7 +32,7 @@ class TaskSection extends Component {
           onChange={ handleToggleCheck }
         />
         <span>{ children }</span>
-      </label>
+      </TaskLabel>
     );
   }
 }

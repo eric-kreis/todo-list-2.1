@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import TaskSection from './TaskSection';
 import EditSection from './EditSection';
-import { TaskItem, TaskBody } from '../../styles/styledComponents';
+import { TaskItem, TaskBody, TaskButtons } from '../../styles/styledComponents';
 
 class TaskContainer extends React.Component {
   constructor(props) {
@@ -54,7 +54,7 @@ class TaskContainer extends React.Component {
               >
                 { text }
               </TaskSection>
-              <div>
+              <TaskButtons>
                 <button
                   onClick={ () => {
                     handleRemoveFocus();
@@ -71,7 +71,7 @@ class TaskContainer extends React.Component {
                 >
                   Remover
                 </button>
-              </div>
+              </TaskButtons>
             </TaskBody>
           )
           : (

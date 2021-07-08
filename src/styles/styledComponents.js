@@ -70,8 +70,25 @@ export const TaskItem = styled.li`
 
 export const TaskBody = styled.section`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 100%;
+`;
+
+export const TaskLabel = styled.label`
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  justify-content: space-evenly;
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+export const TaskButtons = styled.div`
+  width: 20%;
+  display: flex;
+  justify-content: space-around;
 `;
 
 export const ModalWindow = styled.main`
