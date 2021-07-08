@@ -33,7 +33,7 @@ class FormInput extends Component {
     }
 
     return (
-      <span className="form-floating mb3">
+      <span className="form-floating">
         <input
           className={ formInputClass }
           ref={ this.input }

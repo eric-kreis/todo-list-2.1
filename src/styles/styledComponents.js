@@ -6,6 +6,10 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
 
+  h1 {
+    text-align: center;
+  }
+
   .form-floating {
     width: 100%;
     display: flex;
@@ -13,14 +17,20 @@ export const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export const HomeBody = styled.div`
-  /* width: 100vw;
-  height: 100%;
-  background-color: blue; */
+export const PageBody = styled.div`
+  width: 100%;
+  min-height: 100vh;
+  background-color: blue ${(props) => props.backgroundColor};
+  opacity: ${(props) => props.opacity};
+`;
+
+export const HomeHeader = styled.header`
+  background-color: whitesmoke;
 `;
 
 export const HomeMain = styled.main`
-  width: 700px;
+  width: 55%;
+  min-width: 300px;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
@@ -37,6 +47,7 @@ export const MainForm = styled.form`
 export const InputSectionForm = styled.section`
   width: 100%;
   display: flex;
+  justify-content: center;
 `;
 
 export const TaskList = styled.ul`
@@ -61,4 +72,34 @@ export const TaskBody = styled.section`
   display: flex;
   justify-content: space-between;
   width: 100%;
+`;
+
+export const ModalWindow = styled.main`
+  background-color: rgba(0, 0, 0, 0.8);
+  height: 100%;
+  padding-top: 64px;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+`;
+
+export const Modal = styled.div`
+  background: whitesmoke;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  color: #000;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  height: 360px;
+  width: 40%;
+  margin: auto;
+  padding-top: 16px;
+  position: relative;
+  z-index: 10;
+
+  button {
+    height: 64px;
+    width: 64px;
+  }
 `;

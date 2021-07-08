@@ -2,7 +2,8 @@ import React from 'react';
 
 import FormContainer from '../components/FormContainer';
 import Tasks from '../components/taskComponents/Tasks';
-import { HomeBody, HomeMain } from '../styles/styledComponents';
+import ConfirmModal from '../components/ConfirmModal';
+import { PageBody, HomeHeader, HomeMain } from '../styles/styledComponents';
 
 const savedTasks = JSON.parse(localStorage.getItem('tasks'));
 const savedChecks = JSON.parse(localStorage.getItem('checkedItems'));
@@ -14,6 +15,7 @@ const initialState = {
   tasks: !savedTasks ? [] : savedTasks,
   mainInputFocus: false,
   checkedItems: !savedChecks ? [] : savedChecks,
+  openModal: false,
 };
 
 class HomePage extends React.Component {
@@ -23,6 +25,7 @@ class HomePage extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.formInputToggle = this.formInputToggle.bind(this);
     this.handleAddTask = this.handleAddTask.bind(this);
+    this.handleToggleModal = this.handleToggleModal.bind(this);
     this.handleClear = this.handleClear.bind(this);
     this.handleEditBack = this.handleEditBack.bind(this);
     this.handleRemoveItem = this.handleRemoveItem.bind(this);
@@ -72,6 +75,11 @@ class HomePage extends React.Component {
       });
       localStorage.setItem('tasks', JSON.stringify(addingTask));
     }
+  }
+
+  handleToggleModal() {
+    this.setState((prevState) =>
+      ({ openModal: !prevState.openModal }));
   }
 
   handleClear() {
@@ -170,22 +178,32 @@ class HomePage extends React.Component {
       checkedItems,
       formInputClass,
       mainInputFocus,
+      openModal,
     } = this.state;
 
     return (
-      <HomeBody>
+      <PageBody>
+        <ConfirmModal
+          show={ show }
+          openModal={ openModal }
+          handleClear={ this.handleClear }
+          handleToggleModal={ this.handleToggleModal }
+        />
+        <HomeHeader>
+          <h1>Lista de Tarefas</h1>
+        </HomeHeader>
         <HomeMain>
           <FormContainer
             handleAddTask={ this.handleAddTask }
             handleChange={ this.handleChange }
-            handleClear={ this.handleClear }
+            handleToggleModal={ this.handleToggleModal }
             formInputToggle={ this.formInputToggle }
             handleFocus={ this.handleFocus }
             handleRemoveFocus={ this.handleRemoveFocus }
             mainInputFocus={ mainInputFocus }
             formInputClass={ formInputClass }
             taskText={ taskText }
-          />
+            />
           <Tasks
             show={ show }
             tasks={ tasks }
@@ -196,7 +214,7 @@ class HomePage extends React.Component {
             handleToggleCheck={ this.handleToggleCheck }
           />
         </HomeMain>
-      </HomeBody>
+      </PageBody>
     );
   }
 }

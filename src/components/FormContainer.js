@@ -13,7 +13,7 @@ class FormContainer extends Component {
       formInputToggle,
       handleAddTask,
       handleChange,
-      handleClear,
+      handleToggleModal,
       handleFocus,
       handleRemoveFocus,
     } = this.props;
@@ -41,14 +41,14 @@ class FormContainer extends Component {
           </button>
           <button
             onClick={ () => {
-              handleClear();
+              handleToggleModal();
             } }
           >
             Remover Tarefas
           </button>
         </InputSectionForm>
 
-        <div>
+        <InputSectionForm>
           <button
             name="show"
             value="all"
@@ -70,7 +70,7 @@ class FormContainer extends Component {
           >
             Concluídas
           </button>
-        </div>
+        </InputSectionForm>
       </MainForm>
     )
   }
