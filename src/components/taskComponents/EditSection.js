@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { Exit } from '../../sources/Icons';
+import { IconsButtons } from '../../styles/styledComponents';
+
 class EditSection extends Component {
   constructor() {
     super();
@@ -24,15 +27,19 @@ class EditSection extends Component {
       handleEditBack,
     } = this.props;
 
+    let editClass = 'form-control';
+    if (!editText) editClass = 'form-control is-invalid';
+
     return (
       <section className="form-floating mb-3">
         <input
           ref={ this.editInput }
-          className="form-control"
+          className={ editClass }
           type="text"
           name="editText"
           value={ editText }
           placeholder="placeholder"
+          autoComplete="off"
           onChange={ handleEditing }
           onKeyUp={ (e) => {
             if (e.key === 'Enter') {
@@ -46,14 +53,15 @@ class EditSection extends Component {
           } }
         />
         <label>Escreva aqui para editar sua tarefa</label>
-        <button
+        <IconsButtons
+          large
           onClick={ () => {
             handleToggleEdit();
             handleEditBack(editText, inputID);
           } }
         >
-          Voltar
-        </button>
+          <Exit />
+        </IconsButtons>
       </section>
     );
   }

@@ -1,9 +1,10 @@
 import React from 'react';
 
+import Header from '../sources/Header';
 import FormContainer from '../components/FormContainer';
 import Tasks from '../components/taskComponents/Tasks';
-import ConfirmModal from '../components/ConfirmModal';
-import { PageBody, HomeHeader, HomeMain } from '../styles/styledComponents';
+import ClearModalContainer from '../components/ClearModalContainer';
+import { PageBody, HomeMain } from '../styles/styledComponents';
 
 const savedTasks = JSON.parse(localStorage.getItem('tasks'));
 const savedChecks = JSON.parse(localStorage.getItem('checkedItems'));
@@ -15,7 +16,7 @@ const initialState = {
   tasks: !savedTasks ? [] : savedTasks,
   mainInputFocus: false,
   checkedItems: !savedChecks ? [] : savedChecks,
-  openModal: false,
+  clearModal: false,
 };
 
 class HomePage extends React.Component {
@@ -23,7 +24,7 @@ class HomePage extends React.Component {
     super();
 
     this.handleChange = this.handleChange.bind(this);
-    this.formInputToggle = this.formInputToggle.bind(this);
+    this.formClassToggle = this.formClassToggle.bind(this);
     this.handleAddTask = this.handleAddTask.bind(this);
     this.handleToggleModal = this.handleToggleModal.bind(this);
     this.handleClear = this.handleClear.bind(this);
@@ -45,7 +46,7 @@ class HomePage extends React.Component {
     this.setState({ [name]: value });
   }
 
-  formInputToggle({ target }) {
+  formClassToggle({ target }) {
     const { value } = target;
     if (value.trim()) {
       this.setState({ formInputClass: 'form-control' });
@@ -79,7 +80,7 @@ class HomePage extends React.Component {
 
   handleToggleModal() {
     this.setState((prevState) =>
-      ({ openModal: !prevState.openModal }));
+      ({ clearModal: !prevState.clearModal }));
   }
 
   handleClear() {
@@ -178,32 +179,32 @@ class HomePage extends React.Component {
       checkedItems,
       formInputClass,
       mainInputFocus,
-      openModal,
+      clearModal,
     } = this.state;
 
     return (
-      <PageBody>
-        <ConfirmModal
+      <PageBody backgroundColor="whitesmoke">
+        <ClearModalContainer
           show={ show }
-          openModal={ openModal }
+          clearModal={ clearModal }
           handleClear={ this.handleClear }
           handleToggleModal={ this.handleToggleModal }
         />
-        <HomeHeader>
+        <Header>
           <h1>Lista de Tarefas</h1>
-        </HomeHeader>
+        </Header>
         <HomeMain>
           <FormContainer
             handleAddTask={ this.handleAddTask }
             handleChange={ this.handleChange }
             handleToggleModal={ this.handleToggleModal }
-            formInputToggle={ this.formInputToggle }
+            formClassToggle={ this.formClassToggle }
             handleFocus={ this.handleFocus }
             handleRemoveFocus={ this.handleRemoveFocus }
             mainInputFocus={ mainInputFocus }
             formInputClass={ formInputClass }
             taskText={ taskText }
-            />
+          />
           <Tasks
             show={ show }
             tasks={ tasks }

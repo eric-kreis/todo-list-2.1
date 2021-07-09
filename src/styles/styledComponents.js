@@ -6,10 +6,6 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
 
-  h1 {
-    text-align: center;
-  }
-
   .form-floating {
     width: 100%;
     display: flex;
@@ -17,37 +13,83 @@ export const GlobalStyle = createGlobalStyle`
   }
 `;
 
+export const PageHeader = styled.header`
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 12px;
+
+  h1 {
+    font-size: x-large;
+  }
+`;
+
 export const PageBody = styled.div`
   width: 100%;
   min-height: 100vh;
-  background-color: blue ${(props) => props.backgroundColor};
-  opacity: ${(props) => props.opacity};
-`;
-
-export const HomeHeader = styled.header`
-  background-color: whitesmoke;
+  background-color: ${(props) => props.backgroundColor};
 `;
 
 export const HomeMain = styled.main`
-  width: 55%;
-  min-width: 300px;
-  margin: auto;
+  /* background-color: blue; */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  margin: auto;
+  min-width: 300px;
+  padding: 36px 64px;
+  width: 50%;
 `;
 
 export const MainForm = styled.form`
-  width: 100%;
   display: flex;
-  padding: 0 24px 0 24px;
   flex-direction: column;
+  width: 100%;
 `;
 
-export const InputSectionForm = styled.section`
-  width: 100%;
+export const SectionForm = styled.section`
   display: flex;
   justify-content: center;
+  margin-bottom: 16px;
+  width: 100%;
+`;
+
+export const IconsButtons = styled.button`
+  background-color: transparent;
+  border: 0;
+  font-size: ${ (props) => {
+    if (props.large) {
+      return '24px';
+    }
+    if (props.medium) {
+      return '20px';
+    }
+    return '15px'
+  }};
+  margin: 12px;
+
+  :hover {
+    color: ${ (props) => {
+      if (props.add) {
+        return 'green';
+      }
+      if (props.clear) {
+        return 'red';
+      }
+      return 'blue';
+    } };
+  }
+`;
+
+export const FormShowButtons = styled.button`
+  background-color: transparent;
+  border: 0;
+  font-size: 20px;
+  margin: 12px;
+
+  :hover {
+    color: blue;
+  }
 `;
 
 export const TaskList = styled.ul`
@@ -56,39 +98,46 @@ export const TaskList = styled.ul`
   flex-wrap: wrap;
   justify-content: space-between;
   width: 500px;
-  padding: 8px;
-  margin: 16px;
 `;
 
 export const TaskItem = styled.li`
   width: 100%;
+  overflow: hidden;
   height: 60px;
   margin: 8px;
   padding-bottom: 4px;
   border-bottom: 1px solid black;
 `;
 
-export const TaskBody = styled.section`
+export const TaskBody = styled.main`
   display: flex;
   justify-content: space-around;
   width: 100%;
 `;
 
 export const TaskLabel = styled.label`
-  width: 80%;
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   overflow: hidden;
-  justify-content: space-evenly;
-  :hover {
-    cursor: pointer;
+  width: 80%;
+  max-width: 80%;
+
+  input {
+    margin-right: 36px;
+    :hover {
+      cursor: pointer;
+    }
+  }
+
+  span {
+    max-width: 100%;
   }
 `;
 
 export const TaskButtons = styled.div`
   width: 20%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 `;
 
 export const ModalWindow = styled.main`
@@ -113,6 +162,7 @@ export const Modal = styled.div`
   margin: auto;
   padding-top: 16px;
   position: relative;
+  text-align: center;
   z-index: 10;
 
   button {

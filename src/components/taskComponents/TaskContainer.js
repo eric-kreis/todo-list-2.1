@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import TaskSection from './TaskSection';
+
 import EditSection from './EditSection';
-import { TaskItem, TaskBody, TaskButtons } from '../../styles/styledComponents';
+import TaskMain from './TaskMain';
+import { TaskItem } from '../../styles/styledComponents';
 
 class TaskContainer extends React.Component {
   constructor(props) {
     super(props);
+    this.editRules = this.editRules.bind(this);
     this.handleToggleEdit = this.handleToggleEdit.bind(this);
     this.handleEditing = this.handleEditing.bind(this);
 
@@ -18,10 +20,18 @@ class TaskContainer extends React.Component {
     }
   }
 
+  editRules() {
+    const { edit, editText } = this.state;
+    const { text } = this.props;
+    if (!edit && !editText) {
+      this.setState({ editText: text });
+    }
+  }
+
   handleToggleEdit() {
     this.setState((prevState) => ({
       edit: !prevState.edit,
-    }));
+    }), () => this.editRules());
   }
 
   handleEditing({ target }) {
@@ -46,33 +56,15 @@ class TaskContainer extends React.Component {
       <TaskItem>
         { !edit
           ? (
-            <TaskBody>
-              <TaskSection
-                id={ id }
-                checkedItems={ checkedItems }
-                handleToggleCheck={ handleToggleCheck }
-              >
-                { text }
-              </TaskSection>
-              <TaskButtons>
-                <button
-                  onClick={ () => {
-                    handleRemoveFocus();
-                    this.handleToggleEdit();
-                  } }
-                >
-                  Editar
-                </button>
-                <button
-                  onClick={ () => {
-                    handleRemoveFocus();
-                    handleRemoveItem(id);
-                  } }
-                >
-                  Remover
-                </button>
-              </TaskButtons>
-            </TaskBody>
+            <TaskMain
+              id={ id }
+              text={ text }
+              checkedItems={ checkedItems }
+              handleRemoveItem={ handleRemoveItem }
+              handleRemoveFocus={ handleRemoveFocus }
+              handleToggleCheck={ handleToggleCheck }
+              handleToggleEdit={ this.handleToggleEdit }
+            />
           )
           : (
             <EditSection

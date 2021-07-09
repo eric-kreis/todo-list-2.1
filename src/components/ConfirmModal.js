@@ -4,25 +4,19 @@ import { ModalWindow, Modal } from '../styles/styledComponents';
 class ConfirmModal extends Component {
   render() {
     const {
-      show,
       openModal,
-      handleClear,
-      handleToggleModal,
+      handleConfirm,
+      handleCancel,
+      children,
     } = this.props;
-
-    let typeMessage = 'todas as tarefas' ;
-
-    if (show === 'toDo') typeMessage = 'as tarefas pendentes';
-    if (show === 'completed') typeMessage = 'as tarefas concluídas';
-
     return (openModal) 
       ? 
         (
           <ModalWindow backgroundColor='gray'>
             <Modal>
-              <h1>Você realmente deseja apagar {typeMessage}?</h1>
-              <button onClick={ () => { handleClear(); handleToggleModal() } } >SIM</button>
-              <button onClick={ handleToggleModal }>NÃO</button>
+              <h1>{ children }</h1>
+              <button onClick={ handleConfirm } >SIM</button>
+              <button onClick={ handleCancel } >NÃO</button>
             </Modal>
           </ModalWindow>
         )
