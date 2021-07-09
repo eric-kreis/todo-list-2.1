@@ -58,24 +58,16 @@ export const IconsButtons = styled.button`
   background-color: transparent;
   border: 0;
   font-size: ${ (props) => {
-    if (props.large) {
-      return '24px';
-    }
-    if (props.medium) {
-      return '20px';
-    }
+    if (props.large) return '24px';
+    if (props.medium) return '20px';
     return '15px'
   }};
   margin: 12px;
 
   :hover {
     color: ${ (props) => {
-      if (props.add) {
-        return 'green';
-      }
-      if (props.clear) {
-        return 'red';
-      }
+      if (props.add) return 'green';
+      if (props.clear) return 'red';
       return 'blue';
     } };
   }
