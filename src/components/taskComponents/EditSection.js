@@ -31,7 +31,7 @@ class EditSection extends Component {
     if (!editText) editClass = 'form-control is-invalid';
 
     return (
-      <section className="form-floating mb-3">
+      <section className="form-floating">
         <input
           ref={ this.editInput }
           className={ editClass }

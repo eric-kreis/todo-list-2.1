@@ -20,14 +20,16 @@ export const PageHeader = styled.header`
   padding: 12px;
 
   h1 {
-    font-size: x-large;
+    font-size: xx-large;
   }
 `;
 
 export const PageBody = styled.div`
   width: 100%;
+  margin: auto;
   min-height: 100vh;
   background-color: ${(props) => props.backgroundColor};
+  background-size: cover;
 `;
 
 export const HomeMain = styled.main`
@@ -36,7 +38,7 @@ export const HomeMain = styled.main`
   flex-wrap: wrap;
   justify-content: space-around;
   margin: auto;
-  min-width: 300px;
+  min-width: 400px;
   padding: 36px 64px;
   width: 50%;
 `;
@@ -48,9 +50,11 @@ export const MainForm = styled.form`
 `;
 
 export const SectionForm = styled.section`
+  align-items: center;
   display: flex;
   justify-content: center;
   margin-bottom: 16px;
+  min-width: 300px;
   width: 100%;
 `;
 
@@ -85,34 +89,47 @@ export const FormShowButtons = styled.button`
 `;
 
 export const TaskList = styled.ul`
-  list-style-type: none;
+  /* background-image: linear-gradient(to bottom right, #02396C, #6497B1); */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 500px;
+  list-style-type: none;
+  min-width: 400px;
+  padding: 38px;
+  width: 150%;
 `;
 
 export const TaskItem = styled.li`
-  width: 100%;
-  overflow: hidden;
+  border-bottom: 1px solid black;
   height: 60px;
   margin: 8px;
+  width: 100%;
   padding-bottom: 4px;
-  border-bottom: 1px solid black;
+  overflow-x: hidden;
+  /* overflow-wrap: break-word; */
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const TaskBody = styled.main`
   display: flex;
   justify-content: space-around;
   width: 100%;
+  /* text-decoration: line-through */
 `;
 
 export const TaskLabel = styled.label`
-  display: flex;
   align-items: center;
+  display: flex;
+  text-decoration: ${(({ checkedItems, id }) =>
+    checkedItems.includes(id)
+    ? 'line-through'
+    : 'none'
+  )};
+  max-width: 80%;
   overflow: hidden;
   width: 80%;
-  max-width: 80%;
 
   input {
     margin-right: 36px;
@@ -128,6 +145,7 @@ export const TaskLabel = styled.label`
 
 export const TaskButtons = styled.div`
   width: 20%;
+  min-width: 80px;
   display: flex;
   justify-content: space-between;
 `;

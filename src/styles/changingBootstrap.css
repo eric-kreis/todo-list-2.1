@@ -1,3 +1,19 @@
+body::-webkit-scrollbar {
+  display: none;
+}
+
 h1 {
   margin-bottom: 0;
+}
+
+#form-input {
+  height: 45px;
+}
+
+.form-floating {
+  height: 100%;
+}
+
+.form-floating > label {
+  padding: .50rem .75rem;
 }

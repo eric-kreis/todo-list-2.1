@@ -19,12 +19,16 @@ class TaskSection extends Component {
   render() {
     const {
       id,
+      checkedItems,
       handleToggleCheck,
       children,
     } = this.props;
 
     return (
-      <TaskLabel>
+      <TaskLabel
+        checkedItems={ checkedItems }
+        id={ id }
+      >
         <input
           ref={ this.check }
           type="checkbox"
