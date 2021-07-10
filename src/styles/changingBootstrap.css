@@ -6,14 +6,10 @@ h1 {
   margin-bottom: 0;
 }
 
-#form-input {
+.form-floating > .form-control {
   height: 45px;
 }
 
-.form-floating {
-  height: 100%;
-}
-
 .form-floating > label {
-  padding: .50rem .75rem;
+  padding: .65rem .75rem;
 }

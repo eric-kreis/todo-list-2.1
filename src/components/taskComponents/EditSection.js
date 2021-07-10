@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { Exit } from '../../sources/Icons';
-import { IconsButtons } from '../../styles/styledComponents';
+import { EditInputSection, IconsButtons } from '../../styles/styledComponents';
 
 class EditSection extends Component {
   constructor() {
@@ -31,7 +31,7 @@ class EditSection extends Component {
     if (!editText) editClass = 'form-control is-invalid';
 
     return (
-      <section className="form-floating">
+      <EditInputSection className="form-floating">
         <input
           ref={ this.editInput }
           className={ editClass }
@@ -62,7 +62,7 @@ class EditSection extends Component {
         >
           <Exit />
         </IconsButtons>
-      </section>
+      </EditInputSection>
     );
   }
 }

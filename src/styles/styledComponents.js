@@ -150,6 +150,16 @@ export const TaskButtons = styled.div`
   justify-content: space-between;
 `;
 
+export const EditInputSection = styled.section`
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+  input {
+    margin-left: 4px;
+  }
+`;
+
 export const ModalWindow = styled.main`
   background-color: rgba(0, 0, 0, 0.8);
   height: 100%;

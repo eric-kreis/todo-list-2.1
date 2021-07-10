@@ -9,7 +9,7 @@ class ConfirmModal extends Component {
       handleCancel,
       children,
     } = this.props;
-    return (openModal) 
+    return (openModal)
       ? 
         (
           <ModalWindow backgroundColor='gray'>
