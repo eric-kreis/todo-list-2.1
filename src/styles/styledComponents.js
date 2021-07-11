@@ -1,39 +1,19 @@
-import styled, { createGlobalStyle } from "styled-components";
-
-export const GlobalStyle = createGlobalStyle`
-  * {
-    padding: 0;
-    margin: 0;
-  }
-
-  .form-floating {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-  }
-`;
+import styled from "styled-components";
 
 export const PageHeader = styled.header`
-  background-color: white;
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.text};
   display: flex;
-  justify-content: space-around;
-  padding: 12px;
+  justify-content: space-between;
+  padding: 16px 28px;
 
   h1 {
-    font-size: xx-large;
+    font-size: x-large;
   }
-`;
-
-export const PageBody = styled.div`
-  width: 100%;
-  margin: auto;
-  min-height: 100vh;
-  background-color: ${(props) => props.backgroundColor};
-  background-size: cover;
 `;
 
 export const HomeMain = styled.main`
-  /* background-color: blue; */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -61,18 +41,20 @@ export const SectionForm = styled.section`
 export const IconsButtons = styled.button`
   background-color: transparent;
   border: 0;
-  font-size: ${ (props) => {
+  color: ${({ theme }) =>
+    theme.title === 'light' ? 'black' : 'white'};
+  font-size: ${(props) => {
     if (props.large) return '24px';
     if (props.medium) return '20px';
-    return '15px'
+    return '15px';
   }};
   margin: 12px;
 
   :hover {
     color: ${ (props) => {
-      if (props.add) return 'green';
+      if (props.add) return '#63BE25';
       if (props.clear) return 'red';
-      return 'blue';
+      return '#015CC8';
     } };
   }
 `;
@@ -80,11 +62,13 @@ export const IconsButtons = styled.button`
 export const FormShowButtons = styled.button`
   background-color: transparent;
   border: 0;
+  color: ${({ theme }) =>
+    theme.title === 'light' ? 'black' : 'white'};
   font-size: 20px;
   margin: 12px;
 
   :hover {
-    color: blue;
+    color: #015CC8;
   }
 `;
 
@@ -95,7 +79,7 @@ export const TaskList = styled.ul`
   justify-content: space-between;
   list-style-type: none;
   min-width: 400px;
-  padding: 38px;
+  padding: 0 38px;
   width: 150%;
 `;
 
@@ -161,32 +145,36 @@ export const EditInputSection = styled.section`
 `;
 
 export const ModalWindow = styled.main`
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: ${({ theme }) => theme.modal.windowBackground};
   height: 100%;
-  padding-top: 64px;
+  display: flex;
+  padding-bottom: 64px;
   position: fixed;
   width: 100%;
   z-index: 10;
 `;
 
 export const Modal = styled.div`
-  background: whitesmoke;
-  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  color: #000;
+  align-items: center;
+  background-color: ${({ theme }) => theme.modal.modalBackground};
+  box-shadow: 0 5px 16px black;
+  border-radius: 30px;
+  color: ${({ theme }) => theme.colors.text};
   display: flex;
   flex-flow: row wrap;
+  height: 300px;
   justify-content: space-around;
-  height: 360px;
-  width: 40%;
   margin: auto;
-  padding-top: 16px;
+  min-width: 150px;
+  padding: 0 16px 8px 16px;
   position: relative;
   text-align: center;
+  width: 25%;
   z-index: 10;
 
   button {
-    height: 64px;
-    width: 64px;
+    font-size: 20px;
+    height: 50px;
+    width: 50px;
   }
 `;

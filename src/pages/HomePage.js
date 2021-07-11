@@ -4,7 +4,7 @@ import Header from '../sources/Header';
 import FormContainer from '../components/FormContainer';
 import Tasks from '../components/taskComponents/Tasks';
 import ClearModalContainer from '../components/ClearModalContainer';
-import { PageBody, HomeMain } from '../styles/styledComponents';
+import { HomeMain } from '../styles/styledComponents';
 
 const savedTasks = JSON.parse(localStorage.getItem('tasks'));
 const savedChecks = JSON.parse(localStorage.getItem('checkedItems'));
@@ -182,15 +182,20 @@ class HomePage extends React.Component {
       clearModal,
     } = this.state;
 
+    const { toggleTheme, theme } = this.props;
+
     return (
-      <PageBody backgroundColor="whitesmoke">
+      <section>
         <ClearModalContainer
           show={ show }
           clearModal={ clearModal }
           handleClear={ this.handleClear }
           handleToggleModal={ this.handleToggleModal }
         />
-        <Header>
+        <Header
+          toggleTheme={ toggleTheme }
+          theme={ theme }
+        >
           <h1>Lista de Tarefas</h1>
         </Header>
         <HomeMain>
@@ -215,7 +220,7 @@ class HomePage extends React.Component {
             handleToggleCheck={ this.handleToggleCheck }
           />
         </HomeMain>
-      </PageBody>
+      </section>
     );
   }
 }

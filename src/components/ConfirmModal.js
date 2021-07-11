@@ -12,9 +12,9 @@ class ConfirmModal extends Component {
     return (openModal)
       ? 
         (
-          <ModalWindow backgroundColor='gray'>
+          <ModalWindow>
             <Modal>
-              <h1>{ children }</h1>
+              <h3>{ children }</h3>
               <button onClick={ handleConfirm } >SIM</button>
               <button onClick={ handleCancel } >NÃO</button>
             </Modal>
