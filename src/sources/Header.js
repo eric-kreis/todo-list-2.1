@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Switch from 'react-switch';
 
 import { PageHeader } from '../styles/styledComponents';
+import { Sun, Moon } from './Icons';
 
 class Header extends Component {
   render() {
@@ -18,13 +19,13 @@ class Header extends Component {
         <Switch
           checked={ theme.title === 'dark' }
           onChange={ toggleTheme }
-          checkedIcon={ false }
-          uncheckedIcon={ false }
-          height={ 12 }
-          handleDiameter={ 24 }
-          width={ 40 }
-          offColor="#7C7C7C"
-          onColor="#EEE5E9"
+          checkedIcon={ <Sun className="sun"/> }
+          uncheckedIcon={ <Moon className="moon"/> }
+          height={ 18 }
+          handleDiameter={ 26 }
+          width={ 50 }
+          offColor="#EEE5E9"
+          onColor="#7C7C7C"
         />
       </PageHeader>
     );

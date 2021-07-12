@@ -51,7 +51,7 @@ export const IconsButtons = styled.button`
   margin: 12px;
 
   :hover {
-    color: ${ (props) => {
+    color: ${(props) => {
       if (props.add) return '#63BE25';
       if (props.clear) return 'red';
       return '#015CC8';

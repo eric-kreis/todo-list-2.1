@@ -13,3 +13,13 @@ h1 {
 .form-floating > label {
   padding: .65rem .75rem;
 }
+
+.react-switch-bg > div {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.moon {
+  font-size: 14px;
+}

@@ -2,7 +2,7 @@ import React from 'react';
 
 import Header from '../sources/Header';
 import FormContainer from '../components/FormContainer';
-import Tasks from '../components/taskComponents/Tasks';
+import Tasks from '../components/Tasks';
 import ClearModalContainer from '../components/ClearModalContainer';
 import { HomeMain } from '../styles/styledComponents';
 

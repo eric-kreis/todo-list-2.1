@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import EditSection from './EditSection';
 import TaskMain from './TaskMain';
-import { TaskItem } from '../../styles/styledComponents';
+import { TaskItem } from '../styles/styledComponents';
 
 class TaskContainer extends React.Component {
   constructor(props) {

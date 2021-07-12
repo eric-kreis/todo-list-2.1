@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { TaskList } from '../../styles/styledComponents';
+import { TaskList } from '../styles/styledComponents';
 import TaskContainer from './TaskContainer';
 
 class Tasks extends React.Component {

@@ -3,18 +3,25 @@ import { VscAdd } from 'react-icons/vsc';
 import { IoMdTrash, IoMdRemove } from 'react-icons/io';
 import { IoExitOutline } from 'react-icons/io5';
 import { MdModeEdit } from 'react-icons/md';
+import { HiSun, HiMoon } from 'react-icons/hi';
 
-// Add Icon
+// Add
 export const Add = VscAdd;
 
-// Trash Icon
+// Trash
 export const Trash = IoMdTrash;
 
-// Edit Icon
+// Edit
 export const Edit = MdModeEdit;
 
-// Remove Icon
+// Remove
 export const Remove = IoMdRemove
 
-// Exit Icon
+// Exit
 export const Exit = IoExitOutline; 
+
+// Sun
+export const Sun = HiSun;
+
+// Moon
+export const Moon = HiMoon;

@@ -10,7 +10,7 @@ const dark = {
   modal: {
     windowBackground: 'rgba(255, 255, 255, 0.664)',
     modalBackground: '#222',
-  }
-}
+  },
+};
 
 export default dark;

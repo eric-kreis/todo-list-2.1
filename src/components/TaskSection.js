@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { TaskLabel } from '../../styles/styledComponents'
+import { TaskLabel } from '../styles/styledComponents'
 
 class TaskSection extends Component {
   constructor() {
