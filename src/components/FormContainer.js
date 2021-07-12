@@ -61,13 +61,13 @@ class FormContainer extends Component {
         </SectionForm>
         <SectionForm>
 
-          <FormShowButtons name="show" value="all" onClick={ handleChange }>
+          <FormShowButtons all name="show" value="all" onClick={ handleChange }>
             Todas
           </FormShowButtons>
-          <FormShowButtons name="show" value="toDo" onClick={ handleChange }>
+          <FormShowButtons todo name="show" value="toDo" onClick={ handleChange }>
             Pendentes
           </FormShowButtons>
-          <FormShowButtons name="show" value="completed" onClick={ handleChange }>
+          <FormShowButtons done name="show" value="completed" onClick={ handleChange }>
             Concluídas
           </FormShowButtons>
 

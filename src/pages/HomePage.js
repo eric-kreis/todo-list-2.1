@@ -5,6 +5,7 @@ import FormContainer from '../components/FormContainer';
 import Tasks from '../components/Tasks';
 import ClearModalContainer from '../components/ClearModalContainer';
 import { HomeMain } from '../styles/styledComponents';
+import Footer from '../sources/Footer';
 
 const savedTasks = JSON.parse(localStorage.getItem('tasks'));
 const savedChecks = JSON.parse(localStorage.getItem('checkedItems'));
@@ -220,6 +221,7 @@ class HomePage extends React.Component {
             handleToggleCheck={ this.handleToggleCheck }
           />
         </HomeMain>
+        <Footer />
       </section>
     );
   }

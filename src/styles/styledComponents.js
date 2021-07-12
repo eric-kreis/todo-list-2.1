@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import { shade } from 'polished';
 
 export const PageHeader = styled.header`
   align-items: center;
@@ -68,12 +69,15 @@ export const FormShowButtons = styled.button`
   margin: 12px;
 
   :hover {
-    color: #015CC8;
+    color: ${({ all, todo, done, theme }) => {
+      if (all) return theme.colors.primary;
+      if (todo) return '#fca311 ';
+      if (done) return '#015CC8';
+    }};
   }
 `;
 
 export const TaskList = styled.ul`
-  /* background-image: linear-gradient(to bottom right, #02396C, #6497B1); */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -90,7 +94,6 @@ export const TaskItem = styled.li`
   width: 100%;
   padding-bottom: 4px;
   overflow-x: hidden;
-  /* overflow-wrap: break-word; */
   ::-webkit-scrollbar {
     display: none;
   }
@@ -100,7 +103,6 @@ export const TaskBody = styled.main`
   display: flex;
   justify-content: space-around;
   width: 100%;
-  /* text-decoration: line-through */
 `;
 
 export const TaskLabel = styled.label`
@@ -117,6 +119,7 @@ export const TaskLabel = styled.label`
 
   input {
     margin-right: 36px;
+
     :hover {
       cursor: pointer;
     }
@@ -176,5 +179,40 @@ export const Modal = styled.div`
     font-size: 20px;
     height: 50px;
     width: 50px;
+  }
+`;
+
+export const PageFooter = styled.footer`
+  align-items: center;
+  background-color: ${({ theme }) => shade(0.25, theme.colors.primary)};
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 28px;
+
+  p {
+    margin: 0;
+    a {
+      text-decoration: none;
+      color: ${({ theme }) => theme.colors.text};
+      :hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  div {
+    display: flex;
+    font-size: 25px;
+
+    * {
+      color: ${({ theme }) => theme.colors.text};
+      display: flex;
+      justify-content: space-between;
+      width: 45px;
+
+      :hover {
+        cursor: pointer;
+      }
+    }
   }
 `;
