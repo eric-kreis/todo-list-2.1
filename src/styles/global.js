@@ -15,6 +15,6 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
     display: flex;
     justify-content: space-between;
-    color: black;
+    color: ${({ theme }) => theme.colors.input}
   }
 `;

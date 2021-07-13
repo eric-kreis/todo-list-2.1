@@ -1,10 +1,11 @@
 import React from 'react';
 
 import Header from '../sources/Header';
+import { PaintBrush } from '../sources/Icons';
 import FormContainer from '../components/FormContainer';
 import Tasks from '../components/Tasks';
 import ClearModalContainer from '../components/ClearModalContainer';
-import { HomeMain } from '../styles/styledComponents';
+import { HomeMain, ThemeButton } from '../styles/styledComponents';
 import Footer from '../sources/Footer';
 
 const savedTasks = JSON.parse(localStorage.getItem('tasks'));
@@ -199,6 +200,9 @@ class HomePage extends React.Component {
         >
           <h1>Lista de Tarefas</h1>
         </Header>
+        <ThemeButton>
+          <PaintBrush />
+        </ThemeButton>
         <HomeMain>
           <FormContainer
             handleAddTask={ this.handleAddTask }

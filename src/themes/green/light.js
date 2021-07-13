@@ -5,7 +5,8 @@ const light = {
     secondary: '#982649',
 
     background: 'whitesmoke',
-    text: 'black',
+    text: '#333',
+    input: '#333'
   },
   modal: {
     windowBackground: 'rgba(0, 0, 0, 0.8)',

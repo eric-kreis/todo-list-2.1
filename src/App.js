@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 import { GlobalStyle } from './styles/global';
-import light from './themes/light';
-import dark from './themes/dark';
+import lightGreen from './themes/green/light';
+import darkGreen from './themes/green/dark';
 import './styles/bootstrap.min.css'
 import './styles/changingBootstrap.css';
 import HomePage from './pages/HomePage';
@@ -17,18 +17,19 @@ class App extends Component {
     this.toggleTheme = this.toggleTheme.bind(this);
 
     this.state = {
-      theme: savedTheme === null ? light : savedTheme,
+      themeColor: 'green',
+      theme: savedTheme === null ? lightGreen : savedTheme,
     }
   }
 
   toggleTheme() {
     this.setState(({ theme }) => {
       if (theme.title === 'light') {
-        localStorage.setItem('theme', JSON.stringify(dark));
-        return { theme: dark };
+        localStorage.setItem('theme', JSON.stringify(darkGreen));
+        return { theme: darkGreen };
       }
-      localStorage.setItem('theme', JSON.stringify(light));
-      return { theme: light };
+      localStorage.setItem('theme', JSON.stringify(lightGreen));
+      return { theme: lightGreen };
     });
   }
 

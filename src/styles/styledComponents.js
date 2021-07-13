@@ -14,6 +14,13 @@ export const PageHeader = styled.header`
   }
 `;
 
+export const ThemeButton = styled.button`
+  position: absolute;
+  margin-top: 12px;
+  right: 36px;
+  transform: rotate(90deg);
+`;
+
 export const HomeMain = styled.main`
   display: flex;
   flex-wrap: wrap;
@@ -42,8 +49,7 @@ export const SectionForm = styled.section`
 export const IconsButtons = styled.button`
   background-color: transparent;
   border: 0;
-  color: ${({ theme }) =>
-    theme.title === 'light' ? 'black' : 'white'};
+  color: ${({ theme }) => theme.colors.text};
   font-size: ${(props) => {
     if (props.large) return '24px';
     if (props.medium) return '20px';
@@ -63,14 +69,13 @@ export const IconsButtons = styled.button`
 export const FormShowButtons = styled.button`
   background-color: transparent;
   border: 0;
-  color: ${({ theme }) =>
-    theme.title === 'light' ? 'black' : 'white'};
+  color: ${({ theme }) => theme.colors.text};
   font-size: 20px;
   margin: 12px;
 
   :hover {
     color: ${({ all, todo, done, theme }) => {
-      if (all) return theme.colors.primary;
+      if (all) return theme.colors.secondary;
       if (todo) return '#fca311 ';
       if (done) return '#015CC8';
     }};

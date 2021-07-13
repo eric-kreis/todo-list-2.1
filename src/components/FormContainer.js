@@ -46,7 +46,7 @@ class FormContainer extends Component {
               handleFocus();
             } }
           >
-            <Add />
+            <Add title="Adicionar tarefa"/>
           </IconsButtons>
           <IconsButtons
             clear
@@ -55,7 +55,7 @@ class FormContainer extends Component {
               handleToggleModal();
             } }
           >
-            <Trash />
+            <Trash title="Remover Tarefas" />
           </IconsButtons>
 
         </SectionForm>

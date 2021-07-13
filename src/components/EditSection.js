@@ -60,7 +60,7 @@ class EditSection extends Component {
             handleEditBack(editText, inputID);
           } }
         >
-          <Exit />
+          <Exit title="Voltar" />
         </IconsButtons>
       </EditInputSection>
     );

@@ -37,7 +37,7 @@ class TaskMain extends Component {
               handleToggleEdit();
             } }
           >
-            <Edit />
+            <Edit title="Editar tarefa" />
           </IconsButtons>
           <IconsButtons
             medium
@@ -47,7 +47,7 @@ class TaskMain extends Component {
               handleRemoveItem(id);
             } }
           >
-            <Remove />
+            <Remove title="Remover tarefa" />
           </IconsButtons>
         </TaskButtons>
       </TaskBody>
