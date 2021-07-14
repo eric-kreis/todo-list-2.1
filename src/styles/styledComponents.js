@@ -12,6 +12,7 @@ export const PageHeader = styled.header`
 
   h1 {
     font-size: xx-large;
+    text-align: center;
   }
 
   div {
@@ -104,11 +105,19 @@ export const TaskList = styled.ul`
 export const TaskItem = styled.li`
   border-bottom: 1px solid ${({ theme }) => theme.colors.text};
   width: 100%;
-  min-height: 60px;
+  min-height: 65px;
   padding-left: 16px;
   overflow-x: hidden;
   ::-webkit-scrollbar {
     display: none;
+  }
+
+  .form-floating > .form-control {
+    height: 43px;
+  }
+
+  .form-floating > label {
+    padding: 20px 16px;
   }
 `;
 
