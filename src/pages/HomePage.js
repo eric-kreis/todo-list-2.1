@@ -1,11 +1,11 @@
 import React from 'react';
 
+import ColorModal from '../components/ColorModal';
+import ClearModalContainer from '../components/ClearModalContainer';
 import Header from '../sources/Header';
-import { PaintBrush } from '../sources/Icons';
 import FormContainer from '../components/FormContainer';
 import Tasks from '../components/Tasks';
-import ClearModalContainer from '../components/ClearModalContainer';
-import { HomeMain, ThemeButton } from '../styles/styledComponents';
+import { HomeMain } from '../styles/styledComponents';
 import Footer from '../sources/Footer';
 
 const savedTasks = JSON.parse(localStorage.getItem('tasks'));
@@ -19,6 +19,7 @@ const initialState = {
   mainInputFocus: false,
   checkedItems: !savedChecks ? [] : savedChecks,
   clearModal: false,
+  colorModal: false,
 };
 
 class HomePage extends React.Component {
@@ -28,6 +29,7 @@ class HomePage extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.formClassToggle = this.formClassToggle.bind(this);
     this.handleAddTask = this.handleAddTask.bind(this);
+    this.toggleColorModal = this.toggleColorModal.bind(this);
     this.handleToggleModal = this.handleToggleModal.bind(this);
     this.handleClear = this.handleClear.bind(this);
     this.handleEditBack = this.handleEditBack.bind(this);
@@ -111,6 +113,12 @@ class HomePage extends React.Component {
     localStorage.setItem('checkedItems', JSON.stringify([]));
   }
 
+  toggleColorModal() {
+    this.setState((prevState) => ({
+      colorModal: !prevState.colorModal,
+    }));
+  }
+
   clearAll() {
     this.setState({
       tasks: [],
@@ -182,12 +190,18 @@ class HomePage extends React.Component {
       formInputClass,
       mainInputFocus,
       clearModal,
+      colorModal,
     } = this.state;
 
-    const { toggleTheme, theme } = this.props;
+    const { toggleTheme, theme, changeColor } = this.props;
 
     return (
       <section>
+        <ColorModal
+          toggleModal={ this.toggleColorModal }
+          colorModal={ colorModal }
+          changeColor={ changeColor }
+        />
         <ClearModalContainer
           show={ show }
           clearModal={ clearModal }
@@ -197,12 +211,10 @@ class HomePage extends React.Component {
         <Header
           toggleTheme={ toggleTheme }
           theme={ theme }
+          toggleModal={ this.toggleColorModal }
         >
           <h1>Lista de Tarefas</h1>
         </Header>
-        <ThemeButton>
-          <PaintBrush />
-        </ThemeButton>
         <HomeMain>
           <FormContainer
             handleAddTask={ this.handleAddTask }

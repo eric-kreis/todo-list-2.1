@@ -6,6 +6,11 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
 
+  html {
+    position: relative;
+    min-height: 100%;
+}
+
   body {
     background-color: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.text}

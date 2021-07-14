@@ -7,28 +7,38 @@ export const PageHeader = styled.header`
   color: ${({ theme }) => theme.colors.text};
   display: flex;
   justify-content: space-between;
-  padding: 16px 28px;
+  padding: 16px 32px;
+  min-width: 400px;
 
   h1 {
-    font-size: x-large;
+    font-size: xx-large;
+  }
+
+  div {
+    align-items: center;
+    display: flex;
   }
 `;
 
 export const ThemeButton = styled.button`
-  position: absolute;
-  margin-top: 12px;
-  right: 36px;
+  background-color: transparent;
+  border: 0;
+  color: ${({ theme }) => theme.colors.text};
+  margin-left: 16px;
   transform: rotate(90deg);
+  font-size: 15px;
 `;
 
 export const HomeMain = styled.main`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin: auto;
+  height: 100%;
+  margin: 0 auto;
   min-width: 400px;
-  padding: 36px 64px;
-  width: 50%;
+  padding: 64px;
+  padding-bottom: 80px;
+  width: 55%;
 `;
 
 export const MainForm = styled.form`
@@ -40,7 +50,7 @@ export const MainForm = styled.form`
 export const SectionForm = styled.section`
   align-items: center;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   margin-bottom: 16px;
   min-width: 300px;
   width: 100%;
@@ -84,8 +94,7 @@ export const FormShowButtons = styled.button`
 
 export const TaskList = styled.ul`
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  flex-flow: row wrap;
   list-style-type: none;
   min-width: 400px;
   padding: 0 38px;
@@ -93,11 +102,12 @@ export const TaskList = styled.ul`
 `;
 
 export const TaskItem = styled.li`
-  border-bottom: 1px solid black;
-  height: 60px;
-  margin: 8px;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.text};
+  /* box-shadow: 0 1px 5px ${({ theme }) => theme.colors.text}; */
+  /* border-radius: 10px; */
+  margin: 6px;
   width: 100%;
-  padding-bottom: 4px;
+  padding: 0 16px;
   overflow-x: hidden;
   ::-webkit-scrollbar {
     display: none;
@@ -107,7 +117,13 @@ export const TaskItem = styled.li`
 export const TaskBody = styled.main`
   display: flex;
   justify-content: space-around;
+  height: 100%;
   width: 100%;
+  :hover {
+    div {
+      opacity: 1;
+    }
+  }
 `;
 
 export const TaskLabel = styled.label`
@@ -140,6 +156,7 @@ export const TaskButtons = styled.div`
   min-width: 80px;
   display: flex;
   justify-content: space-between;
+  opacity: 0;
 `;
 
 export const EditInputSection = styled.section`
@@ -179,20 +196,36 @@ export const Modal = styled.div`
   text-align: center;
   width: 25%;
   z-index: 10;
+`;
 
-  button {
-    font-size: 20px;
-    height: 50px;
-    width: 50px;
-  }
+export const ColorButtonsContainer = styled.section`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  min-width: 150px;
+  padding: 10%;
+  width: 100%;
+  height: 200px;
+`;
+
+export const ColorButtons = styled.button`
+  border: 1px solid black;
+  border-radius: 50%;
+  background-color: ${({ color }) => color };
+  height: 50px;
+  width: 50px;
 `;
 
 export const PageFooter = styled.footer`
   align-items: center;
   background-color: ${({ theme }) => shade(0.25, theme.colors.primary)};
+  bottom: 0;
   display: flex;
   justify-content: space-between;
+  min-width: 400px;
   padding: 10px 28px;
+  position: absolute;
+  width: 100%;
 
   p {
     margin: 0;
