@@ -58,7 +58,6 @@ class App extends Component {
             <Route exact path="/">
               <HomePage
                 toggleTheme={ this.toggleTheme }
-                theme={ theme }
                 changeColor={ this.changeColor }
               />
             </Route>

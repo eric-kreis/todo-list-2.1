@@ -4,7 +4,7 @@ export const lightGreen = {
     primary: '#68B684',
     secondary: '#982649',
 
-    background: 'whitesmoke',
+    background: '#f4f4f4',
     text: '#333',
     input: '#333'
   },

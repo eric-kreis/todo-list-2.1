@@ -103,11 +103,9 @@ export const TaskList = styled.ul`
 
 export const TaskItem = styled.li`
   border-bottom: 1px solid ${({ theme }) => theme.colors.text};
-  /* box-shadow: 0 1px 5px ${({ theme }) => theme.colors.text}; */
-  /* border-radius: 10px; */
-  margin: 6px;
   width: 100%;
-  padding: 0 16px;
+  min-height: 60px;
+  padding-left: 16px;
   overflow-x: hidden;
   ::-webkit-scrollbar {
     display: none;
@@ -136,7 +134,7 @@ export const TaskLabel = styled.label`
   )};
   max-width: 80%;
   overflow: hidden;
-  width: 80%;
+  width: 85%;
 
   input {
     margin-right: 36px;
@@ -152,7 +150,7 @@ export const TaskLabel = styled.label`
 `;
 
 export const TaskButtons = styled.div`
-  width: 20%;
+  width: 15%;
   min-width: 80px;
   display: flex;
   justify-content: space-between;

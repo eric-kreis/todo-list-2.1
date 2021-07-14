@@ -193,7 +193,7 @@ class HomePage extends React.Component {
       colorModal,
     } = this.state;
 
-    const { toggleTheme, theme, changeColor } = this.props;
+    const { toggleTheme, changeColor } = this.props;
 
     return (
       <section>
@@ -210,7 +210,6 @@ class HomePage extends React.Component {
         />
         <Header
           toggleTheme={ toggleTheme }
-          theme={ theme }
           toggleModal={ this.toggleColorModal }
         >
           <h1>Lista de Tarefas</h1>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Switch from 'react-switch';
+import { withTheme } from 'styled-components';
 
 import { PageHeader } from '../styles/styledComponents';
 import { Sun, Moon } from './Icons';
@@ -10,8 +11,8 @@ import { PaintBrush } from '../sources/Icons';
 class Header extends Component {
   render() {
     const {
-      children,
       theme,
+      children,
       toggleTheme,
       toggleModal,
     } = this.props;
@@ -29,8 +30,8 @@ class Header extends Component {
             height={ 18 }
             handleDiameter={ 26 }
             width={ 50 }
-            offColor="#EEE5E9"
-            onColor="#7C7C7C"
+            offColor={ theme.colors.background }
+            onColor={ theme.colors.background }
           />
           <ThemeButton onClick={ toggleModal }>
             <PaintBrush />
@@ -41,4 +42,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default withTheme(Header);
