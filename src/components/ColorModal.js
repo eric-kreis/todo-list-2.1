@@ -9,7 +9,7 @@ import {
 
 class ColorModal extends Component {
   render() {
-    const { toggleModal, colorModal, changeColor } = this.props;
+    const { handleToggleModal, colorModal, changeColor } = this.props;
 
     return (colorModal
       ? (
@@ -23,7 +23,7 @@ class ColorModal extends Component {
             <ColorButtons onClick={ changeColor } color="#C4CBD1" value="white" />
             <ColorButtons onClick={ changeColor } color="#FCEFB4" value="yellow" />
           </ColorButtonsContainer>
-          <button onClick={ toggleModal }>Voltar</button>
+          <button onClick={ () => { handleToggleModal('color'); } }>Voltar</button>
         </Modal>
       </ModalWindow>) : null
     );

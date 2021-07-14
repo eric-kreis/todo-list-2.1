@@ -52,7 +52,7 @@ class FormContainer extends Component {
             clear
             large
             onClick={ () => {
-              handleToggleModal();
+              handleToggleModal('clear');
             } }
           >
             <Trash title="Remover Tarefas" />

@@ -14,7 +14,7 @@ class Header extends Component {
       theme,
       children,
       toggleTheme,
-      toggleModal,
+      handleToggleModal,
     } = this.props;
 
     return (
@@ -33,7 +33,7 @@ class Header extends Component {
             offColor={ theme.colors.background }
             onColor={ theme.colors.background }
           />
-          <ThemeButton onClick={ toggleModal }>
+          <ThemeButton onClick={ () => { handleToggleModal('color'); } }>
             <PaintBrush />
           </ThemeButton>
         </div>

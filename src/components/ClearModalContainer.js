@@ -18,8 +18,8 @@ class ClearModalContainer extends Component {
     return (
       <ConfirmModal
         openModal={ clearModal }
-        handleConfirm={ () => { handleClear(); handleToggleModal(); } }
-        handleCancel={ () => { handleToggleModal(); } }
+        handleConfirm={ () => { handleClear(); handleToggleModal('clear'); } }
+        handleCancel={ () => { handleToggleModal('clear'); } }
       >
         Você realmente deseja remover {typeMessage}?
       </ConfirmModal>

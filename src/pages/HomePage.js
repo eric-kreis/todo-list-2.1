@@ -1,7 +1,6 @@
 import React from 'react';
 
-import ColorModal from '../components/ColorModal';
-import ClearModalContainer from '../components/ClearModalContainer';
+import HomeModals from '../components/HomeModals';
 import Header from '../sources/Header';
 import FormContainer from '../components/FormContainer';
 import Tasks from '../components/Tasks';
@@ -29,7 +28,6 @@ class HomePage extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.formClassToggle = this.formClassToggle.bind(this);
     this.handleAddTask = this.handleAddTask.bind(this);
-    this.toggleColorModal = this.toggleColorModal.bind(this);
     this.handleToggleModal = this.handleToggleModal.bind(this);
     this.handleClear = this.handleClear.bind(this);
     this.handleEditBack = this.handleEditBack.bind(this);
@@ -82,9 +80,15 @@ class HomePage extends React.Component {
     }
   }
 
-  handleToggleModal() {
-    this.setState((prevState) =>
-      ({ clearModal: !prevState.clearModal }));
+  handleToggleModal(name) {
+    if (name === 'clear') {
+      this.setState((prevState) =>
+        ({ clearModal: !prevState.clearModal }));
+    }
+    if (name === 'color') {
+      this.setState((prevState) =>
+        ({ colorModal: !prevState.colorModal }));
+    }
   }
 
   handleClear() {
@@ -111,12 +115,6 @@ class HomePage extends React.Component {
     this.setState({ tasks: onlyToDo, taskText: '' });
     localStorage.setItem('tasks', JSON.stringify(onlyToDo));
     localStorage.setItem('checkedItems', JSON.stringify([]));
-  }
-
-  toggleColorModal() {
-    this.setState((prevState) => ({
-      colorModal: !prevState.colorModal,
-    }));
   }
 
   clearAll() {
@@ -197,20 +195,17 @@ class HomePage extends React.Component {
 
     return (
       <section>
-        <ColorModal
-          toggleModal={ this.toggleColorModal }
+        <HomeModals
+          handleToggleModal={ this.handleToggleModal }
           colorModal={ colorModal }
           changeColor={ changeColor }
-        />
-        <ClearModalContainer
           show={ show }
           clearModal={ clearModal }
           handleClear={ this.handleClear }
-          handleToggleModal={ this.handleToggleModal }
         />
         <Header
           toggleTheme={ toggleTheme }
-          toggleModal={ this.toggleColorModal }
+          handleToggleModal={ this.handleToggleModal }
         >
           <h1>Lista de Tarefas</h1>
         </Header>
