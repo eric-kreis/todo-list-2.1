@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { shade } from 'polished';
+import { shade, transparentize } from 'polished';
 
 export const PageHeader = styled.header`
   align-items: center;
@@ -7,17 +7,24 @@ export const PageHeader = styled.header`
   color: ${({ theme }) => theme.colors.text};
   display: flex;
   justify-content: space-between;
-  padding: 16px 32px;
+  padding: 12px 32px;
   min-width: 400px;
 
   h1 {
-    font-size: xx-large;
+    font-size: x-large;
     text-align: center;
   }
 
   div {
     align-items: center;
     display: flex;
+  }
+
+  @media(max-width: 460px) {
+    h1 {
+      font-size: medium;
+      text-align: center;
+    }
   }
 `;
 
@@ -36,16 +43,16 @@ export const HomeMain = styled.main`
   justify-content: space-around;
   height: 100%;
   margin: 0 auto;
-  min-width: 400px;
   padding: 64px;
   padding-bottom: 80px;
-  width: 55%;
+  width: 48%;
 `;
 
 export const MainForm = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-width: 310px;
 `;
 
 export const SectionForm = styled.section`
@@ -53,8 +60,12 @@ export const SectionForm = styled.section`
   display: flex;
   justify-content: space-evenly;
   margin-bottom: 16px;
-  min-width: 300px;
   width: 100%;
+
+  @media(max-width: 768px) {
+    flex-wrap: wrap;
+    margin-bottom: 0;
+  }
 `;
 
 export const IconsButtons = styled.button`
@@ -78,18 +89,30 @@ export const IconsButtons = styled.button`
 `;
 
 export const FormShowButtons = styled.button`
-  background-color: transparent;
+  background-color: ${({ theme }) =>
+    transparentize(0.4, theme.colors.primary)};
+  box-shadow: 1px 1px 3px ${({ theme }) =>
+    shade(0.2, theme.colors.primary)};
   border: 0;
+  border-radius: 2px;
   color: ${({ theme }) => theme.colors.text};
-  font-size: 20px;
-  margin: 12px;
+  font-size: 18px;
+  margin: 8px;
+  width: 125px;
+  min-width: 100px;
+  /* transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; */
 
   :hover {
     color: ${({ all, todo, done, theme }) => {
-      if (all) return theme.colors.secondary;
-      if (todo) return '#fca311 ';
-      if (done) return '#015CC8';
+      if (all) return theme.colors.text;
+      if (todo) return '#F1C235';
+      if (done) return shade(0.3, '#5AC8FA');
     }};
+
+    background-color: ${({ theme }) =>
+      transparentize(0.2, theme.colors.primary)};
+    box-shadow: 1px 1px 3px ${({ theme }) =>
+      shade(0.4, theme.colors.primary)};
   }
 `;
 
@@ -97,16 +120,15 @@ export const TaskList = styled.ul`
   display: flex;
   flex-flow: row wrap;
   list-style-type: none;
-  min-width: 400px;
-  padding: 0 38px;
-  width: 150%;
+  min-width: 310px;
+  padding: 0;
+  width: 100%;
 `;
 
 export const TaskItem = styled.li`
   border-bottom: 1px solid ${({ theme }) => theme.colors.text};
   width: 100%;
   min-height: 65px;
-  padding-left: 16px;
   overflow-x: hidden;
   ::-webkit-scrollbar {
     display: none;
@@ -115,9 +137,10 @@ export const TaskItem = styled.li`
   .form-floating > .form-control {
     height: 43px;
   }
-
+  
   .form-floating > label {
     padding: 20px 16px;
+    font-family: ubuntu;
   }
 `;
 
@@ -127,6 +150,12 @@ export const TaskBody = styled.main`
   height: 100%;
   width: 100%;
   :hover {
+    div {
+      opacity: 1;
+    }
+  }
+
+  @media(max-width: 768px) {
     div {
       opacity: 1;
     }
@@ -230,7 +259,7 @@ export const PageFooter = styled.footer`
   display: flex;
   justify-content: space-between;
   min-width: 400px;
-  padding: 10px 28px;
+  padding: 8px 32px;
   position: absolute;
   width: 100%;
 
@@ -247,7 +276,7 @@ export const PageFooter = styled.footer`
 
   div {
     display: flex;
-    font-size: 25px;
+    font-size: 22px;
 
     * {
       color: ${({ theme }) => theme.colors.text};
@@ -258,6 +287,16 @@ export const PageFooter = styled.footer`
       :hover {
         cursor: pointer;
       }
+    }
+  }
+
+  @media(max-width: 460px) {
+    p {
+      font-size: 14px;
+    }
+
+    div {
+    font-size: 20px;
     }
   }
 `;

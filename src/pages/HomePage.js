@@ -207,7 +207,7 @@ class HomePage extends React.Component {
           toggleTheme={ toggleTheme }
           handleToggleModal={ this.handleToggleModal }
         >
-          <h1>Lista de Tarefas</h1>
+          <h1>LISTA DE TAREFAS</h1>
         </Header>
         <HomeMain>
           <FormContainer
