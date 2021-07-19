@@ -101,7 +101,7 @@ export const FormShowButtons = styled.button`
     return transparentize(0.4, theme.colors.primary);
   }};
 
-  box-shadow: 1px 1px 3px ${({ theme, show, value }) => {
+  box-shadow: 1px 1px 2px ${({ theme, show, value }) => {
     if (show === value) {
       return theme.colors.primary;
     }
@@ -112,7 +112,7 @@ export const FormShowButtons = styled.button`
   border-radius: 2px;
   color: ${({ theme, show, value }) => {
     if (show === value) {
-      return saturate(0.25, theme.colors.text);
+      return saturate(0.2, theme.colors.text);
     }
     return theme.colors.text
   }};
@@ -123,8 +123,8 @@ export const FormShowButtons = styled.button`
   
   :hover {
     background-color: ${({ theme }) =>
-      transparentize(0.3, theme.colors.primary)};
-    box-shadow: 1px 1px 3px ${({ theme }) => theme.colors.primary};
+      transparentize(0.2, theme.colors.primary)};
+    box-shadow: 1px 1px 2px ${({ theme }) => theme.colors.primary};
   }
 `;
 

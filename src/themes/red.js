@@ -4,7 +4,7 @@ export const lightRed = {
     primary: '#ad2831',
     secondary: '#982649',
 
-    background: '#f4f4f4',
+    background: '#F4F4F4',
     text: '#000',
     input: '#000'
   },
@@ -20,8 +20,8 @@ export const darkRed = {
     primary: '#890620',
     secondary: '#CAD2C5',
 
-    background: '#212529',
-    text: '#fff',
+    background: '#181818',
+    text: '#f4f4f4',
     input: '#000'
   },
   modal: {

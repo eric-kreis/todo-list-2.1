@@ -1,3 +1,5 @@
+import { shade } from "polished";
+
 export const whiteTheme = {
   title: 'light',
   colors: {
@@ -17,10 +19,10 @@ export const whiteTheme = {
 export const blackTheme = {
   title: 'dark',
   colors: {
-    primary: '#343A40',
+    primary: shade(0.2, '#2F3E46'),
     secondary: '#CAD2C5',
 
-    background: '#212529',
+    background: '#181818',
     text: '#ECEFF1',
     input: '#212529'
   },

@@ -20,7 +20,7 @@ export const darkPurple = {
     primary: '#724e91',
     secondary: '#CAD2C5',
 
-    background: '#373f51',
+    background: '#212529',
     text: '#fff',
     input: '#000',
   },

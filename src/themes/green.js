@@ -1,3 +1,5 @@
+import { shade } from "polished";
+
 export const lightGreen = {
   title: 'light',
   colors: {
@@ -17,10 +19,10 @@ export const lightGreen = {
 export const darkGreen = {
   title: 'dark',
   colors: {
-    primary: '#2F3E46',
+    primary: shade(0.55, '#68B684'),
     secondary: '#CAD2C5',
 
-    background: '#0f1413',
+    background: '#181818',
     text: '#fff',
     input: '#333'
   },
