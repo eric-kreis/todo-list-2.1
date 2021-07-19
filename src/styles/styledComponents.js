@@ -156,6 +156,7 @@ export const TaskItem = styled.li`
   .form-floating > label {
     padding: 22px 16px;
     font-family: ubuntu;
+    font-display: fallback;
   }
 `;
 
@@ -267,6 +268,7 @@ export const Modal = styled.div`
       border: none;
       color: ${({ theme }) => theme.colors.text};
       display: inline-block;
+      font-display: fallback;
       font-family: yatra-one;
       font-size: 30px;
       margin: 18px;
@@ -294,6 +296,7 @@ export const Color = styled.div`
     border: none;
     color: ${({ theme }) => theme.colors.text};
     display: inline-block;
+    font-display: fallback;
     font-family: yatra-one;
     font-size: 30px;
   }
