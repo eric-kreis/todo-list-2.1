@@ -4,7 +4,7 @@ export const lightPink = {
     primary: '#EDACBD',
     secondary: '#982649',
 
-    background: '#FFD7DF',
+    background: '#f4f4f4',
     text: '#943E57',
     input: '#943E57'
   },
@@ -17,12 +17,12 @@ export const lightPink = {
 export const darkPink = {
   title: 'dark',
   colors: {
-    primary: '#943E57',
+    primary: '#C2405D',
     secondary: '#CAD2C5',
-    
-    background: '#641B31',
-    text: '#FFD7DF',
-    input: '#943E57'
+
+    background: '#212529',
+    text: '#fff',
+    input: '#000'
   },
   modal: {
     windowBackground: 'rgba(255, 255, 255, 0.664)',

@@ -1,10 +1,12 @@
+import { lighten } from "polished";
+
 export const lightBlue = {
   title: 'light',
   colors: {
-    primary: '#93A8D6',
+    primary: `${lighten(0.1, '#387FAB')}`,
     secondary: '#982649',
 
-    background: '#CDD7ED',
+    background: '#f4f4f4',
     text: '#052252',
     input: '#052252'
   },
@@ -17,11 +19,11 @@ export const lightBlue = {
 export const darkBlue = {
   title: 'dark',
   colors: {
-    primary: '#01183D',
+    primary: '#174070',
     secondary: '#CAD2C5',
 
-    background: '#00072D',
-    text: '#CDD7ED',
+    background: '#212529',
+    text: 'whitesmoke',
     input: '#052252'
   },
   modal: {

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import HomeModals from '../components/HomeModals';
 import Header from '../sources/Header';
@@ -237,5 +238,10 @@ class HomePage extends React.Component {
     );
   }
 }
+
+HomePage.propTypes = {
+  toggleTheme: PropTypes.func.isRequired,
+  changeColor: PropTypes.func.isRequired,
+};
 
 export default HomePage;

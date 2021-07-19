@@ -6,7 +6,6 @@ import { GlobalStyle } from './styles/global';
 import HomePage from './pages/HomePage';
 import * as colors from './themes/themeColors';
 import './styles/bootstrap.min.css'
-import './styles/changingBootstrap.css';
 
 const savedTheme = JSON.parse(localStorage.getItem('theme'));
 const savedColor = localStorage.getItem('themeColor');

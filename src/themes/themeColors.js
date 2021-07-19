@@ -3,7 +3,7 @@ import { lightGreen, darkGreen } from './green';
 import { lightPink, darkPink } from './pink';
 import { lightPurple, darkPurple } from './purple';
 import { whiteTheme, blackTheme } from './white';
-import { lightYellow, darkYellow } from './yellow';
+import { lightRed, darkRed } from './red';
 
 export const blue = {
   light: lightBlue,
@@ -30,7 +30,7 @@ export const white = {
   dark: blackTheme,
 };
 
-export const yellow = {
-  light: lightYellow,
-  dark: darkYellow,
+export const red = {
+  light: lightRed,
+  dark: darkRed,
 };

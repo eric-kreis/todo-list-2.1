@@ -17,7 +17,7 @@ export const PageHeader = styled.header`
 
   h1 {
     font-size: x-large;
-    text-align: center;
+    margin: 0 0 0 40px;
   }
 
   div {
@@ -77,18 +77,18 @@ export const IconsButtons = styled.button`
   background-color: transparent;
   border: 0;
   color: ${({ theme }) => theme.colors.text};
-  font-size: ${(props) => {
-    if (props.large) return '24px';
-    if (props.medium) return '20px';
+  font-size: ${({ large, medium }) => {
+    if (large) return '24px';
+    if (medium) return '20px';
     return '15px';
   }};
   margin: 24px 0 24px 24px;
 
   :hover {
-    color: ${(props) => {
-      if (props.add) return '#63BE25';
-      if (props.clear) return 'red';
-      return '#015CC8';
+    color: ${({ add, clear, theme }) => {
+      if (add) return '#63BE25';
+      if (clear) return 'red';
+      return theme.colors.primary;
     } };
   }
 `;
@@ -181,11 +181,11 @@ export const TaskBody = styled.main`
 export const TaskLabel = styled.label`
   align-items: center;
   display: flex;
-  text-decoration: ${(({ checkedItems, id }) =>
+  text-decoration: ${(({ checkedItems, id }) => (
     checkedItems.includes(id)
     ? 'line-through'
     : 'none'
-  )};
+  ))};
   max-width: 80%;
   overflow: hidden;
   width: 85%;
@@ -242,7 +242,7 @@ export const ModalWindow = styled.main`
 export const Modal = styled.div`
   align-items: center;
   background-color: ${({ theme }) => theme.modal.modalBackground};
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: 0 5px 16px black;
   color: ${({ theme }) => theme.colors.text};
   display: flex;
@@ -270,7 +270,6 @@ export const Modal = styled.div`
       font-family: yatra-one;
       font-size: 30px;
       margin: 18px;
-      text-shadow: 2px 2px ${transparentize(0.5, 'gray')};
     }
   }
 `;
@@ -297,7 +296,6 @@ export const Color = styled.div`
     display: inline-block;
     font-family: yatra-one;
     font-size: 30px;
-    text-shadow: 2px 2px ${transparentize(0.5, 'gray')};
   }
 
   @media(max-width: 768px) {

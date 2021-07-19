@@ -18,24 +18,26 @@ class Header extends Component {
       handleToggleModal,
     } = this.props;
 
+    const { title, colors } = theme;
+
     return (
       <PageHeader>
         <Logo />
         { children }
         <div>
           <Switch
-            checked={ theme.title === 'dark' }
+            checked={ title === 'dark' }
             onChange={ toggleTheme }
             checkedIcon={ <Sun className="sun"/> }
             uncheckedIcon={ <Moon className="moon"/> }
             height={ 18 }
             handleDiameter={ 26 }
             width={ 50 }
-            offColor={ theme.colors.background }
-            onColor={ theme.colors.background }
+            offColor={ colors.background }
+            onColor={ colors.background }
           />
           <ThemeButton onClick={ () => { handleToggleModal('color'); } }>
-            <ColorPalette />
+            <ColorPalette title="Mudar cor" />
           </ThemeButton>
         </div>
       </PageHeader>

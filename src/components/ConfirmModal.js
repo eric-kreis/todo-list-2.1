@@ -18,13 +18,13 @@ class ConfirmModal extends Component {
             { confirmButtons
             ? (
               <div>
-                <button onClick={ handleConfirm }>SIM</button>
-                <button onClick={ handleCancel }>NÃO</button>
+                <button onClick={ handleConfirm }>Sim</button>
+                <button onClick={ handleCancel }>Não</button>
               </div>
 
             ) : (
               <div>
-                <button onClick={ handleCancel } >VOLTAR</button>
+                <button onClick={ handleCancel } >Voltar</button>
               </div>
             )}
           </Modal>

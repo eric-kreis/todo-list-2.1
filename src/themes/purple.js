@@ -1,12 +1,12 @@
 export const lightPurple = {
   title: 'light',
   colors: {
-    primary: '#C09FD8',
+    primary: '#e0aaff',
     secondary: '#982649',
 
-    background: '#DFC3EF',
-    text: '#240B3B',
-    input: '#240B3B',
+    background: '#f4f4f4',
+    text: '#000',
+    input: '#000',
   },
   modal: {
     windowBackground: 'rgba(0, 0, 0, 0.8)',
@@ -17,12 +17,12 @@ export const lightPurple = {
 export const darkPurple = {
   title: 'dark',
   colors: {
-    primary: '#3C096C',
+    primary: '#724e91',
     secondary: '#CAD2C5',
 
-    background: '#240B3B',
-    text: '#DFC3EF',
-    input: '#240B3B',
+    background: '#373f51',
+    text: '#fff',
+    input: '#000',
   },
   modal: {
     windowBackground: 'rgba(255, 255, 255, 0.664)',

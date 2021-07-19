@@ -36,6 +36,24 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 
+  .form-floating > .form-control {
+    height: 45px;
+  }
+
+  .form-floating > label {
+    padding: .65rem .55rem;
+  }
+
+  .react-switch-bg > div {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  .moon {
+    font-size: 14px;
+  }
+
   .form-floating {
     width: 100%;
     display: flex;

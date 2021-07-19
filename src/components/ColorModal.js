@@ -17,12 +17,12 @@ class ColorModal extends Component {
         <ModalWindow>
           <Color>
             <ColorButtonsContainer>
-              <ColorButtons onClick={ changeColor } color="#93A8D6" value="blue" />
+              <ColorButtons onClick={ changeColor } color="#5099C6" value="blue" />
               <ColorButtons onClick={ changeColor } color="#68B684" value="green" />
               <ColorButtons onClick={ changeColor } color="#EDACBD" value="pink" />
-              <ColorButtons onClick={ changeColor } color="#C09FD8" value="purple" />
+              <ColorButtons onClick={ changeColor } color="#E0AAFF" value="purple" />
               <ColorButtons onClick={ changeColor } color="#C4CBD1" value="white" />
-              <ColorButtons onClick={ changeColor } color="#FCEFB4" value="yellow" />
+              <ColorButtons onClick={ changeColor } color="#AE3231" value="red" />
             </ColorButtonsContainer>
             <button
               onClick={ () => { handleToggleModal('color'); } }
