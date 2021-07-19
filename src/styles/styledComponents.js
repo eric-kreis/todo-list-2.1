@@ -17,7 +17,7 @@ export const PageHeader = styled.header`
 
   h1 {
     font-size: x-large;
-    margin: 0 0 0 40px;
+    margin: 0 0 0 30px;
   }
 
   div {
