@@ -1,11 +1,10 @@
 // All icons archive
 import { VscAdd } from 'react-icons/vsc';
 import { IoMdTrash, IoMdRemove } from 'react-icons/io';
-import { IoExitOutline } from 'react-icons/io5';
+import { IoExitOutline, IoColorPalette } from 'react-icons/io5';
 import { MdModeEdit } from 'react-icons/md';
 import { HiSun, HiMoon } from 'react-icons/hi';
 import { SiLinkedin, SiGithub } from 'react-icons/si';
-import { FaPaintBrush } from 'react-icons/fa';
 
 // Add
 export const Add = VscAdd;
@@ -35,4 +34,4 @@ export const LinkedIn = SiLinkedin;
 export const GitHub = SiGithub;
 
 // Paint Brush
-export const PaintBrush = FaPaintBrush;
+export const ColorPalette = IoColorPalette;

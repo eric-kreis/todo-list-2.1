@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Exit } from '../sources/Icons';
-import { EditInputSection, IconsButtons } from '../styles/styledComponents';
+import { Exit } from '../icons/Icons';
+import { EditInputSection, ReturnButton } from '../styles/styledComponents';
 
 class EditSection extends Component {
   constructor() {
@@ -51,17 +51,17 @@ class EditSection extends Component {
             handleToggleEdit();
             handleEditBack(editText, inputID);
           } }
+          maxLength={ 120 }
         />
-        <label>Escreva aqui para editar sua tarefa</label>
-        <IconsButtons
-          large
+        <label>Escreva para editar sua tarefa</label>
+        <ReturnButton
           onClick={ () => {
             handleToggleEdit();
             handleEditBack(editText, inputID);
           } }
         >
           <Exit title="Voltar" />
-        </IconsButtons>
+        </ReturnButton>
       </EditInputSection>
     );
   }

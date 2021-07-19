@@ -6,7 +6,7 @@ import {
   TaskButtons,
   IconsButtons
 } from '../styles/styledComponents';
-import { Edit, Remove } from '../sources/Icons';
+import { Edit, Remove } from '../icons/Icons';
 
 class TaskMain extends Component {
   render() {

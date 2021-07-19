@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { PageFooter } from '../styles/styledComponents';
-import { LinkedIn, GitHub } from '../sources/Icons';
+import { LinkedIn, GitHub } from '../icons/Icons';
 
 class Footer extends Component {
   render() {

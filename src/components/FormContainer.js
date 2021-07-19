@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Add, Trash } from '../sources/Icons';
+import { Add, Trash } from '../icons/Icons';
 
 import FormInput from './FormInput';
 import {
@@ -13,6 +13,7 @@ import {
 class FormContainer extends Component {
   render() {
     const {
+      show,
       taskText,
       formInputClass,
       mainInputFocus,
@@ -27,7 +28,6 @@ class FormContainer extends Component {
     return (
       <MainForm onSubmit={ (e) => e.preventDefault() }>
         <SectionForm>
-
           <FormInput
             name="taskText"
             value={ taskText }
@@ -57,20 +57,32 @@ class FormContainer extends Component {
           >
             <Trash title="Remover Tarefas" />
           </IconsButtons>
-
         </SectionForm>
         <SectionForm>
-
-          <FormShowButtons all name="show" value="all" onClick={ handleChange }>
+          <FormShowButtons
+            name="show"
+            value="all"
+            onClick={ handleChange }
+            show={ show }
+          >
             Todas
           </FormShowButtons>
-          <FormShowButtons todo name="show" value="toDo" onClick={ handleChange }>
+          <FormShowButtons
+            name="show"
+            value="toDo"
+            onClick={ handleChange }
+            show={ show }
+          >
             Pendentes
           </FormShowButtons>
-          <FormShowButtons done name="show" value="completed" onClick={ handleChange }>
+          <FormShowButtons
+            name="show"
+            value="completed"
+            onClick={ handleChange }
+            show={ show }
+          >
             Concluídas
           </FormShowButtons>
-
         </SectionForm>
       </MainForm>
     )

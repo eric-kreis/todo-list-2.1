@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import Switch from 'react-switch';
 import { withTheme } from 'styled-components';
+import Logo from '../icons/Logo';
 
 import { PageHeader } from '../styles/styledComponents';
-import { Sun, Moon } from './Icons';
+import { Sun, Moon } from '../icons/Icons';
 import { ThemeButton } from '../styles/styledComponents';
-import { PaintBrush } from '../sources/Icons';
+import { ColorPalette } from '../icons/Icons';
 
 
 class Header extends Component {
@@ -19,7 +20,7 @@ class Header extends Component {
 
     return (
       <PageHeader>
-        LINKS
+        <Logo />
         { children }
         <div>
           <Switch
@@ -34,7 +35,7 @@ class Header extends Component {
             onColor={ theme.colors.background }
           />
           <ThemeButton onClick={ () => { handleToggleModal('color'); } }>
-            <PaintBrush />
+            <ColorPalette />
           </ThemeButton>
         </div>
       </PageHeader>

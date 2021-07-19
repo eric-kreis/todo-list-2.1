@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 
 import { GlobalStyle } from './styles/global';
 import HomePage from './pages/HomePage';
-import * as colors from './sources/themeColors';
+import * as colors from './themes/themeColors';
 import './styles/bootstrap.min.css'
 import './styles/changingBootstrap.css';
 

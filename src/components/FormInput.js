@@ -46,6 +46,7 @@ class FormInput extends Component {
           onChange={ (e) => { handleChange(e); formClassToggle(e); } }
           placeholder="placeholder"
           autoComplete="off"
+          maxLength={ 120 }
         />
         <label htmlFor="form-input">{ labelText }</label>
       </div>

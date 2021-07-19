@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { shade, transparentize } from 'polished';
+import { shade, transparentize, saturate } from 'polished';
+
 
 export const PageHeader = styled.header`
   align-items: center;
@@ -7,8 +8,12 @@ export const PageHeader = styled.header`
   color: ${({ theme }) => theme.colors.text};
   display: flex;
   justify-content: space-between;
-  padding: 12px 32px;
   min-width: 400px;
+  padding: 12px 32px;
+
+  .logo {
+    color: white;
+  }
 
   h1 {
     font-size: x-large;
@@ -33,8 +38,7 @@ export const ThemeButton = styled.button`
   border: 0;
   color: ${({ theme }) => theme.colors.text};
   margin-left: 16px;
-  transform: rotate(90deg);
-  font-size: 15px;
+  font-size: 18px;
 `;
 
 export const HomeMain = styled.main`
@@ -43,8 +47,9 @@ export const HomeMain = styled.main`
   justify-content: space-around;
   height: 100%;
   margin: 0 auto;
+  min-width: 400px;
   padding: 64px;
-  padding-bottom: 80px;
+  padding-bottom: 100px;
   width: 48%;
 `;
 
@@ -77,7 +82,7 @@ export const IconsButtons = styled.button`
     if (props.medium) return '20px';
     return '15px';
   }};
-  margin: 12px;
+  margin: 24px 0 24px 24px;
 
   :hover {
     color: ${(props) => {
@@ -89,30 +94,37 @@ export const IconsButtons = styled.button`
 `;
 
 export const FormShowButtons = styled.button`
-  background-color: ${({ theme }) =>
-    transparentize(0.4, theme.colors.primary)};
-  box-shadow: 1px 1px 3px ${({ theme }) =>
-    shade(0.2, theme.colors.primary)};
+  background-color: ${({ theme, show, value }) => {
+    if (show === value) {
+      return transparentize(0.2, theme.colors.primary);
+    }
+    return transparentize(0.4, theme.colors.primary);
+  }};
+
+  box-shadow: 1px 1px 3px ${({ theme, show, value }) => {
+    if (show === value) {
+      return theme.colors.primary;
+    }
+    return transparentize(0.4, theme.colors.primary);
+  }};
+
   border: 0;
   border-radius: 2px;
-  color: ${({ theme }) => theme.colors.text};
+  color: ${({ theme, show, value }) => {
+    if (show === value) {
+      return saturate(0.25, theme.colors.text);
+    }
+    return theme.colors.text
+  }};
   font-size: 18px;
   margin: 8px;
-  width: 125px;
   min-width: 100px;
-  /* transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; */
-
+  width: 125px;
+  
   :hover {
-    color: ${({ all, todo, done, theme }) => {
-      if (all) return theme.colors.text;
-      if (todo) return '#F1C235';
-      if (done) return shade(0.3, '#5AC8FA');
-    }};
-
     background-color: ${({ theme }) =>
-      transparentize(0.2, theme.colors.primary)};
-    box-shadow: 1px 1px 3px ${({ theme }) =>
-      shade(0.4, theme.colors.primary)};
+      transparentize(0.3, theme.colors.primary)};
+    box-shadow: 1px 1px 3px ${({ theme }) => theme.colors.primary};
   }
 `;
 
@@ -127,9 +139,12 @@ export const TaskList = styled.ul`
 
 export const TaskItem = styled.li`
   border-bottom: 1px solid ${({ theme }) => theme.colors.text};
+  display: flex;
+  align-items: center;
   width: 100%;
-  min-height: 65px;
+  height: 70px;
   overflow-x: hidden;
+
   ::-webkit-scrollbar {
     display: none;
   }
@@ -139,7 +154,7 @@ export const TaskItem = styled.li`
   }
   
   .form-floating > label {
-    padding: 20px 16px;
+    padding: 22px 16px;
     font-family: ubuntu;
   }
 `;
@@ -151,6 +166,7 @@ export const TaskBody = styled.main`
   width: 100%;
   :hover {
     div {
+      transition: .50s opacity ease-out;
       opacity: 1;
     }
   }
@@ -196,14 +212,22 @@ export const TaskButtons = styled.div`
 `;
 
 export const EditInputSection = styled.section`
-  display: flex;
   align-items: center;
+  display: flex;
   height: 100%;
 
   input {
     margin-left: 4px;
   }
 `;
+
+export const ReturnButton = styled.button`
+  background-color: transparent;
+  border: 0;
+  color: ${({ theme }) => theme.colors.text};
+  font-size: 24px;
+  margin-left: 16px;
+`
 
 export const ModalWindow = styled.main`
   background-color: ${({ theme }) => theme.modal.windowBackground};
@@ -218,8 +242,8 @@ export const ModalWindow = styled.main`
 export const Modal = styled.div`
   align-items: center;
   background-color: ${({ theme }) => theme.modal.modalBackground};
-  box-shadow: 0 5px 16px black;
   border-radius: 30px;
+  box-shadow: 0 5px 16px black;
   color: ${({ theme }) => theme.colors.text};
   display: flex;
   flex-flow: row wrap;
@@ -232,6 +256,30 @@ export const Modal = styled.div`
   text-align: center;
   width: 25%;
   z-index: 10;
+`;
+
+export const Color = styled.div`
+  align-items: center;
+  background-color: ${({ theme }) => theme.modal.modalBackground};
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px ${transparentize(0.6, 'black')};
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: auto;
+  min-width: 200px;
+  padding: 4px 16px 24px 16px;
+  position: relative;
+  width: 20%;
+  z-index: 10;
+
+  .modal-button {
+    background-color: transparent;
+    border: none;
+    display: inline-block;
+    font-family: yatra-one;
+    font-size: 30px;
+  }
 `;
 
 export const ColorButtonsContainer = styled.section`
@@ -259,15 +307,15 @@ export const PageFooter = styled.footer`
   display: flex;
   justify-content: space-between;
   min-width: 400px;
-  padding: 8px 32px;
+  padding: 4px 32px;
   position: absolute;
   width: 100%;
 
   p {
     margin: 0;
     a {
-      text-decoration: none;
       color: ${({ theme }) => theme.colors.text};
+      text-decoration: none;
       :hover {
         text-decoration: underline;
       }
@@ -276,16 +324,16 @@ export const PageFooter = styled.footer`
 
   div {
     display: flex;
-    font-size: 22px;
+    width: 74px;
+    justify-content: space-between;
 
-    * {
+    a {
+      font-size: 24px;
       color: ${({ theme }) => theme.colors.text};
-      display: flex;
-      justify-content: space-between;
-      width: 45px;
 
       :hover {
         cursor: pointer;
+        color: ${({ theme }) => shade(0.2, theme.colors.text)};
       }
     }
   }
@@ -296,7 +344,7 @@ export const PageFooter = styled.footer`
     }
 
     div {
-    font-size: 20px;
+      font-size: 20px;
     }
   }
 `;

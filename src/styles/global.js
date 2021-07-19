@@ -1,36 +1,39 @@
 import { createGlobalStyle } from 'styled-components';
 import { transparentize } from 'polished';
-import mountserrat400 from '../fonts/Montserrat-Regular.ttf'
-import mountserrat500 from '../fonts/Montserrat-SemiBold.ttf';
+import mountserrat400 from '../fonts/Montserrat-Regular.ttf';
+import YatraOne from '../fonts/YatraOne-Regular.ttf';
 
 export const GlobalStyle = createGlobalStyle`
   @font-face {
-    font-family: 'mountserrat400';
+    font-family: mountserrat400;
     src: url(${mountserrat400});
     font-style: normal;
   }
 
   @font-face {
-    font-family: 'mountserrat500';
-    src: url(${mountserrat500});
+    font-family: yatra-one;
+    src: url(${YatraOne});
     font-style: normal;
   }
 
   * {
+    font-kerning: none;
     padding: 0;
     margin: 0;
-    font-family: 'mountserrat400';
-    /* transition: background-color 0.3s, color 0.03s ease-in-out; */
+    font-family: mountserrat400;
   }
 
   html {
     position: relative;
-    min-height: 100%;
+    min-height: 100vh;
   }
 
   body {
     background-color: ${({ theme }) => theme.colors.background};
-    color: ${({ theme }) => theme.colors.text}
+    color: ${({ theme }) => theme.colors.text};
+    ::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   .form-floating {

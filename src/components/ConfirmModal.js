@@ -8,19 +8,29 @@ class ConfirmModal extends Component {
       handleConfirm,
       handleCancel,
       children,
+      confirmButtons,
     } = this.props;
-    return (openModal)
-      ? 
-        (
-          <ModalWindow>
-            <Modal>
-              <h3>{ children }</h3>
-              <button onClick={ handleConfirm } >SIM</button>
-              <button onClick={ handleCancel } >NÃO</button>
-            </Modal>
-          </ModalWindow>
-        )
-      : null;
+    return (openModal
+      && (
+        <ModalWindow>
+          <Modal>
+            <h4>{ children }</h4>
+            { confirmButtons
+            ? (
+              <div>
+                <button onClick={ handleConfirm } >SIM</button>
+                <button onClick={ handleCancel } >NÃO</button>
+              </div>
+
+            ) : (
+              <div>
+                <button onClick={ handleCancel } >Voltar</button>
+              </div>
+            )}
+          </Modal>
+        </ModalWindow>
+      )
+    );
   }
 }
 

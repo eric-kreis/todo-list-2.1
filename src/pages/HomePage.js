@@ -196,6 +196,8 @@ class HomePage extends React.Component {
     return (
       <section>
         <HomeModals
+          tasks={ tasks }
+          checkedItems={ checkedItems }
           handleToggleModal={ this.handleToggleModal }
           colorModal={ colorModal }
           changeColor={ changeColor }
@@ -211,6 +213,7 @@ class HomePage extends React.Component {
         </Header>
         <HomeMain>
           <FormContainer
+            show={ show }
             handleAddTask={ this.handleAddTask }
             handleChange={ this.handleChange }
             handleToggleModal={ this.handleToggleModal }

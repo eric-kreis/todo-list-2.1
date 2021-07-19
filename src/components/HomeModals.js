@@ -5,6 +5,8 @@ import ClearModalContainer from './ClearModalContainer';
 class HomeModals extends Component {
   render() {
     const {
+      tasks,
+      checkedItems,
       handleToggleModal,
       colorModal,
       changeColor,
@@ -24,6 +26,8 @@ class HomeModals extends Component {
           show={ show }
           clearModal={ clearModal }
           handleClear={ handleClear }
+          tasks={ tasks }
+          checkedItems={ checkedItems }
           handleToggleModal={ handleToggleModal }
         />
       </>
