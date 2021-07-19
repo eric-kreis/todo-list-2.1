@@ -242,20 +242,37 @@ export const ModalWindow = styled.main`
 export const Modal = styled.div`
   align-items: center;
   background-color: ${({ theme }) => theme.modal.modalBackground};
-  border-radius: 30px;
+  border-radius: 10px;
   box-shadow: 0 5px 16px black;
   color: ${({ theme }) => theme.colors.text};
   display: flex;
   flex-flow: row wrap;
-  height: 300px;
+  height: 260px;
   justify-content: space-around;
   margin: auto;
-  min-width: 150px;
-  padding: 0 16px 8px 16px;
+  min-width: 250px;
+  padding: 32px 16px;
   position: relative;
   text-align: center;
   width: 25%;
   z-index: 10;
+
+  div {
+    display: flex;
+    width: 60%;
+    justify-content: space-around;
+
+    button {
+      background-color: transparent;
+      border: none;
+      color: ${({ theme }) => theme.colors.text};
+      display: inline-block;
+      font-family: yatra-one;
+      font-size: 30px;
+      margin: 18px;
+      text-shadow: 2px 2px ${transparentize(0.5, 'gray')};
+    }
+  }
 `;
 
 export const Color = styled.div`
@@ -276,9 +293,15 @@ export const Color = styled.div`
   .modal-button {
     background-color: transparent;
     border: none;
+    color: ${({ theme }) => theme.colors.text};
     display: inline-block;
     font-family: yatra-one;
     font-size: 30px;
+    text-shadow: 2px 2px ${transparentize(0.5, 'gray')};
+  }
+
+  @media(max-width: 768px) {
+    width: 35%;
   }
 `;
 
@@ -293,7 +316,8 @@ export const ColorButtonsContainer = styled.section`
 `;
 
 export const ColorButtons = styled.button`
-  border: 1px solid black;
+  border: none;
+  box-shadow: 1px 1px 6px ${transparentize(0.5, 'black')};
   border-radius: 50%;
   background-color: ${({ color }) => color };
   height: 50px;

@@ -49,7 +49,6 @@ class TaskContainer extends React.Component {
       handleEditBack,
       handleRemoveItem,
       handleToggleCheck,
-      handleRemoveFocus,
     } = this.props;
 
     return (
@@ -61,7 +60,6 @@ class TaskContainer extends React.Component {
               text={ text }
               checkedItems={ checkedItems }
               handleRemoveItem={ handleRemoveItem }
-              handleRemoveFocus={ handleRemoveFocus }
               handleToggleCheck={ handleToggleCheck }
               handleToggleEdit={ this.handleToggleEdit }
             />
@@ -88,7 +86,6 @@ TaskContainer.propTypes = {
   checkedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
   handleEditBack: PropTypes.func.isRequired,
   handleRemoveItem: PropTypes.func.isRequired,
-  handleRemoveFocus: PropTypes.func.isRequired,
   handleToggleCheck: PropTypes.func.isRequired,
 };
 

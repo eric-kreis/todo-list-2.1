@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import TaskSection from './TaskSection';
-import {
-  TaskBody,
-  TaskButtons,
-  IconsButtons
-} from '../styles/styledComponents';
+import { TaskBody, TaskButtons, IconsButtons } from '../styles/styledComponents';
 import { Edit, Remove } from '../icons/Icons';
 
 class TaskMain extends Component {
@@ -16,7 +13,6 @@ class TaskMain extends Component {
       checkedItems,
       handleToggleCheck,
       handleToggleEdit,
-      handleRemoveFocus,
       handleRemoveItem,
     } = this.props;
 
@@ -32,20 +28,14 @@ class TaskMain extends Component {
         <TaskButtons>
           <IconsButtons
             medium
-            onClick={ () => {
-              handleRemoveFocus();
-              handleToggleEdit();
-            } }
+            onClick={ () => { handleToggleEdit(); } }
           >
             <Edit title="Editar tarefa" />
           </IconsButtons>
           <IconsButtons
             medium
             clear
-            onClick={ () => {
-              handleRemoveFocus();
-              handleRemoveItem(id);
-            } }
+            onClick={ () => { handleRemoveItem(id); } }
           >
             <Remove title="Remover tarefa" />
           </IconsButtons>
@@ -54,5 +44,14 @@ class TaskMain extends Component {
     );
   }
 }
+
+TaskMain.propTypes = {
+  id: PropTypes.number.isRequired,
+  text: PropTypes.string.isRequired,
+  checkedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
+  handleToggleCheck: PropTypes.func.isRequired,
+  handleToggleEdit: PropTypes.func.isRequired,
+  handleRemoveItem: PropTypes.func.isRequired,
+};
 
 export default TaskMain;

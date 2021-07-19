@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import ColorModal from './ColorModal';
 import ClearModalContainer from './ClearModalContainer';
 
 class HomeModals extends Component {
   render() {
     const {
+      show,
       tasks,
       checkedItems,
-      handleToggleModal,
       colorModal,
-      changeColor,
-      show,
       clearModal,
+      changeColor,
+      handleToggleModal,
       handleClear,
     } = this.props;
 
@@ -34,5 +36,16 @@ class HomeModals extends Component {
     );
   }
 }
+
+HomeModals.propTypes = {
+  show: PropTypes.string.isRequired,
+  tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
+  checkedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
+  colorModal: PropTypes.bool.isRequired,
+  clearModal: PropTypes.bool.isRequired,
+  changeColor: PropTypes.func.isRequired,
+  handleToggleModal: PropTypes.func.isRequired,
+  handleClear: PropTypes.func.isRequired,
+};
 
 export default HomeModals;

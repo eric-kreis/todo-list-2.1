@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import ConfirmModal from './ConfirmModal';
 class ClearModalContainer extends Component {
@@ -20,13 +21,13 @@ class ClearModalContainer extends Component {
     let message = `Você realmente deseja remover ${typeMessage}?`
 
     if (tasks.length === 0) {
-      message = "Você não tem tarefas para remover";
+      message = "Sem tarefas para remover";
       confirmButtons = false;
     } else if (tasks.length === checkedItems.length && show === 'toDo') {
-      message = "Você não tem nenhuma tarefa pendente para remover";
+      message = "Sem tarefas pendentes";
       confirmButtons = false;
     } else if (checkedItems.length === 0 && show === 'completed') {
-      message = "Você não tem nenhuma tarefa concluída para remover";
+      message = "Sem tarefas concluídas";
       confirmButtons = false;
     }
 
@@ -42,5 +43,14 @@ class ClearModalContainer extends Component {
     );
   }
 }
+
+ClearModalContainer.propTypes = {
+  tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
+  checkedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
+  show: PropTypes.string.isRequired,
+  clearModal: PropTypes.bool.isRequired,
+  handleClear: PropTypes.func.isRequired,
+  handleToggleModal: PropTypes.func.isRequired,
+};
 
 export default ClearModalContainer;

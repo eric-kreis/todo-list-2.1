@@ -165,7 +165,6 @@ class HomePage extends React.Component {
       this.setState({ checkedItems: removingItem }, () =>
         localStorage.setItem('checkedItems', JSON.stringify(removingItem)));
     }
-    this.handleRemoveFocus();
   }
 
   handleFocus() {
@@ -214,15 +213,15 @@ class HomePage extends React.Component {
         <HomeMain>
           <FormContainer
             show={ show }
+            taskText={ taskText }
+            formInputClass={ formInputClass }
+            mainInputFocus={ mainInputFocus }
+            formClassToggle={ this.formClassToggle }
             handleAddTask={ this.handleAddTask }
             handleChange={ this.handleChange }
             handleToggleModal={ this.handleToggleModal }
-            formClassToggle={ this.formClassToggle }
             handleFocus={ this.handleFocus }
             handleRemoveFocus={ this.handleRemoveFocus }
-            mainInputFocus={ mainInputFocus }
-            formInputClass={ formInputClass }
-            taskText={ taskText }
           />
           <Tasks
             show={ show }
@@ -230,7 +229,6 @@ class HomePage extends React.Component {
             checkedItems={ checkedItems }
             handleEditBack={ this.handleEditBack }
             handleRemoveItem={ this.handleRemoveItem }
-            handleRemoveFocus={ this.handleRemoveFocus }
             handleToggleCheck={ this.handleToggleCheck }
           />
         </HomeMain>

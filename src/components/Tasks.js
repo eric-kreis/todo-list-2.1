@@ -13,15 +13,12 @@ class Tasks extends React.Component {
       handleEditBack,
       handleRemoveItem,
       handleToggleCheck,
-      handleRemoveFocus,
     } = this.props;
 
     let filtredTasks = tasks;
-
     if (show === 'completed') {
       filtredTasks = tasks.filter(({ id }) => checkedItems.includes(id));
     }
-
     if (show === 'toDo') {
       filtredTasks = tasks.filter(({ id }) => !checkedItems.includes(id));
     }
@@ -36,7 +33,6 @@ class Tasks extends React.Component {
               text={ text }
               checkedItems={ checkedItems }
               handleEditBack={ handleEditBack }
-              handleRemoveFocus={ handleRemoveFocus }
               handleRemoveItem={ handleRemoveItem }
               handleToggleCheck={ handleToggleCheck }
             />
@@ -48,6 +44,7 @@ class Tasks extends React.Component {
 }
 
 Tasks.propTypes = {
+  show: PropTypes.string.isRequired,
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
   checkedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
   handleEditBack: PropTypes.func.isRequired,

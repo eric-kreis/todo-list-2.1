@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import {
   Color,
@@ -35,5 +36,11 @@ class ColorModal extends Component {
     );
   }
 }
+
+ColorModal.propTypes = {
+  colorModal: PropTypes.bool.isRequired,
+  changeColor: PropTypes.func.isRequired,
+  handleToggleModal: PropTypes.func.isRequired,
+};
 
 export default ColorModal;

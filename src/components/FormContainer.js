@@ -90,11 +90,14 @@ class FormContainer extends Component {
 }
 
 FormContainer.propTypes = {
+  show: PropTypes.string.isRequired,
   taskText: PropTypes.string.isRequired,
+  formInputClass: PropTypes.string.isRequired,
   mainInputFocus: PropTypes.bool.isRequired,
+  formClassToggle: PropTypes.func.isRequired,
   handleAddTask: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
-  handleClear: PropTypes.func.isRequired,
+  handleToggleModal: PropTypes.func.isRequired,
   handleFocus: PropTypes.func.isRequired,
   handleRemoveFocus: PropTypes.func.isRequired,
 };

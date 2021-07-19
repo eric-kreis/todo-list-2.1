@@ -19,11 +19,11 @@ class FormInput extends Component {
       type,
       name,
       value,
-      handleFocus,
-      handleRemoveFocus,
+      formInputClass,
       handleChange,
       formClassToggle,
-      formInputClass,
+      handleFocus,
+      handleRemoveFocus,
     } = this.props;
 
     let labelText = 'Escreva sua tarefa aqui';
@@ -63,7 +63,10 @@ FormInput.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   handleFocus: PropTypes.func.isRequired,
+  handleRemoveFocus: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
+  formClassToggle: PropTypes.func.isRequired,
+  formInputClass: PropTypes.string.isRequired,
 };
 
 export default FormInput;
