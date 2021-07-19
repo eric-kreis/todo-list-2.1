@@ -8,12 +8,14 @@ export const GlobalStyle = createGlobalStyle`
     font-family: mountserrat400;
     src: url(${mountserrat400});
     font-style: normal;
+    font-display: fallback;
   }
 
   @font-face {
     font-family: yatra-one;
     src: url(${YatraOne});
     font-style: normal;
+    font-display: fallback;
   }
 
   * {
