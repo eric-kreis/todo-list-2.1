@@ -8,7 +8,6 @@ export const PageHeader = styled.header`
   color: ${({ theme }) => theme.colors.text};
   display: flex;
   justify-content: space-between;
-  min-width: 400px;
   padding: 12px 32px;
 
   .logo {
@@ -31,6 +30,13 @@ export const PageHeader = styled.header`
       text-align: center;
     }
   }
+
+  @media(max-width: 380px) {
+    h1 {
+      font-size: 16px;
+      text-align: center;
+    }
+  }
 `;
 
 export const ThemeButton = styled.button`
@@ -47,7 +53,6 @@ export const HomeMain = styled.main`
   justify-content: space-around;
   height: 100%;
   margin: 0 auto;
-  min-width: 400px;
   padding: 64px;
   padding-bottom: 100px;
   width: 48%;
@@ -57,7 +62,7 @@ export const MainForm = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-width: 310px;
+  min-width: 250px;
 `;
 
 export const SectionForm = styled.section`
@@ -67,7 +72,7 @@ export const SectionForm = styled.section`
   margin-bottom: 16px;
   width: 100%;
 
-  @media(max-width: 768px) {
+  @media(max-width: 900px) {
     flex-wrap: wrap;
     margin-bottom: 0;
   }
@@ -125,6 +130,11 @@ export const FormShowButtons = styled.button`
     background-color: ${({ theme }) =>
       transparentize(0.2, theme.colors.primary)};
     box-shadow: 1px 1px 2px ${({ theme }) => theme.colors.primary};
+  }
+
+  @media(max-width: 860px) {
+    font-size: 16px;
+    width: 80px;
   }
 `;
 
@@ -331,7 +341,6 @@ export const PageFooter = styled.footer`
   bottom: 0;
   display: flex;
   justify-content: space-between;
-  min-width: 400px;
   padding: 4px 32px;
   position: absolute;
   width: 100%;
@@ -364,12 +373,28 @@ export const PageFooter = styled.footer`
   }
 
   @media(max-width: 460px) {
-    p {
+    p, p a {
       font-size: 14px;
     }
 
     div {
-      font-size: 20px;
+      width: 60px;
+      a {
+        font-size: 20px;
+      }
+    }
+  }
+
+  @media(max-width: 380px) {
+    p, p a {
+      font-size: 12px;
+    }
+
+    div {
+      width: 50px;
+      a {
+        font-size: 18px;
+      }
     }
   }
 `;

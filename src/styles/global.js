@@ -25,17 +25,14 @@ export const GlobalStyle = createGlobalStyle`
     font-family: mountserrat400;
   }
 
-  html {
-    position: relative;
-    min-height: 100vh;
-  }
-
   body {
     background-color: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.text};
     ::-webkit-scrollbar {
       display: none;
     }
+    min-height: 100vh;
+    position: relative;
   }
 
   .form-floating > .form-control {
