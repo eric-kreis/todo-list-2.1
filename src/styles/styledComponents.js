@@ -53,7 +53,7 @@ export const HomeMain = styled.main`
   justify-content: space-around;
   height: 100%;
   margin: 0 auto;
-  padding: 45px 64px;
+  padding: 60px 64px;
   padding-bottom: 100px;
   width: 48%;
 `;
