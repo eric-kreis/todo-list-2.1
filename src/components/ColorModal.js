@@ -28,7 +28,7 @@ class ColorModal extends Component {
               onClick={ () => { handleToggleModal('color'); } }
               className="modal-button"
             >
-              Voltar
+              VOLTAR
             </button>
           </Color>
         </ModalWindow>

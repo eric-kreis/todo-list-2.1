@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { shade, transparentize, saturate } from 'polished';
+import { shade, transparentize, saturate, lighten } from 'polished';
 
 
 export const PageHeader = styled.header`
@@ -8,7 +8,7 @@ export const PageHeader = styled.header`
   color: ${({ theme }) => theme.colors.text};
   display: flex;
   justify-content: space-between;
-  padding: 12px 32px;
+  padding: 12px 40px;
 
   .logo {
     color: white;
@@ -53,7 +53,7 @@ export const HomeMain = styled.main`
   justify-content: space-around;
   height: 100%;
   margin: 0 auto;
-  padding: 64px;
+  padding: 45px 64px;
   padding-bottom: 100px;
   width: 48%;
 `;
@@ -87,6 +87,7 @@ export const IconsButtons = styled.button`
     if (medium) return '20px';
     return '15px';
   }};
+  padding: 2px;
   margin: 24px 0 24px 24px;
 
   :hover {
@@ -99,28 +100,25 @@ export const IconsButtons = styled.button`
 `;
 
 export const FormShowButtons = styled.button`
-  background-color: ${({ theme, show, value }) => {
-    if (show === value) {
-      return transparentize(0.2, theme.colors.primary);
-    }
-    return transparentize(0.4, theme.colors.primary);
-  }};
+  background-color: ${({ theme, show, value }) => (
+    (show === value)
+    ? lighten(0.1, theme.colors.primary)
+    : transparentize(0.4, theme.colors.primary)
+  )};
 
-  box-shadow: 1px 1px 2px ${({ theme, show, value }) => {
-    if (show === value) {
-      return theme.colors.primary;
-    }
-    return transparentize(0.4, theme.colors.primary);
-  }};
+  box-shadow: 1px 1px 2px ${({ theme, show, value }) => (
+    (show === value)
+    ? theme.colors.primary
+    : transparentize(0.4, theme.colors.primary)
+  )};
 
   border: 0;
   border-radius: 2px;
-  color: ${({ theme, show, value }) => {
-    if (show === value) {
-      return saturate(0.2, theme.colors.text);
-    }
-    return theme.colors.text
-  }};
+  color: ${({ theme, show, value }) => (
+    (show === value)
+    ? saturate(0.2, theme.colors.text)
+    : shade(0.05, theme.colors.text)
+  )};
   font-size: 18px;
   margin: 8px;
   min-width: 100px;
@@ -128,7 +126,7 @@ export const FormShowButtons = styled.button`
   
   :hover {
     background-color: ${({ theme }) =>
-      transparentize(0.2, theme.colors.primary)};
+      lighten(0.04, theme.colors.primary)};
     box-shadow: 1px 1px 2px ${({ theme }) => theme.colors.primary};
   }
 
@@ -193,7 +191,7 @@ export const TaskLabel = styled.label`
   align-items: center;
   display: flex;
   text-decoration: ${(({ checkedItems, id }) => (
-    checkedItems.includes(id)
+    (checkedItems.includes(id))
     ? 'line-through'
     : 'none'
   ))};
@@ -216,7 +214,7 @@ export const TaskLabel = styled.label`
 
 export const TaskButtons = styled.div`
   width: 15%;
-  min-width: 80px;
+  min-width: 100px;
   display: flex;
   justify-content: space-between;
   opacity: 0;
@@ -279,8 +277,7 @@ export const Modal = styled.div`
       color: ${({ theme }) => theme.colors.text};
       display: inline-block;
       font-display: fallback;
-      font-family: yatra-one;
-      font-size: 30px;
+      font-size: 28px;
       margin: 18px;
     }
   }
@@ -307,12 +304,11 @@ export const Color = styled.div`
     color: ${({ theme }) => theme.colors.text};
     display: inline-block;
     font-display: fallback;
-    font-family: yatra-one;
-    font-size: 30px;
+    font-size: 24px;
   }
 
-  @media(max-width: 768px) {
-    width: 35%;
+  @media(max-width: 460px) {
+    width: 45%;
   }
 `;
 
@@ -332,6 +328,7 @@ export const ColorButtons = styled.button`
   border-radius: 50%;
   background-color: ${({ color }) => color };
   height: 50px;
+  margin: 5px;
   width: 50px;
 `;
 
