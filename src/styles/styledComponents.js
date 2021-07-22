@@ -24,7 +24,7 @@ export const PageHeader = styled.header`
     display: flex;
   }
 
-  @media(max-width: 460px) {
+  @media(max-width: 468px) {
     h1 {
       font-size: medium;
       text-align: center;
