@@ -3,7 +3,7 @@ import { transparentize } from 'polished';
 import mountserrat400 from '../fonts/Montserrat-Regular.ttf';
 import YatraOne from '../fonts/YatraOne-Regular.ttf';
 
-export const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: mountserrat400;
     src: url(${mountserrat400});
@@ -69,3 +69,5 @@ export const GlobalStyle = createGlobalStyle`
       transparentize(0.5, theme.colors.primary)};
   }
 `;
+
+export default GlobalStyle;

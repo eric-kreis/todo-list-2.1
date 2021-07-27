@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { TaskLabel } from '../styles/styledComponents'
+import { TaskLabelS } from './styles';
 
 class TaskSection extends Component {
   constructor() {
@@ -25,7 +25,7 @@ class TaskSection extends Component {
     } = this.props;
 
     return (
-      <TaskLabel
+      <TaskLabelS
         checkedItems={ checkedItems }
         id={ id }
       >
@@ -36,7 +36,7 @@ class TaskSection extends Component {
           onChange={ handleToggleCheck }
         />
         <span>{ children }</span>
-      </TaskLabel>
+      </TaskLabelS>
     );
   }
 }

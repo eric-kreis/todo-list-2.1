@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
-import { GlobalStyle } from './styles/global';
-import HomePage from './pages/HomePage';
-import * as colors from './themes/themeColors';
+import HomePage from './pages/Home';
+import GlobalStyle from './styles/global';
+import * as colors from './themes/';
 import './styles/bootstrap.min.css'
 
 const savedTheme = JSON.parse(localStorage.getItem('theme'));
@@ -50,7 +50,7 @@ class App extends Component {
     const { theme } = this.state;
 
     return (
-      <BrowserRouter>
+      <div>
         <ThemeProvider theme={ theme }>
           <GlobalStyle />
           <Switch>
@@ -62,7 +62,7 @@ class App extends Component {
             </Route>
           </Switch>
         </ThemeProvider>
-      </BrowserRouter>
+      </div>
     );
   }
 }

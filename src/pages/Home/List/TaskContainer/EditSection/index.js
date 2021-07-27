@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Exit } from '../icons/Icons';
-import { EditInputSection, ReturnButton } from '../styles/styledComponents';
+import { Exit } from '../../../../../icons';
+import { EditInputSection, ReturnButton } from './styles';
 
 class EditSection extends Component {
   constructor() {

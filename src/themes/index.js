@@ -1,9 +1,9 @@
-import { lightBlue, darkBlue } from './blue';
-import { lightGreen, darkGreen } from './green';
-import { lightPink, darkPink } from './pink';
-import { lightPurple, darkPurple } from './purple';
-import { whiteTheme, blackTheme } from './white';
-import { lightRed, darkRed } from './red';
+import { lightBlue, darkBlue } from './colors/blue';
+import { lightGreen, darkGreen } from './colors/green';
+import { lightPink, darkPink } from './colors/pink';
+import { lightPurple, darkPurple } from './colors/purple';
+import { whiteTheme, blackTheme } from './colors/white';
+import { lightRed, darkRed } from './colors/red';
 
 export const blue = {
   light: lightBlue,

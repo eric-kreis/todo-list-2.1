@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-import { PageFooter } from '../styles/styledComponents';
-import { LinkedIn, GitHub } from '../icons/Icons';
+import PageFooterS from './styles';
+import { LinkedIn, GitHub } from '../../icons';
 
 class Footer extends Component {
   render() {
     return (
-      <PageFooter>
+      <PageFooterS>
         <p>
           Developed by: <a href="https://www.linkedin.com/in/eric-alfinito-kreis/" target="blank">Eric Alfinito Kreis</a>
         </p>
@@ -14,7 +14,7 @@ class Footer extends Component {
           <a href="https://github.com/eric-kreis" target="blank"><GitHub /></a>
           <a href="https://www.linkedin.com/in/eric-alfinito-kreis/" target="blank"><LinkedIn /></a>
         </div>
-      </PageFooter>
+      </PageFooterS>
     );
   }
 }

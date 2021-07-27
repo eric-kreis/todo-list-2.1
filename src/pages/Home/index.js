@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import HomeModals from '../components/HomeModals';
-import Header from '../sources/Header';
-import FormContainer from '../components/FormContainer';
-import Tasks from '../components/Tasks';
-import { HomeMain } from '../styles/styledComponents';
-import Footer from '../sources/Footer';
+import ColorModal from './HomeModals/ColorModal';
+import ClearModalContainer from './HomeModals/ClearModalContainer';
+import Header from '../../components/Header';
+import FormContainer from './Form';
+import List from './List';
+import Footer from '../../components/Footer';
+
+import  HomeMainS from './styles';
 
 const savedTasks = JSON.parse(localStorage.getItem('tasks'));
 const savedChecks = JSON.parse(localStorage.getItem('checkedItems'));
@@ -195,15 +197,18 @@ class HomePage extends React.Component {
 
     return (
       <section>
-        <HomeModals
-          tasks={ tasks }
-          checkedItems={ checkedItems }
+        <ColorModal
           handleToggleModal={ this.handleToggleModal }
           colorModal={ colorModal }
           changeColor={ changeColor }
+        />
+        <ClearModalContainer
           show={ show }
           clearModal={ clearModal }
           handleClear={ this.handleClear }
+          tasks={ tasks }
+          checkedItems={ checkedItems }
+          handleToggleModal={ this.handleToggleModal }
         />
         <Header
           toggleTheme={ toggleTheme }
@@ -211,7 +216,7 @@ class HomePage extends React.Component {
         >
           <h1>LISTA DE TAREFAS</h1>
         </Header>
-        <HomeMain>
+        <HomeMainS>
           <FormContainer
             show={ show }
             taskText={ taskText }
@@ -224,7 +229,7 @@ class HomePage extends React.Component {
             handleFocus={ this.handleFocus }
             handleRemoveFocus={ this.handleRemoveFocus }
           />
-          <Tasks
+          <List
             show={ show }
             tasks={ tasks }
             checkedItems={ checkedItems }
@@ -232,7 +237,7 @@ class HomePage extends React.Component {
             handleRemoveItem={ this.handleRemoveItem }
             handleToggleCheck={ this.handleToggleCheck }
           />
-        </HomeMain>
+        </HomeMainS>
         <Footer />
       </section>
     );
