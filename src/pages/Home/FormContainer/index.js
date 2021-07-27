@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Add, Trash } from '../../../icons';
 
 import toggleFocus from '../../../redux/reducers/formInput/actions/toggleFocus';
 import controlFormClass from '../../../redux/reducers/formInput/actions/controlFormClass';
@@ -15,6 +14,7 @@ import {
   FormShowButtonS,
 } from './styles';
 import IconButtonS from '../../../styles/IconButtonS.styles';
+import { Add, Trash } from '../../../assets/icons';
 
 class FormContainer extends Component {
   constructor() {
@@ -113,14 +113,11 @@ const mapDispatchToProps = {
 FormContainer.propTypes = {
   display: PropTypes.string.isRequired,
   taskText: PropTypes.string.isRequired,
-  formInputClass: PropTypes.string.isRequired,
-  mainInputFocus: PropTypes.bool.isRequired,
-  formClassToggle: PropTypes.func.isRequired,
-  handleAddTask: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired,
+  displayTasks: PropTypes.func.isRequired,
+  toggleFocus: PropTypes.func.isRequired,
+  controlFormClass: PropTypes.func.isRequired,
+  addItem: PropTypes.func.isRequired,
   handleToggleModal: PropTypes.func.isRequired,
-  handleFocus: PropTypes.func.isRequired,
-  handleRemoveFocus: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormContainer);

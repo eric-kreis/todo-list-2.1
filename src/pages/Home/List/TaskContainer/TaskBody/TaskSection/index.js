@@ -54,7 +54,7 @@ TaskSection.propTypes = {
   id: PropTypes.number.isRequired,
   checkedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
   children: PropTypes.node.isRequired,
-  handleToggleCheck: PropTypes.func.isRequired,
+  toggleCheck: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskSection);

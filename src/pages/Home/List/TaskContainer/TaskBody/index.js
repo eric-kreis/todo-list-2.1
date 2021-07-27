@@ -7,7 +7,7 @@ import removeItem from '../../../../../redux/reducers/listState/actions/removeIt
 import TaskSection from './TaskSection';
 import { TaskBodyS, TaskButtonS } from './styles';
 import IconButtonS from '../../../../../styles/IconButtonS.styles';
-import { Edit, Remove } from '../../../../../icons';
+import { Edit, Remove } from '../../../../../assets/icons';
 
 class TaskBody extends Component {
   render() {
@@ -50,9 +50,8 @@ const mapDispatchToProps = { removeItem };
 TaskBody.propTypes = {
   id: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
-  handleToggleCheck: PropTypes.func.isRequired,
+  removeItem: PropTypes.func.isRequired,
   handleToggleEdit: PropTypes.func.isRequired,
-  handleRemoveItem: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(TaskBody);

@@ -33,7 +33,6 @@ class FormInput extends Component {
 
   render() {
     const {
-      type,
       taskText,
       formInputClass,
       changeText,
@@ -54,7 +53,7 @@ class FormInput extends Component {
           className={ formInputClass }
           ref={ this.input }
           id="form-input"
-          type={ type }
+          type="text"
           name="taskText"
           value={ taskText }
           onFocus={ () => { toggleFocus(true); } }
@@ -86,19 +85,14 @@ const mapDispatchToProps = {
   changeText,
 };
 
-FormInput.defaultProps = {
-  type: 'text',
-};
-
 FormInput.propTypes = {
-  type: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  focus: PropTypes.bool.isRequired,
-  toggleFocus: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired,
-  toggleFormClass: PropTypes.func.isRequired,
   formInputClass: PropTypes.string.isRequired,
+  formFocus: PropTypes.bool.isRequired,
+  taskText: PropTypes.string.isRequired,
+  toggleFocus: PropTypes.func.isRequired,
+  changeText: PropTypes.func.isRequired,
+  controlFormClass: PropTypes.func.isRequired,
+  toggleFormClass: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormInput);

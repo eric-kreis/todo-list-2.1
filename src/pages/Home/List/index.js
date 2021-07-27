@@ -48,9 +48,6 @@ List.propTypes = {
   display: PropTypes.string.isRequired,
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
   checkedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
-  handleEditBack: PropTypes.func.isRequired,
-  handleRemoveItem: PropTypes.func.isRequired,
-  handleToggleCheck: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, null)(List);

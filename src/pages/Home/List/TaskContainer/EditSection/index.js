@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import editBack from '../../../../../redux/reducers/listState/actions/editBack';
 
-import { Exit } from '../../../../../icons';
+import { Exit } from '../../../../../assets/icons';
 import { EditInputSection, ReturnButton } from './styles';
 
 class EditSection extends Component {
@@ -75,9 +75,9 @@ const mapDispatchToProps = { editBack };
 EditSection.propTypes = {
   id: PropTypes.number.isRequired,
   editText: PropTypes.string.isRequired,
+  editBack: PropTypes.func.isRequired,
   handleToggleEdit: PropTypes.func.isRequired,
   handleEditing: PropTypes.func.isRequired,
-  handleEditBack: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(EditSection);
