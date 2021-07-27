@@ -13,10 +13,9 @@ class TaskContainer extends React.Component {
     this.handleToggleEdit = this.handleToggleEdit.bind(this);
     this.handleEditing = this.handleEditing.bind(this);
 
-    const { text } = props;
     this.state = {
       edit: false,
-      editText: text,
+      editText: props.text,
     }
   }
 
@@ -45,10 +44,6 @@ class TaskContainer extends React.Component {
     const {
       id,
       text,
-      checkedItems,
-      handleEditBack,
-      handleRemoveItem,
-      handleToggleCheck,
     } = this.props;
 
     return (
@@ -58,9 +53,6 @@ class TaskContainer extends React.Component {
             <TaskBody
               id={ id }
               text={ text }
-              checkedItems={ checkedItems }
-              handleRemoveItem={ handleRemoveItem }
-              handleToggleCheck={ handleToggleCheck }
               handleToggleEdit={ this.handleToggleEdit }
             />
           )
@@ -71,7 +63,6 @@ class TaskContainer extends React.Component {
               editText={ editText }
               handleToggleEdit={ this.handleToggleEdit }
               handleEditing={ this.handleEditing }
-              handleEditBack={ handleEditBack }
             />
           )
         }
