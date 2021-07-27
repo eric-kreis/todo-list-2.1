@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import ConfirmModal from './ConfirmModal';
 class ClearModalContainer extends Component {
   render() {
     const {
+      display,
       tasks,
       checkedItems,
-      show,
       clearModal,
       handleClear,
       handleToggleModal,
@@ -15,18 +16,18 @@ class ClearModalContainer extends Component {
 
     let typeMessage = 'todas as tarefas' ;
     let confirmButtons = true;
-    if (show === 'toDo') typeMessage = 'as tarefas pendentes';
-    if (show === 'completed') typeMessage = 'as tarefas concluídas';
+    if (display === 'toDo') typeMessage = 'as tarefas pendentes';
+    if (display === 'completed') typeMessage = 'as tarefas concluídas';
 
     let message = `Você realmente deseja remover ${typeMessage}?`
 
     if (tasks.length === 0) {
       message = "Sem tarefas para remover";
       confirmButtons = false;
-    } else if (tasks.length === checkedItems.length && show === 'toDo') {
+    } else if (tasks.length === checkedItems.length && display === 'toDo') {
       message = "Sem tarefas pendentes";
       confirmButtons = false;
-    } else if (checkedItems.length === 0 && show === 'completed') {
+    } else if (checkedItems.length === 0 && display === 'completed') {
       message = "Sem tarefas concluídas";
       confirmButtons = false;
     }
@@ -44,13 +45,15 @@ class ClearModalContainer extends Component {
   }
 }
 
+const mapStateToProps = ({ changeDisplay }) => ({ display: changeDisplay.display }); 
+
 ClearModalContainer.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
   checkedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
-  show: PropTypes.string.isRequired,
+  display: PropTypes.string.isRequired,
   clearModal: PropTypes.bool.isRequired,
   handleClear: PropTypes.func.isRequired,
   handleToggleModal: PropTypes.func.isRequired,
 };
 
-export default ClearModalContainer;
+export default connect(mapStateToProps, null)(ClearModalContainer);

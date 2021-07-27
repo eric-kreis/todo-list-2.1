@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { ListS } from './styles';
@@ -7,7 +8,7 @@ import TaskContainer from './TaskContainer';
 class List extends React.Component {
   render() {
     const {
-      show,
+      display,
       tasks,
       checkedItems,
       handleEditBack,
@@ -16,10 +17,10 @@ class List extends React.Component {
     } = this.props;
 
     let filtredTasks = tasks;
-    if (show === 'completed') {
+    if (display === 'completed') {
       filtredTasks = tasks.filter(({ id }) => checkedItems.includes(id));
     }
-    if (show === 'toDo') {
+    if (display === 'toDo') {
       filtredTasks = tasks.filter(({ id }) => !checkedItems.includes(id));
     }
 
@@ -43,8 +44,10 @@ class List extends React.Component {
   }
 }
 
+const mapStateToProps = ({ changeDisplay }) => ({ display: changeDisplay.display });
+
 List.propTypes = {
-  show: PropTypes.string.isRequired,
+  display: PropTypes.string.isRequired,
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
   checkedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
   handleEditBack: PropTypes.func.isRequired,
@@ -52,4 +55,4 @@ List.propTypes = {
   handleToggleCheck: PropTypes.func.isRequired,
 };
 
-export default List;
+export default connect(mapStateToProps, null)(List);

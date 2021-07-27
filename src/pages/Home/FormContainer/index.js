@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Add, Trash } from '../../../icons';
+
+import displayTasks from '../../../redux/actions/displayTasks';
 
 import FormInput from './FormInput';
 import {
@@ -13,7 +16,8 @@ import IconButtonS from '../../../styles/IconButtonS.styles';
 class FormContainer extends Component {
   render() {
     const {
-      show,
+      display,
+      displayTasks,
       taskText,
       formInputClass,
       mainInputFocus,
@@ -60,26 +64,26 @@ class FormContainer extends Component {
         </SectionFormS>
         <SectionFormS>
           <FormShowButtonS
-            name="show"
+            name="display"
             value="all"
-            onClick={ handleChange }
-            show={ show }
+            onClick={ displayTasks }
+            display={ display }
           >
             Todas
           </FormShowButtonS>
           <FormShowButtonS
-            name="show"
+            name="display"
             value="toDo"
-            onClick={ handleChange }
-            show={ show }
+            onClick={ displayTasks }
+            display={ display }
           >
             Pendentes
           </FormShowButtonS>
           <FormShowButtonS
-            name="show"
+            name="display"
             value="completed"
-            onClick={ handleChange }
-            show={ show }
+            onClick={ displayTasks }
+            display={ display }
           >
             Concluídas
           </FormShowButtonS>
@@ -89,8 +93,12 @@ class FormContainer extends Component {
   }
 }
 
+const mapStateToProps = ({ changeDisplay }) => ({ display: changeDisplay.display });
+
+const mapDispatchToProps = { displayTasks };
+
 FormContainer.propTypes = {
-  show: PropTypes.string.isRequired,
+  display: PropTypes.string.isRequired,
   taskText: PropTypes.string.isRequired,
   formInputClass: PropTypes.string.isRequired,
   mainInputFocus: PropTypes.bool.isRequired,
@@ -102,4 +110,4 @@ FormContainer.propTypes = {
   handleRemoveFocus: PropTypes.func.isRequired,
 };
 
-export default FormContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(FormContainer);

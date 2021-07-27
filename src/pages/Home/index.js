@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import ColorModal from './HomeModals/ColorModal';
 import ClearModalContainer from './HomeModals/ClearModalContainer';
 import Header from '../../components/Header';
-import FormContainer from './Form';
+import FormContainer from './FormContainer';
 import List from './List';
 import Footer from '../../components/Footer';
 
@@ -14,7 +14,6 @@ const savedTasks = JSON.parse(localStorage.getItem('tasks'));
 const savedChecks = JSON.parse(localStorage.getItem('checkedItems'));
 
 const initialState = {
-  show: 'all',
   formInputClass: 'form-control',
   taskText: '',
   tasks: !savedTasks ? [] : savedTasks,
@@ -183,7 +182,6 @@ class HomePage extends React.Component {
 
   render() {
     const {
-      show,
       tasks,
       taskText,
       checkedItems,
@@ -203,7 +201,6 @@ class HomePage extends React.Component {
           changeColor={ changeColor }
         />
         <ClearModalContainer
-          show={ show }
           clearModal={ clearModal }
           handleClear={ this.handleClear }
           tasks={ tasks }
@@ -218,7 +215,6 @@ class HomePage extends React.Component {
         </Header>
         <HomeMainS>
           <FormContainer
-            show={ show }
             taskText={ taskText }
             formInputClass={ formInputClass }
             mainInputFocus={ mainInputFocus }
@@ -230,7 +226,6 @@ class HomePage extends React.Component {
             handleRemoveFocus={ this.handleRemoveFocus }
           />
           <List
-            show={ show }
             tasks={ tasks }
             checkedItems={ checkedItems }
             handleEditBack={ this.handleEditBack }

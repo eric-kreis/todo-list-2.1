@@ -22,22 +22,22 @@ export const SectionFormS = styled.section`
 `;
 
 export const FormShowButtonS = styled.button`
-  background-color: ${({ theme, show, value }) => (
-    (show === value)
+  background-color: ${({ theme, display, value }) => (
+    (display === value)
     ? lighten(0.1, theme.colors.primary)
     : transparentize(0.4, theme.colors.primary)
   )};
 
-  box-shadow: 1px 1px 2px ${({ theme, show, value }) => (
-    (show === value)
+  box-shadow: 1px 1px 2px ${({ theme, display, value }) => (
+    (display === value)
     ? theme.colors.primary
     : transparentize(0.4, theme.colors.primary)
   )};
 
   border: 0;
   border-radius: 2px;
-  color: ${({ theme, show, value }) => (
-    (show === value)
+  color: ${({ theme, display, value }) => (
+    (display === value)
     ? saturate(0.2, theme.colors.text)
     : shade(0.05, theme.colors.text)
   )};
