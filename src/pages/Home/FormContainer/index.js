@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Add, Trash } from '../../../icons';
 
-import displayTasks from '../../../redux/actions/displayTasks';
+import toggleFocus from '../../../redux/reducers/formInput/actions/toggleFocus';
+import controlFormClass from '../../../redux/reducers/formInput/actions/controlFormClass';
+import displayTasks from '../../../redux/reducers/changeDisplay/actions/displayTasks';
+import addItem from '../../../redux/reducers/listState/actions/addItem';
 
 import FormInput from './FormInput';
 import {
@@ -14,41 +17,43 @@ import {
 import IconButtonS from '../../../styles/IconButtonS.styles';
 
 class FormContainer extends Component {
+  constructor() {
+    super();
+    this.addTaskRule = this.addTaskRule.bind(this);
+  }
+
+  addTaskRule() {
+    const {
+      taskText,
+      controlFormClass,
+      toggleFocus,
+      addItem,
+    } = this.props;
+
+    if (!taskText.trim()) {
+      controlFormClass(false);
+    } else {
+      addItem();
+      controlFormClass(true);
+    }
+    toggleFocus(true);
+  }
+
   render() {
     const {
       display,
       displayTasks,
-      taskText,
-      formInputClass,
-      mainInputFocus,
-      formClassToggle,
-      handleAddTask,
-      handleChange,
       handleToggleModal,
-      handleFocus,
-      handleRemoveFocus,
     } = this.props;
 
     return (
       <MainFormS onSubmit={ (e) => e.preventDefault() }>
         <SectionFormS>
-          <FormInput
-            name="taskText"
-            value={ taskText }
-            formInputClass={ formInputClass }
-            mainInputFocus={ mainInputFocus }
-            handleChange={ handleChange }
-            formClassToggle={ formClassToggle }
-            handleFocus={ handleFocus }
-            handleRemoveFocus={ handleRemoveFocus }
-          />
+          <FormInput />
           <IconButtonS
             add
             large
-            onClick={ () => {
-              handleAddTask();
-              handleFocus();
-            } }
+            onClick={ this.addTaskRule }
           >
             <Add title="Adicionar tarefa"/>
           </IconButtonS>
@@ -93,9 +98,17 @@ class FormContainer extends Component {
   }
 }
 
-const mapStateToProps = ({ changeDisplay }) => ({ display: changeDisplay.display });
+const mapStateToProps = ({ changeDisplay, listState }) => ({
+  display: changeDisplay.display,
+  taskText: listState.taskText,
+});
 
-const mapDispatchToProps = { displayTasks };
+const mapDispatchToProps = {
+  displayTasks,
+  toggleFocus,
+  controlFormClass,
+  addItem
+};
 
 FormContainer.propTypes = {
   display: PropTypes.string.isRequired,

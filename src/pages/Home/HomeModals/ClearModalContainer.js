@@ -2,15 +2,40 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import clearAll from '../../../redux/reducers/listState/actions/clearAll';
+import clearToDo from '../../../redux/reducers/listState/actions/clearToDo';
+import clearDone from '../../../redux/reducers/listState/actions/clearDone';
+
 import ConfirmModal from './ConfirmModal';
 class ClearModalContainer extends Component {
+  constructor() {
+    super();
+    this.handleClear = this.handleClear.bind(this);
+  }
+
+  handleClear() {
+    const {
+      display,
+      clearAll,
+      clearToDo,
+      clearDone,
+    } = this.props;
+
+    if (display === 'toDo'){
+      clearToDo();
+    } else if (display === 'completed') {
+      clearDone();
+    } else {
+      clearAll();
+    }
+  }
+
   render() {
     const {
       display,
       tasks,
       checkedItems,
       clearModal,
-      handleClear,
       handleToggleModal,
     } = this.props;
 
@@ -36,7 +61,7 @@ class ClearModalContainer extends Component {
       <ConfirmModal
         confirmButtons={ confirmButtons }
         openModal={ clearModal }
-        handleConfirm={ () => { handleClear(); handleToggleModal('clear'); } }
+        handleConfirm={ () => { this.handleClear(); handleToggleModal('clear'); } }
         handleCancel={ () => { handleToggleModal('clear'); } }
       >
         { message }
@@ -45,7 +70,13 @@ class ClearModalContainer extends Component {
   }
 }
 
-const mapStateToProps = ({ changeDisplay }) => ({ display: changeDisplay.display }); 
+const mapStateToProps = ({ changeDisplay, listState }) => ({
+  display: changeDisplay.display,
+  tasks: listState.tasks,
+  checkedItems: listState.checkedItems,
+});
+
+const mapDispatchToProps = { clearAll, clearToDo, clearDone };
 
 ClearModalContainer.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -56,4 +87,4 @@ ClearModalContainer.propTypes = {
   handleToggleModal: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, null)(ClearModalContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ClearModalContainer);

@@ -1,4 +1,4 @@
-import { DISPLAY_TASKS } from '../actions/displayTasks';
+import { DISPLAY_TASKS } from './actions/displayTasks';
 
 const INITIAL_STATE = {
   display: 'all',

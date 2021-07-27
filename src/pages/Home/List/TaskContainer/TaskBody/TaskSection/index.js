@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { TaskLabelS } from './styles';
+
+import toggleCheck from '../../../../../../redux/reducers/listState/actions/toggleCheck';
 
 class TaskSection extends Component {
   constructor() {
@@ -20,7 +23,7 @@ class TaskSection extends Component {
     const {
       id,
       checkedItems,
-      handleToggleCheck,
+      toggleCheck,
       children,
     } = this.props;
 
@@ -33,13 +36,19 @@ class TaskSection extends Component {
           ref={ this.check }
           type="checkbox"
           value={ id }
-          onChange={ handleToggleCheck }
+          onChange={ toggleCheck }
         />
         <span>{ children }</span>
       </TaskLabelS>
     );
   }
 }
+
+const mapStateToProps = ({ listState }) => ({
+  checkedItems: listState.checkedItems,
+});
+
+const mapDispatchToProps = { toggleCheck };
 
 TaskSection.propTypes = {
   id: PropTypes.number.isRequired,
@@ -48,4 +57,4 @@ TaskSection.propTypes = {
   handleToggleCheck: PropTypes.func.isRequired,
 };
 
-export default TaskSection;
+export default connect(mapStateToProps, mapDispatchToProps)(TaskSection);

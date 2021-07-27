@@ -11,9 +11,6 @@ class List extends React.Component {
       display,
       tasks,
       checkedItems,
-      handleEditBack,
-      handleRemoveItem,
-      handleToggleCheck,
     } = this.props;
 
     let filtredTasks = tasks;
@@ -33,9 +30,6 @@ class List extends React.Component {
               id={ id }
               text={ text }
               checkedItems={ checkedItems }
-              handleEditBack={ handleEditBack }
-              handleRemoveItem={ handleRemoveItem }
-              handleToggleCheck={ handleToggleCheck }
             />
           )
         }
@@ -44,7 +38,11 @@ class List extends React.Component {
   }
 }
 
-const mapStateToProps = ({ changeDisplay }) => ({ display: changeDisplay.display });
+const mapStateToProps = ({ changeDisplay, listState }) => ({
+  display: changeDisplay.display,
+  tasks: listState.tasks,
+  checkedItems: listState.checkedItems,
+});
 
 List.propTypes = {
   display: PropTypes.string.isRequired,

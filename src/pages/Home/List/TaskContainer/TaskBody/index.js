@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import removeItem from '../../../../../redux/reducers/listState/actions/removeItem';
 
 import TaskSection from './TaskSection';
 import { TaskBodyS, TaskButtonS } from './styles';
@@ -11,18 +14,14 @@ class TaskBody extends Component {
     const {
       id,
       text,
-      checkedItems,
-      handleToggleCheck,
+      removeItem,
       handleToggleEdit,
-      handleRemoveItem,
     } = this.props;
 
     return (
       <TaskBodyS>
         <TaskSection
           id={ id }
-          checkedItems={ checkedItems }
-          handleToggleCheck={ handleToggleCheck }
         >
           { text }
         </TaskSection>
@@ -36,7 +35,7 @@ class TaskBody extends Component {
           <IconButtonS
             medium
             clear
-            onClick={ () => { handleRemoveItem(id); } }
+            onClick={ () => { removeItem(id); } }
           >
             <Remove title="Remover tarefa" />
           </IconButtonS>
@@ -46,13 +45,14 @@ class TaskBody extends Component {
   }
 }
 
+const mapDispatchToProps = { removeItem };
+
 TaskBody.propTypes = {
   id: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
-  checkedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
   handleToggleCheck: PropTypes.func.isRequired,
   handleToggleEdit: PropTypes.func.isRequired,
   handleRemoveItem: PropTypes.func.isRequired,
 };
 
-export default TaskBody;
+export default connect(null, mapDispatchToProps)(TaskBody);
