@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Add, Trash } from '../icons/Icons';
+import { Add, Trash } from '../../../icons';
 
 import FormInput from './FormInput';
 import {
-  MainForm,
-  SectionForm,
-  IconsButtons,
-  FormShowButtons,
-} from '../styles/styledComponents'
+  MainFormS,
+  SectionFormS,
+  FormShowButtonS,
+} from './styles';
+import IconButtonS from '../../../styles/IconButtonS.styles';
 
 class FormContainer extends Component {
   render() {
@@ -26,8 +26,8 @@ class FormContainer extends Component {
     } = this.props;
 
     return (
-      <MainForm onSubmit={ (e) => e.preventDefault() }>
-        <SectionForm>
+      <MainFormS onSubmit={ (e) => e.preventDefault() }>
+        <SectionFormS>
           <FormInput
             name="taskText"
             value={ taskText }
@@ -38,7 +38,7 @@ class FormContainer extends Component {
             handleFocus={ handleFocus }
             handleRemoveFocus={ handleRemoveFocus }
           />
-          <IconsButtons
+          <IconButtonS
             add
             large
             onClick={ () => {
@@ -47,8 +47,8 @@ class FormContainer extends Component {
             } }
           >
             <Add title="Adicionar tarefa"/>
-          </IconsButtons>
-          <IconsButtons
+          </IconButtonS>
+          <IconButtonS
             clear
             large
             onClick={ () => {
@@ -56,35 +56,35 @@ class FormContainer extends Component {
             } }
           >
             <Trash title="Remover Tarefas" />
-          </IconsButtons>
-        </SectionForm>
-        <SectionForm>
-          <FormShowButtons
+          </IconButtonS>
+        </SectionFormS>
+        <SectionFormS>
+          <FormShowButtonS
             name="show"
             value="all"
             onClick={ handleChange }
             show={ show }
           >
             Todas
-          </FormShowButtons>
-          <FormShowButtons
+          </FormShowButtonS>
+          <FormShowButtonS
             name="show"
             value="toDo"
             onClick={ handleChange }
             show={ show }
           >
             Pendentes
-          </FormShowButtons>
-          <FormShowButtons
+          </FormShowButtonS>
+          <FormShowButtonS
             name="show"
             value="completed"
             onClick={ handleChange }
             show={ show }
           >
             Concluídas
-          </FormShowButtons>
-        </SectionForm>
-      </MainForm>
+          </FormShowButtonS>
+        </SectionFormS>
+      </MainFormS>
     )
   }
 }

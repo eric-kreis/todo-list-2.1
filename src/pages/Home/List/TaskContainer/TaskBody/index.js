@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import TaskSection from './TaskSection';
-import { TaskBody, TaskButtons, IconsButtons } from '../styles/styledComponents';
-import { Edit, Remove } from '../icons/Icons';
+import { TaskBodyS, TaskButtonS } from './styles';
+import IconButtonS from '../../../../../styles/IconButtonS.styles';
+import { Edit, Remove } from '../../../../../icons';
 
-class TaskMain extends Component {
+class TaskBody extends Component {
   render() {
     const {
       id,
@@ -17,7 +18,7 @@ class TaskMain extends Component {
     } = this.props;
 
     return (
-      <TaskBody>
+      <TaskBodyS>
         <TaskSection
           id={ id }
           checkedItems={ checkedItems }
@@ -25,27 +26,27 @@ class TaskMain extends Component {
         >
           { text }
         </TaskSection>
-        <TaskButtons>
-          <IconsButtons
+        <TaskButtonS>
+          <IconButtonS
             medium
             onClick={ () => { handleToggleEdit(); } }
           >
             <Edit title="Editar tarefa" />
-          </IconsButtons>
-          <IconsButtons
+          </IconButtonS>
+          <IconButtonS
             medium
             clear
             onClick={ () => { handleRemoveItem(id); } }
           >
             <Remove title="Remover tarefa" />
-          </IconsButtons>
-        </TaskButtons>
-      </TaskBody>
+          </IconButtonS>
+        </TaskButtonS>
+      </TaskBodyS>
     );
   }
 }
 
-TaskMain.propTypes = {
+TaskBody.propTypes = {
   id: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
   checkedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
@@ -54,4 +55,4 @@ TaskMain.propTypes = {
   handleRemoveItem: PropTypes.func.isRequired,
 };
 
-export default TaskMain;
+export default TaskBody;

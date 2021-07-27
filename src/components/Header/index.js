@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import Switch from 'react-switch';
 import { withTheme } from 'styled-components';
-import Logo from '../icons/Logo';
 
-import { PageHeader } from '../styles/styledComponents';
-import { Sun, Moon } from '../icons/Icons';
-import { ThemeButton } from '../styles/styledComponents';
-import { ColorPalette } from '../icons/Icons';
-
+import Logo from '../../assets/Logo';
+import { PageHeaderS, ThemeButtonS } from './styles';
+import { Sun, Moon, ColorPalette } from '../../icons';
 
 class Header extends Component {
   render() {
@@ -21,7 +18,7 @@ class Header extends Component {
     const { title, colors } = theme;
 
     return (
-      <PageHeader>
+      <PageHeaderS>
         <Logo />
         { children }
         <div>
@@ -36,11 +33,11 @@ class Header extends Component {
             offColor={ colors.background }
             onColor={ colors.background }
           />
-          <ThemeButton onClick={ () => { handleToggleModal('color'); } }>
+          <ThemeButtonS onClick={ () => { handleToggleModal('color'); } }>
             <ColorPalette title="Mudar cor" />
-          </ThemeButton>
+          </ThemeButtonS>
         </div>
-      </PageHeader>
+      </PageHeaderS>
     );
   }
 }

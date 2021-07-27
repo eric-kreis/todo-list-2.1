@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 
 import EditSection from './EditSection';
-import TaskMain from './TaskMain';
-import { TaskItem } from '../styles/styledComponents';
+import TaskBody from './TaskBody';
+import { ItemS } from './styles';
 
 class TaskContainer extends React.Component {
   constructor(props) {
@@ -52,10 +52,10 @@ class TaskContainer extends React.Component {
     } = this.props;
 
     return (
-      <TaskItem>
+      <ItemS>
         { !edit
           ? (
-            <TaskMain
+            <TaskBody
               id={ id }
               text={ text }
               checkedItems={ checkedItems }
@@ -75,7 +75,7 @@ class TaskContainer extends React.Component {
             />
           )
         }
-      </TaskItem>
+      </ItemS>
     );
   }
 }

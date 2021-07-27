@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { ModalWindow, Modal } from '../styles/styledComponents';
+import { ModalWindowS, ModalS } from './styles';
 class ConfirmModal extends Component {
   render() {
     const {
@@ -12,8 +12,8 @@ class ConfirmModal extends Component {
     } = this.props;
     return (openModal
       && (
-        <ModalWindow>
-          <Modal>
+        <ModalWindowS>
+          <ModalS>
             <h4>{ children }</h4>
             { confirmButtons
             ? (
@@ -27,8 +27,8 @@ class ConfirmModal extends Component {
                 <button onClick={ handleCancel } >VOLTAR</button>
               </div>
             )}
-          </Modal>
-        </ModalWindow>
+          </ModalS>
+        </ModalWindowS>
       )
     );
   }

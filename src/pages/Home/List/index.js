@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { TaskList } from '../styles/styledComponents';
+import { ListS } from './styles';
 import TaskContainer from './TaskContainer';
 
-class Tasks extends React.Component {
+class List extends React.Component {
   render() {
     const {
       show,
@@ -24,7 +24,7 @@ class Tasks extends React.Component {
     }
 
     return (
-      <TaskList>
+      <ListS>
         {
           filtredTasks.map(({ id, text }) =>
             <TaskContainer
@@ -38,12 +38,12 @@ class Tasks extends React.Component {
             />
           )
         }
-      </TaskList>
+      </ListS>
     );
   }
 }
 
-Tasks.propTypes = {
+List.propTypes = {
   show: PropTypes.string.isRequired,
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
   checkedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
@@ -52,4 +52,4 @@ Tasks.propTypes = {
   handleToggleCheck: PropTypes.func.isRequired,
 };
 
-export default Tasks;
+export default List;
