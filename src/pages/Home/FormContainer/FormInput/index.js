@@ -10,8 +10,6 @@ import toggleFormClass from '../../../../redux/reducers/formInput/actions/toggle
 class FormInput extends Component {
   constructor() {
     super();
-    this.enableAdd = this.enableAdd.bind(this);
-
     this.input = React.createRef();
   }
 
@@ -22,23 +20,14 @@ class FormInput extends Component {
     }
   }
 
-  enableAdd(taskText) {
-    const { possibleToAdd } = this.props;
-    if (!taskText.trim()) {
-      possibleToAdd(false);
-    } else {
-      possibleToAdd(true);
-    }
-  }
-
   render() {
     const {
       taskText,
       formInputClass,
-      changeText,
-      toggleFocus,
-      controlFormClass,
-      toggleFormClass,
+      changeText: handleChangeText,
+      toggleFormClass: handleToggleFormClass,
+      toggleFocus: handleToggleFocus,
+      controlFormClass: handleControlFormClass,
     } = this.props;
 
     let labelText = 'Escreva sua tarefa aqui';
@@ -56,11 +45,11 @@ class FormInput extends Component {
           type="text"
           name="taskText"
           value={ taskText }
-          onFocus={ () => { toggleFocus(true); } }
-          onBlur={ () => { toggleFocus(false); controlFormClass(); } }
+          onFocus={ () => { handleToggleFocus(true); } }
+          onBlur={ () => { handleToggleFocus(false); handleControlFormClass(); } }
           onChange={ (e) => {
-            changeText(e);
-            toggleFormClass(e);
+            handleChangeText(e);
+            handleToggleFormClass(e);
           } }
           placeholder="placeholder"
           autoComplete="off"
@@ -79,10 +68,10 @@ const mapStateToProps = ({ formInput, listState }) => ({
 });
 
 const mapDispatchToProps = {
+  changeText,
   toggleFormClass,
   toggleFocus,
   controlFormClass,
-  changeText,
 };
 
 FormInput.propTypes = {

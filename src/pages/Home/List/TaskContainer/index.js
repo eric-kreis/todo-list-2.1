@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
 import EditSection from './EditSection';
 import TaskBody from './TaskBody';
 import { ItemS } from './styles';
@@ -74,7 +73,6 @@ class TaskContainer extends React.Component {
 TaskContainer.propTypes = {
   id: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
-  checkedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
 export default TaskContainer;

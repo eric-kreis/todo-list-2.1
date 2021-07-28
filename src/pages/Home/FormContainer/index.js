@@ -25,24 +25,23 @@ class FormContainer extends Component {
   addTaskRule() {
     const {
       taskText,
-      controlFormClass,
-      toggleFocus,
-      addItem,
+      controlFormClass: handleControlFormClass,
+      toggleFocus: handleToggleFocus,
+      addItem: handleAddItem,
     } = this.props;
 
     if (!taskText.trim()) {
-      controlFormClass(false);
+      handleControlFormClass(false);
     } else {
-      addItem();
-      controlFormClass(true);
+      handleAddItem();
     }
-    toggleFocus(true);
+    handleToggleFocus(true);
   }
 
   render() {
     const {
       display,
-      displayTasks,
+      displayTasks: handleDisplayTasks,
       handleToggleModal,
     } = this.props;
 
@@ -71,7 +70,7 @@ class FormContainer extends Component {
           <FormShowButtonS
             name="display"
             value="all"
-            onClick={ displayTasks }
+            onClick={ handleDisplayTasks }
             display={ display }
           >
             Todas
@@ -79,7 +78,7 @@ class FormContainer extends Component {
           <FormShowButtonS
             name="display"
             value="toDo"
-            onClick={ displayTasks }
+            onClick={ handleDisplayTasks }
             display={ display }
           >
             Pendentes
@@ -87,7 +86,7 @@ class FormContainer extends Component {
           <FormShowButtonS
             name="display"
             value="completed"
-            onClick={ displayTasks }
+            onClick={ handleDisplayTasks }
             display={ display }
           >
             Concluídas

@@ -25,7 +25,7 @@ class EditSection extends Component {
     const {
       id,
       editText,
-      editBack,
+      editBack: handleEditBack,
       handleToggleEdit,
       handleEditing,
     } = this.props;
@@ -47,12 +47,12 @@ class EditSection extends Component {
           onKeyUp={ (e) => {
             if (e.key === 'Enter') {
               handleToggleEdit();
-              editBack(editText, id);
+              handleEditBack(editText, id);
             }
           } }
           onBlur={ () => {
             handleToggleEdit();
-            editBack(editText, id);
+            handleEditBack(editText, id);
           } }
           maxLength={ 120 }
         />
@@ -60,7 +60,7 @@ class EditSection extends Component {
         <ReturnButton
           onClick={ () => {
             handleToggleEdit();
-            editBack(editText, id);
+            handleEditBack(editText, id);
           } }
         >
           <Exit title="Voltar" />

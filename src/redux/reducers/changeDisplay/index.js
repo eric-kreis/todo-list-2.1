@@ -6,10 +6,10 @@ const INITIAL_STATE = {
 
 const changeDisplay = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case DISPLAY_TASKS:
-      return { ...state, [action.name]: action.value }
-    default:
-      return state;
+  case DISPLAY_TASKS:
+    return { ...state, [action.name]: action.value }
+  default:
+    return state;
   }
 };
 

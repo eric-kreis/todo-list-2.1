@@ -23,7 +23,7 @@ class TaskSection extends Component {
     const {
       id,
       checkedItems,
-      toggleCheck,
+      toggleCheck: handleToggleCheck,
       children,
     } = this.props;
 
@@ -36,7 +36,7 @@ class TaskSection extends Component {
           ref={ this.check }
           type="checkbox"
           value={ id }
-          onChange={ toggleCheck }
+          onChange={ handleToggleCheck }
         />
         <span>{ children }</span>
       </TaskLabelS>

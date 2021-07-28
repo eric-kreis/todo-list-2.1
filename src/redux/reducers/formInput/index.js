@@ -9,22 +9,22 @@ const INITIAL_STATE = {
 
 const changeFormClass = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case FORM_CLASS:
-      if (action.value.trim()) {
-        return { ...state, formInputClass: 'form-control' };
-      }
-      return { ...state, formInputClass: 'form-control is-invalid' };
+  case FORM_CLASS:
+    if (action.value.trim()) {
+      return { ...state, formInputClass: 'form-control' };
+    }
+    return { ...state, formInputClass: 'form-control is-invalid' };
 
-    case RESET_CLASS:
-      return action.valid
-        ? { ...state, formInputClass: 'form-control' }
-        : {...state, formInputClass: 'form-control is-invalid'}
-  
-    case FOCUS:
-      return { ...state, formFocus: action.formFocus };
+  case RESET_CLASS:
+    return action.valid
+      ? { ...state, formInputClass: 'form-control' }
+      : {...state, formInputClass: 'form-control is-invalid'}
 
-    default:
-      return state;
+  case FOCUS:
+    return { ...state, formFocus: action.formFocus };
+
+  default:
+    return state;
   }
 }
 

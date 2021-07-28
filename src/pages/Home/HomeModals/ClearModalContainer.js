@@ -16,14 +16,19 @@ class ClearModalContainer extends Component {
   }
 
   handleClear() {
-    const { display, clearAll, clearToDo, clearDone } = this.props;
-    if (display === 'toDo'){ clearToDo(); }
-    else if (display === 'completed') { clearDone(); }
-    else { clearAll(); }
+    const {
+      display,
+      clearAll: handleClearAll,
+      clearToDo: handleCLearToDo,
+      clearDone: handleClearDone,
+    } = this.props;
+    if (display === 'toDo'){ handleCLearToDo(); }
+    else if (display === 'completed') { handleClearDone(); }
+    else { handleClearAll(); }
   }
 
   displayMessage() {
-    const { display, tasks,checkedItems } = this.props;
+    const { display, tasks, checkedItems } = this.props;
 
     let typeMessage = 'todas as tarefas' ;
     let confirmButtons = true;

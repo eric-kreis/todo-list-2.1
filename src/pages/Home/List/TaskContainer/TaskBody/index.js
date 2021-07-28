@@ -14,7 +14,7 @@ class TaskBody extends Component {
     const {
       id,
       text,
-      removeItem,
+      removeItem: handleRemoveItem,
       handleToggleEdit,
     } = this.props;
 
@@ -35,7 +35,7 @@ class TaskBody extends Component {
           <IconButtonS
             medium
             clear
-            onClick={ () => { removeItem(id); } }
+            onClick={ () => { handleRemoveItem(id); } }
           >
             <Remove title="Remover tarefa" />
           </IconButtonS>
