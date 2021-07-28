@@ -10,8 +10,6 @@ import toggleFormClass from '../../../../redux/reducers/formInput/actions/toggle
 class FormInput extends Component {
   constructor() {
     super();
-    this.enableAdd = this.enableAdd.bind(this);
-
     this.input = React.createRef();
   }
 
@@ -22,24 +20,14 @@ class FormInput extends Component {
     }
   }
 
-  enableAdd(taskText) {
-    const { possibleToAdd } = this.props;
-    if (!taskText.trim()) {
-      possibleToAdd(false);
-    } else {
-      possibleToAdd(true);
-    }
-  }
-
   render() {
     const {
-      type,
       taskText,
       formInputClass,
-      changeText,
-      toggleFocus,
-      controlFormClass,
-      toggleFormClass,
+      changeText: handleChangeText,
+      toggleFormClass: handleToggleFormClass,
+      toggleFocus: handleToggleFocus,
+      controlFormClass: handleControlFormClass,
     } = this.props;
 
     let labelText = 'Escreva sua tarefa aqui';
@@ -54,14 +42,14 @@ class FormInput extends Component {
           className={ formInputClass }
           ref={ this.input }
           id="form-input"
-          type={ type }
+          type="text"
           name="taskText"
           value={ taskText }
-          onFocus={ () => { toggleFocus(true); } }
-          onBlur={ () => { toggleFocus(false); controlFormClass(); } }
+          onFocus={ () => { handleToggleFocus(true); } }
+          onBlur={ () => { handleToggleFocus(false); handleControlFormClass(); } }
           onChange={ (e) => {
-            changeText(e);
-            toggleFormClass(e);
+            handleChangeText(e);
+            handleToggleFormClass(e);
           } }
           placeholder="placeholder"
           autoComplete="off"
@@ -80,25 +68,20 @@ const mapStateToProps = ({ formInput, listState }) => ({
 });
 
 const mapDispatchToProps = {
+  changeText,
   toggleFormClass,
   toggleFocus,
   controlFormClass,
-  changeText,
-};
-
-FormInput.defaultProps = {
-  type: 'text',
 };
 
 FormInput.propTypes = {
-  type: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  focus: PropTypes.bool.isRequired,
-  toggleFocus: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired,
-  toggleFormClass: PropTypes.func.isRequired,
   formInputClass: PropTypes.string.isRequired,
+  formFocus: PropTypes.bool.isRequired,
+  taskText: PropTypes.string.isRequired,
+  toggleFocus: PropTypes.func.isRequired,
+  changeText: PropTypes.func.isRequired,
+  controlFormClass: PropTypes.func.isRequired,
+  toggleFormClass: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormInput);

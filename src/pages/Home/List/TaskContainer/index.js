@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
 import EditSection from './EditSection';
 import TaskBody from './TaskBody';
 import { ItemS } from './styles';
@@ -39,7 +38,7 @@ class TaskContainer extends React.Component {
   }
 
   render() {
-    const { edit, editText } = this.state
+    const { edit, editText } = this.state;
 
     const {
       id,
@@ -74,10 +73,6 @@ class TaskContainer extends React.Component {
 TaskContainer.propTypes = {
   id: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
-  checkedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
-  handleEditBack: PropTypes.func.isRequired,
-  handleRemoveItem: PropTypes.func.isRequired,
-  handleToggleCheck: PropTypes.func.isRequired,
 };
 
 export default TaskContainer;

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import editBack from '../../../../../redux/reducers/listState/actions/editBack';
 
-import { Exit } from '../../../../../icons';
+import { Exit } from '../../../../../assets/icons';
 import { EditInputSection, ReturnButton } from './styles';
 
 class EditSection extends Component {
@@ -25,7 +25,7 @@ class EditSection extends Component {
     const {
       id,
       editText,
-      editBack,
+      editBack: handleEditBack,
       handleToggleEdit,
       handleEditing,
     } = this.props;
@@ -47,12 +47,12 @@ class EditSection extends Component {
           onKeyUp={ (e) => {
             if (e.key === 'Enter') {
               handleToggleEdit();
-              editBack(editText, id);
+              handleEditBack(editText, id);
             }
           } }
           onBlur={ () => {
             handleToggleEdit();
-            editBack(editText, id);
+            handleEditBack(editText, id);
           } }
           maxLength={ 120 }
         />
@@ -60,7 +60,7 @@ class EditSection extends Component {
         <ReturnButton
           onClick={ () => {
             handleToggleEdit();
-            editBack(editText, id);
+            handleEditBack(editText, id);
           } }
         >
           <Exit title="Voltar" />
@@ -75,9 +75,9 @@ const mapDispatchToProps = { editBack };
 EditSection.propTypes = {
   id: PropTypes.number.isRequired,
   editText: PropTypes.string.isRequired,
+  editBack: PropTypes.func.isRequired,
   handleToggleEdit: PropTypes.func.isRequired,
   handleEditing: PropTypes.func.isRequired,
-  handleEditBack: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(EditSection);

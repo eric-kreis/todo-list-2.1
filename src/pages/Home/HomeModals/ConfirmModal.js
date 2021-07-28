@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import { ModalWindowS, ModalS } from './styles';
 class ConfirmModal extends Component {
@@ -33,5 +34,13 @@ class ConfirmModal extends Component {
     );
   }
 }
+
+ConfirmModal.propTypes = {
+  openModal: PropTypes.bool.isRequired,
+  handleConfirm: PropTypes.func.isRequired,
+  handleCancel: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+  confirmButtons: PropTypes.bool.isRequired,
+};
 
 export default ConfirmModal;

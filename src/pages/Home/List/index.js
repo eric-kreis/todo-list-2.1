@@ -6,12 +6,13 @@ import { ListS } from './styles';
 import TaskContainer from './TaskContainer';
 
 class List extends React.Component {
-  render() {
-    const {
-      display,
-      tasks,
-      checkedItems,
-    } = this.props;
+  constructor() {
+    super();
+    this.filterTasks = this.filterTasks.bind(this);
+  }
+
+  filterTasks() {
+    const { display, tasks, checkedItems } = this.props;
 
     let filtredTasks = tasks;
     if (display === 'completed') {
@@ -20,7 +21,11 @@ class List extends React.Component {
     if (display === 'toDo') {
       filtredTasks = tasks.filter(({ id }) => !checkedItems.includes(id));
     }
+    return filtredTasks;
+  }
 
+  render() {
+    const filtredTasks = this.filterTasks();
     return (
       <ListS>
         {
@@ -29,7 +34,6 @@ class List extends React.Component {
               key={ id }
               id={ id }
               text={ text }
-              checkedItems={ checkedItems }
             />
           )
         }
@@ -48,9 +52,6 @@ List.propTypes = {
   display: PropTypes.string.isRequired,
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
   checkedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
-  handleEditBack: PropTypes.func.isRequired,
-  handleRemoveItem: PropTypes.func.isRequired,
-  handleToggleCheck: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, null)(List);
+export default connect(mapStateToProps)(List);

@@ -23,7 +23,7 @@ class TaskSection extends Component {
     const {
       id,
       checkedItems,
-      toggleCheck,
+      toggleCheck: handleToggleCheck,
       children,
     } = this.props;
 
@@ -36,7 +36,7 @@ class TaskSection extends Component {
           ref={ this.check }
           type="checkbox"
           value={ id }
-          onChange={ toggleCheck }
+          onChange={ handleToggleCheck }
         />
         <span>{ children }</span>
       </TaskLabelS>
@@ -54,7 +54,7 @@ TaskSection.propTypes = {
   id: PropTypes.number.isRequired,
   checkedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
   children: PropTypes.node.isRequired,
-  handleToggleCheck: PropTypes.func.isRequired,
+  toggleCheck: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskSection);
