@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import ColorModal from './HomeModals/ColorModal';
 import ClearModalContainer from './HomeModals/ClearModalContainer';
@@ -31,25 +30,21 @@ class HomePage extends React.Component {
         ({ colorModal: !prevState.colorModal }));
     }
   }
-  
 
   render() {
     const { clearModal, colorModal } = this.state;
-    const { toggleTheme, changeColor } = this.props;
 
     return (
       <section>
         <ColorModal
           handleToggleModal={ this.handleToggleModal }
           colorModal={ colorModal }
-          changeColor={ changeColor }
         />
         <ClearModalContainer
           clearModal={ clearModal }
           handleToggleModal={ this.handleToggleModal }
         />
         <Header
-          toggleTheme={ toggleTheme }
           handleToggleModal={ this.handleToggleModal }
         >
           <h1>LISTA DE TAREFAS</h1>
@@ -65,10 +60,5 @@ class HomePage extends React.Component {
     );
   }
 }
-
-HomePage.propTypes = {
-  toggleTheme: PropTypes.func.isRequired,
-  changeColor: PropTypes.func.isRequired,
-};
 
 export default HomePage;

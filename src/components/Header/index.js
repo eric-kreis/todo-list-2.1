@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Switch from 'react-switch';
 import { withTheme } from 'styled-components';
+import toggleTheme from '../../redux/reducers/changeTheme/actions/toggleTheme';
 
 import Logo from '../../assets/Logo';
 import { PageHeaderS, ThemeButtonS } from './styles';
@@ -12,7 +14,7 @@ class Header extends Component {
     const {
       theme,
       children,
-      toggleTheme,
+      toggleTheme: handleToggleTheme,
       handleToggleModal,
     } = this.props;
 
@@ -25,7 +27,7 @@ class Header extends Component {
         <div>
           <Switch
             checked={ title === 'dark' }
-            onChange={ toggleTheme }
+            onChange={ handleToggleTheme }
             checkedIcon={ <Sun className="sun"/> }
             uncheckedIcon={ <Moon className="moon"/> }
             height={ 18 }
@@ -55,4 +57,6 @@ Header.propTypes = {
   handleToggleModal: PropTypes.func.isRequired,
 }
 
-export default withTheme(Header);
+const mapDispatchToProps = { toggleTheme };
+
+export default connect(null, mapDispatchToProps)(withTheme(Header));
