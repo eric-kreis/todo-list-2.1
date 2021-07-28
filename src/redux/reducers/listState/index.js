@@ -1,3 +1,4 @@
+import { DISPLAY_TASKS } from './actions/displayTasks';
 import { TASK } from './actions/changeText';
 import { ADD_ITEM } from './actions/addItem';
 import { REMOVE_ITEM } from './actions/removeItem';
@@ -12,12 +13,16 @@ const savedChecks = JSON.parse(localStorage.getItem('checkedItems'));
 
 const INITIAL_STATE = {
   taskText: '',
+  display: 'all',
   tasks: !savedTasks ? [] : savedTasks,
-  checkedItems: !savedChecks ? [] : savedChecks, 
+  checkedItems: !savedChecks ? [] : savedChecks,
 };
 
 const listState = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+  case DISPLAY_TASKS:
+    return { ...state, [action.name]: action.value };
+
   case TASK:
     return { ...state, taskText: action.value };
 

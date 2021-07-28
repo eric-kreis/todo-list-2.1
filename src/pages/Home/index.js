@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import ColorModal from './HomeModals/ColorModal';
 import ClearModalContainer from './HomeModals/ClearModalContainer';
@@ -8,7 +8,7 @@ import List from './List';
 import Footer from '../../components/Footer';
 
 import  HomeMainS from './styles';
-class HomePage extends React.Component {
+class HomePage extends Component {
   constructor() {
     super();
 

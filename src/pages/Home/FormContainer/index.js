@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import toggleFocus from '../../../redux/reducers/formInput/actions/toggleFocus';
 import controlFormClass from '../../../redux/reducers/formInput/actions/controlFormClass';
-import displayTasks from '../../../redux/reducers/changeDisplay/actions/displayTasks';
+import displayTasks from '../../../redux/reducers/listState/actions/displayTasks';
 import addItem from '../../../redux/reducers/listState/actions/addItem';
 
 import FormInput from './FormInput';
@@ -97,8 +97,8 @@ class FormContainer extends Component {
   }
 }
 
-const mapStateToProps = ({ changeDisplay, listState }) => ({
-  display: changeDisplay.display,
+const mapStateToProps = ({ listState }) => ({
+  display: listState.display,
   taskText: listState.taskText,
 });
 

@@ -10,6 +10,8 @@ import toggleFormClass from '../../../../redux/reducers/formInput/actions/toggle
 class FormInput extends Component {
   constructor() {
     super();
+    this.changeLabelText = this.changeLabelText.bind(this);
+
     this.input = React.createRef();
   }
 
@@ -18,6 +20,14 @@ class FormInput extends Component {
     if (formFocus) {
       this.input.current.focus();
     }
+  }
+
+  changeLabelText() {
+    const { formInputClass } = this.props;
+    if (formInputClass !== 'form-control') {
+      return 'Escreva para adicionar tarefa';
+    }
+    return 'Escreva sua tarefa aqui';
   }
 
   render() {
@@ -30,11 +40,7 @@ class FormInput extends Component {
       controlFormClass: handleControlFormClass,
     } = this.props;
 
-    let labelText = 'Escreva sua tarefa aqui';
-
-    if (formInputClass !== 'form-control') {
-      labelText = 'Este campo não pode estar vazio';
-    }
+    const labelText = this.changeLabelText();
 
     return (
       <div className="form-floating">

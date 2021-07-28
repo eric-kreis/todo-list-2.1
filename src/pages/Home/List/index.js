@@ -42,8 +42,8 @@ class List extends React.Component {
   }
 }
 
-const mapStateToProps = ({ changeDisplay, listState }) => ({
-  display: changeDisplay.display,
+const mapStateToProps = ({ listState }) => ({
+  display: listState.display,
   tasks: listState.tasks,
   checkedItems: listState.checkedItems,
 });
