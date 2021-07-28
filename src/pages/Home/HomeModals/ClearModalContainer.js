@@ -73,8 +73,8 @@ class ClearModalContainer extends Component {
   }
 }
 
-const mapStateToProps = ({ changeDisplay, listState }) => ({
-  display: changeDisplay.display,
+const mapStateToProps = ({ listState }) => ({
+  display: listState.display,
   tasks: listState.tasks,
   checkedItems: listState.checkedItems,
 });

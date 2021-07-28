@@ -5,7 +5,7 @@ export const MainFormS = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-width: 250px;
+  min-width: 310px;
 `;
 
 export const SectionFormS = styled.section`
@@ -15,7 +15,7 @@ export const SectionFormS = styled.section`
   margin-bottom: 16px;
   width: 100%;
 
-  @media(max-width: 900px) {
+  @media(max-width: 1008px) {
     flex-wrap: wrap;
     margin-bottom: 0;
   }
