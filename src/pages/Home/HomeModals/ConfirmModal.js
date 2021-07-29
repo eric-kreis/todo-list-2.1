@@ -13,19 +13,19 @@ class ConfirmModal extends Component {
     } = this.props;
     return (openModal
       && (
-        <ModalWindowS>
+        <ModalWindowS data-testid="confirm-modal">
           <ModalS>
             <h4>{ children }</h4>
             { confirmButtons
             ? (
               <div>
-                <button onClick={ handleConfirm }>SIM</button>
-                <button onClick={ handleCancel }>NÃO</button>
+                <button onClick={ handleConfirm }data-testid="confirm-btn">SIM</button>
+                <button onClick={ handleCancel }data-testid="decline-btn">NÃO</button>
               </div>
 
             ) : (
               <div>
-                <button onClick={ handleCancel } >VOLTAR</button>
+                <button onClick={ handleCancel } data-testid="return-confirm-modal">VOLTAR</button>
               </div>
             )}
           </ModalS>

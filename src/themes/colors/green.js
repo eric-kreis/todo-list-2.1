@@ -1,4 +1,4 @@
-import { shade } from "polished";
+import { shade } from 'polished';
 
 export const lightGreen = {
   title: 'light',

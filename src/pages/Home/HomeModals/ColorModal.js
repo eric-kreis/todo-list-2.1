@@ -17,7 +17,7 @@ class ColorModal extends Component {
 
     return (colorModal
       && (
-        <ModalWindowS>
+        <ModalWindowS data-testid="color-modal">
           <ColorsContainerS>
             <ColorButtonsContainerS>
               <ColorButtonS onClick={ handleChangeColor } color="#5099C6" value="blue" />
@@ -30,6 +30,7 @@ class ColorModal extends Component {
             <button
               onClick={ () => { handleToggleModal('color'); } }
               className="modal-button"
+              data-testid="return-color-modal"
             >
               VOLTAR
             </button>

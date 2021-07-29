@@ -7,7 +7,7 @@ const INITIAL_STATE = {
   formFocus: false,
 };
 
-const changeFormClass = (state = INITIAL_STATE, action) => {
+const formInput = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case FORM_CLASS:
     if (action.value.trim()) {
@@ -28,4 +28,4 @@ const changeFormClass = (state = INITIAL_STATE, action) => {
   }
 }
 
-export default changeFormClass;
+export default formInput;

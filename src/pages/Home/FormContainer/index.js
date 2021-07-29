@@ -62,6 +62,7 @@ class FormContainer extends Component {
             onClick={ () => {
               handleToggleModal('clear');
             } }
+            data-testid="clear-btn"
           >
             <Trash title="Remover Tarefas" />
           </IconButtonS>

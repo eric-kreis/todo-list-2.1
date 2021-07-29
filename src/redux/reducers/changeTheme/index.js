@@ -18,7 +18,7 @@ const changeTheme = (state = INITIAL_STATE, action) => {
     const { value } = action;
     localStorage.setItem('themeColor', value);
     localStorage.setItem('theme', JSON.stringify(colors[value][title]));
-    return {...state, themeColor: value, theme: colors[value][title] };
+    return { ...state, themeColor: value, theme: colors[value][title] };
 
   case TOGGLE_THEME:
     const { theme, themeColor } = state;
