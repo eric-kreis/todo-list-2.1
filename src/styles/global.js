@@ -5,10 +5,10 @@ import YatraOne from '../fonts/YatraOne-Regular.ttf';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
-    font-family: mountserrat400;
-    src: url(${mountserrat400});
-    font-style: normal;
     font-display: fallback;
+    font-family: mountserrat400;
+    font-style: normal;
+    src: url(${mountserrat400});
   }
 
   @font-face {
@@ -55,9 +55,9 @@ const GlobalStyle = createGlobalStyle`
     color: #212529;
     background-color: #fff;
     border-color: ${({ theme }) => theme.colors.primary};
-    outline: 0;
     box-shadow: 0 0 0 0.25rem ${({ theme }) =>
       transparentize(0.5, theme.colors.primary)};
+    outline: 0;
   }
 
   .react-switch-bg > div {
