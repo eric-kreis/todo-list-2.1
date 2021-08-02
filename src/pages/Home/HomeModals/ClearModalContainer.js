@@ -18,11 +18,11 @@ class ClearModalContainer extends Component {
   handleClear() {
     const {
       display,
-      clearAll: handleClearAll,
-      clearToDo: handleCLearToDo,
-      clearDone: handleClearDone,
+      handleClearAll,
+      handleClearToDo,
+      handleClearDone,
     } = this.props;
-    if (display === 'toDo'){ handleCLearToDo(); }
+    if (display === 'toDo'){ handleClearToDo(); }
     else if (display === 'completed') { handleClearDone(); }
     else { handleClearAll(); }
   }
@@ -79,16 +79,20 @@ const mapStateToProps = ({ listState }) => ({
   checkedItems: listState.checkedItems,
 });
 
-const mapDispatchToProps = { clearAll, clearToDo, clearDone };
+const mapDispatchToProps = (dispatch) => ({
+  handleClearAll: () => dispatch(clearAll()),
+  handleClearToDo: () => dispatch(clearToDo()),
+  handleClearDone: () => dispatch(clearDone()),
+});
 
 ClearModalContainer.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
   checkedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
   display: PropTypes.string.isRequired,
   clearModal: PropTypes.bool.isRequired,
-  clearAll: PropTypes.func.isRequired,
-  clearToDo: PropTypes.func.isRequired,
-  clearDone: PropTypes.func.isRequired,
+  handleClearAll: PropTypes.func.isRequired,
+  handleClearToDo: PropTypes.func.isRequired,
+  handleClearDone: PropTypes.func.isRequired,
   handleToggleModal: PropTypes.func.isRequired,
 };
 

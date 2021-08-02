@@ -14,7 +14,7 @@ class TaskBody extends Component {
     const {
       id,
       text,
-      removeItem: handleRemoveItem,
+      handleRemoveItem,
       handleToggleEdit,
     } = this.props;
 
@@ -45,12 +45,14 @@ class TaskBody extends Component {
   }
 }
 
-const mapDispatchToProps = { removeItem };
+const mapDispatchToProps = (dispatch) => ({
+  handleRemoveItem: (id) => dispatch(removeItem(id)),
+});
 
 TaskBody.propTypes = {
   id: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
-  removeItem: PropTypes.func.isRequired,
+  handleRemoveItem: PropTypes.func.isRequired,
   handleToggleEdit: PropTypes.func.isRequired,
 };
 

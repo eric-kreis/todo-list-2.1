@@ -14,7 +14,7 @@ class Header extends Component {
     const {
       theme,
       children,
-      toggleTheme: handleToggleTheme,
+      handleToggleTheme,
       handleToggleModal,
     } = this.props;
 
@@ -53,10 +53,12 @@ Header.propTypes = {
     }),
   }).isRequired,
   children: PropTypes.node.isRequired,
-  toggleTheme: PropTypes.func.isRequired,
+  handleToggleTheme: PropTypes.func.isRequired,
   handleToggleModal: PropTypes.func.isRequired,
 }
 
-const mapDispatchToProps = { toggleTheme };
+const mapDispatchToProps = (dispatch) => ({
+  handleToggleTheme: () => dispatch(toggleTheme()),
+});
 
 export default connect(null, mapDispatchToProps)(withTheme(Header));

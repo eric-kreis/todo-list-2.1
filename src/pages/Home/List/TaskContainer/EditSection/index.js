@@ -25,7 +25,7 @@ class EditSection extends Component {
     const {
       id,
       editText,
-      editBack: handleEditBack,
+      handleEditBack,
       handleToggleEdit,
       handleEditing,
     } = this.props;
@@ -70,12 +70,14 @@ class EditSection extends Component {
   }
 }
 
-const mapDispatchToProps = { editBack };
+const mapDispatchToProps = (dispatch) => ({
+  handleEditBack: (text, id) => dispatch(editBack(text, id)),
+});
 
 EditSection.propTypes = {
   id: PropTypes.number.isRequired,
   editText: PropTypes.string.isRequired,
-  editBack: PropTypes.func.isRequired,
+  handleEditBack: PropTypes.func.isRequired,
   handleToggleEdit: PropTypes.func.isRequired,
   handleEditing: PropTypes.func.isRequired,
 };

@@ -13,7 +13,7 @@ import {
 
 class ColorModal extends Component {
   render() {
-    const { handleToggleModal, colorModal, changeColor: handleChangeColor } = this.props;
+    const { handleToggleModal, colorModal, handleChangeColor } = this.props;
 
     return (colorModal
       && (
@@ -43,10 +43,12 @@ class ColorModal extends Component {
 
 ColorModal.propTypes = {
   colorModal: PropTypes.bool.isRequired,
-  changeColor: PropTypes.func.isRequired,
+  handleChangeColor: PropTypes.func.isRequired,
   handleToggleModal: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = { changeColor };
+const mapDispatchToProps = (dispatch) => ({
+  handleChangeColor: (e) => dispatch(changeColor(e)),
+});
 
 export default connect(null, mapDispatchToProps)(ColorModal);
