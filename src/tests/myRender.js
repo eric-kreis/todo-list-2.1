@@ -6,38 +6,35 @@ import { ThemeProvider } from 'styled-components';
 import { createStore, combineReducers } from 'redux';
 import { createMemoryHistory } from 'history';
 
-import formInput from '../redux/reducers/formInput';
 import listState from '../redux/reducers/listState';
 import changeTheme from '../redux/reducers/changeTheme';
 
 import { green } from '../themes';
 
-const renderWithRedux = (
+const myRender = (
   component,
   {
     initialState,
     store = createStore(
-      combineReducers({
-        formInput,
-        listState,
-        changeTheme,
-      }), initialState),
+      combineReducers({listState, changeTheme}), initialState),
+  } = {},
+  {
+    route = '/',
+    history = createMemoryHistory({ initialEntries: [route] }),
   } = {},
   theme = green.dark,
-) => {
-  const history = createMemoryHistory();
-  return {
-    ...render(
-      <Provider store={ store }>
-        <Router history={ history }>
-          <ThemeProvider theme={ theme }>
-            { component }
-          </ThemeProvider>
-        </Router>
-      </Provider>),
-    store,
-    history,
-  }
-};
+) => ({
+  ...render(
+    <Provider store={ store }>
+      <Router history={ history }>
+        <ThemeProvider theme={ theme }>
+          { component }
+        </ThemeProvider>
+      </Router>
+    </Provider>),
+  store,
+  history,
+  theme,
+});
 
-export default renderWithRedux;
+export default myRender;

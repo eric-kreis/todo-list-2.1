@@ -36,7 +36,10 @@ class Header extends Component {
             offColor={ colors.background }
             onColor={ colors.background }
           />
-          <ThemeButtonS onClick={ () => { handleToggleModal('color'); } }>
+          <ThemeButtonS
+            data-testid="color-btn"
+            onClick={ () => { handleToggleModal('color'); } }
+          >
             <ColorPalette title="Mudar cor" />
           </ThemeButtonS>
         </div>

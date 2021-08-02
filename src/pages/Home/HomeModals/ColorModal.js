@@ -20,12 +20,42 @@ class ColorModal extends Component {
         <ModalWindowS data-testid="color-modal">
           <ColorsContainerS>
             <ColorButtonsContainerS>
-              <ColorButtonS onClick={ handleChangeColor } color="#5099C6" value="blue" />
-              <ColorButtonS onClick={ handleChangeColor } color="#68B684" value="green" />
-              <ColorButtonS onClick={ handleChangeColor } color="#EDACBD" value="pink" />
-              <ColorButtonS onClick={ handleChangeColor } color="#E0AAFF" value="purple" />
-              <ColorButtonS onClick={ handleChangeColor } color="#C4CBD1" value="white" />
-              <ColorButtonS onClick={ handleChangeColor } color="#AE3231" value="red" />
+              <ColorButtonS
+                onClick={ handleChangeColor }
+                color="#5099C6"
+                value="blue"
+                title="Azul"
+              />
+              <ColorButtonS
+                onClick={ handleChangeColor }
+                color="#68B684"
+                value="green"
+                title="Verde"
+              />
+              <ColorButtonS
+                onClick={ handleChangeColor }
+                color="#EDACBD"
+                value="pink"
+                title="Rosa"
+              />
+              <ColorButtonS
+                onClick={ handleChangeColor }
+                color="#E0AAFF"
+                value="purple"
+                title="Roxo"
+              />
+              <ColorButtonS
+                onClick={ handleChangeColor }
+                color="#C4CBD1"
+                value="white"
+                title="Branco"
+              />
+              <ColorButtonS
+                onClick={ handleChangeColor }
+                color="#AE3231"
+                value="red"
+                title="Vermelho"
+              />
             </ColorButtonsContainerS>
             <button
               onClick={ () => { handleToggleModal('color'); } }

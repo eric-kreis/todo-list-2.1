@@ -1,6 +1,6 @@
 import React from 'react';
-import renderWithRedux from './renderWithRedux';
-import { screen } from '@testing-library/react';
+import myRender from './myRender';
+import { screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import HomePage from '../pages/Home';
 
@@ -14,9 +14,11 @@ const listState = {
   checkedItems: [793],
 };
 
-describe('Página Home', () => {
+beforeEach(() => cleanup());
+
+describe('Home Page / Modais', () => {
   it('Modais não devem estar na página quando for carregada', () => {
-    renderWithRedux(<HomePage/>);
+    myRender(<HomePage/>);
     const colorModal = screen.queryByTestId('color-modal');
     const clearModal = screen.queryByTestId('confirm-modal');
     expect(colorModal).toBeNull();
@@ -24,8 +26,8 @@ describe('Página Home', () => {
   });
 
   it('Modais devem ser exibidos de acordo com seus eventos', () => {
-    renderWithRedux(<HomePage/>);
-    const colorBtn = screen.queryByTitle(/Mudar cor/i);
+    myRender(<HomePage/>);
+    const colorBtn = screen.queryByTestId('color-btn');
     const clearBtn = screen.queryByTestId('clear-btn');
 
     expect(screen.queryByTestId('color-modal')).toBeNull();
@@ -49,7 +51,7 @@ describe('Página Home', () => {
   });
 
   it('Com tarefas existentes os botões do Modal "Remover tarefas" devem mudar', () => {
-    renderWithRedux(<HomePage/>, { initialState: { listState } });
+    myRender(<HomePage/>, { initialState: { listState } });
     const clearBtn = screen.queryByTestId('clear-btn');
 
     expect(screen.queryByTestId('confirm-btn')).toBeNull();
@@ -61,4 +63,29 @@ describe('Página Home', () => {
     expect(screen.queryByTestId('confirm-btn')).toBeInTheDocument();
     expect(screen.queryByTestId('decline-btn')).toBeInTheDocument();
   });
+
+  it('Os valor dos botões do Modal de cor devem representar uma cor', () => {
+    myRender(<HomePage/>);
+    const colorBtn =  screen.queryByTestId('color-btn');
+
+    userEvent.click(colorBtn);
+    expect(screen.getByTitle('Verde')).toBeInTheDocument();
+    expect(screen.getByTitle('Rosa')).toBeInTheDocument();
+  });
+
+  // it('Os botões do Modal de cor devem mudar a cor do tema', () => {
+  //   const changeColor = jest.fn();
+
+  //   const { theme } = myRender(<HomePage/>);
+  //   const colorBtn =  screen.queryByTestId('color-btn');
+
+  //   userEvent.click(colorBtn);
+  //   userEvent.click(screen.getByTitle('Rosa'));
+  //   expect(theme.title).toBe('dark');
+  //   expect(theme.colors.secondary).toBe('#C2405D');
+  // });
 });
+
+// describe('Home Page / Temas', () => {
+//   it('Testa ')
+// });
