@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
-import toggleFocus from '../../../../redux/reducers/formInput/actions/toggleFocus';
-import controlFormClass from '../../../../redux/reducers/formInput/actions/controlFormClass';
-import toggleFormClass from '../../../../redux/reducers/formInput/actions/toggleFormClass';
 
 class FormInput extends Component {
   constructor() {
@@ -36,7 +31,7 @@ class FormInput extends Component {
       handleChangeText,
       handleToggleFormClass,
       handleToggleFocus,
-      handleControlFormClass,
+      handleResetFormClass,
     } = this.props;
 
     const labelText = this.changeLabelText();
@@ -50,8 +45,11 @@ class FormInput extends Component {
           type="text"
           name="taskText"
           value={ taskText }
-          onFocus={ () => { handleToggleFocus(true); } }
-          onBlur={ () => { handleToggleFocus(false); handleControlFormClass(); } }
+          onFocus={ handleToggleFocus }
+          onBlur={ () => {
+            handleToggleFocus(false);
+            handleResetFormClass();
+          } }
           onChange={ (e) => {
             handleChangeText(e);
             handleToggleFormClass(e);
@@ -66,17 +64,6 @@ class FormInput extends Component {
   }
 }
 
-const mapStateToProps = ({ formInput, listState }) => ({
-  formInputClass: formInput.formInputClass,
-  formFocus: formInput.formFocus,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  handleToggleFormClass: (e) => dispatch(toggleFormClass(e)),
-  handleToggleFocus: (formFocus) => dispatch(toggleFocus(formFocus)),
-  handleControlFormClass: (valid) => dispatch(controlFormClass(valid)),
-});
-
 FormInput.propTypes = {
   formInputClass: PropTypes.string.isRequired,
   formFocus: PropTypes.bool.isRequired,
@@ -84,7 +71,7 @@ FormInput.propTypes = {
   handleChangeText: PropTypes.func.isRequired,
   handleToggleFormClass: PropTypes.func.isRequired,
   handleToggleFocus: PropTypes.func.isRequired,
-  handleControlFormClass: PropTypes.func.isRequired,
+  handleResetFormClass: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormInput);
+export default FormInput;

@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import toggleFocus from '../../../redux/reducers/formInput/actions/toggleFocus';
-import controlFormClass from '../../../redux/reducers/formInput/actions/controlFormClass';
 import displayTasks from '../../../redux/reducers/listState/actions/displayTasks';
 import addItem from '../../../redux/reducers/listState/actions/addItem';
 
@@ -20,10 +18,15 @@ class FormContainer extends Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
+    this.handleToggleFocus = this.handleToggleFocus.bind(this);
+    this.handleToggleFormClass = this.handleToggleFormClass.bind(this);
+    this.handleResetFormClass = this.handleResetFormClass.bind(this);
     this.addTaskRule = this.addTaskRule.bind(this);
 
     this.state = {
       taskText: '',
+      formInputClass: 'form-control',
+      formFocus: false,
     };
   }
 
@@ -31,25 +34,45 @@ class FormContainer extends Component {
     this.setState({ [name]: value });
   }
 
+  handleToggleFocus(bool = true) {
+    this.setState({ formFocus: bool });
+  }
+
+  handleToggleFormClass({ target: { value } }) {
+    if (!value.trim()) {
+      this.setState({
+        formInputClass: 'form-control is-invalid',
+      });
+    } else {
+      this.setState({ formInputClass: 'form-control' });
+    }
+  }
+
+  handleResetFormClass() {
+    this.setState({ formInputClass: 'form-control' });
+  }
+
   addTaskRule() {
     const { taskText } = this.state;
-    const {
-      handleControlFormClass,
-      handleToggleFocus,
-      handleAddItem,
-    } = this.props;
-  
+    const { handleAddItem } = this.props;
+
     if (!taskText.trim()) {
-      handleControlFormClass(false);
+      this.setState({
+        formInputClass: 'form-control is-invalid',
+      });
     } else {
       handleAddItem(taskText);
       this.setState({ taskText: '' });
     }
-    handleToggleFocus(true);
+    this.handleToggleFocus();
   }
 
   render() {
-    const { taskText } = this.state;
+    const {
+      taskText,
+      formFocus,
+      formInputClass
+    } = this.state;
     const {
       display,
       handleDisplayTasks,
@@ -61,7 +84,12 @@ class FormContainer extends Component {
         <SectionFormS>
           <FormInput
             taskText={ taskText }
+            formInputClass={ formInputClass }
+            formFocus={ formFocus }
             handleChangeText={ this.handleChange }
+            handleToggleFormClass={ this.handleToggleFormClass }
+            handleToggleFocus={ this.handleToggleFocus }
+            handleResetFormClass={ this.handleResetFormClass }
           />
           <IconButtonS
             add
@@ -120,16 +148,12 @@ const mapStateToProps = ({ listState }) => ({
 const mapDispatchToProps = (dispatch) => ({
   handleAddItem: (text) => dispatch(addItem(text)),
   handleDisplayTasks: (e) => dispatch(displayTasks(e)),
-  handleToggleFocus: (formFocus) => dispatch(toggleFocus(formFocus)),
-  handleControlFormClass: (valid) => dispatch(controlFormClass(valid)),
 });
 
 FormContainer.propTypes = {
   display: PropTypes.string.isRequired,
   handleAddItem: PropTypes.func.isRequired,
   handleDisplayTasks: PropTypes.func.isRequired,
-  handleToggleFocus: PropTypes.func.isRequired,
-  handleControlFormClass: PropTypes.func.isRequired,
   handleToggleModal: PropTypes.func.isRequired,
 };
 
