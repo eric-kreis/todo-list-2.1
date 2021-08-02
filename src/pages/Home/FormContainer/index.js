@@ -19,36 +19,50 @@ import { Add, Trash } from '../../../assets/icons';
 class FormContainer extends Component {
   constructor() {
     super();
+    this.handleChange = this.handleChange.bind(this);
     this.addTaskRule = this.addTaskRule.bind(this);
+
+    this.state = {
+      taskText: '',
+    };
+  }
+
+  handleChange({ target: { value, name } }) {
+    this.setState({ [name]: value });
   }
 
   addTaskRule() {
+    const { taskText } = this.state;
     const {
-      taskText,
-      controlFormClass: handleControlFormClass,
-      toggleFocus: handleToggleFocus,
-      addItem: handleAddItem,
+      handleControlFormClass,
+      handleToggleFocus,
+      handleAddItem,
     } = this.props;
-
+  
     if (!taskText.trim()) {
       handleControlFormClass(false);
     } else {
-      handleAddItem();
+      handleAddItem(taskText);
+      this.setState({ taskText: '' });
     }
     handleToggleFocus(true);
   }
 
   render() {
+    const { taskText } = this.state;
     const {
       display,
-      displayTasks: handleDisplayTasks,
+      handleDisplayTasks,
       handleToggleModal,
     } = this.props;
 
     return (
       <MainFormS onSubmit={ (e) => e.preventDefault() }>
         <SectionFormS>
-          <FormInput />
+          <FormInput
+            taskText={ taskText }
+            handleChangeText={ this.handleChange }
+          />
           <IconButtonS
             add
             large
@@ -103,20 +117,19 @@ const mapStateToProps = ({ listState }) => ({
   taskText: listState.taskText,
 });
 
-const mapDispatchToProps = {
-  displayTasks,
-  toggleFocus,
-  controlFormClass,
-  addItem
-};
+const mapDispatchToProps = (dispatch) => ({
+  handleAddItem: (text) => dispatch(addItem(text)),
+  handleDisplayTasks: (e) => dispatch(displayTasks(e)),
+  handleToggleFocus: (formFocus) => dispatch(toggleFocus(formFocus)),
+  handleControlFormClass: (valid) => dispatch(controlFormClass(valid)),
+});
 
 FormContainer.propTypes = {
   display: PropTypes.string.isRequired,
-  taskText: PropTypes.string.isRequired,
-  displayTasks: PropTypes.func.isRequired,
-  toggleFocus: PropTypes.func.isRequired,
-  controlFormClass: PropTypes.func.isRequired,
-  addItem: PropTypes.func.isRequired,
+  handleAddItem: PropTypes.func.isRequired,
+  handleDisplayTasks: PropTypes.func.isRequired,
+  handleToggleFocus: PropTypes.func.isRequired,
+  handleControlFormClass: PropTypes.func.isRequired,
   handleToggleModal: PropTypes.func.isRequired,
 };
 

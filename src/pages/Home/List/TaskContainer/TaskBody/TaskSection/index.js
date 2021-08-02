@@ -23,7 +23,7 @@ class TaskSection extends Component {
     const {
       id,
       checkedItems,
-      toggleCheck: handleToggleCheck,
+      handleToggleCheck,
       children,
     } = this.props;
 
@@ -48,7 +48,9 @@ const mapStateToProps = ({ listState }) => ({
   checkedItems: listState.checkedItems,
 });
 
-const mapDispatchToProps = { toggleCheck };
+const mapDispatchToProps = (dispatch) => ({
+  handleToggleCheck: (e) => dispatch(toggleCheck(e)),
+});
 
 TaskSection.propTypes = {
   id: PropTypes.number.isRequired,

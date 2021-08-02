@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import toggleFocus from '../../../../redux/reducers/formInput/actions/toggleFocus';
-import changeText from '../../../../redux/reducers/listState/actions/changeText';
 import controlFormClass from '../../../../redux/reducers/formInput/actions/controlFormClass';
 import toggleFormClass from '../../../../redux/reducers/formInput/actions/toggleFormClass';
 
@@ -34,10 +33,10 @@ class FormInput extends Component {
     const {
       taskText,
       formInputClass,
-      changeText: handleChangeText,
-      toggleFormClass: handleToggleFormClass,
-      toggleFocus: handleToggleFocus,
-      controlFormClass: handleControlFormClass,
+      handleChangeText,
+      handleToggleFormClass,
+      handleToggleFocus,
+      handleControlFormClass,
     } = this.props;
 
     const labelText = this.changeLabelText();
@@ -70,24 +69,22 @@ class FormInput extends Component {
 const mapStateToProps = ({ formInput, listState }) => ({
   formInputClass: formInput.formInputClass,
   formFocus: formInput.formFocus,
-  taskText: listState.taskText,
 });
 
-const mapDispatchToProps = {
-  changeText,
-  toggleFormClass,
-  toggleFocus,
-  controlFormClass,
-};
+const mapDispatchToProps = (dispatch) => ({
+  handleToggleFormClass: (e) => dispatch(toggleFormClass(e)),
+  handleToggleFocus: (formFocus) => dispatch(toggleFocus(formFocus)),
+  handleControlFormClass: (valid) => dispatch(controlFormClass(valid)),
+});
 
 FormInput.propTypes = {
   formInputClass: PropTypes.string.isRequired,
   formFocus: PropTypes.bool.isRequired,
   taskText: PropTypes.string.isRequired,
-  toggleFocus: PropTypes.func.isRequired,
-  changeText: PropTypes.func.isRequired,
-  controlFormClass: PropTypes.func.isRequired,
-  toggleFormClass: PropTypes.func.isRequired,
+  handleChangeText: PropTypes.func.isRequired,
+  handleToggleFormClass: PropTypes.func.isRequired,
+  handleToggleFocus: PropTypes.func.isRequired,
+  handleControlFormClass: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormInput);

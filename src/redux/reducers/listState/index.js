@@ -1,5 +1,4 @@
 import { DISPLAY_TASKS } from './actions/displayTasks';
-import { TASK } from './actions/changeText';
 import { ADD_ITEM } from './actions/addItem';
 import { REMOVE_ITEM } from './actions/removeItem';
 import { TOGGLE_CHECKED } from './actions/toggleCheck';
@@ -8,11 +7,43 @@ import { CLEAR_ALL } from './actions/clearAll';
 import { CLEAR_TODO } from './actions/clearToDo';
 import { CLEAR_DONE } from './actions/clearDone';
 
+// Action assistents;
+const addOneMore = (state, action) => ([
+  ...state.tasks,
+  {
+    id: Math.ceil(Math.random() * 1000),
+    text: action.text,
+  }
+]);
+
+const removeItem = (state, action) => (
+  state.tasks.find(({ id }) => id === Number(action.value)));
+
+const addChecked = (state, action) => {
+  if (action.checked) {
+    const { id } = state.tasks.find(({ id }) => id === Number(action.value));
+    return [...state.checkedItems, id];
+  }
+  return state.checkedItems.filter((id) => id !== Number(action.value));
+};
+
+const editedTasks = (state, action) => (
+  state.tasks.map(({ id, text }) => {
+    if (id === action.id) return { id, text: action.text };
+    return { id, text };
+  })
+);
+
+const onlyDone = (state) => state.tasks.filter(({ id }) =>
+state.checkedItems.includes(id));
+
+const onlyToDo = (state) => state.tasks.filter(({ id }) =>
+!state.checkedItems.includes(id));
+
+// Reducer code starts below;
 const savedTasks = JSON.parse(localStorage.getItem('tasks'));
 const savedChecks = JSON.parse(localStorage.getItem('checkedItems'));
-
 const INITIAL_STATE = {
-  taskText: '',
   display: 'all',
   tasks: !savedTasks ? [] : savedTasks,
   checkedItems: !savedChecks ? [] : savedChecks,
@@ -23,48 +54,25 @@ const listState = (state = INITIAL_STATE, action) => {
   case DISPLAY_TASKS:
     return { ...state, [action.name]: action.value };
 
-  case TASK:
-    return { ...state, taskText: action.value };
-
   case ADD_ITEM:
-    const newTasks = [...state.tasks,
-      {
-        id: Math.ceil(Math.random() * 1000),
-        text: state.taskText,
-      }
-    ];
-    localStorage.setItem('tasks', JSON.stringify(newTasks));
+    localStorage.setItem('tasks', JSON.stringify(addOneMore(state, action)));
     return {
       ...state,
-      tasks: newTasks,
-      taskText: '',
+      tasks: addOneMore(state, action),
     };
 
   case REMOVE_ITEM:
-    const withoutItem = state.tasks.filter(({ id }) => id !== action.id);
-    localStorage.setItem('tasks', JSON.stringify(withoutItem));
-    return { ...state, tasks: withoutItem };
+    localStorage.setItem('tasks', JSON.stringify(removeItem(state, action)));
+    return { ...state, tasks: removeItem(state, action) };
 
   case TOGGLE_CHECKED:
-    if (action.checked) {
-      const { id } = state.tasks.find(({ id }) => id === Number(action.value));
-      const addingChecked = [...state.checkedItems, id];
-      localStorage.setItem('checkedItems', JSON.stringify(addingChecked))
-      return { ...state, checkedItems: addingChecked };
-    }
-    const removingItem = state.checkedItems.filter((id) => id !== Number(action.value));
-    localStorage.setItem('checkedItems', JSON.stringify(removingItem));
-    return { ...state, checkedItems: removingItem };
+    localStorage.setItem('checkedItems', JSON.stringify(addChecked(state, action)));
+    return { ...state, checkedItems: addChecked(state, action) };
 
   case EDIT:
     if(action.text.trim()) {
-      const tasksCopy = state.tasks.map(({ id, text }) => {
-        if (id === action.id) return { id, text: action.text };
-        return { id, text };
-      });
-      localStorage.setItem('tasks', JSON.stringify(tasksCopy));
-      console.log(tasksCopy)
-      return { ...state, tasks: tasksCopy };
+      localStorage.setItem('tasks', JSON.stringify(editedTasks(state, action)));
+      return { ...state, tasks: editedTasks(state, action) };
     }
     return state;
 
@@ -74,17 +82,13 @@ const listState = (state = INITIAL_STATE, action) => {
     return { ...state, tasks: [], checkedItems: [] };
 
   case CLEAR_TODO:
-    const onlyDone = state.tasks.filter(({ id }) =>
-      state.checkedItems.includes(id));
-    localStorage.setItem('tasks', JSON.stringify(onlyDone));
-    return { ...state, tasks: onlyDone };
+    localStorage.setItem('tasks', JSON.stringify(onlyDone(state)));
+    return { ...state, tasks: onlyDone(state) };
 
   case CLEAR_DONE:
-    const onlyToDo = state.tasks.filter(({ id }) =>
-      !state.checkedItems.includes(id));
-    localStorage.setItem('tasks', JSON.stringify(onlyToDo));
+    localStorage.setItem('tasks', JSON.stringify(onlyToDo(state)));
     localStorage.setItem('checkedItems', JSON.stringify([]));
-    return { ...state, tasks: onlyToDo, checkedItems: [] };
+    return { ...state, tasks: onlyToDo(state), checkedItems: [] };
 
   default:
     return state;
