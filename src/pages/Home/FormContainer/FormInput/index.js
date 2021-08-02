@@ -60,7 +60,7 @@ class FormInput extends Component {
         />
         <label htmlFor="form-input">{ labelText }</label>
       </div>
-    );  
+    );
   }
 }
 

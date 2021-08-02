@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ListS = styled.ul`
+const ListS = styled.ul`
   display: flex;
   flex-flow: row wrap;
   list-style-type: none;
@@ -8,3 +8,5 @@ export const ListS = styled.ul`
   padding: 0;
   width: 100%;
 `;
+
+export default ListS;

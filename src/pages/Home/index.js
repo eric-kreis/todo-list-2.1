@@ -7,7 +7,8 @@ import FormContainer from './FormContainer';
 import List from './List';
 import Footer from '../../components/Footer';
 
-import  HomeMainS from './styles';
+import HomeMainS from './styles';
+
 class HomePage extends Component {
   constructor() {
     super();
@@ -22,12 +23,12 @@ class HomePage extends Component {
 
   handleToggleModal(name) {
     if (name === 'clear') {
-      this.setState((prevState) =>
-        ({ clearModal: !prevState.clearModal }));
+      this.setState((prevState) => ({
+        clearModal: !prevState.clearModal }));
     }
     if (name === 'color') {
-      this.setState((prevState) =>
-        ({ colorModal: !prevState.colorModal }));
+      this.setState((prevState) => ({
+        colorModal: !prevState.colorModal }));
     }
   }
 

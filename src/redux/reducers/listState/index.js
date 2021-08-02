@@ -11,17 +11,17 @@ import { CLEAR_DONE } from './actions/clearDone';
 const addOneMore = (state, action) => ([
   ...state.tasks,
   {
-    id: Math.ceil(Math.random() * 1000),
+    id: Math.ceil(Math.random() * Date.now()),
     text: action.text,
-  }
+  },
 ]);
 
 const removeItem = (state, action) => (
-  state.tasks.find(({ id }) => id === Number(action.value)));
+  state.tasks.filter(({ id }) => id !== Number(action.id)));
 
 const addChecked = (state, action) => {
   if (action.checked) {
-    const { id } = state.tasks.find(({ id }) => id === Number(action.value));
+    const { id } = state.tasks.find(({ id: taskId }) => taskId === Number(action.value));
     return [...state.checkedItems, id];
   }
   return state.checkedItems.filter((id) => id !== Number(action.value));
@@ -34,11 +34,11 @@ const editedTasks = (state, action) => (
   })
 );
 
-const onlyDone = (state) => state.tasks.filter(({ id }) =>
-state.checkedItems.includes(id));
+const onlyDone = (state) => state.tasks.filter(({ id }) => (
+  state.checkedItems.includes(id)));
 
-const onlyToDo = (state) => state.tasks.filter(({ id }) =>
-!state.checkedItems.includes(id));
+const onlyToDo = (state) => state.tasks.filter(({ id }) => (
+  !state.checkedItems.includes(id)));
 
 // Reducer code starts below;
 const savedTasks = JSON.parse(localStorage.getItem('tasks'));
@@ -70,7 +70,7 @@ const listState = (state = INITIAL_STATE, action) => {
     return { ...state, checkedItems: addChecked(state, action) };
 
   case EDIT:
-    if(action.text.trim()) {
+    if (action.text.trim()) {
       localStorage.setItem('tasks', JSON.stringify(editedTasks(state, action)));
       return { ...state, tasks: editedTasks(state, action) };
     }

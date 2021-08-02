@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { TaskLabelS } from './styles';
+import TaskLabelS from './styles';
 
 import toggleCheck from '../../../../../../redux/reducers/listState/actions/toggleCheck';
 

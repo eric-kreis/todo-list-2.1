@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import EditSection from './EditSection';
 import TaskBody from './TaskBody';
-import { ItemS } from './styles';
+import ItemS from './styles';
 
 class TaskContainer extends React.Component {
   constructor(props) {
@@ -15,15 +15,7 @@ class TaskContainer extends React.Component {
     this.state = {
       edit: false,
       editText: props.text,
-    }
-  }
-
-  editRules() {
-    const { edit, editText } = this.state;
-    const { text } = this.props;
-    if (!edit && !editText) {
-      this.setState({ editText: text });
-    }
+    };
   }
 
   handleToggleEdit() {
@@ -35,6 +27,14 @@ class TaskContainer extends React.Component {
   handleEditing({ target }) {
     const { name, value } = target;
     this.setState({ [name]: value });
+  }
+
+  editRules() {
+    const { edit, editText } = this.state;
+    const { text } = this.props;
+    if (!edit && !editText) {
+      this.setState({ editText: text });
+    }
   }
 
   render() {
@@ -63,8 +63,7 @@ class TaskContainer extends React.Component {
               handleToggleEdit={ this.handleToggleEdit }
               handleEditing={ this.handleEditing }
             />
-          )
-        }
+          ) }
       </ItemS>
     );
   }

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { ListS } from './styles';
+import ListS from './styles';
 import TaskContainer from './TaskContainer';
 
 class List extends React.Component {
@@ -29,13 +29,13 @@ class List extends React.Component {
     return (
       <ListS>
         {
-          filtredTasks.map(({ id, text }) =>
+          filtredTasks.map(({ id, text }) => (
             <TaskContainer
               key={ id }
               id={ id }
               text={ text }
             />
-          )
+          ))
         }
       </ListS>
     );

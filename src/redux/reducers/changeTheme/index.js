@@ -17,7 +17,11 @@ const changeTheme = (state = INITIAL_STATE, action) => {
     localStorage.setItem('themeColor', action.value);
     localStorage
       .setItem('theme', JSON.stringify(colors[action.value][state.theme.title]));
-    return { ...state, themeColor: action.value, theme: colors[action.value][state.theme.title] };
+    return {
+      ...state,
+      themeColor: action.value,
+      theme: colors[action.value][state.theme.title],
+    };
 
   case TOGGLE_THEME:
     if (state.theme.title === 'light') {

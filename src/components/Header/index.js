@@ -28,8 +28,8 @@ class Header extends Component {
           <Switch
             checked={ title === 'dark' }
             onChange={ handleToggleTheme }
-            checkedIcon={ <Sun className="sun"/> }
-            uncheckedIcon={ <Moon className="moon"/> }
+            checkedIcon={ <Sun className="sun" /> }
+            uncheckedIcon={ <Moon className="moon" /> }
             height={ 18 }
             handleDiameter={ 26 }
             width={ 50 }
@@ -58,7 +58,7 @@ Header.propTypes = {
   children: PropTypes.node.isRequired,
   handleToggleTheme: PropTypes.func.isRequired,
   handleToggleModal: PropTypes.func.isRequired,
-}
+};
 
 const mapDispatchToProps = (dispatch) => ({
   handleToggleTheme: () => dispatch(toggleTheme()),

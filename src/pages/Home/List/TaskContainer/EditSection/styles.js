@@ -16,4 +16,4 @@ border: 0;
 color: ${({ theme }) => theme.colors.text};
 font-size: 24px;
 margin-left: 16px;
-`
+`;

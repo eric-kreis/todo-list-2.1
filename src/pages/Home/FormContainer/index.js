@@ -14,6 +14,9 @@ import {
 import IconButtonS from '../../../styles/IconButtonS.styles';
 import { Add, Trash } from '../../../assets/icons';
 
+const validClass = 'form-control';
+const invalidClass = 'form-control is-invalid';
+
 class FormContainer extends Component {
   constructor() {
     super();
@@ -25,7 +28,7 @@ class FormContainer extends Component {
 
     this.state = {
       taskText: '',
-      formInputClass: 'form-control',
+      formInputClass: validClass,
       formFocus: false,
     };
   }
@@ -41,15 +44,15 @@ class FormContainer extends Component {
   handleToggleFormClass({ target: { value } }) {
     if (!value.trim()) {
       this.setState({
-        formInputClass: 'form-control is-invalid',
+        formInputClass: invalidClass,
       });
     } else {
-      this.setState({ formInputClass: 'form-control' });
+      this.setState({ formInputClass: validClass });
     }
   }
 
   handleResetFormClass() {
-    this.setState({ formInputClass: 'form-control' });
+    this.setState({ formInputClass: validClass });
   }
 
   addTaskRule() {
@@ -58,7 +61,7 @@ class FormContainer extends Component {
 
     if (!taskText.trim()) {
       this.setState({
-        formInputClass: 'form-control is-invalid',
+        formInputClass: invalidClass,
       });
     } else {
       handleAddItem(taskText);
@@ -71,7 +74,7 @@ class FormContainer extends Component {
     const {
       taskText,
       formFocus,
-      formInputClass
+      formInputClass,
     } = this.state;
     const {
       display,
@@ -96,7 +99,7 @@ class FormContainer extends Component {
             large
             onClick={ this.addTaskRule }
           >
-            <Add title="Adicionar tarefa"/>
+            <Add title="Adicionar tarefa" />
           </IconButtonS>
           <IconButtonS
             clear
@@ -136,7 +139,7 @@ class FormContainer extends Component {
           </FormShowButtonS>
         </SectionFormS>
       </MainFormS>
-    )
+    );
   }
 }
 

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-export const TaskLabelS = styled.label`
+const TaskLabelS = styled.label`
   align-items: center;
   display: flex;
   text-decoration: ${(({ checkedItems, id }) => (
     (checkedItems.includes(id))
-    ? 'line-through'
-    : 'none'
+      ? 'line-through'
+      : 'none'
   ))};
   max-width: 80%;
   overflow: hidden;
@@ -24,3 +24,5 @@ export const TaskLabelS = styled.label`
     max-width: 100%;
   }
 `;
+
+export default TaskLabelS;

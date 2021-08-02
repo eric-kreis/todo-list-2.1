@@ -58,6 +58,7 @@ class ColorModal extends Component {
               />
             </ColorButtonsContainerS>
             <button
+              type="button"
               onClick={ () => { handleToggleModal('color'); } }
               className="modal-button"
               data-testid="return-color-modal"

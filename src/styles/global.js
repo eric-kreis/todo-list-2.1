@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 import { createGlobalStyle } from 'styled-components';
 import { transparentize } from 'polished';
 import mountserrat400 from '../fonts/Montserrat-Regular.ttf';
@@ -55,8 +56,8 @@ const GlobalStyle = createGlobalStyle`
     color: #212529;
     background-color: #fff;
     border-color: ${({ theme }) => theme.colors.primary};
-    box-shadow: 0 0 0 0.25rem ${({ theme }) =>
-      transparentize(0.5, theme.colors.primary)};
+    box-shadow: 0 0 0 0.25rem ${({ theme }) => (
+    transparentize(0.5, theme.colors.primary))};
     outline: 0;
   }
 

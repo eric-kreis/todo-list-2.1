@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -76,6 +77,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 EditSection.propTypes = {
   id: PropTypes.number.isRequired,
+  edit: PropTypes.bool.isRequired,
   editText: PropTypes.string.isRequired,
   handleEditBack: PropTypes.func.isRequired,
   handleToggleEdit: PropTypes.func.isRequired,

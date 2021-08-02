@@ -7,6 +7,7 @@ import clearToDo from '../../../redux/reducers/listState/actions/clearToDo';
 import clearDone from '../../../redux/reducers/listState/actions/clearDone';
 
 import ConfirmModal from './ConfirmModal';
+
 class ClearModalContainer extends Component {
   constructor() {
     super();
@@ -22,21 +23,23 @@ class ClearModalContainer extends Component {
       handleClearToDo,
       handleClearDone,
     } = this.props;
-    if (display === 'toDo'){ handleClearToDo(); }
-    else if (display === 'completed') { handleClearDone(); }
-    else { handleClearAll(); }
+    if (display === 'toDo') {
+      handleClearToDo();
+    } else if (display === 'completed') {
+      handleClearDone();
+    } else { handleClearAll(); }
   }
 
   displayMessage() {
     const { display, tasks, checkedItems } = this.props;
 
-    let typeMessage = 'todas as tarefas' ;
+    let typeMessage = 'todas as tarefas';
     let confirmButtons = true;
 
-    if (display === 'toDo') { typeMessage = 'as tarefas pendentes' };
-    if (display === 'completed') { typeMessage = 'as tarefas concluídas' };
+    if (display === 'toDo') typeMessage = 'as tarefas pendentes';
+    if (display === 'completed') typeMessage = 'as tarefas concluídas';
 
-    let message = `Você realmente deseja remover ${typeMessage}?`
+    let message = `Você realmente deseja remover ${typeMessage}?`;
 
     if (tasks.length === 0) {
       message = 'Sem tarefas para remover';

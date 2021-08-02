@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 import styled from 'styled-components';
 import { lighten, transparentize, saturate, shade } from 'polished';
 
@@ -24,22 +25,22 @@ export const SectionFormS = styled.section`
 export const FormShowButtonS = styled.button`
   background-color: ${({ theme, display, value }) => (
     (display === value)
-    ? lighten(0.1, theme.colors.primary)
-    : transparentize(0.4, theme.colors.primary)
+      ? lighten(0.1, theme.colors.primary)
+      : transparentize(0.4, theme.colors.primary)
   )};
 
   box-shadow: 1px 1px 2px ${({ theme, display, value }) => (
     (display === value)
-    ? theme.colors.primary
-    : transparentize(0.4, theme.colors.primary)
+      ? theme.colors.primary
+      : transparentize(0.4, theme.colors.primary)
   )};
 
   border: 0;
   border-radius: 2px;
   color: ${({ theme, display, value }) => (
     (display === value)
-    ? saturate(0.2, theme.colors.text)
-    : shade(0.05, theme.colors.text)
+      ? saturate(0.2, theme.colors.text)
+      : shade(0.05, theme.colors.text)
   )};
   font-size: 18px;
   margin: 8px;
@@ -47,8 +48,8 @@ export const FormShowButtonS = styled.button`
   width: 125px;
   
   :hover {
-    background-color: ${({ theme }) =>
-      lighten(0.04, theme.colors.primary)};
+    background-color: ${({ theme }) => (
+    lighten(0.04, theme.colors.primary))};
     box-shadow: 1px 1px 2px ${({ theme }) => theme.colors.primary};
   }
 

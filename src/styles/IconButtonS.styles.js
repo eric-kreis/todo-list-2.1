@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const IconButtonS = styled.button`
+const IconButtonS = styled.button`
   background-color: transparent;
   border: 0;
   color: ${({ theme }) => theme.colors.text};
@@ -14,10 +14,10 @@ export const IconButtonS = styled.button`
 
   :hover {
     color: ${({ add, clear, theme }) => {
-      if (add) return '#63BE25';
-      if (clear) return 'red';
-      return theme.colors.primary;
-    } };
+    if (add) return '#63BE25';
+    if (clear) return 'red';
+    return theme.colors.primary;
+  }};
   }
 `;
 
