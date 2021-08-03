@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 import { shade } from 'polished';
 
 export const lightGreen = {
@@ -8,7 +9,7 @@ export const lightGreen = {
 
     background: '#f4f4f4',
     text: '#333',
-    input: '#333'
+    input: '#333',
   },
   modal: {
     windowBackground: 'rgba(0, 0, 0, 0.8)',
@@ -24,7 +25,7 @@ export const darkGreen = {
 
     background: '#181818',
     text: '#fff',
-    input: '#333'
+    input: '#333',
   },
   modal: {
     windowBackground: 'rgba(255, 255, 255, 0.664)',

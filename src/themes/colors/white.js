@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 import { shade } from 'polished';
 
 export const whiteTheme = {
@@ -8,7 +9,7 @@ export const whiteTheme = {
 
     background: '#ECEFF1',
     text: '#212529',
-    input: '#212529'
+    input: '#212529',
   },
   modal: {
     windowBackground: 'rgba(0, 0, 0, 0.8)',
@@ -24,7 +25,7 @@ export const blackTheme = {
 
     background: '#181818',
     text: '#ECEFF1',
-    input: '#212529'
+    input: '#212529',
   },
   modal: {
     windowBackground: 'rgba(255, 255, 255, 0.664)',

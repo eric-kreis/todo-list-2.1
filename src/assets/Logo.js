@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { withTheme } from 'styled-components';
 
 class Logo extends Component {
@@ -14,8 +15,11 @@ class Logo extends Component {
         viewBox="0 0 3200.000000 3200.000000"
         preserveAspectRatio="xMidYMid meet"
       >
-        <g transform="translate(0.000000,3200.000000) scale(0.100000,-0.100000)"
-        fill={theme.colors.text} stroke="none">
+        <g
+          transform="translate(0.000000,3200.000000) scale(0.100000,-0.100000)"
+          fill={ theme.colors.text }
+          stroke="none"
+        >
           <path
             d="M10500 25819 c-245 -14 -584 -52 -835 -93 -82 -14 -184 -30 -225 -36
             -192 -29 -281 -47 -495 -100 -498 -125 -915 -267 -1390 -473 -140 -60 -194
@@ -80,5 +84,23 @@ class Logo extends Component {
     );
   }
 }
+
+Logo.propTypes = {
+  theme: PropTypes.shape({
+    title: PropTypes.string,
+    colors: PropTypes.shape({
+      primary: PropTypes.string,
+      secondary: PropTypes.string,
+
+      background: PropTypes.string,
+      text: PropTypes.string,
+      input: PropTypes.string,
+    }),
+    modal: PropTypes.shape({
+      windowBackground: PropTypes.string,
+      modalBackground: PropTypes.string,
+    }),
+  }).isRequired,
+};
 
 export default withTheme(Logo);
