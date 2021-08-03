@@ -66,7 +66,8 @@ class FormInput extends Component {
 
 FormInput.propTypes = {
   formInputClass: PropTypes.string.isRequired,
-  formFocus: PropTypes.bool.isRequired,
+  formFocus: PropTypes.oneOfType([
+    PropTypes.object, PropTypes.bool]).isRequired,
   taskText: PropTypes.string.isRequired,
   handleChangeText: PropTypes.func.isRequired,
   handleToggleFormClass: PropTypes.func.isRequired,
