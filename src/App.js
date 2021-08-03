@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
@@ -7,19 +7,15 @@ import GlobalStyle from './styles/global';
 import Routes from './Routes';
 import 'bootstrap/dist/css/bootstrap.css';
 
-class App extends Component {
-  render() {
-    const { theme } = this.props;
-
-    return (
-      <div>
-        <ThemeProvider theme={ theme }>
-          <GlobalStyle />
-          <Routes />
-        </ThemeProvider>
-      </div>
-    );
-  }
+function App({ theme }) {
+  return (
+    <div>
+      <ThemeProvider theme={ theme }>
+        <GlobalStyle />
+        <Routes />
+      </ThemeProvider>
+    </div>
+  );
 }
 
 App.propTypes = {
