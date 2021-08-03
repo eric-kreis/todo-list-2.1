@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -17,130 +17,100 @@ import { Add, Trash } from '../../../assets/icons';
 const validClass = 'form-control';
 const invalidClass = 'form-control is-invalid';
 
-class FormContainer extends Component {
-  constructor() {
-    super();
-    this.handleChange = this.handleChange.bind(this);
-    this.handleToggleFocus = this.handleToggleFocus.bind(this);
-    this.handleToggleFormClass = this.handleToggleFormClass.bind(this);
-    this.handleResetFormClass = this.handleResetFormClass.bind(this);
-    this.addTaskRule = this.addTaskRule.bind(this);
+function FormContainer({
+  display,
+  handleAddItem,
+  handleDisplayTasks,
+  handleToggleModal,
+}) {
+  const [taskText, setTaskText] = useState('');
+  const [formInputClass, setInputClass] = useState(validClass);
+  const [formFocus, setFormFocus] = useState(false);
 
-    this.state = {
-      taskText: '',
-      formInputClass: validClass,
-      formFocus: false,
-    };
-  }
+  const handleChange = ({ target: { value } }) => {
+    setTaskText(value);
+  };
 
-  handleChange({ target: { value, name } }) {
-    this.setState({ [name]: value });
-  }
+  const handleToggleFocus = (bool = true) => {
+    setFormFocus(bool);
+  };
 
-  handleToggleFocus(bool = true) {
-    this.setState({ formFocus: bool });
-  }
-
-  handleToggleFormClass({ target: { value } }) {
+  const handleToggleFormClass = ({ target: { value } }) => {
     if (!value.trim()) {
-      this.setState({
-        formInputClass: invalidClass,
-      });
+      setInputClass(invalidClass);
     } else {
-      this.setState({ formInputClass: validClass });
+      setInputClass(validClass);
     }
-  }
+  };
 
-  handleResetFormClass() {
-    this.setState({ formInputClass: validClass });
-  }
+  const handleResetFormClass = () => {
+    setInputClass(validClass);
+  };
 
-  addTaskRule() {
-    const { taskText } = this.state;
-    const { handleAddItem } = this.props;
-
+  const addTaskRule = () => {
     if (!taskText.trim()) {
-      this.setState({
-        formInputClass: invalidClass,
-      });
+      setInputClass(invalidClass);
     } else {
       handleAddItem(taskText);
-      this.setState({ taskText: '' });
+      setTaskText('');
     }
-    this.handleToggleFocus();
-  }
+    handleToggleFocus();
+  };
 
-  render() {
-    const {
-      taskText,
-      formFocus,
-      formInputClass,
-    } = this.state;
-    const {
-      display,
-      handleDisplayTasks,
-      handleToggleModal,
-    } = this.props;
-
-    return (
-      <MainFormS onSubmit={ (e) => e.preventDefault() }>
-        <SectionFormS>
-          <FormInput
-            taskText={ taskText }
-            formInputClass={ formInputClass }
-            formFocus={ formFocus }
-            handleChangeText={ this.handleChange }
-            handleToggleFormClass={ this.handleToggleFormClass }
-            handleToggleFocus={ this.handleToggleFocus }
-            handleResetFormClass={ this.handleResetFormClass }
-          />
-          <IconButtonS
-            add
-            large
-            onClick={ this.addTaskRule }
-          >
-            <Add title="Adicionar tarefa" />
-          </IconButtonS>
-          <IconButtonS
-            clear
-            large
-            onClick={ () => {
-              handleToggleModal('clear');
-            } }
-            data-testid="clear-btn"
-          >
-            <Trash title="Remover Tarefas" />
-          </IconButtonS>
-        </SectionFormS>
-        <SectionFormS>
-          <FormShowButtonS
-            name="display"
-            value="all"
-            onClick={ handleDisplayTasks }
-            display={ display }
-          >
-            Todas
-          </FormShowButtonS>
-          <FormShowButtonS
-            name="display"
-            value="toDo"
-            onClick={ handleDisplayTasks }
-            display={ display }
-          >
-            Pendentes
-          </FormShowButtonS>
-          <FormShowButtonS
-            name="display"
-            value="completed"
-            onClick={ handleDisplayTasks }
-            display={ display }
-          >
-            Concluídas
-          </FormShowButtonS>
-        </SectionFormS>
-      </MainFormS>
-    );
-  }
+  return (
+    <MainFormS onSubmit={ (e) => e.preventDefault() }>
+      <SectionFormS>
+        <FormInput
+          taskText={ taskText }
+          formInputClass={ formInputClass }
+          formFocus={ formFocus }
+          handleChangeText={ handleChange }
+          handleToggleFormClass={ handleToggleFormClass }
+          handleToggleFocus={ handleToggleFocus }
+          handleResetFormClass={ handleResetFormClass }
+        />
+        <IconButtonS add large onClick={ addTaskRule }>
+          <Add title="Adicionar tarefa" />
+        </IconButtonS>
+        <IconButtonS
+          clear
+          large
+          onClick={ () => {
+            handleToggleModal('clear');
+          } }
+          data-testid="clear-btn"
+        >
+          <Trash title="Remover Tarefas" />
+        </IconButtonS>
+      </SectionFormS>
+      <SectionFormS>
+        <FormShowButtonS
+          name="display"
+          value="all"
+          onClick={ handleDisplayTasks }
+          display={ display }
+        >
+          Todas
+        </FormShowButtonS>
+        <FormShowButtonS
+          name="display"
+          value="toDo"
+          onClick={ handleDisplayTasks }
+          display={ display }
+        >
+          Pendentes
+        </FormShowButtonS>
+        <FormShowButtonS
+          name="display"
+          value="completed"
+          onClick={ handleDisplayTasks }
+          display={ display }
+        >
+          Concluídas
+        </FormShowButtonS>
+      </SectionFormS>
+    </MainFormS>
+  );
 }
 
 const mapStateToProps = ({ listState }) => ({
