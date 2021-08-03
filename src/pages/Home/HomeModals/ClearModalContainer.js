@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -8,31 +8,25 @@ import clearDone from '../../../redux/reducers/listState/actions/clearDone';
 
 import ConfirmModal from './ConfirmModal';
 
-class ClearModalContainer extends Component {
-  constructor() {
-    super();
-
-    this.handleClear = this.handleClear.bind(this);
-    this.displayMessage = this.displayMessage.bind(this);
-  }
-
-  handleClear() {
-    const {
-      display,
-      handleClearAll,
-      handleClearToDo,
-      handleClearDone,
-    } = this.props;
+function ClearModalContainer({
+  tasks,
+  checkedItems,
+  display,
+  clearModal,
+  handleClearAll,
+  handleClearToDo,
+  handleClearDone,
+  handleToggleModal,
+}) {
+  const handleClear = () => {
     if (display === 'toDo') {
       handleClearToDo();
     } else if (display === 'completed') {
       handleClearDone();
     } else { handleClearAll(); }
-  }
+  };
 
-  displayMessage() {
-    const { display, tasks, checkedItems } = this.props;
-
+  const displayMessage = () => {
     let typeMessage = 'todas as tarefas';
     let confirmButtons = true;
 
@@ -53,27 +47,20 @@ class ClearModalContainer extends Component {
     }
 
     return { message, confirmButtons };
-  }
+  };
 
-  render() {
-    const {
-      clearModal,
-      handleToggleModal,
-    } = this.props;
+  const { message, confirmButtons } = displayMessage();
 
-    const { message, confirmButtons } = this.displayMessage();
-
-    return (
-      <ConfirmModal
-        confirmButtons={ confirmButtons }
-        openModal={ clearModal }
-        handleConfirm={ () => { this.handleClear(); handleToggleModal('clear'); } }
-        handleCancel={ () => { handleToggleModal('clear'); } }
-      >
-        { message }
-      </ConfirmModal>
-    );
-  }
+  return (
+    <ConfirmModal
+      confirmButtons={ confirmButtons }
+      openModal={ clearModal }
+      handleConfirm={ () => { handleClear(); handleToggleModal('clear'); } }
+      handleCancel={ () => { handleToggleModal('clear'); } }
+    >
+      { message }
+    </ConfirmModal>
+  );
 }
 
 const mapStateToProps = ({ listState }) => ({
