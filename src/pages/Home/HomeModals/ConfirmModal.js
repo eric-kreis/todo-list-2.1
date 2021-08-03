@@ -1,56 +1,51 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { ModalWindowS, ModalS } from './styles';
 
-class ConfirmModal extends Component {
-  render() {
-    const {
-      openModal,
-      handleConfirm,
-      handleCancel,
-      children,
-      confirmButtons,
-    } = this.props;
-    return (openModal
-      && (
-        <ModalWindowS data-testid="confirm-modal">
-          <ModalS>
-            <h4>{ children }</h4>
-            { confirmButtons
-              ? (
-                <div>
-                  <button
-                    type="button"
-                    onClick={ handleConfirm }
-                    data-testid="confirm-btn"
-                  >
-                    SIM
-                  </button>
-                  <button
-                    type="button"
-                    onClick={ handleCancel }
-                    data-testid="decline-btn"
-                  >
-                    NÃO
-                  </button>
-                </div>
-              ) : (
-                <div>
-                  <button
-                    type="button"
-                    onClick={ handleCancel }
-                    data-testid="return-confirm-modal"
-                  >
-                    VOLTAR
-                  </button>
-                </div>
-              )}
-          </ModalS>
-        </ModalWindowS>
-      )
-    );
-  }
+function ConfirmModal({
+  openModal,
+  handleConfirm,
+  handleCancel,
+  children,
+  confirmButtons,
+}) {
+  return (openModal && (
+    <ModalWindowS data-testid="confirm-modal">
+      <ModalS>
+        <h4>{ children }</h4>
+        { confirmButtons
+          ? (
+            <div>
+              <button
+                type="button"
+                onClick={ handleConfirm }
+                data-testid="confirm-btn"
+              >
+                SIM
+              </button>
+              <button
+                type="button"
+                onClick={ handleCancel }
+                data-testid="decline-btn"
+              >
+                NÃO
+              </button>
+            </div>
+          ) : (
+            <div>
+              <button
+                type="button"
+                onClick={ handleCancel }
+                data-testid="return-confirm-modal"
+              >
+                VOLTAR
+              </button>
+            </div>
+          )}
+      </ModalS>
+    </ModalWindowS>
+  ));
 }
 
 ConfirmModal.propTypes = {
