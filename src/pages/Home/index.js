@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
 import ColorModal from './HomeModals/ColorModal';
 import ClearModalContainer from './HomeModals/ClearModalContainer';
@@ -9,57 +9,42 @@ import Footer from '../../components/Footer';
 
 import HomeMainS from './styles';
 
-class HomePage extends Component {
-  constructor() {
-    super();
+export default function HomePage() {
+  const [modals, setModals] = useState({
+    clearModal: false,
+    colorModal: false,
+  });
 
-    this.handleToggleModal = this.handleToggleModal.bind(this);
-
-    this.state = {
-      clearModal: false,
-      colorModal: false,
-    };
-  }
-
-  handleToggleModal(name) {
+  const handleToggleModal = (name) => {
     if (name === 'clear') {
-      this.setState((prevState) => ({
-        clearModal: !prevState.clearModal }));
+      setModals(({ ...modals, clearModal: !modals.clearModal }));
     }
     if (name === 'color') {
-      this.setState((prevState) => ({
-        colorModal: !prevState.colorModal }));
+      setModals(({ ...modals, colorModal: !modals.colorModal }));
     }
-  }
+  };
 
-  render() {
-    const { clearModal, colorModal } = this.state;
-
-    return (
-      <section>
-        <ColorModal
-          handleToggleModal={ this.handleToggleModal }
-          colorModal={ colorModal }
+  const { clearModal, colorModal } = modals;
+  return (
+    <section>
+      <ColorModal
+        handleToggleModal={ handleToggleModal }
+        colorModal={ colorModal }
+      />
+      <ClearModalContainer
+        clearModal={ clearModal }
+        handleToggleModal={ handleToggleModal }
+      />
+      <Header handleToggleModal={ handleToggleModal }>
+        <h1>LISTA DE TAREFAS</h1>
+      </Header>
+      <HomeMainS>
+        <FormContainer
+          handleToggleModal={ handleToggleModal }
         />
-        <ClearModalContainer
-          clearModal={ clearModal }
-          handleToggleModal={ this.handleToggleModal }
-        />
-        <Header
-          handleToggleModal={ this.handleToggleModal }
-        >
-          <h1>LISTA DE TAREFAS</h1>
-        </Header>
-        <HomeMainS>
-          <FormContainer
-            handleToggleModal={ this.handleToggleModal }
-          />
-          <List />
-        </HomeMainS>
-        <Footer />
-      </section>
-    );
-  }
+        <List />
+      </HomeMainS>
+      <Footer />
+    </section>
+  );
 }
-
-export default HomePage;
