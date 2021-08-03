@@ -1,67 +1,55 @@
-import React, { Component } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-class FormInput extends Component {
-  constructor() {
-    super();
-    this.changeLabelText = this.changeLabelText.bind(this);
+export default function FormInput({
+  formInputClass,
+  formFocus,
+  taskText,
+  handleChange,
+  handleToggleFormClass,
+  handleToggleFocus,
+  handleResetFormClass,
+}) {
+  const input = useRef(null);
 
-    this.input = React.createRef();
-  }
-
-  componentDidUpdate() {
-    const { formFocus } = this.props;
+  useEffect(() => {
     if (formFocus) {
-      this.input.current.focus();
+      input.current.focus();
     }
-  }
+  }, [formFocus]);
 
-  changeLabelText() {
-    const { formInputClass } = this.props;
+  const changeLabelText = () => {
     if (formInputClass !== 'form-control') {
       return 'Escreva para adicionar tarefa';
     }
     return 'Escreva sua tarefa aqui';
-  }
+  };
 
-  render() {
-    const {
-      taskText,
-      formInputClass,
-      handleChangeText,
-      handleToggleFormClass,
-      handleToggleFocus,
-      handleResetFormClass,
-    } = this.props;
-
-    const labelText = this.changeLabelText();
-
-    return (
-      <div className="form-floating">
-        <input
-          className={ formInputClass }
-          ref={ this.input }
-          id="form-input"
-          type="text"
-          name="taskText"
-          value={ taskText }
-          onFocus={ handleToggleFocus }
-          onBlur={ () => {
-            handleToggleFocus(false);
-            handleResetFormClass();
-          } }
-          onChange={ (e) => {
-            handleChangeText(e);
-            handleToggleFormClass(e);
-          } }
-          placeholder="placeholder"
-          autoComplete="off"
-          maxLength={ 120 }
-        />
-        <label htmlFor="form-input">{ labelText }</label>
-      </div>
-    );
-  }
+  return (
+    <div className="form-floating">
+      <input
+        className={ formInputClass }
+        ref={ input }
+        id="form-input"
+        type="text"
+        name="taskText"
+        value={ taskText }
+        onFocus={ handleToggleFocus }
+        onBlur={ () => {
+          handleToggleFocus(false);
+          handleResetFormClass();
+        } }
+        onChange={ (e) => {
+          handleChange(e);
+          handleToggleFormClass(e);
+        } }
+        placeholder="placeholder"
+        autoComplete="off"
+        maxLength={ 120 }
+      />
+      <label htmlFor="form-input">{ changeLabelText() }</label>
+    </div>
+  );
 }
 
 FormInput.propTypes = {
@@ -69,10 +57,8 @@ FormInput.propTypes = {
   formFocus: PropTypes.oneOfType([
     PropTypes.object, PropTypes.bool]).isRequired,
   taskText: PropTypes.string.isRequired,
-  handleChangeText: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
   handleToggleFormClass: PropTypes.func.isRequired,
   handleToggleFocus: PropTypes.func.isRequired,
   handleResetFormClass: PropTypes.func.isRequired,
 };
-
-export default FormInput;

@@ -64,7 +64,7 @@ function FormContainer({
           taskText={ taskText }
           formInputClass={ formInputClass }
           formFocus={ formFocus }
-          handleChangeText={ handleChange }
+          handleChange={ handleChange }
           handleToggleFormClass={ handleToggleFormClass }
           handleToggleFocus={ handleToggleFocus }
           handleResetFormClass={ handleResetFormClass }
