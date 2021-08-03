@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { Component } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -8,67 +8,58 @@ import editBack from '../../../../../redux/reducers/listState/actions/editBack';
 import { Exit } from '../../../../../assets/icons';
 import { EditInputSection, ReturnButton } from './styles';
 
-class EditSection extends Component {
-  constructor() {
-    super();
+function EditSection({
+  id,
+  edit,
+  editText,
+  handleEditBack,
+  handleToggleEdit,
+  handleEditing,
+}) {
+  const editInput = useRef(null);
 
-    this.editInput = React.createRef();
-  }
-
-  componentDidMount() {
-    const { edit } = this.props;
+  useEffect(() => {
     if (edit) {
-      this.editInput.current.focus();
+      editInput.current.focus();
     }
-  }
+  }, [edit]);
 
-  render() {
-    const {
-      id,
-      editText,
-      handleEditBack,
-      handleToggleEdit,
-      handleEditing,
-    } = this.props;
+  const editClass = editText ? 'form-control' : 'form-control is-invalid';
 
-    let editClass = 'form-control';
-    if (!editText) editClass = 'form-control is-invalid';
-
-    return (
-      <EditInputSection className="form-floating">
-        <input
-          ref={ this.editInput }
-          className={ editClass }
-          type="text"
-          name="editText"
-          value={ editText }
-          placeholder="placeholder"
-          autoComplete="off"
-          onChange={ handleEditing }
-          onKeyUp={ (e) => {
-            if (e.key === 'Enter') {
-              handleToggleEdit();
-              handleEditBack(editText, id);
-            }
-          } }
-          onBlur={ () => {
+  return (
+    <EditInputSection className="form-floating">
+      <input
+        ref={ editInput }
+        className={ editClass }
+        type="text"
+        name="editText"
+        value={ editText }
+        placeholder="placeholder"
+        autoComplete="off"
+        onChange={ handleEditing }
+        onKeyUp={ (e) => {
+          if (e.key === 'Enter') {
             handleToggleEdit();
             handleEditBack(editText, id);
-          } }
-          maxLength={ 120 }
-        />
-        <label>Escreva para editar sua tarefa</label>
-        <ReturnButton
-          onClick={ () => {
-            handleToggleEdit();
-            handleEditBack(editText, id);
-          } }
-        >
-          <Exit title="Voltar" />
-        </ReturnButton>
-      </EditInputSection>
-    );
-  }
+          }
+        } }
+        onBlur={ () => {
+          handleToggleEdit();
+          handleEditBack(editText, id);
+        } }
+        maxLength={ 120 }
+      />
+      <label>Escreva para editar sua tarefa</label>
+      <ReturnButton
+        onClick={ () => {
+          handleToggleEdit();
+          handleEditBack(editText, id);
+        } }
+      >
+        <Exit title="Voltar" />
+      </ReturnButton>
+    </EditInputSection>
+  );
 }
 
 const mapDispatchToProps = (dispatch) => ({

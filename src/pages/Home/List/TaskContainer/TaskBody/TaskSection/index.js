@@ -18,7 +18,7 @@ function TaskSection({
     if (checkedItems.includes(id)) {
       check.current.checked = true;
     }
-  });
+  }, [checkedItems, id]);
 
   return (
     <TaskLabelS
