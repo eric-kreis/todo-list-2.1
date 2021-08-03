@@ -7,21 +7,19 @@ import TaskContainer from './TaskContainer';
 
 function List({ display, tasks, checkedItems }) {
   const filterTasks = () => {
-    let filtredTasks = tasks;
-    if (display === 'completed') {
-      filtredTasks = tasks.filter(({ id }) => checkedItems.includes(id));
-    }
     if (display === 'toDo') {
-      filtredTasks = tasks.filter(({ id }) => !checkedItems.includes(id));
+      return tasks.filter(({ id }) => !checkedItems.includes(id));
     }
-    return filtredTasks;
+    if (display === 'completed') {
+      return tasks.filter(({ id }) => checkedItems.includes(id));
+    }
+    return tasks;
   };
 
-  const filtredTasks = filterTasks();
   return (
     <ListS>
       {
-        filtredTasks.map(({ id, text }) => (
+        filterTasks().map(({ id, text }) => (
           <TaskContainer
             key={ id }
             id={ id }

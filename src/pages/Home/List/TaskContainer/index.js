@@ -6,32 +6,27 @@ import TaskBody from './TaskBody';
 import ItemS from './styles';
 
 export default function TaskContainer({ id, text }) {
-  const [editStatus, setEditStatus] = useState({
-    edit: false,
-    editText: text,
-  });
+  const [editText, setEditText] = useState(text);
+  const [editStatus, setEditStatus] = useState(false);
+
+  const handleEditing = ({ target: { value } }) => {
+    setEditText(value);
+  };
 
   const editRules = () => {
-    const { edit, editText } = editStatus;
-    if (!edit && !editText) {
-      setEditStatus({ ...editStatus, editText: text });
+    if (!editStatus && !editText) {
+      setEditText(text);
     }
   };
 
   const handleToggleEdit = () => {
-    const { edit } = editStatus;
-    setEditStatus({ ...editStatus, edit: !edit });
+    setEditStatus(!editStatus);
     editRules();
-  };
-
-  const handleEditing = ({ target }) => {
-    const { name, value } = target;
-    setEditStatus({ ...editStatus, [name]: value });
   };
 
   return (
     <ItemS>
-      { !editStatus.edit
+      { !editStatus
         ? (
           <TaskBody
             id={ id }
@@ -42,8 +37,8 @@ export default function TaskContainer({ id, text }) {
         : (
           <EditSection
             id={ id }
-            edit={ editStatus.edit }
-            editText={ editStatus.editText }
+            editStatus={ editStatus }
+            editText={ editText }
             handleToggleEdit={ handleToggleEdit }
             handleEditing={ handleEditing }
           />

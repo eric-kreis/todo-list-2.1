@@ -10,7 +10,7 @@ import { EditInputSection, ReturnButton } from './styles';
 
 function EditSection({
   id,
-  edit,
+  editStatus,
   editText,
   handleEditBack,
   handleToggleEdit,
@@ -19,10 +19,10 @@ function EditSection({
   const editInput = useRef(null);
 
   useEffect(() => {
-    if (edit) {
+    if (editStatus) {
       editInput.current.focus();
     }
-  }, [edit]);
+  }, [editStatus]);
 
   const editClass = editText ? 'form-control' : 'form-control is-invalid';
 
@@ -68,7 +68,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 EditSection.propTypes = {
   id: PropTypes.number.isRequired,
-  edit: PropTypes.bool.isRequired,
+  editStatus: PropTypes.bool.isRequired,
   editText: PropTypes.string.isRequired,
   handleEditBack: PropTypes.func.isRequired,
   handleToggleEdit: PropTypes.func.isRequired,
