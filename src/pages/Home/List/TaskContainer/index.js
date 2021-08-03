@@ -8,7 +8,7 @@ import ItemS from './styles';
 export default function TaskContainer({ id, text }) {
   const [editStatus, setEditStatus] = useState({
     edit: false,
-    editText: props.text,
+    editText: text,
   });
 
   const editRules = () => {

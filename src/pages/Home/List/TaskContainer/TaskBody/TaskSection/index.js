@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -6,42 +6,34 @@ import TaskLabelS from './styles';
 
 import toggleCheck from '../../../../../../redux/reducers/listState/actions/toggleCheck';
 
-class TaskSection extends Component {
-  constructor() {
-    super();
-    this.check = React.createRef();
-  }
+function TaskSection({
+  id,
+  checkedItems,
+  handleToggleCheck,
+  children,
+}) {
+  const check = useRef(null);
 
-  componentDidMount() {
-    const { checkedItems, id } = this.props;
+  useEffect(() => {
     if (checkedItems.includes(id)) {
-      this.check.current.checked = true;
+      check.current.checked = true;
     }
-  }
+  });
 
-  render() {
-    const {
-      id,
-      checkedItems,
-      handleToggleCheck,
-      children,
-    } = this.props;
-
-    return (
-      <TaskLabelS
-        checkedItems={ checkedItems }
-        id={ id }
-      >
-        <input
-          ref={ this.check }
-          type="checkbox"
-          value={ id }
-          onChange={ handleToggleCheck }
-        />
-        <span>{ children }</span>
-      </TaskLabelS>
-    );
-  }
+  return (
+    <TaskLabelS
+      checkedItems={ checkedItems }
+      id={ id }
+    >
+      <input
+        ref={ check }
+        type="checkbox"
+        value={ id }
+        onChange={ handleToggleCheck }
+      />
+      <span>{ children }</span>
+    </TaskLabelS>
+  );
 }
 
 const mapStateToProps = ({ listState }) => ({
