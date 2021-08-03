@@ -5,15 +5,8 @@ import PropTypes from 'prop-types';
 import ListS from './styles';
 import TaskContainer from './TaskContainer';
 
-class List extends React.Component {
-  constructor() {
-    super();
-    this.filterTasks = this.filterTasks.bind(this);
-  }
-
-  filterTasks() {
-    const { display, tasks, checkedItems } = this.props;
-
+function List({ display, tasks, checkedItems }) {
+  const filterTasks = () => {
     let filtredTasks = tasks;
     if (display === 'completed') {
       filtredTasks = tasks.filter(({ id }) => checkedItems.includes(id));
@@ -22,24 +15,22 @@ class List extends React.Component {
       filtredTasks = tasks.filter(({ id }) => !checkedItems.includes(id));
     }
     return filtredTasks;
-  }
+  };
 
-  render() {
-    const filtredTasks = this.filterTasks();
-    return (
-      <ListS>
-        {
-          filtredTasks.map(({ id, text }) => (
-            <TaskContainer
-              key={ id }
-              id={ id }
-              text={ text }
-            />
-          ))
-        }
-      </ListS>
-    );
-  }
+  const filtredTasks = filterTasks();
+  return (
+    <ListS>
+      {
+        filtredTasks.map(({ id, text }) => (
+          <TaskContainer
+            key={ id }
+            id={ id }
+            text={ text }
+          />
+        ))
+      }
+    </ListS>
+  );
 }
 
 const mapStateToProps = ({ listState }) => ({
