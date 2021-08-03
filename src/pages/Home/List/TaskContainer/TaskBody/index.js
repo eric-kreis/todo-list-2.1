@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -9,40 +9,36 @@ import { TaskBodyS, TaskButtonS } from './styles';
 import IconButtonS from '../../../../../styles/IconButtonS.styles';
 import { Edit, Remove } from '../../../../../assets/icons';
 
-class TaskBody extends Component {
-  render() {
-    const {
-      id,
-      text,
-      handleRemoveItem,
-      handleToggleEdit,
-    } = this.props;
-
-    return (
-      <TaskBodyS>
-        <TaskSection
-          id={ id }
+function TaskBody({
+  id,
+  text,
+  handleRemoveItem,
+  handleToggleEdit,
+}) {
+  return (
+    <TaskBodyS>
+      <TaskSection
+        id={ id }
+      >
+        { text }
+      </TaskSection>
+      <TaskButtonS>
+        <IconButtonS
+          medium
+          onClick={ () => { handleToggleEdit(); } }
         >
-          { text }
-        </TaskSection>
-        <TaskButtonS>
-          <IconButtonS
-            medium
-            onClick={ () => { handleToggleEdit(); } }
-          >
-            <Edit title="Editar tarefa" />
-          </IconButtonS>
-          <IconButtonS
-            medium
-            clear
-            onClick={ () => { handleRemoveItem(id); } }
-          >
-            <Remove title="Remover tarefa" />
-          </IconButtonS>
-        </TaskButtonS>
-      </TaskBodyS>
-    );
-  }
+          <Edit title="Editar tarefa" />
+        </IconButtonS>
+        <IconButtonS
+          medium
+          clear
+          onClick={ () => { handleRemoveItem(id); } }
+        >
+          <Remove title="Remover tarefa" />
+        </IconButtonS>
+      </TaskButtonS>
+    </TaskBodyS>
+  );
 }
 
 const mapDispatchToProps = (dispatch) => ({
