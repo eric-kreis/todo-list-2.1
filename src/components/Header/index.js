@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Switch from 'react-switch';
@@ -9,43 +9,38 @@ import Logo from '../../assets/Logo';
 import { PageHeaderS, ThemeButtonS } from './styles';
 import { Sun, Moon, ColorPalette } from '../../assets/icons';
 
-class Header extends Component {
-  render() {
-    const {
-      theme,
-      children,
-      handleToggleTheme,
-      handleToggleModal,
-    } = this.props;
-
-    const { title, colors } = theme;
-
-    return (
-      <PageHeaderS>
-        <Logo />
-        { children }
-        <div>
-          <Switch
-            checked={ title === 'dark' }
-            onChange={ handleToggleTheme }
-            checkedIcon={ <Sun className="sun" /> }
-            uncheckedIcon={ <Moon className="moon" /> }
-            height={ 18 }
-            handleDiameter={ 26 }
-            width={ 50 }
-            offColor={ colors.background }
-            onColor={ colors.background }
-          />
-          <ThemeButtonS
-            data-testid="color-btn"
-            onClick={ () => { handleToggleModal('color'); } }
-          >
-            <ColorPalette title="Mudar cor" />
-          </ThemeButtonS>
-        </div>
-      </PageHeaderS>
-    );
-  }
+function Header({
+  theme,
+  children,
+  handleToggleModal,
+  handleToggleTheme,
+}) {
+  const { title, colors } = theme;
+  return (
+    <PageHeaderS>
+      <Logo />
+      { children }
+      <div>
+        <Switch
+          checked={ title === 'dark' }
+          onChange={ handleToggleTheme }
+          checkedIcon={ <Sun className="sun" /> }
+          uncheckedIcon={ <Moon className="moon" /> }
+          height={ 18 }
+          handleDiameter={ 26 }
+          width={ 50 }
+          offColor={ colors.background }
+          onColor={ colors.background }
+        />
+        <ThemeButtonS
+          data-testid="color-btn"
+          onClick={ () => { handleToggleModal('color'); } }
+        >
+          <ColorPalette title="Mudar cor" />
+        </ThemeButtonS>
+      </div>
+    </PageHeaderS>
+  );
 }
 
 Header.propTypes = {

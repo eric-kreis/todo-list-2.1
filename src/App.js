@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 
 import GlobalStyle from './styles/global';
 import Routes from './Routes';
-import './styles/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 class App extends Component {
   render() {
