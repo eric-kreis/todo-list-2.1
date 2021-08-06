@@ -9,7 +9,7 @@ const PageFooterS = styled.footer`
   bottom: 0;
   display: flex;
   justify-content: space-between;
-  padding: 4px 32px;
+  padding: 4px 36px;
   position: absolute;
   width: 100%;
 

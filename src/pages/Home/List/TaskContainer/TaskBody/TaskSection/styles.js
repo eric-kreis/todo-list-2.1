@@ -10,7 +10,7 @@ const TaskLabelS = styled.label`
   ))};
   max-width: 80%;
   overflow: hidden;
-  width: 85%;
+  width: 100%;
 
   input {
     margin-right: 36px;
@@ -22,6 +22,10 @@ const TaskLabelS = styled.label`
 
   span {
     max-width: 100%;
+  }
+
+  @media(max-width: 560px) {
+    font-size: 14px;
   }
 `;
 

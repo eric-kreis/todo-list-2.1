@@ -19,6 +19,10 @@ const IconButtonS = styled.button`
     return theme.colors.primary;
   }};
   }
+
+  @media(max-width: 560px) {
+    font-size: ${({ medium }) => (medium) && '16px'};
+  }
 `;
 
 export default IconButtonS;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const TaskBodyS = styled.main`
+export const TaskBodyS = styled.section`
   display: flex;
   justify-content: space-around;
   height: 100%;
@@ -26,4 +26,12 @@ export const TaskButtonS = styled.div`
   justify-content: space-between;
   width: 15%;
   opacity: 0;
+
+  @media(max-width: 768px) {
+    font-size: 15px;
+  }
+
+  @media(max-width: 560px) {
+    justify-content: space-evenly;
+  }
 `;
