@@ -1,17 +1,18 @@
-import React, { useEffect, useRef } from 'react';
-import { connect } from 'react-redux';
+import React, { useCallback, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import TaskLabelS from './styles';
-
 import toggleCheck from '../../../../../../redux/reducers/listState/actions/toggleCheck';
 
-function TaskSection({
-  id,
-  checkedItems,
-  handleToggleCheck,
-  children,
-}) {
+export default function TaskSection({ id, children }) {
+  const { checkedItems } = useSelector(({ listState }) => listState);
+
+  const dispatch = useDispatch();
+
+  const handleToggleCheck = useCallback((e) => (
+    dispatch(toggleCheck(e))), [dispatch]);
+
   const check = useRef(null);
 
   useEffect(() => {
@@ -36,19 +37,7 @@ function TaskSection({
   );
 }
 
-const mapStateToProps = ({ listState }) => ({
-  checkedItems: listState.checkedItems,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  handleToggleCheck: (e) => dispatch(toggleCheck(e)),
-});
-
 TaskSection.propTypes = {
-  id: PropTypes.number.isRequired,
-  checkedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
+  id: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
-  handleToggleCheck: PropTypes.func.isRequired,
 };
-
-export default connect(mapStateToProps, mapDispatchToProps)(TaskSection);

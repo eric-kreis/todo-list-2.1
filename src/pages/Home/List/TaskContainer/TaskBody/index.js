@@ -41,7 +41,7 @@ export default function TaskBody({ id, text, handleToggleEdit }) {
 }
 
 TaskBody.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   handleToggleEdit: PropTypes.func.isRequired,
 };

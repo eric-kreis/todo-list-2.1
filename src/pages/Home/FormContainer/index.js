@@ -85,7 +85,6 @@ function FormContainer({
       </SectionFormS>
       <SectionFormS>
         <FormShowButtonS
-          name="display"
           value="all"
           onClick={ handleDisplayTasks }
           display={ display }
@@ -93,7 +92,6 @@ function FormContainer({
           Todas
         </FormShowButtonS>
         <FormShowButtonS
-          name="display"
           value="toDo"
           onClick={ handleDisplayTasks }
           display={ display }
@@ -101,7 +99,6 @@ function FormContainer({
           Pendentes
         </FormShowButtonS>
         <FormShowButtonS
-          name="display"
           value="completed"
           onClick={ handleDisplayTasks }
           display={ display }

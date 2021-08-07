@@ -48,6 +48,6 @@ export default function TaskContainer({ id, text }) {
 }
 
 TaskContainer.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
 };
