@@ -1,5 +1,5 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import clearAll from '../../../redux/reducers/listState/actions/clearAll';
@@ -8,16 +8,19 @@ import clearDone from '../../../redux/reducers/listState/actions/clearDone';
 
 import ConfirmModal from './ConfirmModal';
 
-function ClearModalContainer({
-  tasks,
-  checkedItems,
-  display,
-  clearModal,
-  handleClearAll,
-  handleClearToDo,
-  handleClearDone,
-  handleToggleModal,
-}) {
+export default function ClearModalContainer({ clearModal, handleToggleModal }) {
+  const dispatch = useDispatch();
+
+  const handleClearAll = useCallback(() => dispatch(clearAll()), [dispatch]);
+  const handleClearToDo = useCallback(() => dispatch(clearToDo()), [dispatch]);
+  const handleClearDone = useCallback(() => dispatch(clearDone()), [dispatch]);
+
+  const {
+    display,
+    tasks,
+    checkedItems,
+  } = useSelector(({ listState }) => listState);
+
   const handleClear = () => {
     if (display === 'toDo') {
       handleClearToDo();
@@ -63,27 +66,7 @@ function ClearModalContainer({
   );
 }
 
-const mapStateToProps = ({ listState }) => ({
-  display: listState.display,
-  tasks: listState.tasks,
-  checkedItems: listState.checkedItems,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  handleClearAll: () => dispatch(clearAll()),
-  handleClearToDo: () => dispatch(clearToDo()),
-  handleClearDone: () => dispatch(clearDone()),
-});
-
 ClearModalContainer.propTypes = {
-  tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
-  checkedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
-  display: PropTypes.string.isRequired,
   clearModal: PropTypes.bool.isRequired,
-  handleClearAll: PropTypes.func.isRequired,
-  handleClearToDo: PropTypes.func.isRequired,
-  handleClearDone: PropTypes.func.isRequired,
   handleToggleModal: PropTypes.func.isRequired,
 };
-
-export default connect(mapStateToProps, mapDispatchToProps)(ClearModalContainer);
