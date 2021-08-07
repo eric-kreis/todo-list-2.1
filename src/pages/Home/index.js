@@ -39,9 +39,7 @@ export default function HomePage() {
         <h1>LISTA DE TAREFAS</h1>
       </Header>
       <HomeMainS>
-        <FormContainer
-          handleToggleModal={ handleToggleModal }
-        />
+        <FormContainer handleToggleModal={ handleToggleModal } />
         <List />
       </HomeMainS>
       <Footer />
