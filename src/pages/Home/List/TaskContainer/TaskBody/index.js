@@ -1,5 +1,5 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import removeItem from '../../../../../redux/reducers/listState/actions/removeItem';
@@ -9,12 +9,11 @@ import { TaskBodyS, TaskButtonS } from './styles';
 import IconButtonS from '../../../../../styles/IconButtonS.styles';
 import { Edit, Remove } from '../../../../../assets/icons';
 
-function TaskBody({
-  id,
-  text,
-  handleRemoveItem,
-  handleToggleEdit,
-}) {
+export default function TaskBody({ id, text, handleToggleEdit }) {
+  const dispatch = useDispatch();
+  const handleRemoveItem = useCallback(() => (
+    dispatch(removeItem(id))), [dispatch, id]);
+
   return (
     <TaskBodyS>
       <TaskSection
@@ -25,14 +24,14 @@ function TaskBody({
       <TaskButtonS>
         <IconButtonS
           medium
-          onClick={ () => { handleToggleEdit(); } }
+          onClick={ handleToggleEdit }
         >
           <Edit title="Editar tarefa" />
         </IconButtonS>
         <IconButtonS
           medium
           clear
-          onClick={ () => { handleRemoveItem(id); } }
+          onClick={ handleRemoveItem }
         >
           <Remove title="Remover tarefa" />
         </IconButtonS>
@@ -41,15 +40,8 @@ function TaskBody({
   );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  handleRemoveItem: (id) => dispatch(removeItem(id)),
-});
-
 TaskBody.propTypes = {
   id: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
-  handleRemoveItem: PropTypes.func.isRequired,
   handleToggleEdit: PropTypes.func.isRequired,
 };
-
-export default connect(null, mapDispatchToProps)(TaskBody);
