@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Switch from 'react-switch';
+import { useDispatch } from 'react-redux';
 import { ThemeContext } from 'styled-components';
 import toggleTheme from '../../redux/reducers/changeTheme/actions/toggleTheme';
 
@@ -9,12 +9,11 @@ import Logo from '../../assets/Logo';
 import { PageHeaderS, ThemeButtonS } from './styles';
 import { Sun, Moon, ColorPalette } from '../../assets/icons';
 
-function Header({
-  children,
-  handleToggleModal,
-  handleToggleTheme,
-}) {
+export default function Header({ children, handleToggleModal }) {
   const { title, colors } = useContext(ThemeContext);
+  const dispatch = useDispatch();
+
+  const handleToggleTheme = () => dispatch(toggleTheme());
 
   return (
     <PageHeaderS>
@@ -33,7 +32,6 @@ function Header({
           onColor={ colors.background }
         />
         <ThemeButtonS
-          data-testid="color-btn"
           onClick={ () => { handleToggleModal('color'); } }
         >
           <ColorPalette title="Mudar cor" />
@@ -45,12 +43,5 @@ function Header({
 
 Header.propTypes = {
   children: PropTypes.node.isRequired,
-  handleToggleTheme: PropTypes.func.isRequired,
   handleToggleModal: PropTypes.func.isRequired,
 };
-
-const mapDispatchToProps = (dispatch) => ({
-  handleToggleTheme: () => dispatch(toggleTheme()),
-});
-
-export default connect(null, mapDispatchToProps)(Header);
