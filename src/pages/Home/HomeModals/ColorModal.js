@@ -1,5 +1,5 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import changeColor from '../../../redux/reducers/changeTheme/actions/changeColor';
@@ -11,45 +11,44 @@ import {
   ColorButtonsContainerS,
 } from './styles';
 
-function ColorModal({ handleToggleModal, colorModal, handleChangeColor }) {
+export default function ColorModal({ handleToggleModal, colorModal }) {
+  const dispatch = useDispatch();
+
+  const handleChangeColor = useCallback((e) => (
+    dispatch(changeColor(e))), [dispatch]);
+
   return (colorModal
     && (
-      <ModalWindowS data-testid="color-modal">
+      <ModalWindowS>
         <ColorsContainerS>
           <ColorButtonsContainerS>
             <ColorButtonS
               onClick={ handleChangeColor }
-              color="#5099C6"
               value="blue"
               title="Azul"
             />
             <ColorButtonS
               onClick={ handleChangeColor }
-              color="#68B684"
               value="green"
               title="Verde"
             />
             <ColorButtonS
               onClick={ handleChangeColor }
-              color="#EDACBD"
               value="pink"
               title="Rosa"
             />
             <ColorButtonS
               onClick={ handleChangeColor }
-              color="#E0AAFF"
               value="purple"
               title="Roxo"
             />
             <ColorButtonS
               onClick={ handleChangeColor }
-              color="#C4CBD1"
               value="white"
               title="Branco"
             />
             <ColorButtonS
               onClick={ handleChangeColor }
-              color="#AE3231"
               value="red"
               title="Vermelho"
             />
@@ -58,7 +57,6 @@ function ColorModal({ handleToggleModal, colorModal, handleChangeColor }) {
             type="button"
             onClick={ () => { handleToggleModal('color'); } }
             className="modal-button"
-            data-testid="return-color-modal"
           >
             VOLTAR
           </button>
@@ -70,12 +68,5 @@ function ColorModal({ handleToggleModal, colorModal, handleChangeColor }) {
 
 ColorModal.propTypes = {
   colorModal: PropTypes.bool.isRequired,
-  handleChangeColor: PropTypes.func.isRequired,
   handleToggleModal: PropTypes.func.isRequired,
 };
-
-const mapDispatchToProps = (dispatch) => ({
-  handleChangeColor: (e) => dispatch(changeColor(e)),
-});
-
-export default connect(null, mapDispatchToProps)(ColorModal);

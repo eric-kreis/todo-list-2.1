@@ -11,9 +11,12 @@ import ConfirmModal from './ConfirmModal';
 export default function ClearModalContainer({ clearModal, handleToggleModal }) {
   const dispatch = useDispatch();
 
-  const handleClearAll = useCallback(() => dispatch(clearAll()), [dispatch]);
-  const handleClearToDo = useCallback(() => dispatch(clearToDo()), [dispatch]);
-  const handleClearDone = useCallback(() => dispatch(clearDone()), [dispatch]);
+  const handleClearAll = useCallback(() => (
+    dispatch(clearAll())), [dispatch]);
+  const handleClearToDo = useCallback(() => (
+    dispatch(clearToDo())), [dispatch]);
+  const handleClearDone = useCallback(() => (
+    dispatch(clearDone())), [dispatch]);
 
   const {
     display,

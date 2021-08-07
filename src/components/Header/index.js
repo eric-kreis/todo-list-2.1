@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Switch from 'react-switch';
 import { useDispatch } from 'react-redux';
@@ -13,7 +13,8 @@ export default function Header({ children, handleToggleModal }) {
   const { title, colors } = useContext(ThemeContext);
   const dispatch = useDispatch();
 
-  const handleToggleTheme = () => dispatch(toggleTheme());
+  const handleToggleTheme = useCallback(() => (
+    dispatch(toggleTheme())), [dispatch]);
 
   return (
     <PageHeaderS>

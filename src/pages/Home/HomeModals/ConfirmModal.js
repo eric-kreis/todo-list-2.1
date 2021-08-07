@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { ModalWindowS, ModalS } from './styles';
 
-function ConfirmModal({
+export default function ConfirmModal({
   openModal,
   handleConfirm,
   handleCancel,
@@ -11,7 +11,7 @@ function ConfirmModal({
   confirmButtons,
 }) {
   return (openModal && (
-    <ModalWindowS data-testid="confirm-modal">
+    <ModalWindowS>
       <ModalS>
         <h4>{ children }</h4>
         { confirmButtons
@@ -20,14 +20,12 @@ function ConfirmModal({
               <button
                 type="button"
                 onClick={ handleConfirm }
-                data-testid="confirm-btn"
               >
                 SIM
               </button>
               <button
                 type="button"
                 onClick={ handleCancel }
-                data-testid="decline-btn"
               >
                 NÃO
               </button>
@@ -37,7 +35,6 @@ function ConfirmModal({
               <button
                 type="button"
                 onClick={ handleCancel }
-                data-testid="return-confirm-modal"
               >
                 VOLTAR
               </button>
@@ -55,5 +52,3 @@ ConfirmModal.propTypes = {
   children: PropTypes.node.isRequired,
   confirmButtons: PropTypes.bool.isRequired,
 };
-
-export default ConfirmModal;

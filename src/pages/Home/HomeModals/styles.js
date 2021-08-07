@@ -1,6 +1,7 @@
 /* eslint-disable no-magic-numbers */
 import styled from 'styled-components';
 import { transparentize } from 'polished';
+import * as themeColors from '../../../themes';
 
 export const ModalWindowS = styled.main`
   background-color: ${({ theme }) => theme.modal.windowBackground};
@@ -90,7 +91,8 @@ export const ColorButtonS = styled.button`
   border: none;
   box-shadow: 1px 1px 6px ${transparentize(0.5, 'black')};
   border-radius: 50%;
-  background-color: ${({ color }) => color};
+  background-color: ${({ value }) => (
+    themeColors[value].light.colors.primary)};
   height: 50px;
   margin: 5px;
   width: 50px;
