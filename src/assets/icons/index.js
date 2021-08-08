@@ -16,10 +16,10 @@ export const Trash = IoMdTrash;
 export const Edit = MdModeEdit;
 
 // Remove
-export const Remove = IoMdRemove
+export const Remove = IoMdRemove;
 
 // Exit
-export const Exit = IoExitOutline; 
+export const Exit = IoExitOutline;
 
 // Sun
 export const Sun = HiSun;

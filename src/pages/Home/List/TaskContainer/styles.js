@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ItemS = styled.li`
+const ItemS = styled.li`
   border-bottom: 1px solid ${({ theme }) => theme.colors.text};
   display: flex;
   align-items: center;
@@ -22,3 +22,5 @@ export const ItemS = styled.li`
     font-display: fallback;
   }
 `;
+
+export default ItemS;

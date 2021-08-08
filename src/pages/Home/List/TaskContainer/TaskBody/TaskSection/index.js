@@ -1,60 +1,43 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useCallback, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { TaskLabelS } from './styles';
-
+import TaskLabelS from './styles';
 import toggleCheck from '../../../../../../redux/reducers/listState/actions/toggleCheck';
 
-class TaskSection extends Component {
-  constructor() {
-    super();
-    this.check = React.createRef();
-  }
+export default function TaskSection({ id, children }) {
+  const { checkedItems } = useSelector(({ listState }) => listState);
 
-  componentDidMount() {
-    const { checkedItems, id } = this.props;
+  const dispatch = useDispatch();
+
+  const handleToggleCheck = useCallback((e) => (
+    dispatch(toggleCheck(e))), [dispatch]);
+
+  const check = useRef(null);
+
+  useEffect(() => {
     if (checkedItems.includes(id)) {
-      this.check.current.checked = true;
+      check.current.checked = true;
     }
-  }
+  }, [checkedItems, id]);
 
-  render() {
-    const {
-      id,
-      checkedItems,
-      toggleCheck: handleToggleCheck,
-      children,
-    } = this.props;
-
-    return (
-      <TaskLabelS
-        checkedItems={ checkedItems }
-        id={ id }
-      >
-        <input
-          ref={ this.check }
-          type="checkbox"
-          value={ id }
-          onChange={ handleToggleCheck }
-        />
-        <span>{ children }</span>
-      </TaskLabelS>
-    );
-  }
+  return (
+    <TaskLabelS
+      checkedItems={ checkedItems }
+      id={ id }
+    >
+      <input
+        ref={ check }
+        type="checkbox"
+        value={ id }
+        onChange={ handleToggleCheck }
+      />
+      <span>{ children }</span>
+    </TaskLabelS>
+  );
 }
 
-const mapStateToProps = ({ listState }) => ({
-  checkedItems: listState.checkedItems,
-});
-
-const mapDispatchToProps = { toggleCheck };
-
 TaskSection.propTypes = {
-  id: PropTypes.number.isRequired,
-  checkedItems: PropTypes.arrayOf(PropTypes.number).isRequired,
+  id: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
-  toggleCheck: PropTypes.func.isRequired,
 };
-
-export default connect(mapStateToProps, mapDispatchToProps)(TaskSection);

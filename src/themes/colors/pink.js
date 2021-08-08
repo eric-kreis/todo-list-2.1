@@ -6,7 +6,7 @@ export const lightPink = {
 
     background: '#f4f4f4',
     text: '#943E57',
-    input: '#943E57'
+    input: '#943E57',
   },
   modal: {
     windowBackground: 'rgba(0, 0, 0, 0.8)',
@@ -22,7 +22,7 @@ export const darkPink = {
 
     background: '#212529',
     text: '#fff',
-    input: '#000'
+    input: '#000',
   },
   modal: {
     windowBackground: 'rgba(255, 255, 255, 0.664)',

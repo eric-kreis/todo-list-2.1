@@ -1,38 +1,48 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { ModalWindowS, ModalS } from './styles';
-class ConfirmModal extends Component {
-  render() {
-    const {
-      openModal,
-      handleConfirm,
-      handleCancel,
-      children,
-      confirmButtons,
-    } = this.props;
-    return (openModal
-      && (
-        <ModalWindowS>
-          <ModalS>
-            <h4>{ children }</h4>
-            { confirmButtons
-            ? (
-              <div>
-                <button onClick={ handleConfirm }>SIM</button>
-                <button onClick={ handleCancel }>NÃO</button>
-              </div>
 
-            ) : (
-              <div>
-                <button onClick={ handleCancel } >VOLTAR</button>
-              </div>
-            )}
-          </ModalS>
-        </ModalWindowS>
-      )
-    );
-  }
+export default function ConfirmModal({
+  openModal,
+  handleConfirm,
+  handleCancel,
+  children,
+  confirmButtons,
+}) {
+  return (openModal && (
+    <ModalWindowS>
+      <ModalS>
+        <h4>{ children }</h4>
+        { confirmButtons
+          ? (
+            <div>
+              <button
+                type="button"
+                onClick={ handleConfirm }
+              >
+                SIM
+              </button>
+              <button
+                type="button"
+                onClick={ handleCancel }
+              >
+                NÃO
+              </button>
+            </div>
+          ) : (
+            <div>
+              <button
+                type="button"
+                onClick={ handleCancel }
+              >
+                VOLTAR
+              </button>
+            </div>
+          )}
+      </ModalS>
+    </ModalWindowS>
+  ));
 }
 
 ConfirmModal.propTypes = {
@@ -42,5 +52,3 @@ ConfirmModal.propTypes = {
   children: PropTypes.node.isRequired,
   confirmButtons: PropTypes.bool.isRequired,
 };
-
-export default ConfirmModal;

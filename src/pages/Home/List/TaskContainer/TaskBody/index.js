@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import removeItem from '../../../../../redux/reducers/listState/actions/removeItem';
@@ -9,49 +9,39 @@ import { TaskBodyS, TaskButtonS } from './styles';
 import IconButtonS from '../../../../../styles/IconButtonS.styles';
 import { Edit, Remove } from '../../../../../assets/icons';
 
-class TaskBody extends Component {
-  render() {
-    const {
-      id,
-      text,
-      removeItem: handleRemoveItem,
-      handleToggleEdit,
-    } = this.props;
+export default function TaskBody({ id, text, handleToggleEdit }) {
+  const dispatch = useDispatch();
+  const handleRemoveItem = useCallback(() => (
+    dispatch(removeItem(id))), [dispatch, id]);
 
-    return (
-      <TaskBodyS>
-        <TaskSection
-          id={ id }
+  return (
+    <TaskBodyS>
+      <TaskSection
+        id={ id }
+      >
+        { text }
+      </TaskSection>
+      <TaskButtonS>
+        <IconButtonS
+          medium
+          onClick={ handleToggleEdit }
         >
-          { text }
-        </TaskSection>
-        <TaskButtonS>
-          <IconButtonS
-            medium
-            onClick={ () => { handleToggleEdit(); } }
-          >
-            <Edit title="Editar tarefa" />
-          </IconButtonS>
-          <IconButtonS
-            medium
-            clear
-            onClick={ () => { handleRemoveItem(id); } }
-          >
-            <Remove title="Remover tarefa" />
-          </IconButtonS>
-        </TaskButtonS>
-      </TaskBodyS>
-    );
-  }
+          <Edit title="Editar tarefa" />
+        </IconButtonS>
+        <IconButtonS
+          medium
+          clear
+          onClick={ handleRemoveItem }
+        >
+          <Remove title="Remover tarefa" />
+        </IconButtonS>
+      </TaskButtonS>
+    </TaskBodyS>
+  );
 }
 
-const mapDispatchToProps = { removeItem };
-
 TaskBody.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
-  removeItem: PropTypes.func.isRequired,
   handleToggleEdit: PropTypes.func.isRequired,
 };
-
-export default connect(null, mapDispatchToProps)(TaskBody);

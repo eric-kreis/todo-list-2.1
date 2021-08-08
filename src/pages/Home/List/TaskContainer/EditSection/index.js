@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import React, { useCallback, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import editBack from '../../../../../redux/reducers/listState/actions/editBack';
@@ -7,77 +8,68 @@ import editBack from '../../../../../redux/reducers/listState/actions/editBack';
 import { Exit } from '../../../../../assets/icons';
 import { EditInputSection, ReturnButton } from './styles';
 
-class EditSection extends Component {
-  constructor() {
-    super();
+export default function EditSection({
+  id,
+  editStatus,
+  editText,
+  handleToggleEdit,
+  handleEditing,
+}) {
+  const dispatch = useDispatch();
 
-    this.editInput = React.createRef();
-  }
+  const handleEditBack = useCallback((text) => (
+    dispatch(editBack(text, id))), [dispatch, id]);
 
-  componentDidMount() {
-    const { edit } = this.props;
-    if (edit) {
-      this.editInput.current.focus();
+  const editInput = useRef(null);
+
+  useEffect(() => {
+    if (editStatus) {
+      editInput.current.focus();
     }
-  }
+  }, [editStatus]);
 
-  render() {
-    const {
-      id,
-      editText,
-      editBack: handleEditBack,
-      handleToggleEdit,
-      handleEditing,
-    } = this.props;
+  const editClass = editText ? 'form-control' : 'form-control is-invalid';
 
-    let editClass = 'form-control';
-    if (!editText) editClass = 'form-control is-invalid';
-
-    return (
-      <EditInputSection className="form-floating">
-        <input
-          ref={ this.editInput }
-          className={ editClass }
-          type="text"
-          name="editText"
-          value={ editText }
-          placeholder="placeholder"
-          autoComplete="off"
-          onChange={ handleEditing }
-          onKeyUp={ (e) => {
-            if (e.key === 'Enter') {
-              handleToggleEdit();
-              handleEditBack(editText, id);
-            }
-          } }
-          onBlur={ () => {
+  return (
+    <EditInputSection className="form-floating">
+      <input
+        ref={ editInput }
+        className={ editClass }
+        type="text"
+        name="editText"
+        value={ editText }
+        placeholder="placeholder"
+        autoComplete="off"
+        onChange={ handleEditing }
+        onKeyUp={ (e) => {
+          if (e.key === 'Enter') {
             handleToggleEdit();
-            handleEditBack(editText, id);
-          } }
-          maxLength={ 120 }
-        />
-        <label>Escreva para editar sua tarefa</label>
-        <ReturnButton
-          onClick={ () => {
-            handleToggleEdit();
-            handleEditBack(editText, id);
-          } }
-        >
-          <Exit title="Voltar" />
-        </ReturnButton>
-      </EditInputSection>
-    );
-  }
+            handleEditBack(editText);
+          }
+        } }
+        onBlur={ () => {
+          handleToggleEdit();
+          handleEditBack(editText);
+        } }
+        maxLength={ 120 }
+      />
+      <label>Escreva para editar sua tarefa</label>
+      <ReturnButton
+        onClick={ () => {
+          handleToggleEdit();
+          handleEditBack(editText);
+        } }
+      >
+        <Exit title="Voltar" />
+      </ReturnButton>
+    </EditInputSection>
+  );
 }
 
-const mapDispatchToProps = { editBack };
-
 EditSection.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
+  editStatus: PropTypes.bool.isRequired,
   editText: PropTypes.string.isRequired,
-  editBack: PropTypes.func.isRequired,
   handleToggleEdit: PropTypes.func.isRequired,
   handleEditing: PropTypes.func.isRequired,
 };
-
-export default connect(null, mapDispatchToProps)(EditSection);

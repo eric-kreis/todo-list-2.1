@@ -1,78 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import EditSection from './EditSection';
 import TaskBody from './TaskBody';
-import { ItemS } from './styles';
+import ItemS from './styles';
 
-class TaskContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.editRules = this.editRules.bind(this);
-    this.handleToggleEdit = this.handleToggleEdit.bind(this);
-    this.handleEditing = this.handleEditing.bind(this);
+export default function TaskContainer({ id, text }) {
+  const [editText, setEditText] = useState(text);
+  const [editStatus, setEditStatus] = useState(false);
 
-    this.state = {
-      edit: false,
-      editText: props.text,
+  const handleEditing = ({ target: { value } }) => {
+    setEditText(value);
+  };
+
+  const editRules = () => {
+    if (!editStatus && !editText) {
+      setEditText(text);
     }
-  }
+  };
 
-  editRules() {
-    const { edit, editText } = this.state;
-    const { text } = this.props;
-    if (!edit && !editText) {
-      this.setState({ editText: text });
-    }
-  }
+  const handleToggleEdit = () => {
+    setEditStatus(!editStatus);
+    editRules();
+  };
 
-  handleToggleEdit() {
-    this.setState((prevState) => ({
-      edit: !prevState.edit,
-    }), () => this.editRules());
-  }
-
-  handleEditing({ target }) {
-    const { name, value } = target;
-    this.setState({ [name]: value });
-  }
-
-  render() {
-    const { edit, editText } = this.state;
-
-    const {
-      id,
-      text,
-    } = this.props;
-
-    return (
-      <ItemS>
-        { !edit
-          ? (
-            <TaskBody
-              id={ id }
-              text={ text }
-              handleToggleEdit={ this.handleToggleEdit }
-            />
-          )
-          : (
-            <EditSection
-              id={ id }
-              edit={ edit }
-              editText={ editText }
-              handleToggleEdit={ this.handleToggleEdit }
-              handleEditing={ this.handleEditing }
-            />
-          )
-        }
-      </ItemS>
-    );
-  }
+  return (
+    <ItemS>
+      { !editStatus
+        ? (
+          <TaskBody
+            id={ id }
+            text={ text }
+            handleToggleEdit={ handleToggleEdit }
+          />
+        )
+        : (
+          <EditSection
+            id={ id }
+            editStatus={ editStatus }
+            editText={ editText }
+            handleToggleEdit={ handleToggleEdit }
+            handleEditing={ handleEditing }
+          />
+        ) }
+    </ItemS>
+  );
 }
 
 TaskContainer.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
 };
-
-export default TaskContainer;

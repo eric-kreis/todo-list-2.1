@@ -1,5 +1,5 @@
+import { v4 } from 'uuid';
 import { DISPLAY_TASKS } from './actions/displayTasks';
-import { TASK } from './actions/changeText';
 import { ADD_ITEM } from './actions/addItem';
 import { REMOVE_ITEM } from './actions/removeItem';
 import { TOGGLE_CHECKED } from './actions/toggleCheck';
@@ -8,11 +8,93 @@ import { CLEAR_ALL } from './actions/clearAll';
 import { CLEAR_TODO } from './actions/clearToDo';
 import { CLEAR_DONE } from './actions/clearDone';
 
+// LocalStorage assistent;
+const saveState = (key, value) => localStorage
+  .setItem(key, JSON.stringify(value));
+
+// Cases assistents;
+const addAndSaveToDo = (state, action) => {
+  const adding = {
+    ...state,
+    tasks: [...state.tasks, {
+      id: v4(),
+      text: action.text,
+    }],
+  };
+
+  saveState('tasks', adding.tasks);
+  return adding;
+};
+
+const removeAndSaveToDo = (state, action) => {
+  const removing = {
+    ...state,
+    tasks: state.tasks.filter(({ id }) => id !== action.id),
+  };
+  saveState('tasks', removing.tasks);
+
+  return removing;
+};
+
+const toggleAndSavingChecked = (state, action) => {
+  if (action.checked) {
+    const { id } = state.tasks.find(({ id: taskId }) => taskId === action.value);
+    const addingChecked = {
+      ...state,
+      checkedItems: [...state.checkedItems, id],
+    };
+    saveState('checkedItems', addingChecked.checkedItems);
+    return addingChecked;
+  }
+
+  const removingChecked = {
+    ...state,
+    checkedItems: state.checkedItems.filter((id) => id !== action.value),
+  };
+  saveState('checkedItems', removingChecked.checkedItems);
+  return removingChecked;
+};
+
+const editingTasks = (state, action) => {
+  const editing = {
+    ...state,
+    tasks: state.tasks.map(({ id, text }) => {
+      if (id === action.id) return { id, text: action.text };
+      return { id, text };
+    }),
+  };
+  saveState('tasks', editing.tasks);
+  return editing;
+};
+
+const onlyDone = (state) => {
+  const doneTasks = {
+    ...state,
+    tasks: state.tasks.filter(({ id }) => (
+      state.checkedItems.includes(id))),
+  };
+
+  saveState('tasks', doneTasks.tasks);
+  return doneTasks;
+};
+
+const onlyToDo = (state) => {
+  const toDoTasks = {
+    ...state,
+    tasks: state.tasks.filter(({ id }) => (
+      !state.checkedItems.includes(id))),
+    checkedItems: [],
+  };
+
+  saveState('tasks', toDoTasks.tasks);
+  localStorage.setItem('checkedItems', JSON.stringify([]));
+  return toDoTasks;
+};
+
+// Reducer code starts below;
 const savedTasks = JSON.parse(localStorage.getItem('tasks'));
 const savedChecks = JSON.parse(localStorage.getItem('checkedItems'));
-
 const INITIAL_STATE = {
-  taskText: '',
   display: 'all',
   tasks: !savedTasks ? [] : savedTasks,
   checkedItems: !savedChecks ? [] : savedChecks,
@@ -21,52 +103,21 @@ const INITIAL_STATE = {
 const listState = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case DISPLAY_TASKS:
-    return { ...state, [action.name]: action.value };
-
-  case TASK:
-    return { ...state, taskText: action.value };
+    return { ...state, display: action.value };
 
   case ADD_ITEM:
-    const newTasks = [...state.tasks,
-      {
-        id: Math.ceil(Math.random() * 1000),
-        text: state.taskText,
-      }
-    ];
-    localStorage.setItem('tasks', JSON.stringify(newTasks));
-    return {
-      ...state,
-      tasks: newTasks,
-      taskText: '',
-    };
+    return addAndSaveToDo(state, action);
 
   case REMOVE_ITEM:
-    const withoutItem = state.tasks.filter(({ id }) => id !== action.id);
-    localStorage.setItem('tasks', JSON.stringify(withoutItem));
-    return { ...state, tasks: withoutItem };
+    return removeAndSaveToDo(state, action);
 
   case TOGGLE_CHECKED:
-    if (action.checked) {
-      const { id } = state.tasks.find(({ id }) => id === Number(action.value));
-      const addingChecked = [...state.checkedItems, id];
-      localStorage.setItem('checkedItems', JSON.stringify(addingChecked))
-      return { ...state, checkedItems: addingChecked };
-    }
-    const removingItem = state.checkedItems.filter((id) => id !== Number(action.value));
-    localStorage.setItem('checkedItems', JSON.stringify(removingItem));
-    return { ...state, checkedItems: removingItem };
+    return toggleAndSavingChecked(state, action);
 
   case EDIT:
-    if(action.text.trim()) {
-      const tasksCopy = state.tasks.map(({ id, text }) => {
-        if (id === action.id) return { id, text: action.text };
-        return { id, text };
-      });
-      localStorage.setItem('tasks', JSON.stringify(tasksCopy));
-      console.log(tasksCopy)
-      return { ...state, tasks: tasksCopy };
-    }
-    return state;
+    return (action.text.trim())
+      ? editingTasks(state, action)
+      : state;
 
   case CLEAR_ALL:
     localStorage.setItem('tasks', JSON.stringify([]));
@@ -74,17 +125,10 @@ const listState = (state = INITIAL_STATE, action) => {
     return { ...state, tasks: [], checkedItems: [] };
 
   case CLEAR_TODO:
-    const onlyDone = state.tasks.filter(({ id }) =>
-      state.checkedItems.includes(id));
-    localStorage.setItem('tasks', JSON.stringify(onlyDone));
-    return { ...state, tasks: onlyDone };
+    return onlyDone(state);
 
   case CLEAR_DONE:
-    const onlyToDo = state.tasks.filter(({ id }) =>
-      !state.checkedItems.includes(id));
-    localStorage.setItem('tasks', JSON.stringify(onlyToDo));
-    localStorage.setItem('checkedItems', JSON.stringify([]));
-    return { ...state, tasks: onlyToDo, checkedItems: [] };
+    return onlyToDo(state);
 
   default:
     return state;

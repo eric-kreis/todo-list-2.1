@@ -6,7 +6,7 @@ export const lightRed = {
 
     background: '#F4F4F4',
     text: '#000',
-    input: '#000'
+    input: '#000',
   },
   modal: {
     windowBackground: 'rgba(0, 0, 0, 0.8)',
@@ -22,7 +22,7 @@ export const darkRed = {
 
     background: '#181818',
     text: '#f4f4f4',
-    input: '#000'
+    input: '#000',
   },
   modal: {
     windowBackground: 'rgba(255, 255, 255, 0.664)',

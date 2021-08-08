@@ -6,7 +6,7 @@ export const PageHeaderS = styled.header`
   color: ${({ theme }) => theme.colors.text};
   display: flex;
   justify-content: space-between;
-  padding: 12px 40px;
+  padding: 12px 36px;
 
   .logo {
     color: white;
