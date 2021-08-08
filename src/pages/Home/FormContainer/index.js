@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useCallback, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import displayTasks from '../../../redux/reducers/listState/actions/displayTasks';
@@ -17,12 +17,19 @@ import { Add, Trash } from '../../../assets/icons';
 const validClass = 'form-control';
 const invalidClass = 'form-control is-invalid';
 
-function FormContainer({
-  display,
-  handleAddItem,
-  handleDisplayTasks,
-  handleToggleModal,
-}) {
+export default function FormContainer({ handleToggleModal }) {
+  // Getting information from "listState" Reducer;
+  const { display } = useSelector(({ listState }) => listState);
+
+  // Using disptach;
+  const dispatch = useDispatch();
+
+  const handleAddItem = useCallback((text) => (
+    dispatch(addItem(text))), [dispatch]);
+  const handleDisplayTasks = useCallback((e) => (
+    dispatch(displayTasks(e))), [dispatch]);
+
+  // Component state;
   const [taskText, setTaskText] = useState('');
   const [formInputClass, setInputClass] = useState(validClass);
   const [formFocus, setFormFocus] = useState(false);
@@ -110,21 +117,6 @@ function FormContainer({
   );
 }
 
-const mapStateToProps = ({ listState }) => ({
-  display: listState.display,
-  taskText: listState.taskText,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  handleAddItem: (text) => dispatch(addItem(text)),
-  handleDisplayTasks: (e) => dispatch(displayTasks(e)),
-});
-
 FormContainer.propTypes = {
-  display: PropTypes.string.isRequired,
-  handleAddItem: PropTypes.func.isRequired,
-  handleDisplayTasks: PropTypes.func.isRequired,
   handleToggleModal: PropTypes.func.isRequired,
 };
-
-export default connect(mapStateToProps, mapDispatchToProps)(FormContainer);

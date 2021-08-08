@@ -10,7 +10,7 @@ export default function FormInput({
   handleToggleFocus,
   handleResetFormClass,
 }) {
-  const input = useRef(null);
+  const input = useRef();
 
   useEffect(() => {
     if (formFocus) {
