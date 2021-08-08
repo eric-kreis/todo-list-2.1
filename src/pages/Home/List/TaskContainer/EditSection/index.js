@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect, useRef } from 'react';
-import { connect } from 'react-redux';
+import React, { useCallback, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import editBack from '../../../../../redux/reducers/listState/actions/editBack';
@@ -8,14 +8,18 @@ import editBack from '../../../../../redux/reducers/listState/actions/editBack';
 import { Exit } from '../../../../../assets/icons';
 import { EditInputSection, ReturnButton } from './styles';
 
-function EditSection({
+export default function EditSection({
   id,
   editStatus,
   editText,
-  handleEditBack,
   handleToggleEdit,
   handleEditing,
 }) {
+  const dispatch = useDispatch();
+
+  const handleEditBack = useCallback((text) => (
+    dispatch(editBack(text, id))), [dispatch, id]);
+
   const editInput = useRef(null);
 
   useEffect(() => {
@@ -40,12 +44,12 @@ function EditSection({
         onKeyUp={ (e) => {
           if (e.key === 'Enter') {
             handleToggleEdit();
-            handleEditBack(editText, id);
+            handleEditBack(editText);
           }
         } }
         onBlur={ () => {
           handleToggleEdit();
-          handleEditBack(editText, id);
+          handleEditBack(editText);
         } }
         maxLength={ 120 }
       />
@@ -53,7 +57,7 @@ function EditSection({
       <ReturnButton
         onClick={ () => {
           handleToggleEdit();
-          handleEditBack(editText, id);
+          handleEditBack(editText);
         } }
       >
         <Exit title="Voltar" />
@@ -62,17 +66,10 @@ function EditSection({
   );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  handleEditBack: (text, id) => dispatch(editBack(text, id)),
-});
-
 EditSection.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   editStatus: PropTypes.bool.isRequired,
   editText: PropTypes.string.isRequired,
-  handleEditBack: PropTypes.func.isRequired,
   handleToggleEdit: PropTypes.func.isRequired,
   handleEditing: PropTypes.func.isRequired,
 };
-
-export default connect(null, mapDispatchToProps)(EditSection);
