@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const HomeMainS = styled.main`
+export const HomeMainS = styled.main`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -25,4 +25,10 @@ const HomeMainS = styled.main`
   }
 `;
 
-export default HomeMainS;
+export const ThemeButtonS = styled.button`
+  background-color: transparent;
+  border: 0;
+  color: ${({ theme }) => theme.colors.text};
+  margin-left: 16px;
+  font-size: 18px;
+`;

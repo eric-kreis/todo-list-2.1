@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const PageHeaderS = styled.header`
+const PageHeaderS = styled.header`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.text};
@@ -37,10 +37,4 @@ export const PageHeaderS = styled.header`
   }
 `;
 
-export const ThemeButtonS = styled.button`
-  background-color: transparent;
-  border: 0;
-  color: ${({ theme }) => theme.colors.text};
-  margin-left: 16px;
-  font-size: 18px;
-`;
+export default PageHeaderS;

@@ -6,10 +6,10 @@ import { ThemeContext } from 'styled-components';
 import toggleTheme from '../../redux/reducers/changeTheme/actions/toggleTheme';
 
 import Logo from '../../assets/Logo';
-import { PageHeaderS, ThemeButtonS } from './styles';
-import { Sun, Moon, ColorPalette } from '../../assets/icons';
+import PageHeaderS from './styles';
+import { Sun, Moon } from '../../assets/icons';
 
-export default function Header({ children, handleToggleModal }) {
+export default function Header({ children, changeThemeButton }) {
   const { title, colors } = useContext(ThemeContext);
   const dispatch = useDispatch();
 
@@ -19,7 +19,9 @@ export default function Header({ children, handleToggleModal }) {
   return (
     <PageHeaderS>
       <Logo />
-      { children }
+      <h1>
+        { children }
+      </h1>
       <div>
         <Switch
           checked={ title === 'dark' }
@@ -32,17 +34,17 @@ export default function Header({ children, handleToggleModal }) {
           offColor={ colors.background }
           onColor={ colors.background }
         />
-        <ThemeButtonS
-          onClick={ () => { handleToggleModal('color'); } }
-        >
-          <ColorPalette title="Mudar cor" />
-        </ThemeButtonS>
+        { changeThemeButton }
       </div>
     </PageHeaderS>
   );
 }
 
+Header.defaultProps = {
+  changeThemeButton: null,
+};
+
 Header.propTypes = {
   children: PropTypes.node.isRequired,
-  handleToggleModal: PropTypes.func.isRequired,
+  changeThemeButton: PropTypes.node,
 };

@@ -7,7 +7,8 @@ import FormContainer from './FormContainer';
 import List from './List';
 import Footer from '../../components/Footer';
 
-import HomeMainS from './styles';
+import { HomeMainS, ThemeButtonS } from './styles';
+import { ColorPalette } from '../../assets/icons';
 
 export default function HomePage() {
   const [modals, setModals] = useState({
@@ -35,8 +36,16 @@ export default function HomePage() {
         clearModal={ clearModal }
         handleToggleModal={ handleToggleModal }
       />
-      <Header handleToggleModal={ handleToggleModal }>
-        <h1>LISTA DE TAREFAS</h1>
+      <Header
+        changeThemeButton={
+          <ThemeButtonS
+            onClick={ () => { handleToggleModal('color'); } }
+          >
+            <ColorPalette title="Mudar cor" />
+          </ThemeButtonS>
+        }
+      >
+        LISTA DE TAREFAS
       </Header>
       <HomeMainS>
         <FormContainer handleToggleModal={ handleToggleModal } />
