@@ -3,16 +3,6 @@ import styled from 'styled-components';
 import { transparentize } from 'polished';
 import * as themeColors from '../../../themes';
 
-export const ModalWindowS = styled.main`
-  background-color: ${({ theme }) => theme.modal.windowBackground};
-  height: 100%;
-  display: flex;
-  padding-bottom: 64px;
-  position: fixed;
-  width: 100%;
-  z-index: 10;
-`;
-
 export const ModalS = styled.div`
   align-items: center;
   background-color: ${({ theme }) => theme.modal.modalBackground};

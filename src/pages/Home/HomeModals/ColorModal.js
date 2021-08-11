@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 
 import changeColor from '../../../redux/reducers/changeTheme/actions/changeColor';
 
+import { ModalWindowS } from '../../../styles/ModalWindowS';
 import {
   ColorsContainerS,
-  ModalWindowS,
   ColorButtonS,
   ColorButtonsContainerS,
 } from './styles';

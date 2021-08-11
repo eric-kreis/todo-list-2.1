@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
+import SignUpModal from './SignUpModal';
 import Header from '../../components/Header';
 
 export default function Login() {
@@ -14,6 +15,7 @@ export default function Login() {
 
   return (
     <section>
+      <SignUpModal />
       <Header>LISTA DE TAREFAS</Header>
       <main>
         <form onSubmit={ (e) => e.preventDefault() }>
@@ -26,11 +28,11 @@ export default function Login() {
               placeholder="placeholder"
               onChange={ handleChange }
             />
-            <label>Email</label>
+            <label>E-mail</label>
           </div>
           <div className="form-floating">
             <input
-              type="text"
+              type="password"
               name="password"
               value={ credentials.password }
               className="form-control"

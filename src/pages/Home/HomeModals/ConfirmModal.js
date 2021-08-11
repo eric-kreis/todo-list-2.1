@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { ModalWindowS, ModalS } from './styles';
+import { ModalWindowS } from '../../../styles/ModalWindowS';
+import { ModalS } from './styles';
 
 export default function ConfirmModal({
   openModal,

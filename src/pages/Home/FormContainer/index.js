@@ -6,11 +6,7 @@ import displayTasks from '../../../redux/reducers/listState/actions/displayTasks
 import addItem from '../../../redux/reducers/listState/actions/addItem';
 
 import FormInput from './FormInput';
-import {
-  MainFormS,
-  SectionFormS,
-  FormShowButtonS,
-} from './styles';
+import { MainFormS, SectionFormS, FormShowButtonS } from './styles';
 import IconButtonS from '../../../styles/IconButtonS.styles';
 import { Add, Trash } from '../../../assets/icons';
 
