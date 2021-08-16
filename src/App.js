@@ -1,13 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
+import { useSelector } from 'react-redux';
 
 import GlobalStyle from './styles/global';
 import Routes from './Routes';
 import 'bootstrap/dist/css/bootstrap.css';
 
-function App({ theme }) {
+export default function App() {
+  const theme = useSelector(({ changeTheme }) => changeTheme.theme);
   return (
     <div>
       <ThemeProvider theme={ theme }>
@@ -17,26 +17,3 @@ function App({ theme }) {
     </div>
   );
 }
-
-App.propTypes = {
-  theme: PropTypes.shape({
-    title: PropTypes.string,
-    colors: PropTypes.shape({
-      primary: PropTypes.string,
-      secondary: PropTypes.string,
-
-      background: PropTypes.string,
-      text: PropTypes.string,
-      input: PropTypes.string,
-    }),
-    modal: PropTypes.shape({
-      windowBackground: PropTypes.string,
-      modalBackground: PropTypes.string,
-    }),
-  }).isRequired,
-};
-
-const mapStateToProps = ({ changeTheme }) => ({
-  theme: changeTheme.theme });
-
-export default connect(mapStateToProps)(App);
