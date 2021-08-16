@@ -1,10 +1,7 @@
-import React, { useCallback, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useCallback, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import displayTasks from '../../../redux/reducers/listState/actions/displayTasks';
-import addItem from '../../../redux/reducers/listState/actions/addItem';
-
+import ListContext from '../../../Contexts/ListContext';
 import FormInput from './FormInput';
 import { MainFormS, SectionFormS, FormShowButtonS } from './styles';
 import IconButtonS from '../../../styles/IconButtonS.styles';
@@ -15,15 +12,12 @@ const invalidClass = 'form-control is-invalid';
 
 export default function FormContainer({ handleToggleModal }) {
   // Getting information from "listState" Reducer;
-  const { display } = useSelector(({ listState }) => listState);
+  const { display, changeDisplay, addAndSaveToDo } = useContext(ListContext);
 
   // Using disptach;
-  const dispatch = useDispatch();
 
-  const handleAddItem = useCallback((text) => (
-    dispatch(addItem(text))), [dispatch]);
-  const handleDisplayTasks = useCallback((e) => (
-    dispatch(displayTasks(e))), [dispatch]);
+  const handleAddItem = useCallback((text) => addAndSaveToDo(text), [addAndSaveToDo]);
+  const handleDisplayTasks = useCallback((e) => changeDisplay(e), [changeDisplay]);
 
   // Component state;
   const [taskText, setTaskText] = useState('');

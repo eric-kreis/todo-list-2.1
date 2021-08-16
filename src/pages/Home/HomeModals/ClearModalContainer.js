@@ -1,28 +1,22 @@
-import React, { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import clearAll from '../../../redux/reducers/listState/actions/clearAll';
-import clearToDo from '../../../redux/reducers/listState/actions/clearToDo';
-import clearDone from '../../../redux/reducers/listState/actions/clearDone';
-
 import ConfirmModal from './ConfirmModal';
+import ListContext from '../../../Contexts/ListContext';
 
 export default function ClearModalContainer({ clearModal, handleToggleModal }) {
-  const dispatch = useDispatch();
-
-  const handleClearAll = useCallback(() => (
-    dispatch(clearAll())), [dispatch]);
-  const handleClearToDo = useCallback(() => (
-    dispatch(clearToDo())), [dispatch]);
-  const handleClearDone = useCallback(() => (
-    dispatch(clearDone())), [dispatch]);
-
   const {
     display,
     tasks,
     checkedItems,
-  } = useSelector(({ listState }) => listState);
+    clearAll,
+    clearToDo,
+    clearDone,
+  } = useContext(ListContext);
+
+  const handleClearAll = useCallback(() => clearAll(), [clearAll]);
+  const handleClearToDo = useCallback(() => clearToDo(), [clearToDo]);
+  const handleClearDone = useCallback(() => clearDone(), [clearDone]);
 
   const handleClear = () => {
     if (display === 'toDo') {

@@ -1,17 +1,11 @@
-import React, { useCallback, useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useContext, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
+import ListContext from '../../../../../../Contexts/ListContext';
 import TaskLabelS from './styles';
-import toggleCheck from '../../../../../../redux/reducers/listState/actions/toggleCheck';
 
 export default function TaskSection({ id, children }) {
-  const { checkedItems } = useSelector(({ listState }) => listState);
-
-  const dispatch = useDispatch();
-
-  const handleToggleCheck = useCallback((e) => (
-    dispatch(toggleCheck(e))), [dispatch]);
+  const { checkedItems, toggleAndSavingChecked } = useContext(ListContext);
 
   const check = useRef(null);
 
@@ -30,7 +24,7 @@ export default function TaskSection({ id, children }) {
         ref={ check }
         type="checkbox"
         value={ id }
-        onChange={ handleToggleCheck }
+        onChange={ toggleAndSavingChecked }
       />
       <span>{ children }</span>
     </TaskLabelS>

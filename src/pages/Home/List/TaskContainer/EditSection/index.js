@@ -1,10 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useCallback, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useCallback, useContext, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import editBack from '../../../../../redux/reducers/listState/actions/editBack';
-
+import ListContext from '../../../../../Contexts/ListContext';
 import { Exit } from '../../../../../assets/icons';
 import { EditInputSection, ReturnButton } from './styles';
 
@@ -15,10 +13,10 @@ export default function EditSection({
   handleToggleEdit,
   handleEditing,
 }) {
-  const dispatch = useDispatch();
+  const { editingTasks } = useContext(ListContext);
 
   const handleEditBack = useCallback((text) => (
-    dispatch(editBack(text, id))), [dispatch, id]);
+    editingTasks(text, id)), [editingTasks, id]);
 
   const editInput = useRef(null);
 

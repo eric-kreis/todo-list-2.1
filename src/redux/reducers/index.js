@@ -1,10 +1,6 @@
 import { combineReducers } from 'redux';
-import listState from './listState';
 import changeTheme from './changeTheme';
 
-const rootReducer = combineReducers({
-  listState,
-  changeTheme,
-});
+const rootReducer = combineReducers({ changeTheme });
 
 export default rootReducer;

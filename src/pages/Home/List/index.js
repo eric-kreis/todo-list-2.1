@@ -1,15 +1,11 @@
-import React, { useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useCallback, useContext } from 'react';
+import ListContext from '../../../Contexts/ListContext';
 
 import ListS from './styles';
 import TaskContainer from './TaskContainer';
 
 export default function List() {
-  const {
-    display,
-    tasks,
-    checkedItems,
-  } = useSelector(({ listState }) => listState);
+  const { display, tasks, checkedItems } = useContext(ListContext);
 
   const filterTasks = useCallback(() => {
     if (display === 'toDo') {

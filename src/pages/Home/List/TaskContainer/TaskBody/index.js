@@ -1,24 +1,20 @@
-import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import removeItem from '../../../../../redux/reducers/listState/actions/removeItem';
-
+import ListContext from '../../../../../Contexts/ListContext';
 import TaskSection from './TaskSection';
 import { TaskBodyS, TaskButtonS } from './styles';
 import IconButtonS from '../../../../../styles/IconButtonS.styles';
 import { Edit, Remove } from '../../../../../assets/icons';
 
 export default function TaskBody({ id, text, handleToggleEdit }) {
-  const dispatch = useDispatch();
+  const { removeAndSaveToDo } = useContext(ListContext);
   const handleRemoveItem = useCallback(() => (
-    dispatch(removeItem(id))), [dispatch, id]);
+    removeAndSaveToDo(id)), [removeAndSaveToDo, id]);
 
   return (
     <TaskBodyS>
-      <TaskSection
-        id={ id }
-      >
+      <TaskSection id={ id }>
         { text }
       </TaskSection>
       <TaskButtonS>

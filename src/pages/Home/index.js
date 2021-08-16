@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import ListProvider from '../../Providers/ListProvider';
 import ColorModal from './HomeModals/ColorModal';
 import ClearModalContainer from './HomeModals/ClearModalContainer';
 import Header from '../../components/Header';
@@ -18,40 +19,42 @@ export default function HomePage() {
 
   const handleToggleModal = (name) => {
     if (name === 'clear') {
-      setModals(({ ...modals, clearModal: !modals.clearModal }));
+      setModals((prevModals) => ({ ...prevModals, clearModal: !modals.clearModal }));
     }
     if (name === 'color') {
-      setModals(({ ...modals, colorModal: !modals.colorModal }));
+      setModals((prevModals) => ({ ...prevModals, colorModal: !modals.colorModal }));
     }
   };
 
   const { clearModal, colorModal } = modals;
   return (
     <section>
-      <ColorModal
-        handleToggleModal={ handleToggleModal }
-        colorModal={ colorModal }
-      />
-      <ClearModalContainer
-        clearModal={ clearModal }
-        handleToggleModal={ handleToggleModal }
-      />
-      <Header
-        changeThemeButton={
-          <ThemeButtonS
-            onClick={ () => { handleToggleModal('color'); } }
-          >
-            <ColorPalette title="Mudar cor" />
-          </ThemeButtonS>
-        }
-      >
-        LISTA DE TAREFAS
-      </Header>
-      <HomeMainS>
-        <FormContainer handleToggleModal={ handleToggleModal } />
-        <List />
-      </HomeMainS>
-      <Footer />
+      <ListProvider>
+        <ColorModal
+          handleToggleModal={ handleToggleModal }
+          colorModal={ colorModal }
+        />
+        <ClearModalContainer
+          clearModal={ clearModal }
+          handleToggleModal={ handleToggleModal }
+        />
+        <Header
+          changeThemeButton={
+            <ThemeButtonS
+              onClick={ () => { handleToggleModal('color'); } }
+            >
+              <ColorPalette title="Mudar cor" />
+            </ThemeButtonS>
+          }
+        >
+          LISTA DE TAREFAS
+        </Header>
+        <HomeMainS>
+          <FormContainer handleToggleModal={ handleToggleModal } />
+          <List />
+        </HomeMainS>
+        <Footer />
+      </ListProvider>
     </section>
   );
 }
