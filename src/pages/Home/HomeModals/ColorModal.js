@@ -2,8 +2,7 @@ import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import changeColor from '../../../redux/reducers/changeTheme/actions/changeColor';
-
+import { Creators as ThemeActions } from '../../../redux/reducers/changeTheme';
 import { ModalWindowS } from '../../../styles/ModalWindowS';
 import {
   ColorsContainerS,
@@ -15,7 +14,7 @@ export default function ColorModal({ handleToggleModal, colorModal }) {
   const dispatch = useDispatch();
 
   const handleChangeColor = useCallback((e) => (
-    dispatch(changeColor(e))), [dispatch]);
+    dispatch(ThemeActions.changeColor(e))), [dispatch]);
 
   return (colorModal
     && (

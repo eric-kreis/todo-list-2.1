@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Switch from 'react-switch';
 import { useDispatch } from 'react-redux';
 import { ThemeContext } from 'styled-components';
-import toggleTheme from '../../redux/reducers/changeTheme/actions/toggleTheme';
+import { Creators as ThemeActions } from '../../redux/reducers/changeTheme';
 
 import Logo from '../../assets/Logo';
 import PageHeaderS from './styles';
@@ -14,7 +14,7 @@ export default function Header({ children, changeThemeButton }) {
   const dispatch = useDispatch();
 
   const handleToggleTheme = useCallback(() => (
-    dispatch(toggleTheme())), [dispatch]);
+    dispatch(ThemeActions.toggleTheme())), [dispatch]);
 
   return (
     <PageHeaderS>
