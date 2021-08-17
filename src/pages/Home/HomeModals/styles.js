@@ -69,8 +69,7 @@ export const ColorsContainerS = styled.div`
   }
 
   @media(max-width: 460px) {
-    width: 75%;
-    height: 75%;
+    width: 70%;
   }
 `;
 
