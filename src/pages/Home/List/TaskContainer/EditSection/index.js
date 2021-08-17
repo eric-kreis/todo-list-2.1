@@ -36,7 +36,7 @@ export default function EditSection({
         type="text"
         name="editText"
         value={ editText }
-        placeholder="placeholder"
+        placeholder=" "
         autoComplete="off"
         onChange={ handleEditing }
         onKeyUp={ (e) => {

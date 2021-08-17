@@ -43,7 +43,7 @@ export default function FormInput({
           handleChange(e);
           handleToggleFormClass(e);
         } }
-        placeholder="placeholder"
+        placeholder=" "
         autoComplete="off"
         maxLength={ 120 }
       />
