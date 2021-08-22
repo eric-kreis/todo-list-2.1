@@ -1,154 +1,142 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 
+import { useAuth } from '../../../Contexts/AuthContext';
 import { ModalWindowS } from '../../../styles/ModalWindowS';
+import EmailInput from '../EmailInput';
 import PasswordsSection from './PasswordsSection';
-import { SignUpContainerS, SignUpFormS, SubmitButton } from './styles';
+import { SignUpContainerS, SignUpFormS, SubmitButtonS } from './styles';
 
 const validClass = 'form-control';
 const invalidClass = 'form-control is-invalid';
 
 export default function SignUpModal() {
-  const emailInput = useRef();
+  const { signUp } = useAuth();
 
-  useEffect(() => {
-    emailInput.current.focus();
-  }, []);
-
-  const [newUserInfo, setNewUserInfo] = useState({
-    email: '',
-    password: '',
-    repeatPassword: '',
-  });
+  const [emailValue, setEmailValue] = useState('');
+  const [passwordValue, setPassowordValue] = useState('');
+  const [confirmValue, setConfirmValue] = useState('');
 
   const [emailClass, setEmailClass] = useState(validClass);
   const [passwordClass, setPasswordClass] = useState(validClass);
-  const [repeatPasswordClass, setRepeatPasswordClass] = useState(validClass);
+  const [confirmPasswordClass, setConfirmPasswordClass] = useState(validClass);
 
-  const [validated, setValidated] = useState(false);
+  const [submiting, setSubmiting] = useState(false);
 
-  const handleChange = ({ target: { name, value } }) => {
-    setNewUserInfo({ ...newUserInfo, [name]: value });
-  };
+  const [loading, setLoading] = useState(false);
 
-  // Email validation;
-  const validateEmail = (email) => {
+  const [error, setError] = useState('');
+
+  const classes = useMemo(() => (
+    [emailClass, passwordClass, confirmPasswordClass]
+  ), [confirmPasswordClass, emailClass, passwordClass]);
+
+  // Email functions;
+  const emailValidation = (value) => {
     const emailPattern = /\S+@\S+\.\S+/;
-    if (emailPattern.test(email)) {
+    if (emailPattern.test(value)) {
       setEmailClass(validClass);
-      return true;
+    } else {
+      setEmailClass(invalidClass);
     }
-    setEmailClass(invalidClass);
-    return false;
   };
 
-  const handleValidateEmail = ({ target: { value } }) => validateEmail(value);
+  const handleValidateEmail = ({ target: { value } }) => {
+    setSubmiting(false);
+    setEmailValue(value);
+    emailValidation(value);
+  };
 
-  // Password validation;
-  const validatePassword = (password) => {
-    const { repeatPassword } = newUserInfo;
-    if (password.trim()) {
+  // Password functions;
+  const passwordValidation = (value) => {
+    if (value.trim()) {
       setPasswordClass(validClass);
-      if (password === repeatPassword) {
-        setRepeatPasswordClass(validClass);
-        return true;
+      if (value === confirmValue) {
+        setConfirmPasswordClass(validClass);
+      } else if (confirmValue) {
+        setConfirmPasswordClass(invalidClass);
       }
-      setRepeatPasswordClass(invalidClass);
-      return false;
+    } else {
+      setPasswordClass(invalidClass);
     }
-    setPasswordClass(invalidClass);
-    return false;
   };
 
-  const handleValidatePassword = ({ target: { value } }) => validatePassword(value);
-
-  // Repeat password validation;
-  const validateRepeat = (repeatPassword) => {
-    const { password } = newUserInfo;
-    if (repeatPassword === password && repeatPassword.trim()) {
-      setRepeatPasswordClass(validClass);
-      return true;
-    }
-    setRepeatPasswordClass(invalidClass);
-    return false;
+  const handleValidatePassword = ({ target: { value } }) => {
+    setSubmiting(false);
+    setPassowordValue(value);
+    passwordValidation(value);
   };
 
-  const handleValidateRepeat = ({ target: { value } }) => validateRepeat(value);
+  // Confirm password functions;
+  const confirmValidation = (value) => {
+    if (value === passwordValue && value.trim()) {
+      setConfirmPasswordClass(validClass);
+    } else {
+      setConfirmPasswordClass(invalidClass);
+    }
+  };
+
+  const handleValidateConfirm = ({ target: { value } }) => {
+    setSubmiting(false);
+    setConfirmValue(value);
+    confirmValidation(value);
+  };
 
   const handleSubmit = () => {
-    Object.keys(newUserInfo).forEach((userInfo) => {
-      const value = newUserInfo[userInfo];
-      switch (userInfo) {
-      case 'email':
-        validateEmail(value);
-        if (validateEmail(value)) {
-          setValidated(true);
-          break;
-        }
-        setValidated(false);
-        break;
-      case 'password':
-        validatePassword(value);
-        if (validatePassword(value)) {
-          setValidated(true);
-          break;
-        }
-        setValidated(false);
-        break;
-      case 'repeatPassword':
-        validateRepeat(value);
-        if (validateRepeat(value)) {
-          setValidated(true);
-          break;
-        }
-        setValidated(false);
-        break;
-      default:
-        break;
-      }
-    });
+    emailValidation(emailValue);
+    passwordValidation(passwordValue);
+    confirmValidation(confirmValue);
+    setSubmiting(true);
   };
 
-  console.log(validated);
+  useEffect(() => {
+    const someInvalid = classes.some((inputClass) => {
+      if (inputClass === invalidClass) return true;
+      return false;
+    });
+
+    if (!someInvalid && submiting) {
+      const creatingUser = async () => {
+        try {
+          setLoading(true);
+          setError('');
+          await signUp(emailValue, passwordValue);
+        } catch (signError) {
+          setError('Falha ao criar a conta');
+        }
+        setLoading(false);
+      };
+      creatingUser();
+    }
+  }, [classes, emailValue, passwordValue, signUp, submiting]);
 
   return (
     <ModalWindowS>
       <SignUpContainerS>
         <h4>CRIE SUA CONTA</h4>
         <SignUpFormS onSubmit={ (e) => e.preventDefault() }>
-          <div className="form-floating">
-            <input
-              ref={ emailInput }
-              type="text"
-              name="email"
-              value={ newUserInfo.email }
-              className={ emailClass }
-              placeholder="placeholder"
-              onChange={ (e) => {
-                handleChange(e);
-                handleValidateEmail(e);
-              } }
-            />
-            <label>
-              { emailClass === validClass ? 'E-mail' : 'Digite um e-mail válido' }
-            </label>
-          </div>
+          { error && <h5>{ error }</h5> }
+          <EmailInput
+            value={ emailValue }
+            className={ emailClass }
+            onChange={ handleValidateEmail }
+          >
+            { emailClass === validClass ? 'E-mail' : 'Digite um e-mail válido' }
+          </EmailInput>
           <PasswordsSection
-            newUserInfo={ newUserInfo }
+            passwordValue={ passwordValue }
+            confirmValue={ confirmValue }
             passwordClass={ passwordClass }
-            repeatPasswordClass={ repeatPasswordClass }
-            handleChange={ handleChange }
+            confirmPasswordClass={ confirmPasswordClass }
             handleValidatePassword={ handleValidatePassword }
-            handleValidateRepeat={ handleValidateRepeat }
+            handleValidateConfirm={ handleValidateConfirm }
           />
-          <SubmitButton
+          <SubmitButtonS
             type="submit"
-            onClick={ () => {
-              handleSubmit();
-            } }
+            onClick={ handleSubmit }
+            disabled={ loading }
           >
             Cadastre-se
-          </SubmitButton>
+          </SubmitButtonS>
         </SignUpFormS>
       </SignUpContainerS>
     </ModalWindowS>

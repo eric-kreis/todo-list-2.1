@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const PasswordsSectionS = styled.section`
+export const PasswordContainerS = styled.section`
   .form-control.is-invalid {
     background-position: right 32px center;
   }

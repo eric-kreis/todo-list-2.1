@@ -56,7 +56,7 @@ export const SignUpFormS = styled.form`
   }
 `;
 
-export const SubmitButton = styled.button`
+export const SubmitButtonS = styled.button`
   background-color: ${({ theme }) => theme.colors.primary};
   border: none;
   border-radius: 0.25rem;
