@@ -1,27 +1,32 @@
+/* eslint-disable no-magic-numbers */
+import { shade } from 'polished';
 import styled from 'styled-components';
 
 export const SignUpContainerS = styled.div`
-  align-items: center;
   background-color: ${({ theme }) => theme.modal.modalBackground};
   border-radius: 5px;
   box-shadow: 0 5px 16px black;
   color: ${({ theme }) => theme.colors.text};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   height: 80vh;
-  margin: 60px auto 0;
-  min-height: 50vh;
+  margin: 50px auto 0;
+  max-height: 100%;
   min-width: 400px;
-  overflow-y: scroll;
-  padding: 48px 16px;
+  padding: 16px;
   position: relative;
+  overflow-y: scroll;
   text-align: center;
   z-index: 10;
 
-  ::-webkit-scrollbar {
-    display: none;
+  h4 {
+    padding: 16px 0 0;
+    margin: 0;
   }
 
-  h4 {
-    margin-bottom: 32px;
+  ::-webkit-scrollbar {
+    display: none;
   }
 
   @media(max-width: 768px) {
@@ -35,7 +40,16 @@ export const SignUpContainerS = styled.div`
 export const SignUpFormS = styled.form`
   display: flex;
   flex-direction: column;
-  margin-top: 48px;
+  max-height: 100%;
+
+  .error {
+    color: red;
+    font-size: small;
+    margin-bottom: 4px;
+    padding: 0;
+    padding-left: 4px;
+    text-align: left;
+  }
 
   .form-floating {
     background-color: ${({ theme }) => theme.modal.modalBackground};
@@ -50,10 +64,26 @@ export const SignUpFormS = styled.form`
   .form-control:focus {
     color: #212529;
     outline: 0;
+
     &:-webkit-autofill:first-line {
       font-size: 1rem;
     }
   }
+
+  p {
+    padding: 10px;
+    button {
+      background-color: transparent;
+      border: 0;
+      color: ${({ theme }) => theme.colors.text};
+      
+      :hover {
+        color: ${({ theme }) => theme.colors.primary};
+        text-decoration: underline;
+      }
+    }
+  }
+
 `;
 
 export const SubmitButtonS = styled.button`
@@ -63,4 +93,8 @@ export const SubmitButtonS = styled.button`
   color: ${({ theme }) => theme.colors.text};
   margin-top: 64px;
   padding: 8px 0;
+
+  :hover {
+    background-color: ${({ theme }) => shade(0.1, theme.colors.primary)};
+  }
 `;

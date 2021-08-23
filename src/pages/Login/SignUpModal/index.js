@@ -1,4 +1,5 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import PropTypes from 'prop-types';
 
 import { useAuth } from '../../../Contexts/AuthContext';
 import { ModalWindowS } from '../../../styles/ModalWindowS';
@@ -9,7 +10,7 @@ import { SignUpContainerS, SignUpFormS, SubmitButtonS } from './styles';
 const validClass = 'form-control';
 const invalidClass = 'form-control is-invalid';
 
-export default function SignUpModal() {
+export default function SignUpModal({ setSignUpModal }) {
   const { signUp } = useAuth();
 
   const [emailValue, setEmailValue] = useState('');
@@ -19,14 +20,13 @@ export default function SignUpModal() {
   const [emailClass, setEmailClass] = useState(validClass);
   const [passwordClass, setPasswordClass] = useState(validClass);
   const [confirmPasswordClass, setConfirmPasswordClass] = useState(validClass);
-
-  const [submiting, setSubmiting] = useState(false);
+  const [validated, setValidated] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
   const [error, setError] = useState('');
 
-  const classes = useMemo(() => (
+  const inputClasses = useMemo(() => (
     [emailClass, passwordClass, confirmPasswordClass]
   ), [confirmPasswordClass, emailClass, passwordClass]);
 
@@ -41,7 +41,6 @@ export default function SignUpModal() {
   };
 
   const handleValidateEmail = ({ target: { value } }) => {
-    setSubmiting(false);
     setEmailValue(value);
     emailValidation(value);
   };
@@ -61,7 +60,6 @@ export default function SignUpModal() {
   };
 
   const handleValidatePassword = ({ target: { value } }) => {
-    setSubmiting(false);
     setPassowordValue(value);
     passwordValidation(value);
   };
@@ -76,46 +74,47 @@ export default function SignUpModal() {
   };
 
   const handleValidateConfirm = ({ target: { value } }) => {
-    setSubmiting(false);
     setConfirmValue(value);
     confirmValidation(value);
   };
 
-  const handleSubmit = () => {
+  useEffect(() => {
+    const allValidated = inputClasses.every((inputClass) => inputClass === validClass);
+    setValidated(allValidated);
+  }, [inputClasses]);
+
+  const handleSubmit = async () => {
     emailValidation(emailValue);
     passwordValidation(passwordValue);
     confirmValidation(confirmValue);
-    setSubmiting(true);
-  };
 
-  useEffect(() => {
-    const someInvalid = classes.some((inputClass) => {
-      if (inputClass === invalidClass) return true;
-      return false;
-    });
-
-    if (!someInvalid && submiting) {
-      const creatingUser = async () => {
-        try {
-          setLoading(true);
-          setError('');
-          await signUp(emailValue, passwordValue);
-        } catch (signError) {
-          setError('Falha ao criar a conta');
+    if (emailValue && passwordValue && confirmValue && validated) {
+      try {
+        setLoading(true);
+        setError('');
+        await signUp(emailValue, passwordValue);
+      } catch (signError) {
+        switch (signError.code) {
+        case 'auth/email-already-in-use':
+          setError('* O e-mail fornecido já está em uso');
+          break;
+        default:
+          setError('* Falha ao criar a conta');
+          break;
         }
-        setLoading(false);
-      };
-      creatingUser();
+      }
+      setLoading(false);
     }
-  }, [classes, emailValue, passwordValue, signUp, submiting]);
+  };
 
   return (
     <ModalWindowS>
       <SignUpContainerS>
         <h4>CRIE SUA CONTA</h4>
         <SignUpFormS onSubmit={ (e) => e.preventDefault() }>
-          { error && <h5>{ error }</h5> }
+          { error && <p className="error">{ error }</p> }
           <EmailInput
+            name="sign"
             value={ emailValue }
             className={ emailClass }
             onChange={ handleValidateEmail }
@@ -137,8 +136,18 @@ export default function SignUpModal() {
           >
             Cadastre-se
           </SubmitButtonS>
+          <p>
+            {'Já tem uma conta? '}
+            <button type="button" onClick={ () => setSignUpModal(false) }>
+              Entrar
+            </button>
+          </p>
         </SignUpFormS>
       </SignUpContainerS>
     </ModalWindowS>
   );
 }
+
+SignUpModal.propTypes = {
+  setSignUpModal: PropTypes.func.isRequired,
+};

@@ -29,7 +29,7 @@ export default function PasswordInput({
     <PasswordContainerS className="form-floating">
       <input
         ref={ input }
-        id={ `sign-${name}` }
+        id={ `password-${name}` }
         type="password"
         name={ name }
         value={ value }
@@ -38,7 +38,7 @@ export default function PasswordInput({
         onChange={ onChange }
         maxLength={ 40 }
       />
-      <label htmlFor={ `sign-${name}` }>{ children }</label>
+      <label htmlFor={ `password-${name}` }>{ children }</label>
       <PasswordButtonS
         type="button"
         onClick={ () => { handleToggleType(); changeIcon(); } }

@@ -14,7 +14,7 @@ export default function PasswordsSection({
   return (
     <section>
       <PasswordInput
-        name="password"
+        name="sign-pass"
         value={ passwordValue }
         className={ passwordClass }
         onChange={ handleValidatePassword }
@@ -24,7 +24,7 @@ export default function PasswordsSection({
           : 'Digite uma senha válida' }
       </PasswordInput>
       <PasswordInput
-        name="confirm"
+        name="sign-confirm"
         value={ confirmValue }
         className={ confirmPasswordClass }
         onChange={ handleValidateConfirm }
