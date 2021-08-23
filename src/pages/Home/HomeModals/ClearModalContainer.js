@@ -1,8 +1,8 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import ConfirmModal from './ConfirmModal';
-import ListContext from '../../../Contexts/ListContext';
+import { useList } from '../../../Contexts/ListContext';
 
 export default function ClearModalContainer({ clearModal, handleToggleModal }) {
   const {
@@ -12,7 +12,7 @@ export default function ClearModalContainer({ clearModal, handleToggleModal }) {
     clearAll,
     clearToDo,
     clearDone,
-  } = useContext(ListContext);
+  } = useList();
 
   const handleClearAll = useCallback(() => clearAll(), [clearAll]);
   const handleClearToDo = useCallback(() => clearToDo(), [clearToDo]);

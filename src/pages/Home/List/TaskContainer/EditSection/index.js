@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useCallback, useContext, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import ListContext from '../../../../../Contexts/ListContext';
+import { useList } from '../../../../../Contexts/ListContext';
 import { Exit } from '../../../../../assets/icons';
 import { EditInputSection, ReturnButton } from './styles';
 
@@ -13,7 +13,7 @@ export default function EditSection({
   handleToggleEdit,
   handleEditing,
 }) {
-  const { editingTasks } = useContext(ListContext);
+  const { editingTasks } = useList();
 
   const handleEditBack = useCallback((text) => (
     editingTasks(text, id)), [editingTasks, id]);

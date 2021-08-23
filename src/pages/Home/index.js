@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import ListProvider from '../../Providers/ListProvider';
+import ListProvider from '../../Contexts/ListContext';
 import ColorModal from './HomeModals/ColorModal';
 import ClearModalContainer from './HomeModals/ClearModalContainer';
 import Header from '../../components/Header';
@@ -41,7 +41,7 @@ export default function HomePage() {
         <Header
           changeThemeButton={
             <ThemeButtonS
-              onClick={ () => { handleToggleModal('color'); } }
+              onClick={ () => handleToggleModal('color') }
             >
               <ColorPalette title="Mudar cor" />
             </ThemeButtonS>
@@ -50,7 +50,9 @@ export default function HomePage() {
           LISTA DE TAREFAS
         </Header>
         <HomeMainS>
-          <FormContainer handleToggleModal={ handleToggleModal } />
+          <FormContainer
+            handleToggleModal={ handleToggleModal }
+          />
           <List />
         </HomeMainS>
         <Footer />

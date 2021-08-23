@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import PropTypes from 'prop-types';
-import PasswordInput from '../../PasswordInput';
+import PasswordInput from '../../../components/PasswordInput';
 
 export default function PasswordsSection({
   passwordValue,

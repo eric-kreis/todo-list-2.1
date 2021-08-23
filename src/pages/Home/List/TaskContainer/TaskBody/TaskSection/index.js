@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import ListContext from '../../../../../../Contexts/ListContext';
+import { useList } from '../../../../../../Contexts/ListContext';
 import TaskLabelS from './styles';
 
 export default function TaskSection({ id, children }) {
-  const { checkedItems, toggleAndSavingChecked } = useContext(ListContext);
+  const { checkedItems, toggleAndSavingChecked } = useList();
 
   const check = useRef(null);
 

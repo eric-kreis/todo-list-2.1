@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { EyeOff, EyeOn } from '../../../assets/icons';
+import { EyeOff, EyeOn } from '../../assets/icons'
 import { PasswordContainerS, PasswordButtonS } from './styles';
 
 export default function PasswordInput({

@@ -1,16 +1,22 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import PropTypes from 'prop-types';
+import { Link, useHistory } from 'react-router-dom';
 
-import { useAuth } from '../../../Contexts/AuthContext';
-import { ModalWindowS } from '../../../styles/ModalWindowS';
-import EmailInput from '../EmailInput';
+import { useAuth } from '../../Contexts/AuthContext';
+import AuthHeader from '../../components/AuthHeader';
+import EmailInput from '../../components/EmailInput';
 import PasswordsSection from './PasswordsSection';
-import { SignUpContainerS, SignUpFormS, SubmitButtonS } from './styles';
+import {
+  AuthBodyS,
+  AuthContainerS,
+  AuthFormS,
+  SubmitButtonS,
+} from '../../styles/auth';
+import SignupLoading  from '../../assets/loadingCoponents/SignupLoading';
 
 const validClass = 'form-control';
 const invalidClass = 'form-control is-invalid';
 
-export default function SignUpModal({ setSignUpModal }) {
+export default function Signup() {
   const { signUp } = useAuth();
 
   const [emailValue, setEmailValue] = useState('');
@@ -25,6 +31,8 @@ export default function SignUpModal({ setSignUpModal }) {
   const [loading, setLoading] = useState(false);
 
   const [error, setError] = useState('');
+  
+  const history = useHistory();
 
   const inputClasses = useMemo(() => (
     [emailClass, passwordClass, confirmPasswordClass]
@@ -93,6 +101,7 @@ export default function SignUpModal({ setSignUpModal }) {
         setLoading(true);
         setError('');
         await signUp(emailValue, passwordValue);
+        history.push('/');
       } catch (signError) {
         switch (signError.code) {
         case 'auth/email-already-in-use':
@@ -108,46 +117,47 @@ export default function SignUpModal({ setSignUpModal }) {
   };
 
   return (
-    <ModalWindowS>
-      <SignUpContainerS>
-        <h4>CRIE SUA CONTA</h4>
-        <SignUpFormS onSubmit={ (e) => e.preventDefault() }>
-          { error && <p className="error">{ error }</p> }
-          <EmailInput
-            name="sign"
-            value={ emailValue }
-            className={ emailClass }
-            onChange={ handleValidateEmail }
-          >
-            { emailClass === validClass ? 'E-mail' : 'Digite um e-mail válido' }
-          </EmailInput>
-          <PasswordsSection
-            passwordValue={ passwordValue }
-            confirmValue={ confirmValue }
-            passwordClass={ passwordClass }
-            confirmPasswordClass={ confirmPasswordClass }
-            handleValidatePassword={ handleValidatePassword }
-            handleValidateConfirm={ handleValidateConfirm }
-          />
-          <SubmitButtonS
-            type="submit"
-            onClick={ handleSubmit }
-            disabled={ loading }
-          >
-            Cadastre-se
-          </SubmitButtonS>
-          <p>
-            {'Já tem uma conta? '}
-            <button type="button" onClick={ () => setSignUpModal(false) }>
-              Entrar
-            </button>
-          </p>
-        </SignUpFormS>
-      </SignUpContainerS>
-    </ModalWindowS>
+    <AuthBodyS>
+      <AuthContainerS>
+        <AuthHeader>CRIE SUA CONTA</AuthHeader>
+        { loading ? <SignupLoading />
+        : (
+          <AuthFormS onSubmit={ (e) => e.preventDefault() } signup>
+            { error && <p className="error">{ error }</p> }
+            <div>
+              <EmailInput
+                name="sign"
+                value={ emailValue }
+                className={ emailClass }
+                onChange={ handleValidateEmail }
+              >
+                { emailClass === validClass ? 'E-mail' : 'Digite um e-mail válido' }
+              </EmailInput>
+              <PasswordsSection
+                passwordValue={ passwordValue }
+                confirmValue={ confirmValue }
+                passwordClass={ passwordClass }
+                confirmPasswordClass={ confirmPasswordClass }
+                handleValidatePassword={ handleValidatePassword }
+                handleValidateConfirm={ handleValidateConfirm }
+              />
+            </div>
+            <SubmitButtonS
+              type="submit"
+              onClick={ handleSubmit }
+              disabled={ loading }
+            >
+              Cadastre-se
+            </SubmitButtonS>
+            <p>
+              {'Já tem uma conta? '}
+              <Link to="/login">
+                Entrar
+              </Link>
+            </p>
+          </AuthFormS>
+        ) }
+      </AuthContainerS>
+    </AuthBodyS>
   );
 }
-
-SignUpModal.propTypes = {
-  setSignUpModal: PropTypes.func.isRequired,
-};

@@ -1,7 +1,7 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import ListContext from '../../../Contexts/ListContext';
+import { useList } from '../../../Contexts/ListContext';
 import FormInput from './FormInput';
 import { MainFormS, SectionFormS, FormShowButtonS } from './styles';
 import IconButtonS from '../../../styles/IconButtonS.styles';
@@ -12,10 +12,9 @@ const invalidClass = 'form-control is-invalid';
 
 export default function FormContainer({ handleToggleModal }) {
   // Getting information from "listState" Reducer;
-  const { display, changeDisplay, addAndSaveToDo } = useContext(ListContext);
+  const { display, changeDisplay, addAndSaveToDo } = useList();
 
   // Using disptach;
-
   const handleAddItem = useCallback((text) => addAndSaveToDo(text), [addAndSaveToDo]);
   const handleDisplayTasks = useCallback((e) => changeDisplay(e), [changeDisplay]);
 

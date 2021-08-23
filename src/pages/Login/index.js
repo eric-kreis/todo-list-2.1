@@ -1,10 +1,17 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
 import { useAuth } from '../../Contexts/AuthContext';
-import SignUpModal from './SignUpModal';
-import Header from '../../components/Header';
-import EmailInput from './EmailInput';
-import PasswordInput from './PasswordInput';
+import EmailInput from '../../components/EmailInput';
+import PasswordInput from '../../components/PasswordInput';
+import {
+  AuthBodyS,
+  AuthContainerS,
+  AuthFormS,
+  SubmitButtonS,
+} from '../../styles/auth';
+import AuthHeader from '../../components/AuthHeader';
+import LoginLoading from '../../assets/loadingCoponents/LoginLoading';
 
 const validClass = 'form-control';
 const invalidClass = 'form-control is-invalid';
@@ -12,21 +19,20 @@ const invalidClass = 'form-control is-invalid';
 export default function Login() {
   const { login } = useAuth();
 
-  const [signUpModal, setSignUpModal] = useState(false);
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const [emailClass, setEmailClass] = useState(validClass);
   const [passwordClass, setPasswordClass] = useState(validClass);
-
-  const [submiting, setSubmiting] = useState(false);
+  const [validated, setValidated] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
   const [error, setError] = useState('');
 
-  const classes = useMemo(() => (
+  const history = useHistory();
+
+  const inputClasses = useMemo(() => (
     [emailClass, passwordClass]
   ), [emailClass, passwordClass]);
 
@@ -37,7 +43,6 @@ export default function Login() {
   };
 
   const handleChangeEmail = ({ target: { value } }) => {
-    setSubmiting(false);
     setEmail(value);
     emailValidation(value);
   };
@@ -48,76 +53,90 @@ export default function Login() {
   };
 
   const handleChangePassword = ({ target: { value } }) => {
-    setSubmiting(false);
     setPassword(value);
     passwordValidation(value);
   };
 
-  const handleSubmit = () => {
+  useEffect(() => {
+    const allValidated = inputClasses.every((inputClass) => inputClass === validClass);
+    setValidated(allValidated);
+  }, [inputClasses]);
+
+  const handleSubmit = async () => {
     emailValidation(email);
     passwordValidation(password);
-    setSubmiting(true);
-  };
 
-  useEffect(() => {
-    const someInvalid = classes.some((inputClass) => inputClass === invalidClass);
-
-    if (!someInvalid && submiting) {
-      const loginUser = async () => {
-        try {
-          setLoading(true);
-          setError('');
-          await login(email, password);
-        } catch (loginError) {
-          setError('Falha ao entrar');
+    if (email && password && validated) {
+      try {
+        setLoading(true);
+        setError('');
+        await login(email, password);
+        history.push('/');
+      } catch (loginError) {
+        console.log(loginError);
+        switch (loginError.code) {
+        case 'auth/wrong-password':
+          setError('* Senha incorreta');
+          break;
+        case 'auth/too-many-requests':
+          setError('* Muitas tentativas, conta desativada temporariamente');
+          break;
+        case 'auth/user-not-found':
+          setError('* E-mail inválido');
+          break;
+        default:
+          setError('* Falha ao entrar');
+          break;
         }
-        setLoading(false);
-      };
-      loginUser();
-    }
-  }, [classes, email, password, submiting, login]);
+      }
+      setLoading(false);
+    };
+  }
 
   return (
-    <section>
-      { signUpModal && <SignUpModal setSignUpModal={ setSignUpModal } /> }
-      <Header>LISTA DE TAREFAS</Header>
-      { error }
-      <main>
-        <form onSubmit={ (e) => e.preventDefault() }>
-          <EmailInput
-            name="login"
-            value={ email }
-            className={ emailClass }
-            onChange={ handleChangeEmail }
-          >
-            { emailClass === validClass ? 'E-mail' : 'Digite um e-mail válido' }
-          </EmailInput>
-          <PasswordInput
-            name="login"
-            value={ password }
-            className={ passwordClass }
-            onChange={ handleChangePassword }
-          >
-            { passwordClass === validClass ? 'Senha' : 'Digite uma senha válida' }
-          </PasswordInput>
-          <button
-            type="submit"
-            onClick={ handleSubmit }
-          >
-            Entrar
-          </button>
-          <p>
-            Ainda não tem uma conta?
-            <button
-              type="button"
-              onClick={ () => setSignUpModal(true) }
-              disabled={ loading }
-            >
-              { ' Clique aqui para criar!' }
-            </button>
-          </p>
-        </form>
-      </main>
-    </section>
+    <AuthBodyS>
+      <AuthContainerS>
+        <AuthHeader>LOGIN</AuthHeader>
+        { loading ? <LoginLoading />
+          : (
+            <AuthFormS onSubmit={ (e) => e.preventDefault() } login>
+              { error && <p className="error">{ error }</p> }
+              <div>
+                <EmailInput
+                  name="login"
+                  value={ email }
+                  className={ emailClass }
+                  onChange={ handleChangeEmail }
+                >
+                  { emailClass === validClass ? 'E-mail' : 'Digite um e-mail válido' }
+                </EmailInput>
+                <PasswordInput
+                  name="login"
+                  value={ password }
+                  className={ passwordClass }
+                  onChange={ handleChangePassword }
+                >
+                  { passwordClass === validClass ? 'Senha' : 'Digite uma senha válida' }
+                </PasswordInput>
+              </div>
+              <SubmitButtonS
+                type="submit"
+                onClick={ handleSubmit }
+                disabled={ loading }
+              >
+                Entrar
+              </SubmitButtonS>
+              <p>
+                {'Não tem uma conta? '}
+                <Link
+                  to="/register"
+                >
+                  Cadastre-se
+                </Link>
+              </p>
+            </AuthFormS>
+          ) }
+      </AuthContainerS>
+    </AuthBodyS>
   );
 }

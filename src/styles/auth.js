@@ -2,44 +2,62 @@
 import { shade } from 'polished';
 import styled from 'styled-components';
 
-export const SignUpContainerS = styled.div`
-  background-color: ${({ theme }) => theme.modal.modalBackground};
-  border-radius: 5px;
-  box-shadow: 0 5px 16px black;
-  color: ${({ theme }) => theme.colors.text};
+export const AuthBodyS = styled.div`
+  background-color: ${({ theme }) => theme.colors.primary};
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  height: 80vh;
-  margin: 50px auto 0;
-  max-height: 100%;
-  min-width: 400px;
-  padding: 16px;
-  position: relative;
-  overflow-y: scroll;
-  text-align: center;
-  z-index: 10;
+  min-height: 100vh;
+`;
 
-  h4 {
-    padding: 16px 0 0;
-    margin: 0;
-  }
+export const AuthContainerS = styled.section`
+  background-color: whitesmoke;
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px ${({ theme }) => shade(0.2, theme.colors.primary)};
+  color: ${({ theme }) => theme.colors.text};
+  display: grid;
+  grid-template-rows: 3fr 5fr;
+  height: 85vh;
+  margin: auto;
+  overflow-y: scroll;
+  padding: 10px 16px 0;
+  text-align: center;
+  width: 30%;
 
   ::-webkit-scrollbar {
     display: none;
   }
 
+  @media(max-width: 1024px) {
+    width: 40%;
+  }
+
   @media(max-width: 768px) {
+    width: 50%;
+  }
+
+  @media(max-width: 640px) {
+    width: 60%;
+  }
+
+  @media(max-width: 480px) {
     border-radius: 0;
-    height: 100vh;
-    margin: auto;
-    min-width: 100%;
+    box-shadow: none;
+    height: 100%;
+    width: 100%;
   }
 `;
 
-export const SignUpFormS = styled.form`
+export const AuthFormS = styled.form`
   display: flex;
   flex-direction: column;
+  justify-content: ${({ signup, login }) => {
+    if (signup) {
+      return 'flex-end';
+    }
+    if (login) {
+      return 'space-around';
+    }
+  }};
+  margin-top: ${({ login }) => login && '30px'};
   max-height: 100%;
 
   .error {
@@ -71,11 +89,17 @@ export const SignUpFormS = styled.form`
   }
 
   p {
-    padding: 10px;
-    button {
-      background-color: transparent;
-      border: 0;
+    padding: ${({ signup, login }) => {
+      if (signup) {
+        return '10px';
+      }
+      if (login) {
+        return '32px';
+      }
+    }};
+    a {
       color: ${({ theme }) => theme.colors.text};
+      text-decoration: none;
       
       :hover {
         color: ${({ theme }) => theme.colors.primary};
@@ -91,7 +115,7 @@ export const SubmitButtonS = styled.button`
   border: none;
   border-radius: 0.25rem;
   color: ${({ theme }) => theme.colors.text};
-  margin-top: 64px;
+  margin-top: 32px;
   padding: 8px 0;
 
   :hover {

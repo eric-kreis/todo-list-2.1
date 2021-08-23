@@ -1,11 +1,11 @@
-import React, { useCallback, useContext } from 'react';
-import ListContext from '../../../Contexts/ListContext';
+import React, { useCallback } from 'react';
+import { useList } from '../../../Contexts/ListContext';
 
 import ListS from './styles';
 import TaskContainer from './TaskContainer';
 
 export default function List() {
-  const { display, tasks, checkedItems } = useContext(ListContext);
+  const { display, tasks, checkedItems } = useList();
 
   const filterTasks = useCallback(() => {
     if (display === 'toDo') {
