@@ -3,10 +3,7 @@
         "browser": true,
         "es2021": true
     },
-    "extends": [
-        "trybe-frontend",
-        "plugin:react/recommended"
-    ],
+    "extends": ["airbnb", "airbnb/hooks"],
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -18,5 +15,6 @@
         "react"
     ],
     "rules": {
+        "react/jsx-filename-extension": "off"
     }
 }

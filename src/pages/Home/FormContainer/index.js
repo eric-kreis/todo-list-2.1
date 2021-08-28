@@ -54,26 +54,26 @@ export default function FormContainer({ handleToggleModal }) {
   };
 
   return (
-    <MainFormS onSubmit={ (e) => e.preventDefault() }>
+    <MainFormS onSubmit={(e) => e.preventDefault()}>
       <SectionFormS>
         <FormInput
-          taskText={ taskText }
-          formInputClass={ formInputClass }
-          formFocus={ formFocus }
-          handleChange={ handleChange }
-          handleToggleFormClass={ handleToggleFormClass }
-          handleToggleFocus={ handleToggleFocus }
-          handleResetFormClass={ handleResetFormClass }
+          taskText={taskText}
+          formInputClass={formInputClass}
+          formFocus={formFocus}
+          handleChange={handleChange}
+          handleToggleFormClass={handleToggleFormClass}
+          handleToggleFocus={handleToggleFocus}
+          handleResetFormClass={handleResetFormClass}
         />
-        <IconButtonS add large onClick={ addTaskRule }>
+        <IconButtonS add large onClick={addTaskRule}>
           <Add title="Adicionar tarefa" />
         </IconButtonS>
         <IconButtonS
           clear
           large
-          onClick={ () => {
+          onClick={() => {
             handleToggleModal('clear');
-          } }
+          }}
           data-testid="clear-btn"
         >
           <Trash title="Remover Tarefas" />
@@ -82,22 +82,22 @@ export default function FormContainer({ handleToggleModal }) {
       <SectionFormS>
         <FormShowButtonS
           value="all"
-          onClick={ handleDisplayTasks }
-          display={ display }
+          onClick={handleDisplayTasks}
+          display={display}
         >
           Todas
         </FormShowButtonS>
         <FormShowButtonS
           value="toDo"
-          onClick={ handleDisplayTasks }
-          display={ display }
+          onClick={handleDisplayTasks}
+          display={display}
         >
           Pendentes
         </FormShowButtonS>
         <FormShowButtonS
           value="completed"
-          onClick={ handleDisplayTasks }
-          display={ display }
+          onClick={handleDisplayTasks}
+          display={display}
         >
           Concluídas
         </FormShowButtonS>

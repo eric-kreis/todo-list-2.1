@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { EyeOff, EyeOn } from '../../assets/icons'
+import { EyeOff, EyeOn } from '../../assets/icons';
 import { PasswordContainerS, PasswordButtonS } from './styles';
 
 export default function PasswordInput({
@@ -28,20 +28,20 @@ export default function PasswordInput({
   return (
     <PasswordContainerS className="form-floating">
       <input
-        ref={ input }
-        id={ `password-${name}` }
+        ref={input}
+        id={`password-${name}`}
         type="password"
-        name={ name }
-        value={ value }
-        className={ className }
+        name={name}
+        value={value}
+        className={className}
         placeholder=" "
-        onChange={ onChange }
-        maxLength={ 40 }
+        onChange={onChange}
+        maxLength={40}
       />
-      <label htmlFor={ `password-${name}` }>{ children }</label>
+      <label htmlFor={`password-${name}`}>{ children }</label>
       <PasswordButtonS
         type="button"
-        onClick={ () => { handleToggleType(); changeIcon(); } }
+        onClick={() => { handleToggleType(); changeIcon(); }}
       >
         { icon === 'on' ? <EyeOn /> : <EyeOff /> }
       </PasswordButtonS>

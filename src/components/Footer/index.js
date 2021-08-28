@@ -8,8 +8,8 @@ export default function Footer() {
   return (
     <PageFooterS>
       <p>
-        Developed by:
-        <a href="https://www.linkedin.com/in/eric-alfinito-kreis/" target="blank"> Eric Alfinito Kreis</a>
+        {'Developed by: '}
+        <a href="https://www.linkedin.com/in/eric-alfinito-kreis/" target="blank">Eric Alfinito Kreis</a>
       </p>
       <div>
         <a href="https://github.com/eric-kreis" target="blank"><GitHub /></a>

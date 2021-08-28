@@ -1,4 +1,9 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import { auth } from '../firebase';
 
@@ -31,7 +36,7 @@ export default function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={ contextValue }>
+    <AuthContext.Provider value={contextValue}>
       { !loading && children }
     </AuthContext.Provider>
   );

@@ -9,7 +9,7 @@ export default function AuthHeader({ children }) {
       <Logo />
       <h4>{ children }</h4>
     </AuthHeaderS>
-  )
+  );
 }
 
 AuthHeader.propTypes = {

@@ -11,13 +11,14 @@ import {
   SubmitButtonS,
 } from '../../styles/auth';
 import AuthHeader from '../../components/AuthHeader';
-import LoginLoading from '../../assets/loadingCoponents/LoginLoading';
+import LoginLoading from '../../assets/loadingComponents/LoginLoading';
 
 const validClass = 'form-control';
 const invalidClass = 'form-control is-invalid';
 
 export default function Login() {
   const { login } = useAuth();
+  const history = useHistory();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,8 +31,6 @@ export default function Login() {
 
   const [error, setError] = useState('');
 
-  const history = useHistory();
-
   const inputClasses = useMemo(() => (
     [emailClass, passwordClass]
   ), [emailClass, passwordClass]);
@@ -39,7 +38,7 @@ export default function Login() {
   const emailValidation = (value) => {
     const emailPattern = /\S+@\S+\.\S+/;
     if (emailPattern.test(value)) return setEmailClass(validClass);
-    setEmailClass(invalidClass);
+    return setEmailClass(invalidClass);
   };
 
   const handleChangeEmail = ({ target: { value } }) => {
@@ -49,7 +48,7 @@ export default function Login() {
 
   const passwordValidation = (value) => {
     if (value.trim()) return setPasswordClass(validClass);
-    setPasswordClass(invalidClass);
+    return setPasswordClass(invalidClass);
   };
 
   const handleChangePassword = ({ target: { value } }) => {
@@ -73,25 +72,24 @@ export default function Login() {
         await login(email, password);
         history.push('/');
       } catch (loginError) {
-        console.log(loginError);
         switch (loginError.code) {
-        case 'auth/wrong-password':
-          setError('* Senha incorreta');
-          break;
-        case 'auth/too-many-requests':
-          setError('* Muitas tentativas, conta desativada temporariamente');
-          break;
-        case 'auth/user-not-found':
-          setError('* E-mail inválido');
-          break;
-        default:
-          setError('* Falha ao entrar');
-          break;
+          case 'auth/wrong-password':
+            setError('* Senha incorreta');
+            break;
+          case 'auth/too-many-requests':
+            setError('* Muitas tentativas, conta desativada temporariamente');
+            break;
+          case 'auth/user-not-found':
+            setError('* E-mail inválido');
+            break;
+          default:
+            setError('* Falha ao entrar');
+            break;
         }
       }
       setLoading(false);
-    };
-  }
+    }
+  };
 
   return (
     <AuthBodyS>
@@ -99,40 +97,36 @@ export default function Login() {
         <AuthHeader>LOGIN</AuthHeader>
         { loading ? <LoginLoading />
           : (
-            <AuthFormS onSubmit={ (e) => e.preventDefault() } login>
+            <AuthFormS onSubmit={(e) => e.preventDefault()} login>
               { error && <p className="error">{ error }</p> }
               <div>
                 <EmailInput
                   name="login"
-                  value={ email }
-                  className={ emailClass }
-                  onChange={ handleChangeEmail }
+                  value={email}
+                  className={emailClass}
+                  onChange={handleChangeEmail}
                 >
                   { emailClass === validClass ? 'E-mail' : 'Digite um e-mail válido' }
                 </EmailInput>
                 <PasswordInput
                   name="login"
-                  value={ password }
-                  className={ passwordClass }
-                  onChange={ handleChangePassword }
+                  value={password}
+                  className={passwordClass}
+                  onChange={handleChangePassword}
                 >
                   { passwordClass === validClass ? 'Senha' : 'Digite uma senha válida' }
                 </PasswordInput>
               </div>
               <SubmitButtonS
                 type="submit"
-                onClick={ handleSubmit }
-                disabled={ loading }
+                onClick={handleSubmit}
+                disabled={loading}
               >
                 Entrar
               </SubmitButtonS>
               <p>
                 {'Não tem uma conta? '}
-                <Link
-                  to="/register"
-                >
-                  Cadastre-se
-                </Link>
+                <Link to="/register">Cadastre-se</Link>
               </p>
             </AuthFormS>
           ) }

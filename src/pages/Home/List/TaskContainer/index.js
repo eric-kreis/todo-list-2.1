@@ -29,18 +29,18 @@ export default function TaskContainer({ id, text }) {
       { !editStatus
         ? (
           <TaskBody
-            id={ id }
-            text={ text }
-            handleToggleEdit={ handleToggleEdit }
+            id={id}
+            text={text}
+            handleToggleEdit={handleToggleEdit}
           />
         )
         : (
           <EditSection
-            id={ id }
-            editStatus={ editStatus }
-            editText={ editText }
-            handleToggleEdit={ handleToggleEdit }
-            handleEditing={ handleEditing }
+            id={id}
+            editStatus={editStatus}
+            editText={editText}
+            handleToggleEdit={handleToggleEdit}
+            handleEditing={handleEditing}
           />
         ) }
     </ItemS>

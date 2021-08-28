@@ -15,9 +15,9 @@ export default function PasswordsSection({
     <section>
       <PasswordInput
         name="sign-pass"
-        value={ passwordValue }
-        className={ passwordClass }
-        onChange={ handleValidatePassword }
+        value={passwordValue}
+        className={passwordClass}
+        onChange={handleValidatePassword}
       >
         { (passwordClass === 'form-control')
           ? 'Senha'
@@ -25,9 +25,9 @@ export default function PasswordsSection({
       </PasswordInput>
       <PasswordInput
         name="sign-confirm"
-        value={ confirmValue }
-        className={ confirmPasswordClass }
-        onChange={ handleValidateConfirm }
+        value={confirmValue}
+        className={confirmPasswordClass}
+        onChange={handleValidateConfirm}
       >
         { (confirmPasswordClass === 'form-control')
           ? 'Confirme sua senha' : 'As senhas não coincidem' }

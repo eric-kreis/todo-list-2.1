@@ -90,13 +90,14 @@ export const AuthFormS = styled.form`
 
   p {
     padding: ${({ signup, login }) => {
-      if (signup) {
-        return '10px';
-      }
-      if (login) {
-        return '32px';
-      }
-    }};
+    if (signup) {
+      return '10px';
+    }
+    if (login) {
+      return '32px';
+    }
+  }};
+
     a {
       color: ${({ theme }) => theme.colors.text};
       text-decoration: none;

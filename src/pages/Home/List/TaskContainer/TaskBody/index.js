@@ -14,20 +14,20 @@ export default function TaskBody({ id, text, handleToggleEdit }) {
 
   return (
     <TaskBodyS>
-      <TaskSection id={ id }>
+      <TaskSection id={id}>
         { text }
       </TaskSection>
       <TaskButtonS>
         <IconButtonS
           medium
-          onClick={ handleToggleEdit }
+          onClick={handleToggleEdit}
         >
           <Edit title="Editar tarefa" />
         </IconButtonS>
         <IconButtonS
           medium
           clear
-          onClick={ handleRemoveItem }
+          onClick={handleRemoveItem}
         >
           <Remove title="Remover tarefa" />
         </IconButtonS>

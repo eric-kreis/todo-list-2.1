@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import ListProvider from '../../Contexts/ListContext';
 import ColorModal from './HomeModals/ColorModal';
@@ -8,10 +9,17 @@ import FormContainer from './FormContainer';
 import List from './List';
 import Footer from '../../components/Footer';
 
-import { HomeMainS, ThemeButtonS } from './styles';
-import { ColorPalette } from '../../assets/icons';
+import { HomeMainS, ProfileContainerS, ThemeButtonS } from './styles';
+import { ColorPalette, ProfileIcon } from '../../assets/icons';
+import { useAuth } from '../../Contexts/AuthContext';
 
 export default function HomePage() {
+  // const [mQuery, setMQuery] = useState({
+  //   matches: window.innerWidth > 768 ? true : false,
+  // });
+
+  const { currentUser } = useAuth();
+
   const [modals, setModals] = useState({
     clearModal: false,
     colorModal: false,
@@ -28,35 +36,39 @@ export default function HomePage() {
 
   const { clearModal, colorModal } = modals;
   return (
-    <section>
-      <ListProvider>
-        <ColorModal
-          handleToggleModal={ handleToggleModal }
-          colorModal={ colorModal }
+    <ListProvider>
+      <ColorModal
+        handleToggleModal={handleToggleModal}
+        colorModal={colorModal}
+      />
+      <ClearModalContainer
+        clearModal={clearModal}
+        handleToggleModal={handleToggleModal}
+      />
+      <Header
+        changeThemeButton={(
+          <ThemeButtonS
+            onClick={() => handleToggleModal('color')}
+          >
+            <ColorPalette title="Mudar cor" />
+          </ThemeButtonS>
+        )}
+      >
+        LISTA DE TAREFAS
+      </Header>
+      <ProfileContainerS>
+        <Link to="profile">
+          <ProfileIcon className="profile-icon" />
+          {currentUser.email}
+        </Link>
+      </ProfileContainerS>
+      <HomeMainS>
+        <FormContainer
+          handleToggleModal={handleToggleModal}
         />
-        <ClearModalContainer
-          clearModal={ clearModal }
-          handleToggleModal={ handleToggleModal }
-        />
-        <Header
-          changeThemeButton={
-            <ThemeButtonS
-              onClick={ () => handleToggleModal('color') }
-            >
-              <ColorPalette title="Mudar cor" />
-            </ThemeButtonS>
-          }
-        >
-          LISTA DE TAREFAS
-        </Header>
-        <HomeMainS>
-          <FormContainer
-            handleToggleModal={ handleToggleModal }
-          />
-          <List />
-        </HomeMainS>
-        <Footer />
-      </ListProvider>
-    </section>
+        <List />
+      </HomeMainS>
+      <Footer />
+    </ListProvider>
   );
 }

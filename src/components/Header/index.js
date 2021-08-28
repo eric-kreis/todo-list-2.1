@@ -24,15 +24,15 @@ export default function Header({ children, changeThemeButton }) {
       </h1>
       <div>
         <Switch
-          checked={ title === 'dark' }
-          onChange={ handleToggleTheme }
-          checkedIcon={ <Sun className="sun" /> }
-          uncheckedIcon={ <Moon className="moon" /> }
-          height={ 18 }
-          handleDiameter={ 26 }
-          width={ 50 }
-          offColor={ colors.background }
-          onColor={ colors.background }
+          checked={title === 'dark'}
+          onChange={handleToggleTheme}
+          checkedIcon={<Sun className="sun" />}
+          uncheckedIcon={<Moon className="moon" />}
+          height={18}
+          handleDiameter={26}
+          width={50}
+          offColor={colors.background}
+          onColor={colors.background}
         />
         { changeThemeButton }
       </div>

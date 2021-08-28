@@ -28,24 +28,24 @@ export default function FormInput({
   return (
     <div className="form-floating">
       <input
-        className={ formInputClass }
-        ref={ input }
+        className={formInputClass}
+        ref={input}
         id="form-input"
         type="text"
         name="taskText"
-        value={ taskText }
-        onFocus={ handleToggleFocus }
-        onBlur={ () => {
+        value={taskText}
+        onFocus={handleToggleFocus}
+        onBlur={() => {
           handleToggleFocus(false);
           handleResetFormClass();
-        } }
-        onChange={ (e) => {
+        }}
+        onChange={(e) => {
           handleChange(e);
           handleToggleFormClass(e);
-        } }
+        }}
         placeholder=" "
         autoComplete="off"
-        maxLength={ 120 }
+        maxLength={120}
       />
       <label htmlFor="form-input">{ changeLabelText() }</label>
     </div>

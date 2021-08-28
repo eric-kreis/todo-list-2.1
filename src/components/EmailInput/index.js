@@ -17,15 +17,15 @@ export default function EmailInput({
   return (
     <div className="form-floating">
       <input
-        id={ `email-${name}` }
-        ref={ input }
+        id={`email-${name}`}
+        ref={input}
         type="text"
-        value={ value }
-        className={ className }
+        value={value}
+        className={className}
         placeholder=" "
-        onChange={ onChange }
+        onChange={onChange}
       />
-      <label htmlFor={ `email-${name}` }>{ children }</label>
+      <label htmlFor={`email-${name}`}>{ children }</label>
     </div>
   );
 }

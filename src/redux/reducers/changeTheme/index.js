@@ -5,8 +5,7 @@ const savedTheme = JSON.parse(localStorage.getItem('theme'));
 const savedColor = localStorage.getItem('themeColor');
 
 export const { Types, Creators } = createActions({
-  changeColor: ({ target: { value } }) => ({
-    type: 'CHANGE_COLOR', value }),
+  changeColor: ({ target: { value } }) => ({ type: 'CHANGE_COLOR', value }),
   toggleTheme: [],
 });
 

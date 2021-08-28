@@ -16,7 +16,7 @@ export default function Logo() {
     >
       <g
         transform="translate(0.000000,3200.000000) scale(0.100000,-0.100000)"
-        fill={ text }
+        fill={text}
         stroke="none"
       >
         <path

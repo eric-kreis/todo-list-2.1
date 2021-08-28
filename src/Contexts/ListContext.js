@@ -1,5 +1,4 @@
-import React from 'react';
-import { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { v4 } from 'uuid';
 import PropTypes from 'prop-types';
 
@@ -92,7 +91,7 @@ export default function ListProvider({ children }) {
   };
 
   return (
-    <ListContext.Provider value={ contextValue }>
+    <ListContext.Provider value={contextValue}>
       { children }
     </ListContext.Provider>
   );
@@ -101,4 +100,3 @@ export default function ListProvider({ children }) {
 ListProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
-

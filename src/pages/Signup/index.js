@@ -11,13 +11,14 @@ import {
   AuthFormS,
   SubmitButtonS,
 } from '../../styles/auth';
-import SignupLoading  from '../../assets/loadingCoponents/SignupLoading';
+import SignupLoading from '../../assets/loadingComponents/SignupLoading';
 
 const validClass = 'form-control';
 const invalidClass = 'form-control is-invalid';
 
 export default function Signup() {
   const { signUp } = useAuth();
+  const history = useHistory();
 
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPassowordValue] = useState('');
@@ -31,8 +32,6 @@ export default function Signup() {
   const [loading, setLoading] = useState(false);
 
   const [error, setError] = useState('');
-  
-  const history = useHistory();
 
   const inputClasses = useMemo(() => (
     [emailClass, passwordClass, confirmPasswordClass]
@@ -104,12 +103,12 @@ export default function Signup() {
         history.push('/');
       } catch (signError) {
         switch (signError.code) {
-        case 'auth/email-already-in-use':
-          setError('* O e-mail fornecido já está em uso');
-          break;
-        default:
-          setError('* Falha ao criar a conta');
-          break;
+          case 'auth/email-already-in-use':
+            setError('* O e-mail fornecido já está em uso');
+            break;
+          default:
+            setError('* Falha ao criar a conta');
+            break;
         }
       }
       setLoading(false);
@@ -121,42 +120,40 @@ export default function Signup() {
       <AuthContainerS>
         <AuthHeader>CRIE SUA CONTA</AuthHeader>
         { loading ? <SignupLoading />
-        : (
-          <AuthFormS onSubmit={ (e) => e.preventDefault() } signup>
-            { error && <p className="error">{ error }</p> }
-            <div>
-              <EmailInput
-                name="sign"
-                value={ emailValue }
-                className={ emailClass }
-                onChange={ handleValidateEmail }
+          : (
+            <AuthFormS onSubmit={(e) => e.preventDefault()} signup>
+              { error && <p className="error">{ error }</p> }
+              <div>
+                <EmailInput
+                  name="sign"
+                  value={emailValue}
+                  className={emailClass}
+                  onChange={handleValidateEmail}
+                >
+                  { emailClass === validClass ? 'E-mail' : 'Digite um e-mail válido' }
+                </EmailInput>
+                <PasswordsSection
+                  passwordValue={passwordValue}
+                  confirmValue={confirmValue}
+                  passwordClass={passwordClass}
+                  confirmPasswordClass={confirmPasswordClass}
+                  handleValidatePassword={handleValidatePassword}
+                  handleValidateConfirm={handleValidateConfirm}
+                />
+              </div>
+              <SubmitButtonS
+                type="submit"
+                onClick={handleSubmit}
+                disabled={loading}
               >
-                { emailClass === validClass ? 'E-mail' : 'Digite um e-mail válido' }
-              </EmailInput>
-              <PasswordsSection
-                passwordValue={ passwordValue }
-                confirmValue={ confirmValue }
-                passwordClass={ passwordClass }
-                confirmPasswordClass={ confirmPasswordClass }
-                handleValidatePassword={ handleValidatePassword }
-                handleValidateConfirm={ handleValidateConfirm }
-              />
-            </div>
-            <SubmitButtonS
-              type="submit"
-              onClick={ handleSubmit }
-              disabled={ loading }
-            >
-              Cadastre-se
-            </SubmitButtonS>
-            <p>
-              {'Já tem uma conta? '}
-              <Link to="/login">
-                Entrar
-              </Link>
-            </p>
-          </AuthFormS>
-        ) }
+                Cadastre-se
+              </SubmitButtonS>
+              <p>
+                {'Já tem uma conta? '}
+                <Link to="/login">Entrar</Link>
+              </p>
+            </AuthFormS>
+          ) }
       </AuthContainerS>
     </AuthBodyS>
   );

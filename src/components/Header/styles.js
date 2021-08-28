@@ -8,13 +8,9 @@ const PageHeaderS = styled.header`
   justify-content: space-between;
   padding: 12px 36px;
 
-  .logo {
-    color: white;
-  }
-
   h1 {
     font-size: x-large;
-    margin: 0 0 0 35px;
+    margin: 0 0 0 24px;
   }
 
   div {

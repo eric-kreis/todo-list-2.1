@@ -22,39 +22,39 @@ export default function ColorModal({ handleToggleModal, colorModal }) {
         <ColorsContainerS>
           <ColorButtonsContainerS>
             <ColorButtonS
-              onClick={ handleChangeColor }
+              onClick={handleChangeColor}
               value="blue"
               title="Azul"
             />
             <ColorButtonS
-              onClick={ handleChangeColor }
+              onClick={handleChangeColor}
               value="green"
               title="Verde"
             />
             <ColorButtonS
-              onClick={ handleChangeColor }
+              onClick={handleChangeColor}
               value="pink"
               title="Rosa"
             />
             <ColorButtonS
-              onClick={ handleChangeColor }
+              onClick={handleChangeColor}
               value="purple"
               title="Roxo"
             />
             <ColorButtonS
-              onClick={ handleChangeColor }
+              onClick={handleChangeColor}
               value="white"
               title="Branco"
             />
             <ColorButtonS
-              onClick={ handleChangeColor }
+              onClick={handleChangeColor}
               value="red"
               title="Vermelho"
             />
           </ColorButtonsContainerS>
           <button
             type="button"
-            onClick={ () => { handleToggleModal('color'); } }
+            onClick={() => { handleToggleModal('color'); }}
             className="modal-button"
           >
             VOLTAR

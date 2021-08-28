@@ -31,32 +31,32 @@ export default function EditSection({
   return (
     <EditInputSection className="form-floating">
       <input
-        ref={ editInput }
-        className={ editClass }
+        ref={editInput}
+        className={editClass}
         type="text"
         name="editText"
-        value={ editText }
+        value={editText}
         placeholder=" "
         autoComplete="off"
-        onChange={ handleEditing }
-        onKeyUp={ (e) => {
+        onChange={handleEditing}
+        onKeyUp={(e) => {
           if (e.key === 'Enter') {
             handleToggleEdit();
             handleEditBack(editText);
           }
-        } }
-        onBlur={ () => {
+        }}
+        onBlur={() => {
           handleToggleEdit();
           handleEditBack(editText);
-        } }
-        maxLength={ 120 }
+        }}
+        maxLength={120}
       />
       <label>Escreva para editar sua tarefa</label>
       <ReturnButton
-        onClick={ () => {
+        onClick={() => {
           handleToggleEdit();
           handleEditBack(editText);
-        } }
+        }}
       >
         <Exit title="Voltar" />
       </ReturnButton>

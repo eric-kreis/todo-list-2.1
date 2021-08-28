@@ -18,25 +18,16 @@ export default function ConfirmModal({
         { confirmButtons
           ? (
             <div>
-              <button
-                type="button"
-                onClick={ handleConfirm }
-              >
+              <button type="button" onClick={handleConfirm}>
                 SIM
               </button>
-              <button
-                type="button"
-                onClick={ handleCancel }
-              >
+              <button type="button" onClick={handleCancel}>
                 NÃO
               </button>
             </div>
           ) : (
             <div>
-              <button
-                type="button"
-                onClick={ handleCancel }
-              >
+              <button type="button" onClick={handleCancel}>
                 VOLTAR
               </button>
             </div>

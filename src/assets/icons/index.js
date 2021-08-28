@@ -1,6 +1,6 @@
 // All icons archive
 import { VscAdd } from 'react-icons/vsc';
-import { IoMdTrash, IoMdRemove } from 'react-icons/io';
+import { IoMdTrash, IoMdRemove, IoIosSettings } from 'react-icons/io';
 import {
   IoExitOutline,
   IoColorPalette,
@@ -10,6 +10,8 @@ import {
 import { MdModeEdit } from 'react-icons/md';
 import { HiSun, HiMoon } from 'react-icons/hi';
 import { SiLinkedin, SiGithub } from 'react-icons/si';
+import { CgProfile } from 'react-icons/cg';
+import { FiLogOut } from 'react-icons/fi';
 
 // Add
 export const Add = VscAdd;
@@ -46,3 +48,12 @@ export const EyeOn = IoEyeSharp;
 
 // EyeOff
 export const EyeOff = IoEyeOffSharp;
+
+// Profile
+export const ProfileIcon = CgProfile;
+
+// Logout
+export const Logout = FiLogOut;
+
+// Settings
+export const Settings = IoIosSettings;

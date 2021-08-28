@@ -12,7 +12,7 @@ export default function App() {
   return (
     <div>
       <AuthProvider>
-        <ThemeProvider theme={ theme }>
+        <ThemeProvider theme={theme}>
           <GlobalStyle />
           <Routes />
         </ThemeProvider>

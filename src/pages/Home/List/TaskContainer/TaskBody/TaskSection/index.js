@@ -17,14 +17,14 @@ export default function TaskSection({ id, children }) {
 
   return (
     <TaskLabelS
-      checkedItems={ checkedItems }
-      id={ id }
+      checkedItems={checkedItems}
+      id={id}
     >
       <input
-        ref={ check }
+        ref={check}
         type="checkbox"
-        value={ id }
-        onChange={ toggleAndSavingChecked }
+        value={id}
+        onChange={toggleAndSavingChecked}
       />
       <span>{ children }</span>
     </TaskLabelS>

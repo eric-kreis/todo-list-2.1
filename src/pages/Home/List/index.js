@@ -21,9 +21,9 @@ export default function List() {
     <ListS>
       { filterTasks().map(({ id, text }) => (
         <TaskContainer
-          key={ id }
-          id={ id }
-          text={ text }
+          key={id}
+          id={id}
+          text={text}
         />
       )) }
     </ListS>
