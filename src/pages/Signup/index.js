@@ -106,6 +106,9 @@ export default function Signup() {
           case 'auth/email-already-in-use':
             setError('* O e-mail fornecido já está em uso');
             break;
+          case 'auth/weak-password':
+            setError('* A senha deve conter no mínimo 6 caracteres');
+            break;
           default:
             setError('* Falha ao criar a conta');
             break;
