@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Logo from '../../assets/Logo';
 import { useAuth } from '../../Contexts/AuthContext';
+import { SubmitButtonS } from '../../styles/auth';
 import ProfileBodyS from './styles';
 
 export default function Profile() {
-  const { currentUser } = useAuth();
+  const { currentUser, logout } = useAuth();
+  const [error, setError] = useState('');
+
+  const handleSignOut = async () => {
+    try {
+      setError('');
+      await logout();
+    } catch (logoutError) {
+      setError('* Falha ao sair');
+    }
+  };
 
   return (
     <ProfileBodyS>
@@ -18,6 +29,8 @@ export default function Profile() {
           type="file"
           accept="image/png, image/jpeg"
         />
+        { error && <h4>{ error }</h4> }
+        <SubmitButtonS onClick={handleSignOut}>Sair</SubmitButtonS>
       </div>
     </ProfileBodyS>
   );

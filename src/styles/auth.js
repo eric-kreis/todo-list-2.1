@@ -14,7 +14,7 @@ export const AuthContainerS = styled.section`
   box-shadow: 1px 1px 10px ${({ theme }) => shade(0.2, theme.colors.primary)};
   color: ${({ theme }) => theme.colors.text};
   display: grid;
-  grid-template-rows: 3fr 5fr;
+  grid-template-rows: 4fr 6fr;
   height: 85vh;
   margin: auto;
   overflow-y: scroll;
@@ -56,6 +56,7 @@ export const AuthFormS = styled.form`
     if (login) {
       return 'space-around';
     }
+    return 'center';
   }};
   margin-top: ${({ login }) => login && '30px'};
   max-height: 100%;
@@ -96,6 +97,7 @@ export const AuthFormS = styled.form`
     if (login) {
       return '32px';
     }
+    return 0;
   }};
 
     a {
@@ -118,6 +120,7 @@ export const SubmitButtonS = styled.button`
   color: ${({ theme }) => theme.colors.text};
   margin-top: 32px;
   padding: 8px 0;
+  width: 100%;
 
   :hover {
     background-color: ${({ theme }) => shade(0.1, theme.colors.primary)};

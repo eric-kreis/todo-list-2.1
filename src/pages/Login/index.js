@@ -17,7 +17,7 @@ const validClass = 'form-control';
 const invalidClass = 'form-control is-invalid';
 
 export default function Login() {
-  const { login } = useAuth();
+  const { login, currentUser } = useAuth();
   const history = useHistory();
 
   const [email, setEmail] = useState('');
@@ -70,7 +70,6 @@ export default function Login() {
         setLoading(true);
         setError('');
         await login(email, password);
-        history.push('/');
       } catch (loginError) {
         switch (loginError.code) {
           case 'auth/wrong-password':
@@ -90,6 +89,10 @@ export default function Login() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    (() => currentUser && history.push('/'))();
+  }, [currentUser, history]);
 
   return (
     <AuthBodyS>

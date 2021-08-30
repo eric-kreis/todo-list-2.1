@@ -29,10 +29,13 @@ export default function AuthProvider({ children }) {
     return unsubscribe;
   }, []);
 
+  const logout = () => auth.signOut();
+
   const contextValue = {
     currentUser,
     signUp,
     login,
+    logout,
   };
 
   return (

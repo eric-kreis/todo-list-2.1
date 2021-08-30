@@ -7,12 +7,12 @@ const AuthHeaderS = styled.header`
   justify-content: center;
 
   .logo {
-    width: 40pt;
-    height: 40pt;
+    width: 50pt;
+    height: 50pt;
   }
 
   h4 {
-    margin: 16px 0 0;
+    margin: 24px 0 18px;
   }
 `;
 

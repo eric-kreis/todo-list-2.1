@@ -17,7 +17,7 @@ const validClass = 'form-control';
 const invalidClass = 'form-control is-invalid';
 
 export default function Signup() {
-  const { signUp } = useAuth();
+  const { signUp, currentUser } = useAuth();
   const history = useHistory();
 
   const [emailValue, setEmailValue] = useState('');
@@ -54,7 +54,7 @@ export default function Signup() {
 
   // Password functions;
   const passwordValidation = (value) => {
-    if (value.trim()) {
+    if (value.trim() && value.length >= 6) {
       setPasswordClass(validClass);
       if (value === confirmValue) {
         setConfirmPasswordClass(validClass);
@@ -100,7 +100,6 @@ export default function Signup() {
         setLoading(true);
         setError('');
         await signUp(emailValue, passwordValue);
-        history.push('/');
       } catch (signError) {
         switch (signError.code) {
           case 'auth/email-already-in-use':
@@ -117,6 +116,10 @@ export default function Signup() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    (() => currentUser && history.push('/'))();
+  }, [currentUser, history]);
 
   return (
     <AuthBodyS>
