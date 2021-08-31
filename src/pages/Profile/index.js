@@ -19,7 +19,7 @@ export default function Profile() {
 
   return (
     <ProfileBodyS>
-      <div>
+      <section className="profile-container">
         <section className="photo-container">
           { currentUser.photoURL
             ? <img src={currentUser.photoURL} alt="Perfil" />
@@ -31,7 +31,7 @@ export default function Profile() {
         />
         { error && <h4>{ error }</h4> }
         <SubmitButtonS onClick={handleSignOut}>Sair</SubmitButtonS>
-      </div>
+      </section>
     </ProfileBodyS>
   );
 }

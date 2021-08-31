@@ -7,7 +7,7 @@ const ProfileBodyS = styled.div`
   display: flex;
   min-height: 100vh;
 
-  div {
+  .profile-container {
     background-color: whitesmoke;
     border-radius: 5px;
     box-shadow: 1px 1px 10px ${({ theme }) => shade(0.2, theme.colors.primary)};
