@@ -16,6 +16,7 @@ export default function Header({ children, changeThemeButton }) {
   const handleToggleTheme = useCallback(() => (
     dispatch(ThemeActions.toggleTheme())), [dispatch]);
 
+  const isChecked = title === 'dark';
   return (
     <PageHeaderS>
       <Logo />
@@ -24,7 +25,7 @@ export default function Header({ children, changeThemeButton }) {
       </h1>
       <div>
         <Switch
-          checked={title === 'dark'}
+          checked={isChecked}
           onChange={handleToggleTheme}
           checkedIcon={<Sun className="sun" />}
           uncheckedIcon={<Moon className="moon" />}
