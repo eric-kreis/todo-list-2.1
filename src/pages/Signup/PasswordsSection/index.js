@@ -21,7 +21,7 @@ export default function PasswordsSection({
       >
         { (passwordClass === 'form-control')
           ? 'Senha'
-          : 'A senha deve possuir no mínimo 6 caracteres' }
+          : 'Mínimo de 6 caracteres' }
       </PasswordInput>
       <PasswordInput
         name="sign-confirm"

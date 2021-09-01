@@ -1,5 +1,5 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useState, useMemo } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 
 import { useAuth } from '../../Contexts/AuthContext';
 import EmailInput from '../../components/EmailInput';
@@ -18,14 +18,12 @@ const invalidClass = 'form-control is-invalid';
 
 export default function Login() {
   const { login, currentUser } = useAuth();
-  const history = useHistory();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const [emailClass, setEmailClass] = useState(validClass);
   const [passwordClass, setPasswordClass] = useState(validClass);
-  const [validated, setValidated] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
@@ -56,16 +54,15 @@ export default function Login() {
     passwordValidation(value);
   };
 
-  useEffect(() => {
-    const allValidated = inputClasses.every((inputClass) => inputClass === validClass);
-    setValidated(allValidated);
-  }, [inputClasses]);
+  const allValidated = useMemo(() => (
+    inputClasses.every((inputClass) => inputClass === validClass)
+  ), [inputClasses]);
 
   const handleSubmit = async () => {
     emailValidation(email);
     passwordValidation(password);
 
-    if (email && password && validated) {
+    if (email && password && allValidated) {
       try {
         setLoading(true);
         setError('');
@@ -90,9 +87,7 @@ export default function Login() {
     }
   };
 
-  useEffect(() => {
-    (() => currentUser && history.push('/'))();
-  }, [currentUser, history]);
+  if (currentUser) return <Redirect to="/" />;
 
   return (
     <AuthBodyS>

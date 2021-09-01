@@ -47,9 +47,7 @@ export default function HomePage() {
       />
       <Header
         changeThemeButton={(
-          <ThemeButtonS
-            onClick={() => handleToggleModal('color')}
-          >
+          <ThemeButtonS onClick={() => handleToggleModal('color')}>
             <ColorPalette title="Mudar cor" />
           </ThemeButtonS>
         )}
@@ -63,9 +61,7 @@ export default function HomePage() {
         </Link>
       </ProfileContainerS>
       <HomeMainS>
-        <FormContainer
-          handleToggleModal={handleToggleModal}
-        />
+        <FormContainer handleToggleModal={handleToggleModal} />
         <List />
       </HomeMainS>
       <Footer />

@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useMemo, useState } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 
 import { useAuth } from '../../Contexts/AuthContext';
 import AuthHeader from '../../components/AuthHeader';
@@ -18,7 +18,6 @@ const invalidClass = 'form-control is-invalid';
 
 export default function Signup() {
   const { signUp, currentUser } = useAuth();
-  const history = useHistory();
 
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPassowordValue] = useState('');
@@ -27,7 +26,6 @@ export default function Signup() {
   const [emailClass, setEmailClass] = useState(validClass);
   const [passwordClass, setPasswordClass] = useState(validClass);
   const [confirmPasswordClass, setConfirmPasswordClass] = useState(validClass);
-  const [validated, setValidated] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
@@ -85,17 +83,16 @@ export default function Signup() {
     confirmValidation(value);
   };
 
-  useEffect(() => {
-    const allValidated = inputClasses.every((inputClass) => inputClass === validClass);
-    setValidated(allValidated);
-  }, [inputClasses]);
+  const allValidated = useMemo(() => (
+    inputClasses.every((inputClass) => inputClass === validClass)
+  ), [inputClasses]);
 
   const handleSubmit = async () => {
     emailValidation(emailValue);
     passwordValidation(passwordValue);
     confirmValidation(confirmValue);
 
-    if (emailValue && passwordValue && confirmValue && validated) {
+    if (emailValue && passwordValue && confirmValue && allValidated) {
       try {
         setLoading(true);
         setError('');
@@ -117,9 +114,7 @@ export default function Signup() {
     }
   };
 
-  useEffect(() => {
-    (() => currentUser && history.push('/'))();
-  }, [currentUser, history]);
+  if (currentUser) return <Redirect to="/" />;
 
   return (
     <AuthBodyS>

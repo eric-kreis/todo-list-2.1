@@ -12,7 +12,7 @@ export const AuthContainerS = styled.section`
   background-color: whitesmoke;
   border-radius: 5px;
   box-shadow: 1px 1px 10px ${({ theme }) => shade(0.2, theme.colors.primary)};
-  color: ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.colors.input};
   display: grid;
   grid-template-rows: 4fr 6fr;
   height: 85vh;
@@ -72,6 +72,7 @@ export const AuthFormS = styled.form`
 
   .form-floating {
     background-color: ${({ theme }) => theme.modal.modalBackground};
+    border-radius: 10px;
     color: ${({ theme }) => theme.colors.input};
     margin-bottom: 8px;
   }
@@ -92,7 +93,7 @@ export const AuthFormS = styled.form`
   p {
     padding: ${({ signup, login }) => {
     if (signup) {
-      return '10px';
+      return '28px';
     }
     if (login) {
       return '32px';
@@ -101,7 +102,7 @@ export const AuthFormS = styled.form`
   }};
 
     a {
-      color: ${({ theme }) => theme.colors.text};
+      color: ${({ theme }) => theme.colors.input};
       text-decoration: none;
       
       :hover {

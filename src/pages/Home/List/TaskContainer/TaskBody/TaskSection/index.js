@@ -16,10 +16,7 @@ export default function TaskSection({ id, children }) {
   }, [checkedItems, id]);
 
   return (
-    <TaskLabelS
-      checkedItems={checkedItems}
-      id={id}
-    >
+    <TaskLabelS checkedItems={checkedItems} id={id}>
       <input
         ref={check}
         type="checkbox"

@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { ThemeContext } from 'styled-components';
 
-export default function Logo() {
+export default function Logo({ color }) {
   const { colors: { text } } = useContext(ThemeContext);
 
   return (
@@ -16,7 +17,7 @@ export default function Logo() {
     >
       <g
         transform="translate(0.000000,3200.000000) scale(0.100000,-0.100000)"
-        fill={text}
+        fill={color || text}
         stroke="none"
       >
         <path
@@ -82,3 +83,11 @@ export default function Logo() {
     </svg>
   );
 }
+
+Logo.defaultProps = {
+  color: '',
+};
+
+Logo.propTypes = {
+  color: PropTypes.string,
+};

@@ -10,13 +10,11 @@ import AuthProvider from './Contexts/AuthContext';
 export default function App() {
   const theme = useSelector(({ changeTheme }) => changeTheme.theme);
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <AuthProvider>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          <Routes />
-        </ThemeProvider>
+        <GlobalStyle />
+        <Routes />
       </AuthProvider>
-    </div>
+    </ThemeProvider>
   );
 }

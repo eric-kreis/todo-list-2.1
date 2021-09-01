@@ -1,37 +1,32 @@
 import React, { createContext, useContext, useState } from 'react';
 import { v4 } from 'uuid';
 import PropTypes from 'prop-types';
+import { getStorage, saveStorage } from '../helpers';
 
 const ListContext = createContext();
 
 export const useList = () => useContext(ListContext);
 
-const savedTasks = JSON.parse(localStorage.getItem('tasks'));
-const savedChecks = JSON.parse(localStorage.getItem('checkedItems'));
+const savedTasks = getStorage('tasks');
+const savedChecks = getStorage('checkedItems');
 
 // LocalStorage assistent;
-const setAndSave = (callback, key, value) => {
-  callback(value);
-  localStorage.setItem(key, JSON.stringify(value));
+const setAndSave = (stateFunc, key, value) => {
+  stateFunc(value);
+  saveStorage(key, value);
 };
 
 export default function ListProvider({ children }) {
   const [display, setDisplay] = useState('all');
-  const [tasks, setTasks] = useState(!savedTasks ? [] : savedTasks);
-  const [checkedItems, setCheckedItems] = useState(!savedChecks ? [] : savedChecks);
+  const [tasks, setTasks] = useState(savedTasks);
+  const [checkedItems, setCheckedItems] = useState(savedChecks);
 
   const changeDisplay = ({ target: { value } }) => {
     setDisplay(value);
   };
 
   const addAndSaveToDo = (text) => {
-    const adding = [
-      ...tasks,
-      {
-        id: v4(),
-        text,
-      },
-    ];
+    const adding = [...tasks, { id: v4(), text }];
     setAndSave(setTasks, 'tasks', adding);
   };
 
