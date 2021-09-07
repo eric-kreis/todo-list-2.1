@@ -15,10 +15,10 @@ export const AuthContainerS = styled.section`
   color: ${({ theme }) => theme.colors.input};
   display: grid;
   grid-template-rows: 4fr 6fr;
-  height: 85vh;
+  height: ${({ defaultH }) => (defaultH ? '' : '85vh')};
   margin: auto;
   overflow-y: scroll;
-  padding: 10px 16px 0;
+  padding: 10px 16px ${({ update }) => (update ? '24px' : 0)};
   text-align: center;
   width: 30%;
 
@@ -27,21 +27,17 @@ export const AuthContainerS = styled.section`
   }
 
   @media(max-width: 1024px) {
-    width: 40%;
-  }
-
-  @media(max-width: 768px) {
     width: 50%;
   }
 
-  @media(max-width: 640px) {
+  @media(max-width: 768px) {
     width: 60%;
   }
 
-  @media(max-width: 480px) {
+  @media(max-width: 640px) {
     border-radius: 0;
     box-shadow: none;
-    height: 100%;
+    height: 100vh;
     width: 100%;
   }
 `;
@@ -59,10 +55,18 @@ export const AuthFormS = styled.form`
     return 'center';
   }};
   margin-top: ${({ login }) => login && '30px'};
-  max-height: 100%;
 
   .error {
     color: red;
+    font-size: small;
+    margin-bottom: 4px;
+    padding: 0;
+    padding-left: 4px;
+    text-align: left;
+  }
+
+  .success {
+    color: green;
     font-size: small;
     margin-bottom: 4px;
     padding: 0;
@@ -90,7 +94,7 @@ export const AuthFormS = styled.form`
     }
   }
 
-  p {
+  .link-container {
     padding: ${({ signup, login }) => {
     if (signup) {
       return '28px';
@@ -100,6 +104,10 @@ export const AuthFormS = styled.form`
     }
     return 0;
   }};
+
+    p {
+      margin: ${({ update }) => (update ? '16px' : '8px')} 0 0 0;
+    }
 
     a {
       color: ${({ theme }) => theme.colors.input};
@@ -111,7 +119,6 @@ export const AuthFormS = styled.form`
       }
     }
   }
-
 `;
 
 export const SubmitButtonS = styled.button`
@@ -122,6 +129,10 @@ export const SubmitButtonS = styled.button`
   margin-top: 32px;
   padding: 8px 0;
   width: 100%;
+
+  :disabled {
+    opacity: 0.8;
+  }
 
   :hover {
     background-color: ${({ theme }) => shade(0.1, theme.colors.primary)};

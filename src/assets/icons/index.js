@@ -12,48 +12,52 @@ import { HiSun, HiMoon } from 'react-icons/hi';
 import { SiLinkedin, SiGithub } from 'react-icons/si';
 import { CgProfile } from 'react-icons/cg';
 import { FiLogOut } from 'react-icons/fi';
+import { AiOutlineMenu } from 'react-icons/ai';
 
-// Add
+// Add;
 export const Add = VscAdd;
 
-// Trash
+// Trash;
 export const Trash = IoMdTrash;
 
-// Edit
+// Edit;
 export const Edit = MdModeEdit;
 
-// Remove
+// Remove;
 export const Remove = IoMdRemove;
 
-// Exit
+// Exit;
 export const Exit = IoExitOutline;
 
-// Sun
+// Sun;
 export const Sun = HiSun;
 
-// Moon
+// Moon;
 export const Moon = HiMoon;
 
-// LinkedIn
+// LinkedIn;
 export const LinkedIn = SiLinkedin;
 
-// GitHub
+// GitHub;
 export const GitHub = SiGithub;
 
-// Paint Brush
+// Paint Brush;
 export const ColorPalette = IoColorPalette;
 
-// EyeOn
+// EyeOn;
 export const EyeOn = IoEyeSharp;
 
-// EyeOff
+// EyeOff;
 export const EyeOff = IoEyeOffSharp;
 
-// Profile
+// Profile;
 export const ProfileIcon = CgProfile;
 
-// Logout
+// Logout;
 export const Logout = FiLogOut;
 
-// Settings
+// Settings;
 export const Settings = IoIosSettings;
+
+// Hamburguer menu;
+export const Menu = AiOutlineMenu;

@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
 import { useAuth } from '../../Contexts/AuthContext';
 import AuthHeader from '../../components/AuthHeader';
@@ -11,15 +11,16 @@ import {
   AuthFormS,
   SubmitButtonS,
 } from '../../styles/auth';
-import SignupLoading from '../../assets/loadingComponents/SignupLoading';
+import UpdateLoading from '../../assets/loadingComponents/UpdateLoading';
 
 const validClass = 'form-control';
 const invalidClass = 'form-control is-invalid';
 
-export default function Signup() {
-  const { signUp, currentUser } = useAuth();
+export default function UpdateProfile() {
+  const history = useHistory();
+  const { updateEmail, updatePassword, currentUser } = useAuth();
 
-  const [emailValue, setEmailValue] = useState('');
+  const [emailValue, setEmailValue] = useState(currentUser.email);
   const [passwordValue, setPassowordValue] = useState('');
   const [confirmValue, setConfirmValue] = useState('');
 
@@ -30,10 +31,6 @@ export default function Signup() {
   const [loading, setLoading] = useState(false);
 
   const [error, setError] = useState('');
-
-  const inputClasses = useMemo(() => (
-    [emailClass, passwordClass, confirmPasswordClass]
-  ), [confirmPasswordClass, emailClass, passwordClass]);
 
   // Email functions;
   const emailValidation = (value) => {
@@ -52,7 +49,7 @@ export default function Signup() {
 
   // Password functions;
   const passwordValidation = (value) => {
-    if (value.trim() && value.length >= 6) {
+    if (value.trim()) {
       setPasswordClass(validClass);
       if (value === confirmValue) {
         setConfirmPasswordClass(validClass);
@@ -83,40 +80,45 @@ export default function Signup() {
     confirmValidation(value);
   };
 
-  const allValidated = useMemo(() => (
-    inputClasses.every((inputClass) => inputClass === validClass)
-  ), [inputClasses]);
-
   const handleSubmit = async () => {
-    try {
-      setLoading(true);
-      setError('');
-      await signUp(emailValue, passwordValue);
-    } catch (signError) {
-      switch (signError.code) {
-        case 'auth/email-already-in-use':
-          setError('* O e-mail fornecido já está em uso');
-          break;
-        case 'auth/weak-password':
-          setError('* A senha deve conter no mínimo 6 caracteres');
-          break;
-        default:
-          setError('* Falha ao criar a conta');
-          break;
-      }
-    }
-    setLoading(false);
-  };
+    // eslint-disable-next-line max-len
+    if (emailClass === validClass && ((passwordValue && confirmValue) || (!passwordValue && !confirmValue))) {
+      emailValidation(emailValue);
+      passwordValidation(passwordValue);
+      confirmValidation(confirmValue);
+      const promises = [];
+      if (currentUser.email !== emailValue) promises.push(updateEmail(emailValue));
+      if (confirmValue) promises.push(updatePassword(confirmValue));
 
-  if (currentUser) return <Redirect to="/" />;
+      try {
+        setError('');
+        setLoading(true);
+        await Promise.all(promises);
+        history.push('/');
+      } catch (updateError) {
+        switch (updateError.code) {
+          case 'auth/weak-password':
+            setError('* A senha deve conter pelo menos 6 caracteres');
+            break;
+          case 'auth/requires-recent-login':
+            setError('* Faça login novamente para atualizar esta informação');
+            break;
+          default:
+            setError('* Falha ao atualizar a conta');
+            break;
+        }
+      }
+      setLoading(false);
+    }
+  };
 
   return (
     <AuthBodyS>
-      <AuthContainerS>
-        <AuthHeader>CRIE SUA CONTA</AuthHeader>
-        { loading ? <SignupLoading />
+      <AuthContainerS defaultH update>
+        <AuthHeader>Atualizar Perfil</AuthHeader>
+        { loading ? <UpdateLoading />
           : (
-            <AuthFormS onSubmit={(e) => e.preventDefault()} signup>
+            <AuthFormS onSubmit={(e) => e.preventDefault()} update>
               { error && <p className="error">{ error }</p> }
               <div>
                 <EmailInput
@@ -134,18 +136,21 @@ export default function Signup() {
                   confirmPasswordClass={confirmPasswordClass}
                   handleValidatePassword={handleValidatePassword}
                   handleValidateConfirm={handleValidateConfirm}
+                  setPasswordClass={setPasswordClass}
+                  setConfirmPasswordClass={setConfirmPasswordClass}
                 />
               </div>
               <SubmitButtonS
                 type="submit"
                 onClick={handleSubmit}
-                disabled={!emailValue || !passwordValue || !confirmValue || !allValidated}
+                disabled={emailClass !== validClass}
               >
-                Cadastre-se
+                Atualizar
               </SubmitButtonS>
               <div className="link-container">
-                {'Já tem uma conta? '}
-                <Link to="/login">Entrar</Link>
+                <p>
+                  <Link to="/">Voltar</Link>
+                </p>
               </div>
             </AuthFormS>
           ) }

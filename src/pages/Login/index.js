@@ -59,32 +59,27 @@ export default function Login() {
   ), [inputClasses]);
 
   const handleSubmit = async () => {
-    emailValidation(email);
-    passwordValidation(password);
-
-    if (email && password && allValidated) {
-      try {
-        setLoading(true);
-        setError('');
-        await login(email, password);
-      } catch (loginError) {
-        switch (loginError.code) {
-          case 'auth/wrong-password':
-            setError('* Senha incorreta');
-            break;
-          case 'auth/too-many-requests':
-            setError('* Muitas tentativas, conta desativada temporariamente');
-            break;
-          case 'auth/user-not-found':
-            setError('* E-mail inválido');
-            break;
-          default:
-            setError('* Falha ao entrar');
-            break;
-        }
+    try {
+      setLoading(true);
+      setError('');
+      await login(email, password);
+    } catch (loginError) {
+      switch (loginError.code) {
+        case 'auth/wrong-password':
+          setError('* Senha incorreta');
+          break;
+        case 'auth/too-many-requests':
+          setError('* Muitas tentativas, conta desativada temporariamente');
+          break;
+        case 'auth/user-not-found':
+          setError('* E-mail inválido');
+          break;
+        default:
+          setError('* Falha ao entrar');
+          break;
       }
-      setLoading(false);
     }
+    setLoading(false);
   };
 
   if (currentUser) return <Redirect to="/" />;
@@ -118,14 +113,17 @@ export default function Login() {
               <SubmitButtonS
                 type="submit"
                 onClick={handleSubmit}
-                disabled={loading}
+                disabled={!email || !password || !allValidated}
               >
                 Entrar
               </SubmitButtonS>
-              <p>
-                {'Não tem uma conta? '}
-                <Link to="/register">Cadastre-se</Link>
-              </p>
+              <div className="link-container">
+                <Link to="/reset-password">Esqueceu a senha?</Link>
+                <p>
+                  {'Não tem uma conta? '}
+                  <Link to="/register">Cadastre-se</Link>
+                </p>
+              </div>
             </AuthFormS>
           ) }
       </AuthContainerS>

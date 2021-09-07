@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Logo from '../../assets/Logo';
 import { useAuth } from '../../Contexts/AuthContext';
 import { SubmitButtonS } from '../../styles/auth';
@@ -30,6 +31,7 @@ export default function Profile() {
           accept="image/png, image/jpeg"
         />
         { error && <h4>{ error }</h4> }
+        <Link to="/update-profile">Atualizar perfil</Link>
         <SubmitButtonS onClick={handleSignOut}>Sair</SubmitButtonS>
       </section>
     </ProfileBodyS>

@@ -8,6 +8,7 @@ export default function PasswordInput({
   name,
   className,
   onChange,
+  onBlur,
   children,
 }) {
   const input = useRef();
@@ -36,6 +37,7 @@ export default function PasswordInput({
         className={className}
         placeholder=" "
         onChange={onChange}
+        onBlur={onBlur}
         maxLength={40}
       />
       <label htmlFor={`password-${name}`}>{ children }</label>
@@ -49,10 +51,15 @@ export default function PasswordInput({
   );
 }
 
+PasswordInput.defaultProps = {
+  onBlur: () => {},
+};
+
 PasswordInput.propTypes = {
   value: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   className: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func,
   children: PropTypes.node.isRequired,
 };
