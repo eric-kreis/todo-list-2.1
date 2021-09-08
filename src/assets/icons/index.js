@@ -10,9 +10,9 @@ import {
 import { MdModeEdit } from 'react-icons/md';
 import { HiSun, HiMoon } from 'react-icons/hi';
 import { SiLinkedin, SiGithub } from 'react-icons/si';
-import { CgProfile } from 'react-icons/cg';
 import { FiLogOut } from 'react-icons/fi';
 import { AiOutlineMenu } from 'react-icons/ai';
+import { FaUser } from 'react-icons/fa';
 
 // Add;
 export const Add = VscAdd;
@@ -51,7 +51,7 @@ export const EyeOn = IoEyeSharp;
 export const EyeOff = IoEyeOffSharp;
 
 // Profile;
-export const ProfileIcon = CgProfile;
+export const ProfileIcon = FaUser;
 
 // Logout;
 export const Logout = FiLogOut;

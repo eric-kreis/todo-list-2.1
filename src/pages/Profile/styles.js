@@ -56,7 +56,7 @@ const ProfileBodyS = styled.div`
     @media(max-width: 480px) {
       border-radius: 0;
       box-shadow: none;
-      height: 100%;
+      height: 100vh;
       width: 100%;
     }
   }

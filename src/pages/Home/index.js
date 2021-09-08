@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import ListProvider from '../../Contexts/ListContext';
 import ColorModal from './HomeModals/ColorModal';
@@ -9,16 +9,12 @@ import FormContainer from './FormContainer';
 import List from './List';
 import Footer from '../../components/Footer';
 
-import { HomeMainS, ProfileContainerS, ThemeButtonS } from './styles';
-import { ColorPalette, ProfileIcon } from '../../assets/icons';
-import { useAuth } from '../../Contexts/AuthContext';
+import { HomeBodyS, HomeMainS, ThemeButtonS } from './styles';
+import { ColorPalette } from '../../assets/icons';
+import SideBar from '../../components/SideBar';
 
 export default function HomePage() {
-  // const [mQuery, setMQuery] = useState({
-  //   matches: window.innerWidth > 768 ? true : false,
-  // });
-
-  const { currentUser } = useAuth();
+  const active = useSelector(({ sideBar }) => sideBar.active);
 
   const [modals, setModals] = useState({
     clearModal: false,
@@ -45,26 +41,23 @@ export default function HomePage() {
         clearModal={clearModal}
         handleToggleModal={handleToggleModal}
       />
-      <Header
-        changeThemeButton={(
-          <ThemeButtonS onClick={() => handleToggleModal('color')}>
-            <ColorPalette title="Mudar cor" />
-          </ThemeButtonS>
-        )}
-      >
-        LISTA DE TAREFAS
-      </Header>
-      <ProfileContainerS>
-        <Link to="profile">
-          <ProfileIcon className="profile-icon" />
-          {currentUser.email}
-        </Link>
-      </ProfileContainerS>
-      <HomeMainS>
-        <FormContainer handleToggleModal={handleToggleModal} />
-        <List />
-      </HomeMainS>
-      <Footer />
+      <HomeBodyS active={active}>
+        <SideBar />
+        <Header
+          changeThemeButton={(
+            <ThemeButtonS onClick={() => handleToggleModal('color')}>
+              <ColorPalette title="Mudar cor" />
+            </ThemeButtonS>
+          )}
+        >
+          LISTA DE TAREFAS
+        </Header>
+        <HomeMainS>
+          <FormContainer handleToggleModal={handleToggleModal} />
+          <List />
+        </HomeMainS>
+        <Footer />
+      </HomeBodyS>
     </ListProvider>
   );
 }
