@@ -1,14 +1,17 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useCallback } from 'react';
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { Creators as BarActions } from '../../redux/reducers/sideBar';
 
-import { Menu, ProfileIcon } from '../../assets/icons';
+import { ColorPalette, ProfileIcon } from '../../assets/icons';
 import SideBarS from './styles';
+import ColorModal from './ColorsContainer';
 
 export default function SideBar() {
   const dispatch = useDispatch();
+
   const active = useSelector(({ sideBar }) => sideBar.active);
 
   const handleToggleBar = useCallback(() => (
@@ -16,32 +19,34 @@ export default function SideBar() {
 
   return (
     <SideBarS active={active}>
-      <button type="button" onClick={handleToggleBar}>
-        <Menu />
-      </button>
-      <ul>
-        <li>
-          <Link to="profile">
-            <ProfileIcon className="sidebar-icon" />
-            {active && ' Perfil'}
-            <span className="my-tooltip">Perfil</span>
-          </Link>
-        </li>
-        {/* <li>
-          <Link to="profile">
-            <ProfileIcon className="sidebar-icon" />
-            {active && ' Perfil'}
-            <span className="my-tooltip">Perfil</span>
-          </Link>
-        </li>
-        <li>
-          <Link to="profile">
-            <ProfileIcon className="sidebar-icon" />
-            {active && ' Perfil'}
-            <span className="my-tooltip">Perfil</span>
-          </Link>
-        </li> */}
-      </ul>
+      <aside>
+        <ul>
+          <li>
+            <Link to="profile">
+              <ProfileIcon className="sidebar-icon" />
+              Perfil
+            </Link>
+          </li>
+        </ul>
+        <footer>
+          <ul>
+            <li>
+              <div className="color-handle">
+                <ColorPalette className="sidebar-icon" />
+                Mudar tema
+                <ColorModal />
+              </div>
+            </li>
+            <li>
+              <Link to="profile">
+                <ProfileIcon className="sidebar-icon" />
+                Perfil
+              </Link>
+            </li>
+          </ul>
+        </footer>
+      </aside>
+      {active && <button type="button" className="null-container" onClick={handleToggleBar} />}
     </SideBarS>
   );
 }

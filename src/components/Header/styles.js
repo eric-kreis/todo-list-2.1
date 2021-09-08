@@ -6,11 +6,31 @@ const PageHeaderS = styled.header`
   color: ${({ theme }) => theme.colors.text};
   display: flex;
   justify-content: space-between;
-  padding: 12px 36px;
+  padding: 8px 12px;
+
+  .icon-container {
+    align-items: center;
+    display: flex;
+    width: 100px;
+    justify-content: space-around;
+
+    :first-of-type {
+      justify-content: space-evenly;
+    }
+
+    button {
+      align-items: center;
+      background-color: transparent;
+      border: 0;
+      color: ${({ theme }) => theme.colors.text};
+      display: flex;
+      font-size: 20px;
+    }
+  }
 
   h1 {
     font-size: x-large;
-    margin: 0 0 0 24px;
+    margin: 0;
   }
 
   div {

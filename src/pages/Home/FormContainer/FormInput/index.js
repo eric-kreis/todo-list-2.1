@@ -20,9 +20,9 @@ export default function FormInput({
 
   const changeLabelText = () => {
     if (formInputClass !== 'form-control') {
-      return 'Escreva para adicionar tarefa';
+      return 'Escreva algo :(';
     }
-    return 'Escreva sua tarefa aqui';
+    return 'Escreva aqui :)';
   };
 
   return (

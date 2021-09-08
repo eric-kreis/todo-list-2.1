@@ -7,9 +7,6 @@ const ListContext = createContext();
 
 export const useList = () => useContext(ListContext);
 
-const savedTasks = getStorage('tasks');
-const savedChecks = getStorage('checkedItems');
-
 // LocalStorage assistent;
 const setAndSave = (stateFunc, key, value) => {
   stateFunc(value);
@@ -17,6 +14,9 @@ const setAndSave = (stateFunc, key, value) => {
 };
 
 export default function ListProvider({ children }) {
+  const savedTasks = getStorage('tasks');
+  const savedChecks = getStorage('checkedItems');
+
   const [display, setDisplay] = useState('all');
   const [tasks, setTasks] = useState(savedTasks);
   const [checkedItems, setCheckedItems] = useState(savedChecks);

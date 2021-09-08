@@ -55,8 +55,8 @@ export default function ClearModalContainer({ clearModal, handleToggleModal }) {
     <ConfirmModal
       confirmButtons={confirmButtons}
       openModal={clearModal}
-      handleConfirm={() => { handleClear(); handleToggleModal('clear'); }}
-      handleCancel={() => { handleToggleModal('clear'); }}
+      handleConfirm={() => { handleClear(); handleToggleModal(); }}
+      handleCancel={handleToggleModal}
     >
       { message }
     </ConfirmModal>

@@ -4,8 +4,7 @@ import { shade } from 'polished';
 
 const PageFooterS = styled.footer`
   align-items: center;
-  background-color: ${({ theme }) => (
-    shade(0.25, theme.colors.primary))};
+  background-color: ${({ theme }) => theme.colors.primary};
   bottom: 0;
   display: flex;
   justify-content: space-between;
