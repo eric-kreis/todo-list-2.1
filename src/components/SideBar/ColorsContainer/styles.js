@@ -1,10 +1,9 @@
-import { shade } from 'polished';
 import styled from 'styled-components';
 import * as themeColors from '../../../themes';
 
 export const ColorsContainerS = styled.div`
   align-items: center;
-  background-color: ${({ theme }) => shade(0.01, theme.colors.primary)};
+  background-color: ${({ theme }) => theme.colors.background};
   border-radius: 0 5px 5px 0;
   display: none;
   flex-flow: row wrap;

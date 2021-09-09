@@ -26,7 +26,7 @@ export default function ListProvider({ children }) {
     const getData = async () => {
       try {
         setLoading(true);
-        const doc = await database.users.doc(currentUser.uid).get();
+        const doc = await database.userData.doc(currentUser.uid).get();
         setLoading(false);
         if (doc.exists) {
           const userData = doc.data();
@@ -47,9 +47,7 @@ export default function ListProvider({ children }) {
   // State observer;
   useEffect(() => {
     if (tasks.length > 0) {
-      database.users.doc(currentUser.uid).set({
-        userId: currentUser.uid,
-        email: currentUser.email,
+      database.userData.doc(currentUser.uid).set({
         tasks,
         checkedItems,
         lastModification: database.getCurrentTimestamp(),

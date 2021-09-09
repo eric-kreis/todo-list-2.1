@@ -12,6 +12,7 @@ import {
   SubmitButtonS,
 } from '../../styles/auth';
 import UpdateLoading from '../../assets/loadingComponents/UpdateLoading';
+import { database } from '../../firebase';
 
 const validClass = 'form-control';
 const invalidClass = 'form-control is-invalid';
@@ -83,9 +84,6 @@ export default function UpdateProfile() {
   const handleSubmit = async () => {
     // eslint-disable-next-line max-len
     if (emailClass === validClass && ((passwordValue && confirmValue) || (!passwordValue && !confirmValue))) {
-      emailValidation(emailValue);
-      passwordValidation(passwordValue);
-      confirmValidation(confirmValue);
       const promises = [];
       if (currentUser.email !== emailValue) promises.push(updateEmail(emailValue));
       if (confirmValue) promises.push(updatePassword(confirmValue));
@@ -94,14 +92,22 @@ export default function UpdateProfile() {
         setError('');
         setLoading(true);
         await Promise.all(promises);
+        const doc = await database.users.doc(currentUser.uid).get();
+        database.users.doc(currentUser.uid).set({
+          ...doc.data(),
+          currentEmail: currentUser.email,
+        });
         history.push('/');
       } catch (updateError) {
         switch (updateError.code) {
           case 'auth/weak-password':
-            setError('* A senha deve conter pelo menos 6 caracteres');
+            setError('* Sua senha deve conter pelo menos 6 caracteres');
             break;
           case 'auth/requires-recent-login':
             setError('* Faça login novamente para atualizar esta informação');
+            break;
+          case 'auth/email-already-in-use':
+            setError('* Falha ao atualizar, este email já está em uso');
             break;
           default:
             setError('* Falha ao atualizar a conta');
@@ -149,7 +155,7 @@ export default function UpdateProfile() {
               </SubmitButtonS>
               <div className="link-container">
                 <p>
-                  <Link to="/">Voltar</Link>
+                  <Link to="/profile">Voltar</Link>
                 </p>
               </div>
             </AuthFormS>

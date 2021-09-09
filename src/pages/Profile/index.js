@@ -30,6 +30,10 @@ export default function Profile() {
           type="file"
           accept="image/png, image/jpeg"
         />
+        <p>
+          E-mail:
+          {` ${currentUser.email}`}
+        </p>
         { error && <h4>{ error }</h4> }
         <Link to="/update-profile">Atualizar perfil</Link>
         <SubmitButtonS onClick={handleSignOut}>Sair</SubmitButtonS>

@@ -42,7 +42,7 @@ const SideBarS = styled.div`
     ul {
       width: 100%;
       padding: 0;
-  
+
       li {
         height: 50px;
         color: ${({ theme }) => theme.colors.text};
@@ -63,7 +63,7 @@ const SideBarS = styled.div`
           border: 0;
           color: ${({ theme }) => theme.colors.text};
           display: flex;
-          font-size: 18px;
+          font-size: 16px;
           height: 100%;
           padding: 0 16px;
           text-decoration: none;

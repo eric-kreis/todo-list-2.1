@@ -12,6 +12,7 @@ import {
   SubmitButtonS,
 } from '../../styles/auth';
 import SignupLoading from '../../assets/loadingComponents/SignupLoading';
+import { database } from '../../firebase';
 
 const validClass = 'form-control';
 const invalidClass = 'form-control is-invalid';
@@ -108,7 +109,20 @@ export default function Signup() {
     setLoading(false);
   };
 
-  if (currentUser) return <Redirect to="/" />;
+  if (currentUser) {
+    const doc = database.users.where('userId', '==', currentUser.uid);
+
+    if (!doc.exists) {
+      database.users.doc(currentUser.uid).set({
+        userId: currentUser.uid,
+        firstEmail: emailValue,
+        currentEmail: currentUser.email,
+        firstLogin: database.getCurrentTimestamp(),
+      });
+    }
+
+    return <Redirect to="/" />;
+  }
 
   return (
     <AuthBodyS>
