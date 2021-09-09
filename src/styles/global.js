@@ -1,26 +1,10 @@
 /* eslint-disable no-magic-numbers */
 import { createGlobalStyle } from 'styled-components';
 import { transparentize } from 'polished';
-import mountserrat400 from '../fonts/Montserrat-Regular.ttf';
-import YatraOne from '../fonts/YatraOne-Regular.ttf';
 
 const GlobalStyle = createGlobalStyle`
-  @font-face {
-    font-display: fallback;
-    font-family: mountserrat400;
-    font-style: normal;
-    src: url(${mountserrat400});
-  }
-
-  @font-face {
-    font-display: fallback;
-    font-family: yatra-one;
-    font-style: normal;
-    src: url(${YatraOne});
-  }
-
   * {
-    font-family: mountserrat400;
+    font-family: 'Montserrat', sans-serif;
     font-kerning: none;
     margin: 0;
     padding: 0;
@@ -30,7 +14,8 @@ const GlobalStyle = createGlobalStyle`
     background-color: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.text};
     min-height: 100vh;
-    position: relative;
+    min-width: 100vw;
+    position: ${({ active }) => (active ? 'fixed' : 'relative')};
 
     ::-webkit-scrollbar {
       display: none;

@@ -5,8 +5,8 @@ const SideBarS = styled.div`
   .null-container {
     background-color: ${({ theme }) => transparentize(0.3, theme.modal.windowBackground)};
     border: 0;
+    height: calc(100vh - 48px);
     left: 0;
-    bottom: 44px;
     position: absolute;
     top: 48px;
     z-index: 1;
@@ -15,29 +15,18 @@ const SideBarS = styled.div`
     :hover {
       cursor: default;
     }
-
-    @media(max-width: 460px) {
-      bottom: 38px;
-    }
-
-    @media(max-width: 380px) {
-      bottom: 35px;
-    }
-
-    @media(max-width: 375px) {
-      top: 54px;
-    }
   }
 
   aside {
     background-color: ${({ theme }) => theme.colors.primary};
-    bottom: 44px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    height: calc(100vh - 48px);
     left: ${({ active }) => (active ? 0 : '-200px')};
+    padding-top: 8px;
     position: absolute;
-    transition: left 0.5s ease;
+    transition: left 0.3s ease;
     top: 48px;
     width: 200px;
     z-index: 2;
@@ -64,15 +53,17 @@ const SideBarS = styled.div`
 
         :hover {
           background-color: ${({ theme }) => theme.colors.background};
-          transition: all 0.3s ease-in-out;
+          transition: all 0.5s ease;
           cursor: pointer;
         }
   
         a, .aside-btn, .color-handle {
           align-items: center;
+          background-color: transparent;
+          border: 0;
           color: ${({ theme }) => theme.colors.text};
           display: flex;
-          font-size: 16px;
+          font-size: 18px;
           height: 100%;
           padding: 0 16px;
           text-decoration: none;
@@ -83,18 +74,6 @@ const SideBarS = styled.div`
           display: flex;
         }
       }
-    }
-
-    @media(max-width: 460px) {
-      bottom: 38px;
-    }
-
-    @media(max-width: 380px) {
-      bottom: 35px;
-    }
-
-    @media(max-width: 375px) {
-      top: 54px;
     }
   }
 `;

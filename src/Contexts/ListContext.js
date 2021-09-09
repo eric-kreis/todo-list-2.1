@@ -1,80 +1,110 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { v4 } from 'uuid';
 import PropTypes from 'prop-types';
-import { getStorage, saveStorage } from '../helpers';
+import { database } from '../firebase';
+import { useAuth } from './AuthContext';
 
 const ListContext = createContext();
 
 export const useList = () => useContext(ListContext);
 
-// LocalStorage assistent;
-const setAndSave = (stateFunc, key, value) => {
-  stateFunc(value);
-  saveStorage(key, value);
-};
-
 export default function ListProvider({ children }) {
-  const savedTasks = getStorage('tasks');
-  const savedChecks = getStorage('checkedItems');
+  const { currentUser } = useAuth();
 
   const [display, setDisplay] = useState('all');
-  const [tasks, setTasks] = useState(savedTasks);
-  const [checkedItems, setCheckedItems] = useState(savedChecks);
+  const [tasks, setTasks] = useState([]);
+  const [checkedItems, setCheckedItems] = useState([]);
+
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        setLoading(true);
+        const doc = await database.users.doc(currentUser.uid).get();
+        setLoading(false);
+        if (doc.exists) {
+          const userData = doc.data();
+          setTasks(userData.tasks || []);
+          setCheckedItems(userData.checkedItems || []);
+        } else {
+          setTasks([]);
+          setCheckedItems([]);
+        }
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.log(error);
+      }
+    };
+    getData();
+  }, [currentUser.uid]);
+
+  // State observer;
+  useEffect(() => {
+    if (tasks.length > 0) {
+      database.users.doc(currentUser.uid).set({
+        userId: currentUser.uid,
+        email: currentUser.email,
+        tasks,
+        checkedItems,
+        lastModification: database.getCurrentTimestamp(),
+      });
+    }
+  }, [checkedItems, currentUser.email, currentUser.uid, tasks]);
 
   const changeDisplay = ({ target: { value } }) => {
     setDisplay(value);
   };
 
   const addAndSaveToDo = (text) => {
-    const adding = [...tasks, { id: v4(), text }];
-    setAndSave(setTasks, 'tasks', adding);
+    setTasks((prevTasks) => [...prevTasks, { id: v4(), text }]);
   };
 
   const removeAndSaveToDo = (id) => {
-    const removing = tasks.filter(({ id: taskId }) => taskId !== id);
-    setAndSave(setTasks, 'tasks', removing);
+    setTasks((prevTasks) => prevTasks.filter(({ id: taskId }) => taskId !== id));
   };
 
   const toggleAndSavingChecked = ({ target: { value, checked } }) => {
     if (checked) {
-      const addingChecked = [...checkedItems, value];
-      setAndSave(setCheckedItems, 'checkedItems', addingChecked);
+      setCheckedItems((prevChecks) => [...prevChecks, value]);
     } else {
-      const removingChecked = checkedItems.filter((id) => id !== value);
-      setAndSave(setCheckedItems, 'checkedItems', removingChecked);
+      setCheckedItems(checkedItems.filter((id) => id !== value));
     }
   };
 
   const editingTasks = (taskText, taskId) => {
     if (taskText.trim()) {
-      const editing = tasks.map(({ id, text }) => {
+      setTasks((prevTasks) => prevTasks.map(({ id, text }) => {
         if (id === taskId) return { id, text: taskText };
         return { id, text };
-      });
-      setAndSave(setTasks, 'tasks', editing);
+      }));
     }
   };
 
   const clearToDo = () => {
-    const doneTasks = tasks.filter(({ id }) => checkedItems.includes(id));
-    setAndSave(setTasks, 'tasks', doneTasks);
+    setTasks((prevTasks) => prevTasks.filter(({ id }) => checkedItems.includes(id)));
   };
 
   const clearDone = () => {
-    const toDoTasks = tasks.filter(({ id }) => !checkedItems.includes(id));
-    setAndSave(setTasks, 'tasks', toDoTasks);
-    setAndSave(setCheckedItems, 'checkedItems', []);
+    setTasks((prevTasks) => prevTasks.filter(({ id }) => !checkedItems.includes(id)));
+    setCheckedItems([]);
   };
 
   const clearAll = () => {
-    setAndSave(setCheckedItems, 'checkedItems', []);
-    setAndSave(setTasks, 'tasks', []);
+    setCheckedItems([]);
+    setTasks([]);
   };
 
   const contextValue = {
     display,
     tasks,
     checkedItems,
+    loading,
     changeDisplay,
     addAndSaveToDo,
     removeAndSaveToDo,

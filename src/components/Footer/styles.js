@@ -5,11 +5,9 @@ import { shade } from 'polished';
 const PageFooterS = styled.footer`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.primary};
-  bottom: 0;
   display: flex;
   justify-content: space-between;
   padding: 4px 36px;
-  position: absolute;
   width: 100%;
 
   p {

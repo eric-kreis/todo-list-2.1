@@ -1,21 +1,34 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import React, { useCallback } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import { useAuth } from '../../Contexts/AuthContext';
 import { Creators as BarActions } from '../../redux/reducers/sideBar';
 
-import { ColorPalette, ProfileIcon } from '../../assets/icons';
+import { ColorPalette, Logout, ProfileIcon } from '../../assets/icons';
 import SideBarS from './styles';
 import ColorModal from './ColorsContainer';
 
 export default function SideBar() {
+  const { logout } = useAuth();
+
   const dispatch = useDispatch();
 
   const active = useSelector(({ sideBar }) => sideBar.active);
 
   const handleToggleBar = useCallback(() => (
     dispatch(BarActions.toggleBar())), [dispatch]);
+
+  const handleDisableBar = useCallback(() => (
+    dispatch(BarActions.disableBar())), [dispatch]);
+
+  useEffect(() => handleDisableBar, [handleDisableBar]);
+
+  const handleSignOut = async () => logout();
 
   return (
     <SideBarS active={active}>
@@ -33,15 +46,15 @@ export default function SideBar() {
             <li>
               <div className="color-handle">
                 <ColorPalette className="sidebar-icon" />
-                Mudar tema
+                Temas
                 <ColorModal />
               </div>
             </li>
             <li>
-              <Link to="profile">
-                <ProfileIcon className="sidebar-icon" />
-                Perfil
-              </Link>
+              <button type="button" onClick={handleSignOut} className="aside-btn">
+                <Logout className="sidebar-icon" />
+                Sair
+              </button>
             </li>
           </ul>
         </footer>

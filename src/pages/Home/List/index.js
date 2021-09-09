@@ -1,11 +1,17 @@
 import React, { useCallback } from 'react';
+import TasksLoading from '../../../assets/loadingComponents/TasksLoading';
 import { useList } from '../../../Contexts/ListContext';
 
 import ListS from './styles';
 import TaskContainer from './TaskContainer';
 
 export default function List() {
-  const { display, tasks, checkedItems } = useList();
+  const {
+    display,
+    tasks,
+    checkedItems,
+    loading,
+  } = useList();
 
   const filterTasks = useCallback(() => {
     if (display === 'toDo') {
@@ -19,13 +25,13 @@ export default function List() {
 
   return (
     <ListS>
-      { filterTasks().map(({ id, text }) => (
+      { !loading ? filterTasks().map(({ id, text }) => (
         <TaskContainer
           key={id}
           id={id}
           text={text}
         />
-      )) }
+      )) : <TasksLoading /> }
     </ListS>
   );
 }

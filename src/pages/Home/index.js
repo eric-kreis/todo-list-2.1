@@ -7,7 +7,7 @@ import FormContainer from './FormContainer';
 import List from './List';
 import Footer from '../../components/Footer';
 
-import HomeMainS from './styles';
+import { HomeMainS, HomeSectionS } from './styles';
 import SideBar from '../../components/SideBar';
 
 export default function HomePage() {
@@ -31,11 +31,13 @@ export default function HomePage() {
         LISTA DE TAREFAS
       </Header>
       <HomeMainS>
-        <SideBar />
-        <FormContainer handleToggleModal={handleToggleModal} />
-        <List />
+        <HomeSectionS>
+          <SideBar />
+          <FormContainer handleToggleModal={handleToggleModal} />
+          <List />
+        </HomeSectionS>
+        <Footer />
       </HomeMainS>
-      <Footer />
     </ListProvider>
   );
 }

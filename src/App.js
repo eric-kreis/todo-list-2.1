@@ -9,10 +9,12 @@ import AuthProvider from './Contexts/AuthContext';
 
 export default function App() {
   const theme = useSelector(({ changeTheme }) => changeTheme.theme);
+  const active = useSelector(({ sideBar }) => sideBar.active);
+
   return (
     <ThemeProvider theme={theme}>
       <AuthProvider>
-        <GlobalStyle />
+        <GlobalStyle active={active} />
         <Routes />
       </AuthProvider>
     </ThemeProvider>
