@@ -24,11 +24,10 @@ export default function HomePage() {
   };
 
   useEffect(() => {
-    const emailList = getStorage('emailList');
-    const noRepetitions = emailList
-      .filter((savedEmail, index) => (
-        savedEmail !== currentUser.email && index < 2));
-    saveStorage('emailList', [currentUser.email, ...noRepetitions]);
+    const emailList = getStorage('loggedEmails');
+    const noRepetitions = emailList.filter((savedEmail, index) => (
+      savedEmail !== currentUser.email && index < 2));
+    saveStorage('loggedEmails', [currentUser.email, ...noRepetitions]);
   }, [currentUser.email]);
 
   const { clearModal } = modals;

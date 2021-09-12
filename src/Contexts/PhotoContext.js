@@ -89,6 +89,23 @@ export default function PhotoProvider({ children }) {
     })();
   }, [currentUser, path]);
 
+  const handleDelete = async () => {
+    try {
+      setLoading(true);
+      setError('');
+
+      await database.users.doc(currentUser.uid).update({
+        imagePath: '/',
+      });
+
+      setPath('/');
+      setImage(defaultImage);
+    } catch (imageError) {
+      setError('* Falha ao excluir sua imagem');
+    }
+    setLoading(false);
+  };
+
   const contextValue = {
     image,
     loading,
@@ -98,6 +115,7 @@ export default function PhotoProvider({ children }) {
     setLoading,
     setError,
     setImage,
+    handleDelete,
   };
 
   return (

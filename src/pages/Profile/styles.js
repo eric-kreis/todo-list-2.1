@@ -26,79 +26,28 @@ const ProfileBodyS = styled.div`
       display: none;
     }
 
-    .photo-settings {
-      align-items: center;
-      border-radius: 3px;
-      display: flex;
-      margin: 0 auto 20px;
-      padding: 0 16px;
-    }
-
-    .photo-container {
-      align-items: center;
-      background-color: ${({ theme }) => shade(0.4, theme.colors.primary)};
-      border: 1px solid ${({ theme }) => theme.colors.text};
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      height: 100px;
-      margin: 0 16px 0 16px;
-      overflow: hidden;
-      width: 100px;
-
-      img {
-        height: 100%;
-        width: 100%;
-        color: ${({ theme }) => theme.colors.text};
-      }
-    }
-
-    .file-settings {
-      display: flex;
-      width: 120px;
-      justify-content: space-around;
-    }
-
-    label, .delete-img-button {
-      align-items: center;
+    .link {
+      display: block;
+      background-color: ${({ theme }) => theme.colors.text};
       border: none;
       border-radius: 0.25rem;
-      color: ${({ theme }) => theme.colors.text};
-      display: flex;
-      justify-content: center;
-      height: 30px;
-      width: 50px;
-      font-size: 30px;
-    }
-
-    label:hover {
-      cursor: pointer;
       color: ${({ theme }) => theme.colors.primary};
-    }
-
-    .delete-img-button {
-      background-color: transparent;
+      text-decoration: none;
+      padding: 8px 0;
+      width: 100%;
 
       :hover {
-        color: red;
+        background-color: ${({ theme }) => shade(0.2, theme.colors.text)};
       }
     }
 
-    .emails-container {
-      p {
-        text-align: center;
-        font-size: large;
-      }
+    .link.last {
+      background-color: ${({ theme }) => theme.colors.primary};
+      color: ${({ theme }) => theme.colors.text};
+      margin-top: 16px;
 
-      ul {
-        display: flex;
-        flex-direction: column;
-        padding: 0;
-      }
-
-      li {
-        text-align: center;
-        list-style-type: none;
+      :hover {
+        background-color: ${({ theme }) => shade(0.15, theme.colors.primary)};
       }
     }
 
@@ -122,18 +71,9 @@ const ProfileBodyS = styled.div`
       border-radius: 0;
       box-shadow: none;
       height: 100vh;
+      max-height: 100vh;
       width: 100%;
     }
-  }
-
-  p {
-    font-size: large;
-  }
-
-  #img-input {
-    opacity: 0;
-    position: absolute;
-    left: -99999px;
   }
 `;
 
