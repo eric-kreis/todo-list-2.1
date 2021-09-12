@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast, Flip } from 'react-toastify';
+import { ThemeContext } from 'styled-components';
 
 import { useAuth } from '../../Contexts/AuthContext';
 import { usePhoto } from '../../Contexts/PhotoContext';
@@ -15,11 +17,14 @@ export default function Profile() {
   const { currentUser } = useAuth();
   const {
     image,
+    error,
     setPath,
     setImage,
     setError,
     handleDelete,
   } = usePhoto();
+
+  const { title } = useContext(ThemeContext);
 
   const [openFileModal, setOpenFileModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -50,26 +55,48 @@ export default function Profile() {
         name: userImg.name,
       };
 
-      const spacelessName = userImg.name.split(' ').join('');
-
-      setOpenFileModal(false);
       try {
-        await storage
-          .ref(`images/${currentUser.uid}`)
-          .child(spacelessName)
-          .put(userImg, metaData);
-        setPath(spacelessName);
+        const spacelessName = userImg.name.split(' ').join('');
+        setOpenFileModal(false);
+
+        await toast.promise(
+          async () => storage
+            .ref(`images/${currentUser.uid}`)
+            .child(spacelessName)
+            .put(userImg, metaData),
+          {
+            pending: {
+              render() { return 'Processando...'; },
+              theme: title,
+            },
+            success: {
+              render() { return 'Foto Atualizada!'; },
+              theme: title,
+            },
+          },
+        );
+
         const reader = new FileReader();
         reader.readAsDataURL(userImg);
         reader.onload = ({ target }) => setImage(target.result);
+        setPath(spacelessName);
       } catch (imageError) {
-        setError('* Falha ao salvar sua imagem.');
+        setError('Falha ao atualizar sua imagem.');
+        setPath('/');
       }
     }
   };
 
+  if (error) {
+    toast.error(error, {
+      theme: title,
+      toastId: 'error-toast',
+    });
+  }
+
   return (
     <ProfileBodyS>
+      <ToastContainer transition={Flip} />
       {openFileModal && userImg.name && (
         <ModalWindowS>
           <ModalSectionS>

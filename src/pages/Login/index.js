@@ -87,7 +87,7 @@ export default function Login() {
   return (
     <AuthBodyS>
       <AuthContainerS>
-        <AuthHeader>LOGIN</AuthHeader>
+        <AuthHeader>ENTRAR</AuthHeader>
         { loading ? <LoginLoading />
           : (
             <AuthFormS onSubmit={(e) => e.preventDefault()} login>

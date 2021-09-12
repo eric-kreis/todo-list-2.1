@@ -64,7 +64,7 @@ export default function PasswordReset() {
   return (
     <AuthBodyS>
       <AuthContainerS defaultH>
-        <AuthHeader>Resetar senha</AuthHeader>
+        <AuthHeader>RECUPERE SUA SENHA</AuthHeader>
         { loading ? <ResetLoading />
           : (
             <AuthFormS onSubmit={(e) => e.preventDefault()} login>
