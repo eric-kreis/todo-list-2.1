@@ -7,6 +7,7 @@ import Routes from './Routes';
 import 'bootstrap/dist/css/bootstrap.css';
 import AuthProvider from './Contexts/AuthContext';
 import PhotoProvider from './Contexts/PhotoContext';
+import ListProvider from './Contexts/ListContext';
 
 export default function App() {
   const theme = useSelector(({ changeTheme }) => changeTheme.theme);
@@ -16,8 +17,10 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <AuthProvider>
         <PhotoProvider>
-          <GlobalStyle active={active} />
-          <Routes />
+          <ListProvider>
+            <GlobalStyle active={active} />
+            <Routes />
+          </ListProvider>
         </PhotoProvider>
       </AuthProvider>
     </ThemeProvider>

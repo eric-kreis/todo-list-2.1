@@ -5,8 +5,8 @@ import { FileUpload, Trash } from '../../../assets/icons';
 import { usePhoto } from '../../../Contexts/PhotoContext';
 import PhotoSettingS from './styles';
 
-export default function PhotoSettings({ handleChangeFile }) {
-  const { image, loading, handleDelete } = usePhoto();
+export default function PhotoSettings({ handleChangeFile, setOpenDeleteModal }) {
+  const { image, loading } = usePhoto();
 
   return (
     <PhotoSettingS>
@@ -23,7 +23,7 @@ export default function PhotoSettings({ handleChangeFile }) {
             accept="image/png, image/jpeg"
           />
         </label>
-        <button type="button" onClick={handleDelete} className="delete-img-button">
+        <button type="button" onClick={() => setOpenDeleteModal(true)} className="delete-img-button">
           <Trash title="Excluir foto" />
         </button>
       </section>
@@ -33,4 +33,5 @@ export default function PhotoSettings({ handleChangeFile }) {
 
 PhotoSettings.propTypes = {
   handleChangeFile: PropTypes.func.isRequired,
+  setOpenDeleteModal: PropTypes.func.isRequired,
 };

@@ -38,7 +38,7 @@ const PhotoSettingS = styled.div`
     align-items: center;
     border: none;
     border-radius: 0.25rem;
-    color: ${({ theme }) => theme.colors.text};
+    color: ${({ theme }) => theme.colors.input};
     display: flex;
     justify-content: center;
 

@@ -12,7 +12,7 @@ const PageHeaderS = styled.header`
     align-items: center;
     display: flex;
     width: 100px;
-    justify-content: space-around;
+    justify-content: space-between;
 
     :first-of-type {
       justify-content: space-evenly;
@@ -25,6 +25,18 @@ const PageHeaderS = styled.header`
       color: ${({ theme }) => theme.colors.text};
       display: flex;
       font-size: 20px;
+    }
+  }
+
+  .image-container {
+    border-radius: 50%;
+    height: 26px;
+    overflow: hidden;
+    width: 26px;
+
+    img {
+      height: 100%;
+      width: 100%;
     }
   }
 

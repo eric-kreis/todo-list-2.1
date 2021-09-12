@@ -13,9 +13,16 @@ import PhotoSettings from './PhotoSettings';
 
 export default function Profile() {
   const { currentUser } = useAuth();
-  const { setPath, setImage, setError } = usePhoto();
+  const {
+    image,
+    setPath,
+    setImage,
+    setError,
+    handleDelete,
+  } = usePhoto();
 
-  const [openModal, setOpenModal] = useState(false);
+  const [openFileModal, setOpenFileModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   const [prevImg, setPrevImg] = useState(null);
 
@@ -28,7 +35,7 @@ export default function Profile() {
     const file = target.files[0];
     if (file) {
       setUserImg(file);
-      setOpenModal(true);
+      setOpenFileModal(true);
 
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -45,26 +52,25 @@ export default function Profile() {
 
       const spacelessName = userImg.name.split(' ').join('');
 
-      setOpenModal(false);
-
-      const reader = new FileReader();
-      reader.readAsDataURL(userImg);
-      reader.onload = ({ target }) => setImage(target.result);
+      setOpenFileModal(false);
       try {
         await storage
           .ref(`images/${currentUser.uid}`)
           .child(spacelessName)
           .put(userImg, metaData);
+        setPath(spacelessName);
+        const reader = new FileReader();
+        reader.readAsDataURL(userImg);
+        reader.onload = ({ target }) => setImage(target.result);
       } catch (imageError) {
         setError('* Falha ao salvar sua imagem.');
-        setPath(spacelessName);
       }
     }
   };
 
   return (
     <ProfileBodyS>
-      {openModal && userImg.name && (
+      {openFileModal && userImg.name && (
         <ModalWindowS>
           <ModalSectionS>
             <section className="photo-container">
@@ -72,13 +78,38 @@ export default function Profile() {
             </section>
             <section className="modal-buttons-container">
               <button type="button" onClick={handleUpload}>Enviar</button>
-              <button onClick={() => setOpenModal(false)} type="button">Voltar</button>
+              <button onClick={() => setOpenFileModal(false)} type="button">Voltar</button>
+            </section>
+          </ModalSectionS>
+        </ModalWindowS>
+      )}
+      {openDeleteModal && (
+        <ModalWindowS>
+          <ModalSectionS>
+            <section className="photo-container">
+              <img src={image} alt="PrevImg" />
+            </section>
+            <section className="modal-buttons-container">
+              <button
+                type="button"
+                onClick={() => {
+                  handleDelete();
+                  setOpenDeleteModal(false);
+                }}
+                className="delete-button"
+              >
+                Excluir
+              </button>
+              <button onClick={() => setOpenDeleteModal(false)} type="button">Voltar</button>
             </section>
           </ModalSectionS>
         </ModalWindowS>
       )}
       <section className="profile-container">
-        <PhotoSettings handleChangeFile={handleChangeFile} />
+        <PhotoSettings
+          handleChangeFile={handleChangeFile}
+          setOpenDeleteModal={setOpenDeleteModal}
+        />
         <EmailsContainer />
         <div>
           <Link to="/update-profile" className="link">Atualizar perfil</Link>

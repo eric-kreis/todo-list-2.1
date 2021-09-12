@@ -16,6 +16,15 @@ const EmailsContainerS = styled.div`
     text-align: center;
     list-style-type: none;
   }
+
+  .error {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 4px;
+    padding: 0;
+    padding-left: 32px;
+    text-align: left;
+  }
 `;
 
 export default EmailsContainerS;

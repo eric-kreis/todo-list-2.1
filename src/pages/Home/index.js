@@ -10,7 +10,6 @@ import { useAuth } from '../../Contexts/AuthContext';
 
 import { HomeMainS, HomeSectionS } from './styles';
 import SideBar from '../../components/SideBar';
-import ListProvider from '../../Contexts/ListContext';
 
 export default function HomePage() {
   const { currentUser } = useAuth();
@@ -26,13 +25,13 @@ export default function HomePage() {
   useEffect(() => {
     const emailList = getStorage('loggedEmails');
     const noRepetitions = emailList.filter((savedEmail, index) => (
-      savedEmail !== currentUser.email && index < 2));
+      savedEmail !== currentUser.email && index <= 2));
     saveStorage('loggedEmails', [currentUser.email, ...noRepetitions]);
   }, [currentUser.email]);
 
   const { clearModal } = modals;
   return (
-    <ListProvider>
+    <div>
       <ClearModalContainer
         clearModal={clearModal}
         handleToggleModal={handleToggleModal}
@@ -48,6 +47,6 @@ export default function HomePage() {
         </HomeSectionS>
         <Footer />
       </HomeMainS>
-    </ListProvider>
+    </div>
   );
 }

@@ -43,6 +43,7 @@ export default function PhotoProvider({ children }) {
             setImage(imageURL);
           }
         } catch (imageError) {
+          setError('* Ocorreu um problema ao enviar este arquivo, tente novamente mais tarde');
           switch (imageError.code) {
             case 'storage/object-not-found':
               setError('* Foto não encontrada');
@@ -53,9 +54,6 @@ export default function PhotoProvider({ children }) {
             case 'storage/canceled':
               setError('* Download da imagem cancelado');
               break;
-            case 'storage/unknown':
-              setError('* Ocorreu um problema desconhecido, tente novamente mais tarde');
-              break;
             default:
               setError('* Ocorreu um problema ao enviar este arquivo, tente novamente mais tarde');
               break;
@@ -64,6 +62,9 @@ export default function PhotoProvider({ children }) {
           setImage(defaultImage);
         }
         setLoading(false);
+      } else {
+        setPath('/');
+        setImage(defaultImage);
       }
     })();
   }, [currentUser]);

@@ -11,7 +11,7 @@ const ProfileBodyS = styled.div`
     background-color: whitesmoke;
     border-radius: 5px;
     box-shadow: 1px 1px 10px ${({ theme }) => shade(0.2, theme.colors.primary)};
-    color: ${({ theme }) => theme.colors.text};
+    color: ${({ theme }) => theme.colors.input};
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -138,9 +138,12 @@ export const ModalSectionS = styled.section`
         color: ${({ theme }) => theme.colors.text};
         margin-bottom: 8px;
       }
+
+      .delete-button {
+        background-color: red;
+      }
     }
   }
-
 `;
 
 export default ProfileBodyS;
