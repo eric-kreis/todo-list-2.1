@@ -23,37 +23,38 @@ export default function ListProvider({ children }) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const getData = async () => {
-      try {
-        setLoading(true);
-        const doc = await database.userData.doc(currentUser.uid).get();
-        setLoading(false);
-        if (doc.exists) {
-          const userData = doc.data();
-          setTasks(userData.tasks || []);
-          setCheckedItems(userData.checkedItems || []);
-        } else {
-          setTasks([]);
-          setCheckedItems([]);
+    if (currentUser) {
+      (async () => {
+        try {
+          setLoading(true);
+          const doc = await database.userData.doc(currentUser.uid).get();
+          setLoading(false);
+          if (doc.exists) {
+            const userData = doc.data();
+            setTasks(userData.tasks || []);
+            setCheckedItems(userData.checkedItems || []);
+          } else {
+            setTasks([]);
+            setCheckedItems([]);
+          }
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.log(error);
         }
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.log(error);
-      }
-    };
-    getData();
-  }, [currentUser.uid]);
+      })();
+    }
+  }, [currentUser]);
 
   // State observer;
   useEffect(() => {
-    if (tasks.length > 0) {
+    if (currentUser && tasks.length > 0) {
       database.userData.doc(currentUser.uid).set({
         tasks,
         checkedItems,
         lastModification: database.getCurrentTimestamp(),
       });
     }
-  }, [checkedItems, currentUser.email, currentUser.uid, tasks]);
+  }, [checkedItems, currentUser, tasks]);
 
   const changeDisplay = ({ target: { value } }) => {
     setDisplay(value);

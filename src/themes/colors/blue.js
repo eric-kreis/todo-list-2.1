@@ -1,10 +1,8 @@
-import { lighten } from 'polished';
-
 export default {
   light: {
     title: 'light',
     colors: {
-      primary: `${lighten(0.1, '#387FAB')}`,
+      primary: '#5099C6',
       secondary: '#982649',
 
       background: '#f4f4f4',

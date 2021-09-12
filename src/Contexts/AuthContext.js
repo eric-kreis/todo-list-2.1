@@ -12,7 +12,7 @@ const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export default function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const signUp = (email, password) => (

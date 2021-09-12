@@ -92,9 +92,7 @@ export default function UpdateProfile() {
         setError('');
         setLoading(true);
         await Promise.all(promises);
-        const doc = await database.users.doc(currentUser.uid).get();
-        database.users.doc(currentUser.uid).set({
-          ...doc.data(),
+        await database.users.doc(currentUser.uid).update({
           currentEmail: currentUser.email,
         });
         history.push('/');

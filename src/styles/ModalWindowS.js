@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ModalWindowS = styled.main`
+const ModalWindowS = styled.main`
   background-color: ${({ theme }) => theme.modal.windowBackground};
   height: 100%;
   display: flex;

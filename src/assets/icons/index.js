@@ -6,6 +6,7 @@ import {
   IoColorPalette,
   IoEyeSharp,
   IoEyeOffSharp,
+  IoCloudUploadOutline,
 } from 'react-icons/io5';
 import { MdModeEdit } from 'react-icons/md';
 import { HiSun, HiMoon } from 'react-icons/hi';
@@ -13,6 +14,7 @@ import { SiLinkedin, SiGithub } from 'react-icons/si';
 import { FiLogOut } from 'react-icons/fi';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { FaUser } from 'react-icons/fa';
+import { RiFolderUploadLine } from 'react-icons/ri';
 
 // Add;
 export const Add = VscAdd;
@@ -61,3 +63,9 @@ export const Settings = IoIosSettings;
 
 // Hamburguer menu;
 export const Menu = AiOutlineMenu;
+
+// Upload;
+export const Upload = IoCloudUploadOutline;
+
+// File upload
+export const FileUpload = RiFolderUploadLine;

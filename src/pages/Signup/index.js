@@ -118,6 +118,7 @@ export default function Signup() {
         firstEmail: emailValue,
         currentEmail: currentUser.email,
         firstLogin: database.getCurrentTimestamp(),
+        imagePath: '/',
       });
     }
 

@@ -1,5 +1,3 @@
-import { shade } from 'polished';
-
 export default {
   light: {
     title: 'light',
@@ -20,7 +18,7 @@ export default {
   dark: {
     title: 'dark',
     colors: {
-      primary: shade(0.2, '#2F3E46'),
+      primary: '#253138',
       secondary: '#CAD2C5',
 
       background: '#181818',
