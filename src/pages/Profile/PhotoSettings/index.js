@@ -12,7 +12,7 @@ import PhotoSettingS from './styles';
 
 import { usePhoto } from '../../../Contexts/PhotoContext';
 
-export default function PhotoSettings({ handleChangeFile, setOpenDeleteModal }) {
+export default function PhotoSettings({ handleChangeFile, setOpenDefaultModal, setOpenPetModal }) {
   const { image, loading } = usePhoto();
 
   return (
@@ -32,17 +32,18 @@ export default function PhotoSettings({ handleChangeFile, setOpenDeleteModal }) 
         </label>
         <button
           type="button"
+          onClick={() => setOpenDefaultModal('delete')}
+          className="icon-btn delete-img-button"
+        >
+          <Trash title="Excluir foto" />
+        </button>
+        <button
+          type="button"
+          onClick={() => setOpenPetModal(true)}
           className="icon-btn gallery"
           title="Abrir galeria"
         >
           <Gallery />
-        </button>
-        <button
-          type="button"
-          onClick={() => setOpenDeleteModal(true)}
-          className="icon-btn delete-img-button"
-        >
-          <Trash title="Excluir foto" />
         </button>
         <Link to="/update-credentials" className="icon-btn update-credentials">
           <Settings title="Alterar credenciais" />
@@ -54,5 +55,6 @@ export default function PhotoSettings({ handleChangeFile, setOpenDeleteModal }) 
 
 PhotoSettings.propTypes = {
   handleChangeFile: PropTypes.func.isRequired,
-  setOpenDeleteModal: PropTypes.func.isRequired,
+  setOpenDefaultModal: PropTypes.func.isRequired,
+  setOpenPetModal: PropTypes.func.isRequired,
 };

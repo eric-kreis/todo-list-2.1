@@ -123,6 +123,9 @@ export default function UpdateCredentials() {
 
   const changePassword = async () => {
     if (passwordValue === confirmValue) {
+      passwordValidation(passwordValue);
+      confirmValidation(confirmValue);
+
       await toast.promise(
         updatePassword(confirmValue),
         {
@@ -201,7 +204,16 @@ export default function UpdateCredentials() {
           </div>
           <ButtonContainerS>
             { view !== 'select' && (
-              <button type="submit" className="link" onClick={handleSubmit}>
+              <button
+                type="submit"
+                className="link"
+                onClick={handleSubmit}
+                disabled={
+                  view === 'email'
+                    ? emailClass !== validClass
+                    : (passwordClass !== validClass || confirmPasswordClass !== validClass)
+                }
+              >
                 Atualizar
               </button>
             ) }

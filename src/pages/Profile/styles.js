@@ -78,18 +78,6 @@ export const ModalSectionS = styled.section`
   padding: 32px;
   width: 25%;
 
-  @media(max-width: 1024px) {
-    width: 35%;
-  }
-
-  @media(max-width: 768px) {
-    width: 45%;
-  }
-
-  @media(max-width: 640px) {
-    width: 75%;
-  }
-
   .photo-container {
     background-color: ${({ theme }) => theme.colors.primary};
     border-radius: 50%;
@@ -130,6 +118,18 @@ export const ModalSectionS = styled.section`
         background-color: red;
       }
     }
+  }
+
+  @media(max-width: 1024px) {
+    width: 35%;
+  }
+
+  @media(max-width: 768px) {
+    width: 45%;
+  }
+
+  @media(max-width: 640px) {
+    width: 75%;
   }
 `;
 

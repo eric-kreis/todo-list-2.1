@@ -31,8 +31,8 @@ const PhotoSettingS = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    height: 80px;
-    width: 80px;
+    height: 70px;
+    width: 70px;
   }
 
   label, .icon-btn {
@@ -45,7 +45,7 @@ const PhotoSettingS = styled.div`
     justify-content: center;
 
     * {
-      font-size: 30px;
+      font-size: 26px;
     }
 
     :hover {

@@ -71,11 +71,15 @@ const GlobalStyle = createGlobalStyle`
       background-color: ${({ theme }) => lighten(0.07, theme.colors.primary)};
       color: ${({ theme }) => theme.colors.text};
     }
+
+    :disabled {
+      opacity: 0.8;
+    }
   }
 
   .link.last {
     background-color: ${({ theme }) => theme.colors.primary};
-    margin-top: 12px;
+    margin-top: 12px;;
 
     :hover {
       background-color: ${({ theme }) => shade(0.15, theme.colors.primary)};

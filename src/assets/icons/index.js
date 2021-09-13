@@ -18,7 +18,7 @@ import { HiSun, HiMoon } from 'react-icons/hi';
 import { SiLinkedin, SiGithub } from 'react-icons/si';
 import { FiLogOut } from 'react-icons/fi';
 import { AiOutlineMenu } from 'react-icons/ai';
-import { FaUser } from 'react-icons/fa';
+import { FaUser, FaDog, FaCat } from 'react-icons/fa';
 import { RiFolderUploadLine } from 'react-icons/ri';
 
 // Add;
@@ -77,3 +77,9 @@ export const FileUpload = RiFolderUploadLine;
 
 // Gallery;
 export const Gallery = IoMdImages;
+
+// Dog;
+export const Dog = FaDog;
+
+// Cat;
+export const Cat = FaCat;

@@ -13,6 +13,9 @@ import ProfileBodyS, { ModalSectionS } from './styles';
 import EmailsContainer from './EmailsContainer';
 import PhotoSettings from './PhotoSettings';
 import { Logout } from '../../assets/icons';
+import dogs from '../../assets/dogs';
+import cats from '../../assets/cats';
+import PetModal from './PetModal';
 
 export default function Profile() {
   const { currentUser, logout } = useAuth();
@@ -27,11 +30,12 @@ export default function Profile() {
 
   const { title } = useContext(ThemeContext);
 
-  const [openFileModal, setOpenFileModal] = useState(false);
-  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [pets, setPets] = useState([]);
+
+  const [openDefaultModal, setOpenDefaultModal] = useState('');
+  const [openPetModal, setOpenPetModal] = useState(false);
 
   const [prevImg, setPrevImg] = useState(null);
-
   const [customImg, setCustomImg] = useState({
     type: '',
     name: '',
@@ -41,7 +45,7 @@ export default function Profile() {
     const file = target.files[0];
     if (file) {
       setCustomImg(file);
-      setOpenFileModal(true);
+      setOpenDefaultModal('send');
 
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -55,11 +59,9 @@ export default function Profile() {
         contentType: customImg.type,
         name: customImg.name,
       };
+      const spacelessName = customImg.name.split(' ').join('');
 
       try {
-        const spacelessName = customImg.name.split(' ').join('');
-        setOpenFileModal(false);
-
         await toast.promise(
           storage
             .ref(`images/${currentUser.uid}`)
@@ -82,10 +84,42 @@ export default function Profile() {
         reader.onload = ({ target }) => setImage(target.result);
         setPath(spacelessName);
       } catch (imageError) {
-        setError('Falha ao atualizar sua imagem.');
+        setError('Falha ao atualizar sua imagem :(');
         setPath('/');
       }
     }
+  };
+
+  const handleChangePet = (value) => {
+    const images = {
+      dog: dogs,
+      cat: cats,
+    };
+
+    setPets(images[value]);
+  };
+
+  const handleSelectPet = async (img) => {
+    const imageFetch = await fetch(img);
+    const myBlob = await imageFetch.blob();
+    myBlob.name = 'pet.png';
+    myBlob.lastModified = new Date();
+
+    const myFile = new File([myBlob], 'pet.png', {
+      type: myBlob.type,
+    });
+
+    setOpenPetModal(false);
+    setPrevImg(img);
+    setCustomImg(myFile);
+    setOpenDefaultModal('send');
+    setPets([]);
+  };
+
+  const handleModalClick = () => {
+    setOpenDefaultModal('');
+    if (openDefaultModal === 'send') handleUpload();
+    if (openDefaultModal === 'delete') handleDelete();
   };
 
   if (error) {
@@ -98,52 +132,42 @@ export default function Profile() {
   return (
     <ProfileBodyS>
       <ToastContainer transition={Flip} />
-      {openFileModal && customImg.name && (
+      { openDefaultModal && (
         <ModalWindowS>
           <ModalSectionS>
             <section className="photo-container">
-              <img src={prevImg} alt="PrevImg" />
+              <img src={openDefaultModal === 'send' ? prevImg : image} alt="PrevImg" />
             </section>
             <section className="modal-buttons-container">
-              <button type="button" onClick={handleUpload}>Enviar</button>
-              <button onClick={() => setOpenFileModal(false)} type="button">Voltar</button>
-            </section>
-          </ModalSectionS>
-        </ModalWindowS>
-      )}
-      {openDeleteModal && (
-        <ModalWindowS>
-          <ModalSectionS>
-            <section className="photo-container">
-              <img src={image} alt="PrevImg" />
-            </section>
-            <section className="modal-buttons-container">
-              <button
-                type="button"
-                onClick={() => {
-                  handleDelete();
-                  setOpenDeleteModal(false);
-                }}
-                className="delete-button"
-              >
-                Excluir
+              <button type="button" onClick={handleModalClick}>
+                { openDefaultModal === 'send' ? 'Enviar' : 'Excluir'}
               </button>
-              <button onClick={() => setOpenDeleteModal(false)} type="button">Voltar</button>
+              <button onClick={() => setOpenDefaultModal('')} type="button">Voltar</button>
             </section>
           </ModalSectionS>
         </ModalWindowS>
       )}
+      { openPetModal && (
+        <PetModal
+          pets={pets}
+          setPets={setPets}
+          handleSelectPet={handleSelectPet}
+          handleChangePet={handleChangePet}
+          setOpenPetModal={setOpenPetModal}
+        />
+      ) }
       <section className="profile-container">
         <PhotoSettings
           handleChangeFile={handleChangeFile}
-          setOpenDeleteModal={setOpenDeleteModal}
+          setOpenDefaultModal={setOpenDefaultModal}
+          setOpenPetModal={setOpenPetModal}
         />
         <EmailsContainer />
         <div>
           <Link to="/" className="link last">Voltar</Link>
           <div className="logout-container">
             <button type="button" onClick={logout}>
-              <Logout />
+              <Logout title="Finalizar sessão" />
             </button>
           </div>
         </div>
