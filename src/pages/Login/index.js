@@ -12,6 +12,7 @@ import {
 } from '../../styles/auth';
 import AuthHeader from '../../components/AuthHeader';
 import LoginLoading from '../../assets/loadingComponents/LoginLoading';
+import { saveLogin } from '../../helpers';
 
 const validClass = 'form-control';
 const invalidClass = 'form-control is-invalid';
@@ -82,7 +83,10 @@ export default function Login() {
     setLoading(false);
   };
 
-  if (currentUser) return <Redirect to="/" />;
+  if (currentUser) {
+    saveLogin(email);
+    return <Redirect to="/" />;
+  }
 
   return (
     <AuthBodyS>

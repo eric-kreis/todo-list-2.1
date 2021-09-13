@@ -1,4 +1,3 @@
-import { shade } from 'polished';
 import styled from 'styled-components';
 
 const PhotoSettingS = styled.div`
@@ -10,8 +9,7 @@ const PhotoSettingS = styled.div`
 
   .photo-container {
     align-items: center;
-    background-color: ${({ theme }) => shade(0.4, theme.colors.primary)};
-    border: 1px solid ${({ theme }) => theme.colors.text};
+    background-color: ${({ theme }) => theme.colors.primary};
     border-radius: 50%;
     display: flex;
     justify-content: center;

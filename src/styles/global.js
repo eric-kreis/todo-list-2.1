@@ -1,6 +1,6 @@
 /* eslint-disable no-magic-numbers */
 import { createGlobalStyle } from 'styled-components';
-import { transparentize } from 'polished';
+import { lighten, shade, transparentize } from 'polished';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -54,6 +54,30 @@ const GlobalStyle = createGlobalStyle`
 
   .moon {
     font-size: 14px;
+  }
+
+  .link {
+    display: block;
+    background-color: ${({ theme }) => lighten(0.1, theme.colors.primary)};
+    border-radius: 0.25rem;
+    color: ${({ theme }) => theme.colors.text};
+    text-decoration: none;
+    padding: 8px 0;
+    width: 100%;
+
+    :hover {
+      background-color: ${({ theme }) => lighten(0.07, theme.colors.primary)};
+      color: ${({ theme }) => theme.colors.text};
+    }
+  }
+
+  .link.last {
+    background-color: ${({ theme }) => theme.colors.primary};
+    margin-top: 12px;
+
+    :hover {
+      background-color: ${({ theme }) => shade(0.15, theme.colors.primary)};
+    }
   }
 `;
 

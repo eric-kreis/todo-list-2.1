@@ -26,31 +26,6 @@ const ProfileBodyS = styled.div`
       display: none;
     }
 
-    .link {
-      display: block;
-      background-color: ${({ theme }) => theme.colors.text};
-      border: none;
-      border-radius: 0.25rem;
-      color: ${({ theme }) => theme.colors.primary};
-      text-decoration: none;
-      padding: 8px 0;
-      width: 100%;
-
-      :hover {
-        background-color: ${({ theme }) => shade(0.2, theme.colors.text)};
-      }
-    }
-
-    .link.last {
-      background-color: ${({ theme }) => theme.colors.primary};
-      color: ${({ theme }) => theme.colors.text};
-      margin-top: 16px;
-
-      :hover {
-        background-color: ${({ theme }) => shade(0.15, theme.colors.primary)};
-      }
-    }
-
     button {
       font-size: 18px;
     }
@@ -103,8 +78,7 @@ export const ModalSectionS = styled.section`
   }
 
   .photo-container {
-    background-color: ${({ theme }) => shade(0.4, theme.colors.primary)};
-    border: 1px solid ${({ theme }) => theme.colors.text};
+    background-color: ${({ theme }) => theme.colors.primary};
     border-radius: 50%;
     justify-content: center;
     height: 125px;

@@ -46,7 +46,6 @@ export default function PhotoProvider({ children }) {
             setImage(imageURL);
           }
         } catch (imageError) {
-          setError('Ocorreu um problema ao enviar este arquivo, tente novamente mais tarde');
           switch (imageError.code) {
             case 'storage/object-not-found':
               setError('Foto não encontrada');
@@ -58,11 +57,12 @@ export default function PhotoProvider({ children }) {
               setError('Download da imagem cancelado');
               break;
             default:
-              setError('Ocorreu um problema ao enviar este arquivo, tente novamente mais tarde');
+              setError('Ocorreu um problema ao carregar a imagem');
               break;
           }
           setPath('/');
           setImage(defaultImage);
+          setError('Ocorreu um problema ao carregar a imagem');
         }
         setLoading(false);
       } else {
@@ -75,9 +75,8 @@ export default function PhotoProvider({ children }) {
   // State observer;
   useEffect(() => {
     (async () => {
-      if (currentUser && path !== '/') {
+      if (currentUser) {
         try {
-          setLoading(true);
           const doc = await database.users.doc(currentUser.uid).get();
           if (doc.exists && doc.data().imagePath !== path) {
             await database.users.doc(currentUser.uid).update({ imagePath: path });
@@ -86,7 +85,6 @@ export default function PhotoProvider({ children }) {
           setError('Falha ao salvar o enderço da sua imagem :(');
           setPath('/');
         }
-        setLoading(false);
       } else {
         setImage(defaultImage);
       }

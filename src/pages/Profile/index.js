@@ -60,7 +60,7 @@ export default function Profile() {
         setOpenFileModal(false);
 
         await toast.promise(
-          async () => storage
+          storage
             .ref(`images/${currentUser.uid}`)
             .child(spacelessName)
             .put(userImg, metaData),

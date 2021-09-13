@@ -13,6 +13,7 @@ import {
 } from '../../styles/auth';
 import SignupLoading from '../../assets/loadingComponents/SignupLoading';
 import { database } from '../../firebase';
+import { saveLogin } from '../../helpers';
 
 const validClass = 'form-control';
 const invalidClass = 'form-control is-invalid';
@@ -110,8 +111,9 @@ export default function Signup() {
   };
 
   if (currentUser) {
-    const doc = database.users.where('userId', '==', currentUser.uid);
+    saveLogin(emailValue);
 
+    const doc = database.users.where('userId', '==', currentUser.uid);
     if (!doc.exists) {
       database.users.doc(currentUser.uid).set({
         userId: currentUser.uid,

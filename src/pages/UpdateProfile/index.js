@@ -83,7 +83,7 @@ export default function UpdateProfile() {
 
   const handleSubmit = async () => {
     // eslint-disable-next-line max-len
-    if (emailClass === validClass && ((passwordValue && confirmValue) || (!passwordValue && !confirmValue))) {
+    if (emailClass === validClass || ((passwordValue && confirmValue) || (!passwordValue && !confirmValue))) {
       const promises = [];
       if (currentUser.email !== emailValue) promises.push(updateEmail(emailValue));
       if (confirmValue) promises.push(updatePassword(confirmValue));
