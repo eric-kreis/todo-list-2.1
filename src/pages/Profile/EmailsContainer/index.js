@@ -25,6 +25,7 @@ export default function EmailsContainer() {
             );
           }) }
       </ul>
+      <hr />
     </EmailsContainerS>
   );
 }

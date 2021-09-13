@@ -18,7 +18,7 @@ export const AuthContainerS = styled.section`
   height: ${({ defaultH }) => (defaultH ? '' : '85vh')};
   margin: auto;
   overflow-y: scroll;
-  padding: 10px 16px ${({ update }) => (update ? '24px' : 0)};
+  padding: ${({ update }) => (update ? '48px' : '10px')} 16px ${({ update }) => (update ? '24px' : 0)};
   text-align: center;
   width: 30%;
 

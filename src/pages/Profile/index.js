@@ -139,7 +139,7 @@ export default function Profile() {
         />
         <EmailsContainer />
         <div>
-          <Link to="/update-profile" className="link">Atualizar perfil</Link>
+          <Link to="/update-credentials" className="link">Atualizar credenciais</Link>
           <Link to="/" className="link last">Voltar</Link>
         </div>
       </section>

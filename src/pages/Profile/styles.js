@@ -20,7 +20,7 @@ const ProfileBodyS = styled.div`
     overflow: scroll;
     padding: 36px 16px;
     text-align: center;
-    width: 30%;
+    width: 35%;
 
     ::-webkit-scrollbar {
       display: none;
@@ -39,10 +39,6 @@ const ProfileBodyS = styled.div`
     }
 
     @media(max-width: 640px) {
-      width: 65%;
-    }
-
-    @media(max-width: 480px) {
       border-radius: 0;
       box-shadow: none;
       height: 100vh;
@@ -70,10 +66,6 @@ export const ModalSectionS = styled.section`
   }
 
   @media(max-width: 640px) {
-    width: 65%;
-  }
-
-  @media(max-width: 480px) {
     width: 75%;
   }
 

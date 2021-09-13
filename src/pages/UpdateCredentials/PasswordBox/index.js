@@ -6,7 +6,7 @@ import PasswordInput from '../../../components/PasswordInput';
 const validClass = 'form-control';
 const invalidClass = 'form-control is-invalid';
 
-export default function PasswordsSection({
+export default function PassowrdBox({
   passwordValue,
   confirmValue,
   passwordClass,
@@ -62,7 +62,7 @@ export default function PasswordsSection({
   );
 }
 
-PasswordsSection.propTypes = {
+PassowrdBox.propTypes = {
   passwordValue: PropTypes.string.isRequired,
   confirmValue: PropTypes.string.isRequired,
   passwordClass: PropTypes.string.isRequired,

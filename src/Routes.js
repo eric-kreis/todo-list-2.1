@@ -8,12 +8,12 @@ import HomePage from './pages/Home';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
 import PasswordReset from './pages/PasswordReset';
-import UpdateProfile from './pages/UpdateProfile';
+import UpdateCredentials from './pages/UpdateCredentials';
 
 export default function Routes() {
   return (
     <Switch>
-      <PrivateRoute path="/update-profile" component={UpdateProfile} />
+      <PrivateRoute path="/update-credentials" component={UpdateCredentials} />
       <Route path="/reset-password" component={PasswordReset} />
       <Route path="/register" component={Signup} />
       <Route path="/login" component={Login} />

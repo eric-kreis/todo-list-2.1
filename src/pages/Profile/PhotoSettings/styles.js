@@ -4,8 +4,10 @@ const PhotoSettingS = styled.div`
   align-items: center;
   border-radius: 3px;
   display: flex;
+  justify-content: space-around;
   margin: 0 auto 20px;
   padding: 0 16px;
+  width: 100%;
 
   .photo-container {
     align-items: center;
@@ -28,7 +30,6 @@ const PhotoSettingS = styled.div`
   .file-settings {
     display: flex;
     justify-content: space-evenly;
-    margin-left: 16px;
     width: 120px;
   }
 

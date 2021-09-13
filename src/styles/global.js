@@ -59,6 +59,7 @@ const GlobalStyle = createGlobalStyle`
   .link {
     display: block;
     background-color: ${({ theme }) => lighten(0.1, theme.colors.primary)};
+    border: 0;
     border-radius: 0.25rem;
     color: ${({ theme }) => theme.colors.text};
     text-decoration: none;
