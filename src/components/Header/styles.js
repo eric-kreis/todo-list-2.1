@@ -12,10 +12,10 @@ const PageHeaderS = styled.header`
     align-items: center;
     display: flex;
     width: 100px;
-    justify-content: space-between;
+    justify-content: space-around;
 
     :first-of-type {
-      justify-content: space-evenly;
+      width: 80px;
     }
 
     button {
@@ -26,13 +26,21 @@ const PageHeaderS = styled.header`
       display: flex;
       font-size: 20px;
     }
+
+    @media(max-width: 468px) {
+      justify-content: space-around;
+
+      :first-of-type {
+        width: 100px;
+      }
+    }
   }
 
   .image-container {
     border-radius: 50%;
-    height: 26px;
+    height: 28px;
     overflow: hidden;
-    width: 26px;
+    width: 28px;
 
     img {
       height: 100%;
@@ -43,23 +51,12 @@ const PageHeaderS = styled.header`
   h1 {
     font-size: x-large;
     margin: 0;
-  }
-
-  div {
-    align-items: center;
-    display: flex;
+    text-align: center;
   }
 
   @media(max-width: 468px) {
     h1 {
-      font-size: medium;
-      text-align: center;
-    }
-  }
-
-  @media(max-width: 380px) {
-    h1 {
-      font-size: 16px;
+      font-size: large;
       text-align: center;
     }
   }

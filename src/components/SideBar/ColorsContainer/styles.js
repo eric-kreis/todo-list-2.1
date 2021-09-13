@@ -9,10 +9,12 @@ export const ColorsContainerS = styled.div`
   flex-flow: row wrap;
   justify-content: space-around;
   left: 200px;
-  margin: auto;
-  min-width: 200px;
-  padding: 20px 4px;
+  padding: 20px;
   position: absolute;
+
+  @media(max-width: 390px) {
+    bottom: -58px;
+  }
 `;
 
 export const ColorButtonsContainerS = styled.section`
@@ -21,10 +23,14 @@ export const ColorButtonsContainerS = styled.section`
   justify-content: space-evenly;
   min-width: 150px;
   width: 100%;
-  height: 100px;
+  height: 100%;
 
   :hover {
     cursor: default;
+  }
+
+  @media(max-width: 390px) {
+    min-width: 0;
   }
 `;
 

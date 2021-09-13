@@ -1,6 +1,11 @@
 // All icons archive
 import { VscAdd } from 'react-icons/vsc';
-import { IoMdTrash, IoMdRemove, IoIosSettings } from 'react-icons/io';
+import {
+  IoMdTrash,
+  IoMdRemove,
+  IoIosSettings,
+  IoMdImages,
+} from 'react-icons/io';
 import {
   IoExitOutline,
   IoColorPalette,
@@ -69,3 +74,6 @@ export const Upload = IoCloudUploadOutline;
 
 // File upload
 export const FileUpload = RiFolderUploadLine;
+
+// Gallery;
+export const Gallery = IoMdImages;

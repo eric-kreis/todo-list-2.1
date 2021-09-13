@@ -73,6 +73,12 @@ const SideBarS = styled.div`
         .color-handle:hover .colors-container {
           display: flex;
         }
+
+        @media(max-width: 768px) {
+          .color-handle:active .colors-container {
+            display: flex;
+          }
+        }
       }
     }
   }

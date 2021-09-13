@@ -28,8 +28,6 @@ export default function SideBar() {
 
   useEffect(() => handleDisableBar, [handleDisableBar]);
 
-  const handleSignOut = async () => logout();
-
   return (
     <SideBarS active={active}>
       <aside>
@@ -51,7 +49,7 @@ export default function SideBar() {
               </div>
             </li>
             <li>
-              <button type="button" onClick={handleSignOut} className="aside-btn">
+              <button type="button" onClick={logout} className="aside-btn">
                 <Logout className="sidebar-icon" />
                 Sair
               </button>

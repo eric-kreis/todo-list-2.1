@@ -29,12 +29,15 @@ const PhotoSettingS = styled.div`
 
   .file-settings {
     display: flex;
-    justify-content: space-evenly;
-    width: 120px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 80px;
+    width: 80px;
   }
 
-  label, .delete-img-button {
+  label, .icon-btn {
     align-items: center;
+    background-color: transparent;
     border: none;
     border-radius: 0.25rem;
     color: ${({ theme }) => theme.colors.input};
@@ -44,18 +47,22 @@ const PhotoSettingS = styled.div`
     * {
       font-size: 30px;
     }
-  }
-
-  label:hover {
-    cursor: pointer;
-    color: ${({ theme }) => theme.colors.primary};
-  }
-
-  .delete-img-button {
-    background-color: transparent;
 
     :hover {
-      color: red;
+      cursor: pointer;
+      color: #F7B400;
+    }
+
+    :hover.gallery {
+      color: #3DA4ED;
+    }
+
+    :hover.delete-img-button {
+      color: #BD282C;
+    }
+
+    :hover.update-credentials {
+      color: ${({ theme }) => theme.colors.primary};
     }
   }
 

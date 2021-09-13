@@ -85,12 +85,12 @@ export default function UpdateCredentials() {
   };
 
   const changeEmail = async () => {
-    if (emailClass === validClass) {
+    if (emailClass === validClass && emailValue !== currentUser.email) {
       await toast.promise(
         updateEmail(emailValue),
         {
           pending: {
-            render() { return 'Atualizando email...'; },
+            render() { return 'Alterando email...'; },
             theme: title,
           },
           success: {
@@ -101,7 +101,7 @@ export default function UpdateCredentials() {
             render({ data }) {
               switch (data.code) {
                 case 'auth/requires-recent-login':
-                  return 'Faça login novamente para atualizar esta informação';
+                  return 'Faça login novamente para alterar esta informação';
                 case 'auth/email-already-in-use':
                   return 'Falha ao atualizar, este email já está em uso';
                 default:
@@ -115,7 +115,7 @@ export default function UpdateCredentials() {
 
       setView('select');
 
-      await database.users.doc(currentUser.uid).update({
+      database.users.doc(currentUser.uid).update({
         currentEmail: currentUser.email,
       });
     }
@@ -127,7 +127,7 @@ export default function UpdateCredentials() {
         updatePassword(confirmValue),
         {
           pending: {
-            render() { return 'Atualizando...'; },
+            render() { return 'Alterando senha...'; },
             theme: title,
           },
           success: {
@@ -140,9 +140,9 @@ export default function UpdateCredentials() {
                 case 'auth/weak-password':
                   return 'Sua senha deve conter pelo menos 6 caracteres';
                 case 'auth/requires-recent-login':
-                  return 'Faça login novamente para atualizar esta informação';
+                  return 'Faça login novamente para alterar esta informação';
                 default:
-                  return 'Falha ao atualizar a conta';
+                  return 'Falha ao atualizar a senha';
               }
             },
             theme: title,
@@ -170,9 +170,9 @@ export default function UpdateCredentials() {
       <ToastContainer transition={Flip} />
       <AuthContainerS defaultH update>
         <AuthHeader>
-          { view === 'select' && 'O que deseja atualizar?' }
-          { view === 'email' && 'Atualizar email' }
-          { view === 'password' && 'Atualizar senha' }
+          { view === 'select' && 'O que deseja alterar?' }
+          { view === 'email' && 'Alterar email' }
+          { view === 'password' && 'Alterar senha' }
         </AuthHeader>
         <AuthFormS onSubmit={(e) => e.preventDefault()} update>
           <div>
@@ -201,7 +201,9 @@ export default function UpdateCredentials() {
           </div>
           <ButtonContainerS>
             { view !== 'select' && (
-              <button type="submit" className="link" onClick={handleSubmit}>Atualizar</button>
+              <button type="submit" className="link" onClick={handleSubmit}>
+                Atualizar
+              </button>
             ) }
             <button type="button" className="link last" onClick={handleReturn}>
               Voltar

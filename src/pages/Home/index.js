@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ToastContainer, Flip } from 'react-toastify';
 
 import ClearModalContainer from './HomeModals/ClearModalContainer';
 import Header from '../../components/Header';
@@ -22,6 +23,7 @@ export default function HomePage() {
   const { clearModal } = modals;
   return (
     <div>
+      <ToastContainer transition={Flip} />
       <ClearModalContainer
         clearModal={clearModal}
         handleToggleModal={handleToggleModal}

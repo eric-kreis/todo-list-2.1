@@ -63,6 +63,7 @@ const GlobalStyle = createGlobalStyle`
     border-radius: 0.25rem;
     color: ${({ theme }) => theme.colors.text};
     text-decoration: none;
+    height: 40px;
     padding: 8px 0;
     width: 100%;
 

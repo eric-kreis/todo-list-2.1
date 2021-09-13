@@ -12,9 +12,10 @@ import ProfileBodyS, { ModalSectionS } from './styles';
 
 import EmailsContainer from './EmailsContainer';
 import PhotoSettings from './PhotoSettings';
+import { Logout } from '../../assets/icons';
 
 export default function Profile() {
-  const { currentUser } = useAuth();
+  const { currentUser, logout } = useAuth();
   const {
     image,
     error,
@@ -31,7 +32,7 @@ export default function Profile() {
 
   const [prevImg, setPrevImg] = useState(null);
 
-  const [userImg, setUserImg] = useState({
+  const [customImg, setCustomImg] = useState({
     type: '',
     name: '',
   });
@@ -39,7 +40,7 @@ export default function Profile() {
   const handleChangeFile = ({ target }) => {
     const file = target.files[0];
     if (file) {
-      setUserImg(file);
+      setCustomImg(file);
       setOpenFileModal(true);
 
       const reader = new FileReader();
@@ -49,21 +50,21 @@ export default function Profile() {
   };
 
   const handleUpload = async () => {
-    if (userImg.type) {
+    if (customImg.type) {
       const metaData = {
-        contentType: userImg.type,
-        name: userImg.name,
+        contentType: customImg.type,
+        name: customImg.name,
       };
 
       try {
-        const spacelessName = userImg.name.split(' ').join('');
+        const spacelessName = customImg.name.split(' ').join('');
         setOpenFileModal(false);
 
         await toast.promise(
           storage
             .ref(`images/${currentUser.uid}`)
             .child(spacelessName)
-            .put(userImg, metaData),
+            .put(customImg, metaData),
           {
             pending: {
               render() { return 'Processando...'; },
@@ -77,7 +78,7 @@ export default function Profile() {
         );
 
         const reader = new FileReader();
-        reader.readAsDataURL(userImg);
+        reader.readAsDataURL(customImg);
         reader.onload = ({ target }) => setImage(target.result);
         setPath(spacelessName);
       } catch (imageError) {
@@ -97,7 +98,7 @@ export default function Profile() {
   return (
     <ProfileBodyS>
       <ToastContainer transition={Flip} />
-      {openFileModal && userImg.name && (
+      {openFileModal && customImg.name && (
         <ModalWindowS>
           <ModalSectionS>
             <section className="photo-container">
@@ -139,8 +140,12 @@ export default function Profile() {
         />
         <EmailsContainer />
         <div>
-          <Link to="/update-credentials" className="link">Atualizar credenciais</Link>
           <Link to="/" className="link last">Voltar</Link>
+          <div className="logout-container">
+            <button type="button" onClick={logout}>
+              <Logout />
+            </button>
+          </div>
         </div>
       </section>
     </ProfileBodyS>

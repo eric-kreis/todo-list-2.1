@@ -1,9 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-import { FileUpload, Trash } from '../../../assets/icons';
-import { usePhoto } from '../../../Contexts/PhotoContext';
+import {
+  FileUpload,
+  Gallery,
+  Settings,
+  Trash,
+} from '../../../assets/icons';
 import PhotoSettingS from './styles';
+
+import { usePhoto } from '../../../Contexts/PhotoContext';
 
 export default function PhotoSettings({ handleChangeFile, setOpenDeleteModal }) {
   const { image, loading } = usePhoto();
@@ -23,9 +30,23 @@ export default function PhotoSettings({ handleChangeFile, setOpenDeleteModal }) 
             accept="image/png, image/jpeg"
           />
         </label>
-        <button type="button" onClick={() => setOpenDeleteModal(true)} className="delete-img-button">
+        <button
+          type="button"
+          className="icon-btn gallery"
+          title="Abrir galeria"
+        >
+          <Gallery />
+        </button>
+        <button
+          type="button"
+          onClick={() => setOpenDeleteModal(true)}
+          className="icon-btn delete-img-button"
+        >
           <Trash title="Excluir foto" />
         </button>
+        <Link to="/update-credentials" className="icon-btn update-credentials">
+          <Settings title="Alterar credenciais" />
+        </Link>
       </section>
     </PhotoSettingS>
   );

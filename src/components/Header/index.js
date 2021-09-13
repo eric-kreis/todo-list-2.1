@@ -43,9 +43,9 @@ export default function Header({ children }) {
           onChange={handleToggleTheme}
           checkedIcon={<Sun className="sun" />}
           uncheckedIcon={<Moon className="moon" />}
-          height={18}
-          handleDiameter={26}
-          width={50}
+          height={16}
+          handleDiameter={24}
+          width={42}
           offColor={colors.background}
           onColor={colors.background}
         />

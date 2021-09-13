@@ -18,7 +18,7 @@ const ProfileBodyS = styled.div`
     max-height: 85vh;
     margin: auto;
     overflow: scroll;
-    padding: 36px 16px;
+    padding: 36px 16px 16px;
     text-align: center;
     width: 35%;
 
@@ -44,6 +44,27 @@ const ProfileBodyS = styled.div`
       height: 100vh;
       max-height: 100vh;
       width: 100%;
+    }
+  }
+  
+  .logout-container {
+    display: flex;
+    justify-content: right;
+    margin-top: 16px;
+    width: 100%;
+
+    button {
+      background-color: transparent;
+      border: 0;
+      border-radius: 3px;
+      color: ${({ theme }) => theme.colors.text};
+      font-size: 22px;
+      padding: 1px 0;
+      width: 30px;
+
+      :hover {
+        color: ${({ theme }) => theme.colors.primary};
+      }
     }
   }
 `;
