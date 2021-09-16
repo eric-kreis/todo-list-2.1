@@ -1,4 +1,4 @@
-# Welcome to my `first` React Project!
+# Welcome to my `first` React Project repository!
 
 ## Available Scripts
 
